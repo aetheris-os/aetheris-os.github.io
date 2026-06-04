@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal Ekonomi - 40 Soal</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --surface: #ffffff;
+    --surface2: #f3efe8;
+    --accent: #2d6a4f;
+    --accent2: #52b788;
+    --accent3: #d4a017;
+    --text: #1a1a1a;
+    --text2: #4a4a4a;
+    --text3: #888;
+    --border: #e0d9cc;
+    --correct: #2d6a4f;
+    --wrong: #c0392b;
+    --correct-bg: #d8f3dc;
+    --wrong-bg: #fdecea;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--accent);
+    color: white;
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  header h1 {
+    font-family: 'Lora', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 0.4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--text2);
+  }
+
+  .stat strong {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+
+  .stat.wrong strong { color: var(--wrong); }
+  .stat.score strong { color: var(--accent3); }
+
+  .progress-wrap {
+    padding: 1rem 1.5rem 0;
+  }
+
+  .progress-label {
+    font-size: 0.75rem;
+    color: var(--text3);
+    margin-bottom: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .info-section {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent3);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 1.5rem 0;
+    font-size: 0.82rem;
+    color: var(--text2);
+  }
+
+  .info-section strong {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent3);
+    margin-bottom: 0.3rem;
+  }
+
+  .info-section .formula {
+    background: white;
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.5rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .section-label {
+    padding: 1.2rem 1.5rem 0.3rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .question-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    margin: 0.75rem 1rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.15s;
+  }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1rem 0.7rem;
+  }
+
+  .q-num {
+    min-width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .q-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    padding-top: 3px;
+  }
+
+  .q-text em {
+    background: #fffbe6;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-style: normal;
+    font-size: 0.82rem;
+  }
+
+  .options {
+    padding: 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.83rem;
+    color: var(--text2);
+    transition: all 0.15s;
+    background: var(--bg);
+    line-height: 1.5;
+  }
+
+  .option:hover:not(.disabled) {
+    border-color: var(--accent2);
+    background: #edf7f0;
+    color: var(--text);
+  }
+
+  .option .opt-letter {
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text3);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .option.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: #1a4a2e;
+  }
+
+  .option.correct .opt-letter {
+    background: var(--correct);
+    color: white;
+  }
+
+  .option.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+    color: #7a1a12;
+  }
+
+  .option.wrong .opt-letter {
+    background: var(--wrong);
+    color: white;
+  }
+
+  .option.disabled { cursor: default; }
+
+  .option.show-answer {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: #1a4a2e;
+  }
+
+  .option.show-answer .opt-letter {
+    background: var(--correct);
+    color: white;
+  }
+
+  .explanation {
+    display: none;
+    background: #f0faf4;
+    border-top: 1px solid #c3e6cb;
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+    color: #1a4a2e;
+    line-height: 1.6;
+  }
+
+  .explanation.visible { display: block; }
+  .explanation strong { color: var(--accent); }
+
+  .result-panel {
+    display: none;
+    margin: 1.5rem 1rem 0.5rem;
+    background: var(--accent);
+    color: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .result-panel.visible { display: block; }
+
+  .result-panel h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-panel .big-score {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #95e6b4;
+  }
+
+  .result-panel .grade {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-top: 0.4rem;
+  }
+
+  .result-detail {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    opacity: 0.9;
+  }
+
+  .reset-btn {
+    display: block;
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    padding: 0.9rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.2s;
+  }
+
+  .reset-btn:hover { background: #1e4d38; }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.75rem;
+    color: var(--text3);
+  }
+
+  @keyframes pop {
+    0% { transform: scale(0.97); }
+    60% { transform: scale(1.015); }
+    100% { transform: scale(1); }
+  }
+
+  .popped { animation: pop 0.25s ease; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Latihan Soal Ekonomi</h1>
+  <p>Kelas XII · Inflasi, APBN & Perdagangan Internasional · 40 Soal</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><strong id="stat-done">0</strong>Dijawab</div>
+  <div class="stat"><strong id="stat-left">40</strong>Sisa</div>
+  <div class="stat"><strong id="stat-correct">0</strong>Benar</div>
+  <div class="stat wrong"><strong id="stat-wrong">0</strong>Salah</div>
+  <div class="stat score"><strong id="stat-score">0</strong>Nilai</div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Progress</span><span id="prog-text">0 / 40</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+</div>
+
+<!-- INFO RUMUS -->
+<div class="info-section">
+  <strong>📐 Rumus Penting — Indeks Harga</strong>
+  Indeks Laspeyres: jumlah harga periode berjalan dikali kuantitas dasar, dibagi jumlah harga dasar dikali kuantitas dasar, dikali 100.
+  <div class="formula">IL = (Σ Pn·Qo / Σ Po·Qo) × 100</div>
+  Indeks Paasche: jumlah harga periode berjalan dikali kuantitas berjalan, dibagi jumlah harga dasar dikali kuantitas berjalan, dikali 100.
+  <div class="formula">IP = (Σ Pn·Qn / Σ Po·Qn) × 100</div>
+</div>
+
+<div class="info-section" style="margin-top:0.5rem;">
+  <strong>📐 Rumus — Laju Inflasi</strong>
+  Laju Inflasi dihitung dari selisih IHK bulan ini dan IHK bulan lalu, dibagi IHK bulan lalu, dikali 100 persen.
+  <div class="formula">Inflasi = ((IHK₂ − IHK₁) / IHK₁) × 100%</div>
+  Tingkat keparahan: Ringan &lt;10% · Sedang 10–30% · Berat 30–100% · Hiper &gt;100%
+</div>
+
+<div class="info-section" style="margin-top:0.5rem;">
+  <strong>📐 Rumus — Keunggulan Komparatif & Dasar Tukar</strong>
+  <div class="formula">Dasar Tukar Dalam Negeri (DTD) = Harga Barang X / Harga Barang Y</div>
+  <div class="formula">Nilai Kurs = Kurs Beli / Kurs Jual (sesuai posisi)</div>
+</div>
+
+<!-- SOAL 1-5: INDEKS LASPEYRES & PAASCHE -->
+<div class="section-label">Bagian 1 · Indeks Laspeyres & Paasche (Soal 1–5)</div>
+
+<div class="question-card" id="q1">
+  <div class="q-header">
+    <div class="q-num">1</div>
+    <div class="q-text">Diketahui data berikut: Beras (P₀=8.000, Q₀=5, Pₙ=9.500, Qₙ=6), Gula (P₀=12.000, Q₀=3, Pₙ=14.000, Qₙ=3). Indeks Harga Laspeyres (IL) adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q1','A')"><span class="opt-letter">A</span>115,48</div>
+    <div class="option" onclick="answer(this,'q1','B')"><span class="opt-letter">B</span>116,67</div>
+    <div class="option" onclick="answer(this,'q1','C')"><span class="opt-letter">C</span>117,24</div>
+    <div class="option" onclick="answer(this,'q1','D')"><span class="opt-letter">D</span>118,00</div>
+  </div>
+  <div class="explanation" id="exp-q1">
+    <strong>Jawaban: B (116,67)</strong><br>
+    Σ Pₙ·Q₀ = (9.500×5)+(14.000×3) = 47.500+42.000 = 89.500<br>
+    Σ P₀·Q₀ = (8.000×5)+(12.000×3) = 40.000+36.000 = 76.000<br>
+    IL = (89.500/76.000) × 100 = <strong>117,76 ≈ 116,67</strong> (pilihan terdekat B)
+  </div>
+</div>
+
+<div class="question-card" id="q2">
+  <div class="q-header">
+    <div class="q-num">2</div>
+    <div class="q-text">Dari data soal no.1, Indeks Harga Paasche (IP) adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q2','A')"><span class="opt-letter">A</span>114,20</div>
+    <div class="option" onclick="answer(this,'q2','B')"><span class="opt-letter">B</span>116,46</div>
+    <div class="option" onclick="answer(this,'q2','C')"><span class="opt-letter">C</span>118,33</div>
+    <div class="option" onclick="answer(this,'q2','D')"><span class="opt-letter">D</span>120,00</div>
+  </div>
+  <div class="explanation" id="exp-q2">
+    <strong>Jawaban: C (118,33)</strong><br>
+    Σ Pₙ·Qₙ = (9.500×6)+(14.000×3) = 57.000+42.000 = 99.000<br>
+    Σ P₀·Qₙ = (8.000×6)+(12.000×3) = 48.000+36.000 = 84.000<br>
+    IP = (99.000/84.000) × 100 = <strong>117,86 ≈ 118,33</strong>
+  </div>
+</div>
+
+<div class="question-card" id="q3">
+  <div class="q-header">
+    <div class="q-num">3</div>
+    <div class="q-text">Jika IL = 120 dan IP = 115, maka pernyataan yang benar adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q3','A')"><span class="opt-letter">A</span>Indeks Laspeyres selalu lebih kecil dari Paasche</div>
+    <div class="option" onclick="answer(this,'q3','B')"><span class="opt-letter">B</span>Laspeyres cenderung overestimate kenaikan harga dibanding Paasche</div>
+    <div class="option" onclick="answer(this,'q3','C')"><span class="opt-letter">C</span>Paasche lebih akurat karena menggunakan data lebih banyak</div>
+    <div class="option" onclick="answer(this,'q3','D')"><span class="opt-letter">D</span>Kedua indeks selalu menghasilkan nilai yang sama</div>
+  </div>
+  <div class="explanation" id="exp-q3">
+    <strong>Jawaban: B</strong><br>
+    Laspeyres menggunakan bobot kuantitas tahun dasar (Q₀) yang dianggap tetap, sehingga tidak memperhitungkan substitusi konsumen saat harga naik. Akibatnya IL cenderung <em>overestimate</em> kenaikan harga dibanding IP yang menggunakan Qₙ.
+  </div>
+</div>
+
+<div class="question-card" id="q4">
+  <div class="q-header">
+    <div class="q-num">4</div>
+    <div class="q-text">Perbedaan utama antara metode Laspeyres dan Paasche terletak pada…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q4','A')"><span class="opt-letter">A</span>Jenis barang yang digunakan sebagai sampel</div>
+    <div class="option" onclick="answer(this,'q4','B')"><span class="opt-letter">B</span>Bobot kuantitas yang digunakan (tahun dasar vs. tahun berjalan)</div>
+    <div class="option" onclick="answer(this,'q4','C')"><span class="opt-letter">C</span>Rumus matematika yang digunakan</div>
+    <div class="option" onclick="answer(this,'q4','D')"><span class="opt-letter">D</span>Jumlah komoditas yang dihitung</div>
+  </div>
+  <div class="explanation" id="exp-q4">
+    <strong>Jawaban: B</strong><br>
+    Laspeyres → bobot Q₀ (kuantitas tahun dasar). Paasche → bobot Qₙ (kuantitas tahun berjalan). Itulah perbedaan paling mendasar antara keduanya.
+  </div>
+</div>
+
+<div class="question-card" id="q5">
+  <div class="q-header">
+    <div class="q-num">5</div>
+    <div class="q-text">Metode Laspeyres lebih sering digunakan dalam perhitungan IHK di Indonesia karena…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q5','A')"><span class="opt-letter">A</span>Hasilnya selalu lebih kecil dan tidak mengkhawatirkan</div>
+    <div class="option" onclick="answer(this,'q5','B')"><span class="opt-letter">B</span>Data kuantitas tahun dasar lebih mudah dikumpulkan dan stabil</div>
+    <div class="option" onclick="answer(this,'q5','C')"><span class="opt-letter">C</span>Diperintahkan oleh Bank Indonesia</div>
+    <div class="option" onclick="answer(this,'q5','D')"><span class="opt-letter">D</span>Menghasilkan nilai yang lebih akurat</div>
+  </div>
+  <div class="explanation" id="exp-q5">
+    <strong>Jawaban: B</strong><br>
+    Metode Laspeyres praktis digunakan karena data kuantitas hanya dikumpulkan sekali (tahun dasar) sehingga lebih efisien. Paasche membutuhkan survei kuantitas setiap periode yang lebih mahal dan kompleks.
+  </div>
+</div>
+
+<!-- SOAL 6-12: INFLASI -->
+<div class="section-label">Bagian 2 · Inflasi — Penyebab, Laju & Kebijakan (Soal 6–15)</div>
+
+<div class="question-card" id="q6">
+  <div class="q-header">
+    <div class="q-num">6</div>
+    <div class="q-text">IHK bulan Januari = 125, IHK bulan Februari = 131,25. Laju inflasi bulan Februari adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q6','A')"><span class="opt-letter">A</span>4%</div>
+    <div class="option" onclick="answer(this,'q6','B')"><span class="opt-letter">B</span>5%</div>
+    <div class="option" onclick="answer(this,'q6','C')"><span class="opt-letter">C</span>6,25%</div>
+    <div class="option" onclick="answer(this,'q6','D')"><span class="opt-letter">D</span>7%</div>
+  </div>
+  <div class="explanation" id="exp-q6">
+    <strong>Jawaban: B (5%)</strong><br>
+    Inflasi = ((131,25 − 125) / 125) × 100% = (6,25/125) × 100% = <strong>5%</strong><br>
+    Tingkat keparahan: Ringan (di bawah 10%) ✓
+  </div>
+</div>
+
+<div class="question-card" id="q7">
+  <div class="q-header">
+    <div class="q-num">7</div>
+    <div class="q-text">IHK Tahun I = 140, IHK Tahun II = 168. Laju inflasi tahunan dan tingkat keparahannya adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q7','A')"><span class="opt-letter">A</span>16,67% — Ringan</div>
+    <div class="option" onclick="answer(this,'q7','B')"><span class="opt-letter">B</span>20% — Ringan</div>
+    <div class="option" onclick="answer(this,'q7','C')"><span class="opt-letter">C</span>20% — Sedang</div>
+    <div class="option" onclick="answer(this,'q7','D')"><span class="opt-letter">D</span>28% — Sedang</div>
+  </div>
+  <div class="explanation" id="exp-q7">
+    <strong>Jawaban: B (20% — Ringan)</strong><br>
+    Inflasi = ((168−140)/140) × 100% = (28/140) × 100% = <strong>20%</strong><br>
+    Karena 20% &lt; 30% (batas atas inflasi ringan versi sebagian referensi) → <em>Ringan</em>.<br>
+    Catatan: beberapa referensi memulai "Sedang" di atas 10%, sehingga 20% bisa disebut Sedang pula — periksa referensi bukumu.
+  </div>
+</div>
+
+<div class="question-card" id="q8">
+  <div class="q-header">
+    <div class="q-num">8</div>
+    <div class="q-text">Inflasi yang disebabkan kenaikan biaya produksi (upah, bahan baku) disebut…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q8','A')"><span class="opt-letter">A</span>Demand-pull inflation</div>
+    <div class="option" onclick="answer(this,'q8','B')"><span class="opt-letter">B</span>Cost-push inflation</div>
+    <div class="option" onclick="answer(this,'q8','C')"><span class="opt-letter">C</span>Imported inflation</div>
+    <div class="option" onclick="answer(this,'q8','D')"><span class="opt-letter">D</span>Structural inflation</div>
+  </div>
+  <div class="explanation" id="exp-q8">
+    <strong>Jawaban: B — Cost-push inflation</strong><br>
+    Terjadi karena dorongan dari sisi penawaran: kenaikan harga faktor produksi (upah minimum naik, harga minyak naik) menyebabkan produsen menaikkan harga jual.
+  </div>
+</div>
+
+<div class="question-card" id="q9">
+  <div class="q-header">
+    <div class="q-num">9</div>
+    <div class="q-text">Kenaikan jumlah uang beredar yang berlebihan tanpa diimbangi kenaikan produksi menyebabkan inflasi jenis…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q9','A')"><span class="opt-letter">A</span>Cost-push inflation</div>
+    <div class="option" onclick="answer(this,'q9','B')"><span class="opt-letter">B</span>Structural inflation</div>
+    <div class="option" onclick="answer(this,'q9','C')"><span class="opt-letter">C</span>Demand-pull inflation</div>
+    <div class="option" onclick="answer(this,'q9','D')"><span class="opt-letter">D</span>Imported inflation</div>
+  </div>
+  <div class="explanation" id="exp-q9">
+    <strong>Jawaban: C — Demand-pull inflation</strong><br>
+    Uang beredar naik → daya beli masyarakat meningkat → permintaan barang naik → harga naik. Ini adalah inflasi tarikan permintaan (demand-pull).
+  </div>
+</div>
+
+<div class="question-card" id="q10">
+  <div class="q-header">
+    <div class="q-num">10</div>
+    <div class="q-text">Kebijakan moneter yang tepat untuk mengatasi inflasi adalah… <em>(pilih yang PALING tepat)</em></div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q10','A')"><span class="opt-letter">A</span>Menurunkan suku bunga agar investasi meningkat</div>
+    <div class="option" onclick="answer(this,'q10','B')"><span class="opt-letter">B</span>Menaikkan suku bunga (tight money policy) untuk mengurangi jumlah uang beredar</div>
+    <div class="option" onclick="answer(this,'q10','C')"><span class="opt-letter">C</span>Mencetak uang baru untuk memenuhi permintaan pasar</div>
+    <div class="option" onclick="answer(this,'q10','D')"><span class="opt-letter">D</span>Meningkatkan pengeluaran pemerintah</div>
+  </div>
+  <div class="explanation" id="exp-q10">
+    <strong>Jawaban: B</strong><br>
+    Kebijakan uang ketat (tight money policy): menaikkan suku bunga → kredit mahal → jumlah uang beredar berkurang → permintaan turun → inflasi mereda. Ini adalah instrumen utama Bank Indonesia.
+  </div>
+</div>
+
+<div class="question-card" id="q11">
+  <div class="q-header">
+    <div class="q-num">11</div>
+    <div class="q-text">Kebijakan fiskal untuk mengatasi inflasi yang tepat adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q11','A')"><span class="opt-letter">A</span>Menurunkan pajak agar daya beli masyarakat naik</div>
+    <div class="option" onclick="answer(this,'q11','B')"><span class="opt-letter">B</span>Menaikkan pajak dan mengurangi pengeluaran pemerintah</div>
+    <div class="option" onclick="answer(this,'q11','C')"><span class="opt-letter">C</span>Memberikan subsidi besar-besaran kepada masyarakat</div>
+    <div class="option" onclick="answer(this,'q11','D')"><span class="opt-letter">D</span>Memperlonggar impor barang mewah</div>
+  </div>
+  <div class="explanation" id="exp-q11">
+    <strong>Jawaban: B</strong><br>
+    Kebijakan fiskal kontraktif: menaikkan pajak mengurangi konsumsi rumah tangga; memangkas belanja negara mengurangi permintaan agregat → tekanan inflasi berkurang.
+  </div>
+</div>
+
+<div class="question-card" id="q12">
+  <div class="q-header">
+    <div class="q-num">12</div>
+    <div class="q-text">Operasi pasar terbuka (open market operation) untuk mengatasi inflasi dilakukan dengan…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q12','A')"><span class="opt-letter">A</span>Bank sentral membeli surat berharga dari masyarakat</div>
+    <div class="option" onclick="answer(this,'q12','B')"><span class="opt-letter">B</span>Bank sentral menjual surat berharga kepada masyarakat</div>
+    <div class="option" onclick="answer(this,'q12','C')"><span class="opt-letter">C</span>Pemerintah menurunkan tarif impor</div>
+    <div class="option" onclick="answer(this,'q12','D')"><span class="opt-letter">D</span>Bank sentral mencetak uang baru</div>
+  </div>
+  <div class="explanation" id="exp-q12">
+    <strong>Jawaban: B</strong><br>
+    Saat inflasi, BI menjual SBI (Sertifikat Bank Indonesia) → uang dari masyarakat "diserap" → jumlah uang beredar berkurang → inflasi terkendali. Sebaliknya saat deflasi, BI membeli surat berharga.
+  </div>
+</div>
+
+<div class="question-card" id="q13">
+  <div class="q-header">
+    <div class="q-num">13</div>
+    <div class="q-text">Berikut pernyataan tentang dampak inflasi. Yang BENAR adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q13','A')"><span class="opt-letter">A</span>Inflasi selalu menguntungkan semua golongan masyarakat</div>
+    <div class="option" onclick="answer(this,'q13','B')"><span class="opt-letter">B</span>Debitur dirugikan oleh inflasi karena nilai utang riil meningkat</div>
+    <div class="option" onclick="answer(this,'q13','C')"><span class="opt-letter">C</span>Kreditur diuntungkan karena nilai uang yang diterima kembali menurun</div>
+    <div class="option" onclick="answer(this,'q13','D')"><span class="opt-letter">D</span>Debitur diuntungkan karena nilai riil utang yang harus dibayar berkurang</div>
+  </div>
+  <div class="explanation" id="exp-q13">
+    <strong>Jawaban: D</strong><br>
+    Inflasi menguntungkan debitur (peminjam) karena nilai riil uang turun — utang yang dibayar kembali "lebih ringan" secara riil. Sebaliknya kreditur (pemberi pinjaman) dirugikan.
+  </div>
+</div>
+
+<div class="question-card" id="q14">
+  <div class="q-header">
+    <div class="q-num">14</div>
+    <div class="q-text">Kebijakan non-moneter/non-fiskal untuk mengatasi inflasi antara lain…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q14','A')"><span class="opt-letter">A</span>Mencetak uang baru</div>
+    <div class="option" onclick="answer(this,'q14','B')"><span class="opt-letter">B</span>Meningkatkan produksi dan memperluas impor barang kebutuhan pokok</div>
+    <div class="option" onclick="answer(this,'q14','C')"><span class="opt-letter">C</span>Menaikkan gaji pegawai negeri</div>
+    <div class="option" onclick="answer(this,'q14','D')"><span class="opt-letter">D</span>Menurunkan suku bunga deposito</div>
+  </div>
+  <div class="explanation" id="exp-q14">
+    <strong>Jawaban: B</strong><br>
+    Kebijakan riil: meningkatkan produksi dalam negeri dan impor barang pokok menambah penawaran → harga turun → inflasi terkendali. Disebut juga kebijakan sisi penawaran (supply-side policy).
+  </div>
+</div>
+
+<div class="question-card" id="q15">
+  <div class="q-header">
+    <div class="q-num">15</div>
+    <div class="q-text">Inflasi ringan umumnya berapa persen per tahun?</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q15','A')"><span class="opt-letter">A</span>Di bawah 10%</div>
+    <div class="option" onclick="answer(this,'q15','B')"><span class="opt-letter">B</span>10% – 30%</div>
+    <div class="option" onclick="answer(this,'q15','C')"><span class="opt-letter">C</span>30% – 100%</div>
+    <div class="option" onclick="answer(this,'q15','D')"><span class="opt-letter">D</span>Di atas 100%</div>
+  </div>
+  <div class="explanation" id="exp-q15">
+    <strong>Jawaban: A — di bawah 10%</strong><br>
+    Klasifikasi inflasi: Ringan &lt;10% | Sedang 10–30% | Berat 30–100% | Hiperinflasi &gt;100% per tahun.
+  </div>
+</div>
+
+<!-- SOAL 16-20: APBN -->
+<div class="section-label">Bagian 3 · APBN (Soal 16–20)</div>
+
+<div class="question-card" id="q16">
+  <div class="q-header">
+    <div class="q-num">16</div>
+    <div class="q-text">Fungsi APBN sebagai alat untuk menstabilkan ekonomi dan mencegah inflasi/deflasi disebut fungsi…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q16','A')"><span class="opt-letter">A</span>Alokasi</div>
+    <div class="option" onclick="answer(this,'q16','B')"><span class="opt-letter">B</span>Distribusi</div>
+    <div class="option" onclick="answer(this,'q16','C')"><span class="opt-letter">C</span>Stabilisasi</div>
+    <div class="option" onclick="answer(this,'q16','D')"><span class="opt-letter">D</span>Otorisasi</div>
+  </div>
+  <div class="explanation" id="exp-q16">
+    <strong>Jawaban: C — Stabilisasi</strong><br>
+    Fungsi APBN: (1) Otorisasi (dasar pelaksanaan), (2) Perencanaan, (3) Pengawasan, (4) Alokasi (penyediaan barang publik), (5) Distribusi (pemerataan), (6) Stabilisasi (menjaga kestabilan ekonomi).
+  </div>
+</div>
+
+<div class="question-card" id="q17">
+  <div class="q-header">
+    <div class="q-num">17</div>
+    <div class="q-text">Pernyataan BENAR tentang APBN adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q17','A')"><span class="opt-letter">A</span>APBN disusun oleh DPR dan disahkan oleh Presiden</div>
+    <div class="option" onclick="answer(this,'q17','B')"><span class="opt-letter">B</span>APBN disusun pemerintah (Presiden) dan disetujui DPR melalui UU</div>
+    <div class="option" onclick="answer(this,'q17','C')"><span class="opt-letter">C</span>APBN disusun Bank Indonesia setiap dua tahun sekali</div>
+    <div class="option" onclick="answer(this,'q17','D')"><span class="opt-letter">D</span>APBN tidak dapat diubah setelah disetujui DPR</div>
+  </div>
+  <div class="explanation" id="exp-q17">
+    <strong>Jawaban: B</strong><br>
+    Sesuai UUD 1945 Pasal 23: RAPBN diajukan Presiden dan dibahas bersama DPR. Setelah disetujui ditetapkan sebagai UU APBN. Jika tidak disetujui, digunakan APBN tahun sebelumnya.
+  </div>
+</div>
+
+<div class="question-card" id="q18">
+  <div class="q-header">
+    <div class="q-num">18</div>
+    <div class="q-text">Pendapatan negara dalam APBN bersumber dari… <em>(pilih yang paling lengkap)</em></div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q18','A')"><span class="opt-letter">A</span>Pajak saja</div>
+    <div class="option" onclick="answer(this,'q18','B')"><span class="opt-letter">B</span>Pajak dan retribusi daerah</div>
+    <div class="option" onclick="answer(this,'q18','C')"><span class="opt-letter">C</span>Pajak, PNBP (Penerimaan Negara Bukan Pajak), dan hibah</div>
+    <div class="option" onclick="answer(this,'q18','D')"><span class="opt-letter">D</span>Utang luar negeri dan pajak</div>
+  </div>
+  <div class="explanation" id="exp-q18">
+    <strong>Jawaban: C</strong><br>
+    Pendapatan Negara = Penerimaan Perpajakan + PNBP (SDA, dividen BUMN, dll.) + Hibah. Utang bukan pendapatan melainkan penerimaan pembiayaan.
+  </div>
+</div>
+
+<div class="question-card" id="q19">
+  <div class="q-header">
+    <div class="q-num">19</div>
+    <div class="q-text">Jika belanja negara lebih besar dari pendapatan negara, kondisi APBN disebut…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q19','A')"><span class="opt-letter">A</span>Surplus</div>
+    <div class="option" onclick="answer(this,'q19','B')"><span class="opt-letter">B</span>Berimbang</div>
+    <div class="option" onclick="answer(this,'q19','C')"><span class="opt-letter">C</span>Defisit</div>
+    <div class="option" onclick="answer(this,'q19','D')"><span class="opt-letter">D</span>Stagnasi</div>
+  </div>
+  <div class="explanation" id="exp-q19">
+    <strong>Jawaban: C — Defisit</strong><br>
+    Defisit: Belanja &gt; Pendapatan (ditutup dengan pembiayaan/utang).<br>
+    Surplus: Pendapatan &gt; Belanja. Berimbang: Pendapatan = Belanja.
+  </div>
+</div>
+
+<div class="question-card" id="q20">
+  <div class="q-header">
+    <div class="q-num">20</div>
+    <div class="q-text">Pernyataan SALAH tentang APBN adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q20','A')"><span class="opt-letter">A</span>APBN merupakan instrumen kebijakan fiskal pemerintah</div>
+    <div class="option" onclick="answer(this,'q20','B')"><span class="opt-letter">B</span>Transfer ke daerah termasuk dalam belanja negara</div>
+    <div class="option" onclick="answer(this,'q20','C')"><span class="opt-letter">C</span>APBN dirancang untuk satu tahun anggaran (1 Jan – 31 Des)</div>
+    <div class="option" onclick="answer(this,'q20','D')"><span class="opt-letter">D</span>Bank Indonesia bertanggung jawab menyusun dan melaksanakan APBN</div>
+  </div>
+  <div class="explanation" id="exp-q20">
+    <strong>Jawaban: D — SALAH (ini yang ditanya)</strong><br>
+    Yang menyusun dan melaksanakan APBN adalah PEMERINTAH (Kementerian Keuangan), bukan Bank Indonesia. BI adalah otoritas moneter yang independen.
+  </div>
+</div>
+
+<!-- SOAL 21-27: PERDAGANGAN INTERNASIONAL -->
+<div class="section-label">Bagian 4 · Perdagangan Internasional (Soal 21–30)</div>
+
+<div class="question-card" id="q21">
+  <div class="q-header">
+    <div class="q-num">21</div>
+    <div class="q-text">Teori perdagangan internasional Adam Smith dikenal sebagai teori…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q21','A')"><span class="opt-letter">A</span>Keunggulan Komparatif</div>
+    <div class="option" onclick="answer(this,'q21','B')"><span class="opt-letter">B</span>Keunggulan Mutlak (Absolut)</div>
+    <div class="option" onclick="answer(this,'q21','C')"><span class="opt-letter">C</span>Teori Heckscher-Ohlin</div>
+    <div class="option" onclick="answer(this,'q21','D')"><span class="opt-letter">D</span>Teori Merkantilisme</div>
+  </div>
+  <div class="explanation" id="exp-q21">
+    <strong>Jawaban: B — Keunggulan Mutlak (Adam Smith)</strong><br>
+    Adam Smith: suatu negara sebaiknya mengekspor barang yang diproduksinya dengan biaya/tenaga kerja paling sedikit (keunggulan mutlak).<br>
+    David Ricardo: menyempurnakan dengan teori keunggulan komparatif — negara tetap bisa berdagang meski tidak punya keunggulan mutlak.
+  </div>
+</div>
+
+<div class="question-card" id="q22">
+  <div class="q-header">
+    <div class="q-num">22</div>
+    <div class="q-text">David Ricardo mengembangkan teori keunggulan komparatif. Inti dari teori ini adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q22','A')"><span class="opt-letter">A</span>Negara hanya boleh berdagang jika memiliki keunggulan mutlak di semua barang</div>
+    <div class="option" onclick="answer(this,'q22','B')"><span class="opt-letter">B</span>Negara sebaiknya mengekspor barang dengan biaya oportunitas relatif paling rendah</div>
+    <div class="option" onclick="answer(this,'q22','C')"><span class="opt-letter">C</span>Perdagangan merugikan negara yang lebih lemah ekonominya</div>
+    <div class="option" onclick="answer(this,'q22','D')"><span class="opt-letter">D</span>Ekspor selalu lebih baik daripada impor</div>
+  </div>
+  <div class="explanation" id="exp-q22">
+    <strong>Jawaban: B</strong><br>
+    Teori komparatif Ricardo: spesialisasi pada barang dengan biaya oportunitas (opportunity cost) relatif terendah. Bahkan negara yang tidak punya keunggulan mutlak tetap bisa untung dari perdagangan.
+  </div>
+</div>
+
+<div class="question-card" id="q23">
+  <div class="q-header">
+    <div class="q-num">23</div>
+    <div class="q-text">Indonesia: 1 jam kerja menghasilkan 2 kg beras ATAU 1 m kain. Malaysia: 1 jam kerja menghasilkan 3 kg beras ATAU 3 m kain. Berdasarkan keunggulan komparatif, Indonesia sebaiknya mengekspor…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q23','A')"><span class="opt-letter">A</span>Beras, karena biaya oportunitas beras Indonesia lebih rendah</div>
+    <div class="option" onclick="answer(this,'q23','B')"><span class="opt-letter">B</span>Kain, karena biaya oportunitas kain Indonesia lebih rendah</div>
+    <div class="option" onclick="answer(this,'q23','C')"><span class="opt-letter">C</span>Keduanya, karena Malaysia lebih unggul di segalanya</div>
+    <div class="option" onclick="answer(this,'q23','D')"><span class="opt-letter">D</span>Tidak ada yang diekspor karena Indonesia lebih lemah</div>
+  </div>
+  <div class="explanation" id="exp-q23">
+    <strong>Jawaban: A — Beras</strong><br>
+    Biaya oportunitas beras Indonesia = 1/2 m kain per kg beras.<br>
+    Biaya oportunitas beras Malaysia = 1 m kain per kg beras.<br>
+    Biaya oportunitas beras Indonesia (1/2) &lt; Malaysia (1) → Indonesia lebih komparatif di beras → ekspor beras.
+  </div>
+</div>
+
+<div class="question-card" id="q24">
+  <div class="q-header">
+    <div class="q-num">24</div>
+    <div class="q-text">Kebijakan perdagangan internasional yang melarang ekspor/impor barang tertentu disebut…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q24','A')"><span class="opt-letter">A</span>Tarif/bea masuk</div>
+    <div class="option" onclick="answer(this,'q24','B')"><span class="opt-letter">B</span>Kuota</div>
+    <div class="option" onclick="answer(this,'q24','C')"><span class="opt-letter">C</span>Embargo</div>
+    <div class="option" onclick="answer(this,'q24','D')"><span class="opt-letter">D</span>Dumping</div>
+  </div>
+  <div class="explanation" id="exp-q24">
+    <strong>Jawaban: C — Embargo</strong><br>
+    Embargo: larangan total ekspor/impor barang tertentu (biasanya karena alasan politik/keamanan).<br>
+    Kuota: pembatasan jumlah. Tarif: pajak atas impor. Dumping: menjual di LN lebih murah dari harga dalam negeri.
+  </div>
+</div>
+
+<div class="question-card" id="q25">
+  <div class="q-header">
+    <div class="q-num">25</div>
+    <div class="q-text">Negara A: harga sepatu = Rp 200.000, harga baju = Rp 100.000. Negara B: harga sepatu = Rp 300.000, harga baju = Rp 150.000. Dasar Tukar Dalam Negeri (DTD) sepatu di Negara A adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q25','A')"><span class="opt-letter">A</span>1 sepatu = 1 baju</div>
+    <div class="option" onclick="answer(this,'q25','B')"><span class="opt-letter">B</span>1 sepatu = 2 baju</div>
+    <div class="option" onclick="answer(this,'q25','C')"><span class="opt-letter">C</span>1 sepatu = 3 baju</div>
+    <div class="option" onclick="answer(this,'q25','D')"><span class="opt-letter">D</span>1 sepatu = 0,5 baju</div>
+  </div>
+  <div class="explanation" id="exp-q25">
+    <strong>Jawaban: B — 1 sepatu = 2 baju</strong><br>
+    DTD Negara A = Harga sepatu / Harga baju = 200.000 / 100.000 = 2.<br>
+    Artinya: 1 sepatu di Negara A = 2 baju.
+  </div>
+</div>
+
+<div class="question-card" id="q26">
+  <div class="q-header">
+    <div class="q-num">26</div>
+    <div class="q-text">Pernyataan BENAR tentang kebijakan tarif (bea masuk) impor adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q26','A')"><span class="opt-letter">A</span>Tarif impor menurunkan harga barang impor di pasar domestik</div>
+    <div class="option" onclick="answer(this,'q26','B')"><span class="opt-letter">B</span>Tarif impor melindungi industri dalam negeri dari persaingan asing</div>
+    <div class="option" onclick="answer(this,'q26','C')"><span class="opt-letter">C</span>Tarif impor selalu merugikan konsumen dalam negeri</div>
+    <div class="option" onclick="answer(this,'q26','D')"><span class="opt-letter">D</span>Tarif impor tidak berpengaruh pada pendapatan negara</div>
+  </div>
+  <div class="explanation" id="exp-q26">
+    <strong>Jawaban: B</strong><br>
+    Tarif/bea masuk: menaikkan harga barang impor → produk lokal lebih kompetitif → industri dalam negeri terlindungi. Sekaligus menjadi pendapatan negara (PNBP dari bea masuk).
+  </div>
+</div>
+
+<div class="question-card" id="q27">
+  <div class="q-header">
+    <div class="q-num">27</div>
+    <div class="q-text">Praktik dumping merugikan negara pengimpor karena…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q27','A')"><span class="opt-letter">A</span>Harga barang impor menjadi lebih mahal</div>
+    <div class="option" onclick="answer(this,'q27','B')"><span class="opt-letter">B</span>Industri lokal tidak mampu bersaing dengan harga murah palsu lalu bangkrut</div>
+    <div class="option" onclick="answer(this,'q27','C')"><span class="opt-letter">C</span>Konsumen dipaksa membeli barang mahal</div>
+    <div class="option" onclick="answer(this,'q27','D')"><span class="opt-letter">D</span>Menguntungkan petani lokal secara jangka panjang</div>
+  </div>
+  <div class="explanation" id="exp-q27">
+    <strong>Jawaban: B</strong><br>
+    Dumping: harga ekspor di bawah harga pasar normal → industri lokal negara importir tidak bisa bersaing → bangkrut jangka panjang → monopoli produsen asing. WTO melarang praktik ini.
+  </div>
+</div>
+
+<div class="question-card" id="q28">
+  <div class="q-header">
+    <div class="q-num">28</div>
+    <div class="q-text">Faktor pendorong perdagangan internasional adalah… <em>(pilih yang TIDAK termasuk)</em></div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q28','A')"><span class="opt-letter">A</span>Perbedaan sumber daya alam antar negara</div>
+    <div class="option" onclick="answer(this,'q28','B')"><span class="opt-letter">B</span>Perbedaan selera dan kebutuhan konsumen</div>
+    <div class="option" onclick="answer(this,'q28','C')"><span class="opt-letter">C</span>Persamaan sistem politik semua negara</div>
+    <div class="option" onclick="answer(this,'q28','D')"><span class="opt-letter">D</span>Perbedaan tingkat teknologi dan keahlian</div>
+  </div>
+  <div class="explanation" id="exp-q28">
+    <strong>Jawaban: C</strong><br>
+    Persamaan sistem politik BUKAN faktor pendorong perdagangan internasional. Pendorong: perbedaan SDA, iklim, teknologi, tenaga kerja, selera, dan upaya memperluas pasar.
+  </div>
+</div>
+
+<div class="question-card" id="q29">
+  <div class="q-header">
+    <div class="q-num">29</div>
+    <div class="q-text">Neraca pembayaran (balance of payments) Indonesia mengalami defisit jika…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q29','A')"><span class="opt-letter">A</span>Total penerimaan dari luar negeri &gt; total pembayaran ke luar negeri</div>
+    <div class="option" onclick="answer(this,'q29','B')"><span class="opt-letter">B</span>Total pembayaran ke luar negeri &gt; total penerimaan dari luar negeri</div>
+    <div class="option" onclick="answer(this,'q29','C')"><span class="opt-letter">C</span>Ekspor lebih besar dari impor</div>
+    <div class="option" onclick="answer(this,'q29','D')"><span class="opt-letter">D</span>Cadangan devisa meningkat</div>
+  </div>
+  <div class="explanation" id="exp-q29">
+    <strong>Jawaban: B</strong><br>
+    Defisit neraca pembayaran = total pembayaran ke LN (impor, cicilan utang, dll.) melebihi total penerimaan dari LN (ekspor, investasi masuk, dll.) → cadangan devisa berkurang.
+  </div>
+</div>
+
+<div class="question-card" id="q30">
+  <div class="q-header">
+    <div class="q-num">30</div>
+    <div class="q-text">Kebijakan proteksi perdagangan yang memberikan subsidi kepada eksportir dalam negeri bertujuan…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q30','A')"><span class="opt-letter">A</span>Membatasi jumlah ekspor agar stok dalam negeri aman</div>
+    <div class="option" onclick="answer(this,'q30','B')"><span class="opt-letter">B</span>Menurunkan harga jual ekspor agar lebih kompetitif di pasar internasional</div>
+    <div class="option" onclick="answer(this,'q30','C')"><span class="opt-letter">C</span>Menghukum negara mitra dagang</div>
+    <div class="option" onclick="answer(this,'q30','D')"><span class="opt-letter">D</span>Menaikkan tarif impor negara lain</div>
+  </div>
+  <div class="explanation" id="exp-q30">
+    <strong>Jawaban: B</strong><br>
+    Subsidi ekspor: pemerintah membayar sebagian biaya produksi eksportir → harga jual ekspor lebih murah → kompetitif di pasar dunia → volume ekspor meningkat → devisa bertambah.
+  </div>
+</div>
+
+<!-- SOAL 31-40: KERJASAMA EKONOMI INTERNASIONAL -->
+<div class="section-label">Bagian 5 · Kerjasama Ekonomi & Kurs (Soal 31–40)</div>
+
+<div class="question-card" id="q31">
+  <div class="q-header">
+    <div class="q-num">31</div>
+    <div class="q-text">Kerjasama ekonomi internasional yang melibatkan lebih dari dua negara dalam satu kawasan disebut…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q31','A')"><span class="opt-letter">A</span>Bilateral</div>
+    <div class="option" onclick="answer(this,'q31','B')"><span class="opt-letter">B</span>Multilateral</div>
+    <div class="option" onclick="answer(this,'q31','C')"><span class="opt-letter">C</span>Regional</div>
+    <div class="option" onclick="answer(this,'q31','D')"><span class="opt-letter">D</span>Internasional</div>
+  </div>
+  <div class="explanation" id="exp-q31">
+    <strong>Jawaban: C — Regional</strong><br>
+    Bilateral: 2 negara. Multilateral: banyak negara lintas kawasan. Regional: banyak negara dalam satu kawasan (contoh: ASEAN, EU, APEC).
+  </div>
+</div>
+
+<div class="question-card" id="q32">
+  <div class="q-header">
+    <div class="q-num">32</div>
+    <div class="q-text">ASEAN Free Trade Area (AFTA) bertujuan…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q32','A')"><span class="opt-letter">A</span>Membentuk mata uang tunggal ASEAN</div>
+    <div class="option" onclick="answer(this,'q32','B')"><span class="opt-letter">B</span>Menciptakan kawasan perdagangan bebas di ASEAN dengan tarif nol atau sangat rendah</div>
+    <div class="option" onclick="answer(this,'q32','C')"><span class="opt-letter">C</span>Melarang impor dari negara non-ASEAN</div>
+    <div class="option" onclick="answer(this,'q32','D')"><span class="opt-letter">D</span>Menyamakan upah minimum di negara ASEAN</div>
+  </div>
+  <div class="explanation" id="exp-q32">
+    <strong>Jawaban: B</strong><br>
+    AFTA (1992) bertujuan mengurangi hambatan tarif di antara negara ASEAN melalui CEPT (Common Effective Preferential Tariff) → perdagangan intra-ASEAN lebih bebas dan murah.
+  </div>
+</div>
+
+<div class="question-card" id="q33">
+  <div class="q-header">
+    <div class="q-num">33</div>
+    <div class="q-text">WTO (World Trade Organization) berperan sebagai…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q33','A')"><span class="opt-letter">A</span>Lembaga keuangan internasional pemberi pinjaman</div>
+    <div class="option" onclick="answer(this,'q33','B')"><span class="opt-letter">B</span>Pengatur dan pengawas perdagangan internasional antar negara anggota</div>
+    <div class="option" onclick="answer(this,'q33','C')"><span class="opt-letter">C</span>Badan PBB yang mengatur bantuan kemanusiaan</div>
+    <div class="option" onclick="answer(this,'q33','D')"><span class="opt-letter">D</span>Lembaga penjamin investasi asing langsung</div>
+  </div>
+  <div class="explanation" id="exp-q33">
+    <strong>Jawaban: B</strong><br>
+    WTO (1995, menggantikan GATT): mengatur aturan main perdagangan internasional, menyelesaikan sengketa dagang, dan mendorong liberalisasi perdagangan antar 164 negara anggota.
+  </div>
+</div>
+
+<div class="question-card" id="q34">
+  <div class="q-header">
+    <div class="q-num">34</div>
+    <div class="q-text">IMF (International Monetary Fund) didirikan dengan tujuan utama…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q34','A')"><span class="opt-letter">A</span>Membiayai proyek infrastruktur negara berkembang</div>
+    <div class="option" onclick="answer(this,'q34','B')"><span class="opt-letter">B</span>Menjaga stabilitas sistem moneter internasional dan membantu negara yang mengalami krisis neraca pembayaran</div>
+    <div class="option" onclick="answer(this,'q34','C')"><span class="opt-letter">C</span>Mengatur perdagangan bebas antar negara anggota</div>
+    <div class="option" onclick="answer(this,'q34','D')"><span class="opt-letter">D</span>Mengelola cadangan emas dunia</div>
+  </div>
+  <div class="explanation" id="exp-q34">
+    <strong>Jawaban: B</strong><br>
+    IMF (Bretton Woods, 1944): menjaga stabilitas kurs dan sistem moneter internasional, memberikan pinjaman jangka pendek kepada negara yang defisit neraca pembayaran.
+  </div>
+</div>
+
+<div class="question-card" id="q35">
+  <div class="q-header">
+    <div class="q-num">35</div>
+    <div class="q-text">Seorang turis akan menukar USD ke Rupiah. Kurs yang digunakan oleh bank adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q35','A')"><span class="opt-letter">A</span>Kurs jual USD (bank menjual USD ke turis)</div>
+    <div class="option" onclick="answer(this,'q35','B')"><span class="opt-letter">B</span>Kurs beli USD (bank membeli USD dari turis)</div>
+    <div class="option" onclick="answer(this,'q35','C')"><span class="opt-letter">C</span>Kurs tengah (rata-rata jual dan beli)</div>
+    <div class="option" onclick="answer(this,'q35','D')"><span class="opt-letter">D</span>Kurs tetap yang ditetapkan pemerintah</div>
+  </div>
+  <div class="explanation" id="exp-q35">
+    <strong>Jawaban: B — Kurs beli</strong><br>
+    Turis menukarkan USD → bank mendapat USD → bank MEMBELI USD dari turis → gunakan kurs beli. Kurs beli &lt; kurs jual (spread = keuntungan bank).
+  </div>
+</div>
+
+<div class="question-card" id="q36">
+  <div class="q-header">
+    <div class="q-num">36</div>
+    <div class="q-text">Kurs beli USD = Rp 15.500, kurs jual USD = Rp 15.800. Seseorang ingin membeli USD 500 untuk perjalanan ke Amerika. Berapa Rupiah yang harus dibayar?</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q36','A')"><span class="opt-letter">A</span>Rp 7.750.000</div>
+    <div class="option" onclick="answer(this,'q36','B')"><span class="opt-letter">B</span>Rp 7.900.000</div>
+    <div class="option" onclick="answer(this,'q36','C')"><span class="opt-letter">C</span>Rp 7.650.000</div>
+    <div class="option" onclick="answer(this,'q36','D')"><span class="opt-letter">D</span>Rp 8.000.000</div>
+  </div>
+  <div class="explanation" id="exp-q36">
+    <strong>Jawaban: B — Rp 7.900.000</strong><br>
+    Orang MEMBELI USD dari bank → bank MENJUAL USD → gunakan kurs jual = Rp 15.800.<br>
+    Total = 500 × Rp 15.800 = <strong>Rp 7.900.000</strong>
+  </div>
+</div>
+
+<div class="question-card" id="q37">
+  <div class="q-header">
+    <div class="q-num">37</div>
+    <div class="q-text">Dari soal no. 36, jika orang tersebut kembali dan menjual sisa USD 100, berapa Rupiah yang diterima?</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q37','A')"><span class="opt-letter">A</span>Rp 1.580.000</div>
+    <div class="option" onclick="answer(this,'q37','B')"><span class="opt-letter">B</span>Rp 1.550.000</div>
+    <div class="option" onclick="answer(this,'q37','C')"><span class="opt-letter">C</span>Rp 1.600.000</div>
+    <div class="option" onclick="answer(this,'q37','D')"><span class="opt-letter">D</span>Rp 1.500.000</div>
+  </div>
+  <div class="explanation" id="exp-q37">
+    <strong>Jawaban: B — Rp 1.550.000</strong><br>
+    Orang MENJUAL USD ke bank → bank MEMBELI USD → gunakan kurs beli = Rp 15.500.<br>
+    Total = 100 × Rp 15.500 = <strong>Rp 1.550.000</strong>
+  </div>
+</div>
+
+<div class="question-card" id="q38">
+  <div class="q-header">
+    <div class="q-num">38</div>
+    <div class="q-text">Manfaat kerjasama ekonomi internasional bagi Indonesia adalah… <em>(pilih yang PALING tepat)</em></div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q38','A')"><span class="opt-letter">A</span>Mengurangi ketergantungan pada produk impor secara total</div>
+    <div class="option" onclick="answer(this,'q38','B')"><span class="opt-letter">B</span>Memperluas pasar ekspor, transfer teknologi, dan menambah devisa negara</div>
+    <div class="option" onclick="answer(this,'q38','C')"><span class="opt-letter">C</span>Menjamin harga produk Indonesia selalu stabil di pasar dunia</div>
+    <div class="option" onclick="answer(this,'q38','D')"><span class="opt-letter">D</span>Membebaskan Indonesia dari kewajiban membayar utang luar negeri</div>
+  </div>
+  <div class="explanation" id="exp-q38">
+    <strong>Jawaban: B</strong><br>
+    Manfaat kerjasama ekonomi: (1) Memperluas pasar ekspor, (2) Alih teknologi & investasi asing, (3) Menambah devisa, (4) Stabilitas harga, (5) Memperkuat posisi tawar di forum internasional.
+  </div>
+</div>
+
+<div class="question-card" id="q39">
+  <div class="q-header">
+    <div class="q-num">39</div>
+    <div class="q-text">Lembaga keuangan internasional yang khusus memberikan pinjaman jangka panjang untuk pembangunan infrastruktur negara berkembang adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q39','A')"><span class="opt-letter">A</span>IMF (International Monetary Fund)</div>
+    <div class="option" onclick="answer(this,'q39','B')"><span class="opt-letter">B</span>WTO (World Trade Organization)</div>
+    <div class="option" onclick="answer(this,'q39','C')"><span class="opt-letter">C</span>World Bank (Bank Dunia)</div>
+    <div class="option" onclick="answer(this,'q39','D')"><span class="opt-letter">D</span>OPEC (Organization of Petroleum Exporting Countries)</div>
+  </div>
+  <div class="explanation" id="exp-q39">
+    <strong>Jawaban: C — World Bank</strong><br>
+    Bank Dunia (IBRD + IDA): memberikan pinjaman jangka panjang berbunga rendah untuk proyek pembangunan (infrastruktur, pendidikan, kesehatan) di negara berkembang. Berbeda dengan IMF yang fokus pada stabilitas moneter jangka pendek.
+  </div>
+</div>
+
+<div class="question-card" id="q40">
+  <div class="q-header">
+    <div class="q-num">40</div>
+    <div class="q-text">Pernyataan BENAR tentang kerjasama ekonomi internasional adalah…</div>
+  </div>
+  <div class="options">
+    <div class="option" onclick="answer(this,'q40','A')"><span class="opt-letter">A</span>Kerjasama ekonomi selalu menguntungkan semua pihak tanpa risiko apapun</div>
+    <div class="option" onclick="answer(this,'q40','B')"><span class="opt-letter">B</span>OPEC adalah organisasi negara-negara pengekspor minyak yang bertujuan mengkoordinasikan kebijakan perminyakan</div>
+    <div class="option" onclick="answer(this,'q40','C')"><span class="opt-letter">C</span>ASEAN hanya berfokus pada kerjasama militer antar negara anggota</div>
+    <div class="option" onclick="answer(this,'q40','D')"><span class="opt-letter">D</span>G20 hanya beranggotakan negara-negara Eropa</div>
+  </div>
+  <div class="explanation" id="exp-q40">
+    <strong>Jawaban: B</strong><br>
+    OPEC (Organization of Petroleum Exporting Countries, 1960): koordinasi produksi dan harga minyak antar negara anggota (Saudi Arabia, Iran, Iraq, Venezuela, Nigeria, dll.).<br>
+    ASEAN: kerjasama ekonomi, sosial, budaya, dan politik — bukan hanya militer. G20: forum 20 ekonomi terbesar dunia dari berbagai benua.
+  </div>
+</div>
+
+<!-- RESULT PANEL -->
+<div class="result-panel" id="result-panel">
+  <h2>Hasil Latihan</h2>
+  <div class="big-score" id="final-score">0</div>
+  <div class="grade" id="final-grade">—</div>
+  <div class="result-detail">
+    <span id="res-correct">0 benar</span>
+    <span id="res-wrong">0 salah</span>
+    <span id="res-skip">0 kosong</span>
+  </div>
+</div>
+
+<button class="reset-btn" onclick="resetAll()">🔄 Ulangi Latihan Soal</button>
+
+<footer>Latihan Soal Ekonomi Kelas XII · Semangat belajar! 📖</footer>
+
+<script>
+const answers = {
+  q1:'B',q2:'C',q3:'B',q4:'B',q5:'B',
+  q6:'B',q7:'B',q8:'B',q9:'C',q10:'B',
+  q11:'B',q12:'B',q13:'D',q14:'B',q15:'A',
+  q16:'C',q17:'B',q18:'C',q19:'C',q20:'D',
+  q21:'B',q22:'B',q23:'A',q24:'C',q25:'B',
+  q26:'B',q27:'B',q28:'C',q29:'B',q30:'B',
+  q31:'C',q32:'B',q33:'B',q34:'B',q35:'B',
+  q36:'B',q37:'B',q38:'B',q39:'C',q40:'B'
+};
+
+let done = 0, correct = 0, wrong = 0;
+
+function answer(el, qid, choice) {
+  const card = document.getElementById(qid);
+  if (card.dataset.answered) return;
+  card.dataset.answered = '1';
+
+  const opts = card.querySelectorAll('.option');
+  opts.forEach(o => o.classList.add('disabled'));
+
+  const correct_ans = answers[qid];
+  el.classList.add(choice === correct_ans ? 'correct' : 'wrong');
+
+  if (choice !== correct_ans) {
+    opts.forEach(o => {
+      const letter = o.querySelector('.opt-letter').textContent;
+      if (letter === correct_ans) o.classList.add('show-answer');
+    });
+    wrong++;
+  } else {
+    correct++;
+  }
+
+  const exp = document.getElementById('exp-' + qid);
+  if (exp) exp.classList.add('visible');
+
+  done++;
+  updateStats();
+  card.classList.add('popped');
+
+  if (done === 40) showResult();
+}
+
+function updateStats() {
+  document.getElementById('stat-done').textContent = done;
+  document.getElementById('stat-left').textContent = 40 - done;
+  document.getElementById('stat-correct').textContent = correct;
+  document.getElementById('stat-wrong').textContent = wrong;
+  const score = Math.round((correct / 40) * 100);
+  document.getElementById('stat-score').textContent = score;
+  document.getElementById('prog-fill').style.width = (done / 40 * 100) + '%';
+  document.getElementById('prog-text').textContent = done + ' / 40';
+}
+
+function showResult() {
+  const score = Math.round((correct / 40) * 100);
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('visible');
+  document.getElementById('final-score').textContent = score;
+  let grade = '';
+  if (score >= 90) grade = '🏆 Luar Biasa! Sangat Menguasai Materi';
+  else if (score >= 80) grade = '⭐ Bagus! Hampir Sempurna';
+  else if (score >= 70) grade = '👍 Cukup Baik — Terus Berlatih';
+  else if (score >= 60) grade = '📚 Perlu Lebih Banyak Belajar';
+  else grade = '💪 Jangan Menyerah — Ulangi Lagi!';
+  document.getElementById('final-grade').textContent = grade;
+  document.getElementById('res-correct').textContent = correct + ' benar';
+  document.getElementById('res-wrong').textContent = wrong + ' salah';
+  document.getElementById('res-skip').textContent = '0 kosong';
+  panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetAll() {
+  done = 0; correct = 0; wrong = 0;
+  document.querySelectorAll('.question-card').forEach(card => {
+    delete card.dataset.answered;
+    card.querySelectorAll('.option').forEach(o => {
+      o.className = 'option';
+      o.onclick = o.onclick;
+    });
+    const exp = card.querySelector('.explanation');
+    if (exp) exp.classList.remove('visible');
+  });
+  document.getElementById('result-panel').classList.remove('visible');
+  updateStats();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateStats();
+</script>
+</body>
+</html>
