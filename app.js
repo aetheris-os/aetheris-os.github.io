@@ -15,7 +15,6 @@ const DATA_MATERI = {
         </ul>
         <p>⚠️ <em>Hati-hati Jebakan!</em> Jika [p → q] lalu yang diketahui [q], kamu <strong>TIDAK BISA</strong> menyimpulkan [p]. Ini kesalahan logika yang paling sering dipasang pembuat soal.</p>
       </div>
-
       <div class="materi-card">
         <h2>2. Studi Kasus Soal Deduktif + Solusi</h2>
         <p><strong>Soal:</strong> Jika siswa rajin belajar (p), maka ia lulus UTBK (q). Jika siswa lulus UTBK (q), maka orang tua bahagia (r). Diketahui orang tua tidak bahagia (~r). Apa simpulan yang sah?</p>
@@ -24,7 +23,6 @@ const DATA_MATERI = {
         Selanjutnya gunakan Modus Tollens dengan fakta baru: (p → r) dan (~r). Kesimpulannya adalah <strong>~p</strong>.<br>
         <strong>Jawaban Akhir:</strong> Siswa tidak rajin belajar.</p>
       </div>
-
       <div class="materi-card">
         <h2>3. Penalaran Induktif (Pola Deret Angka)</h2>
         <p>Mencari pola umum dari data-data spesifik. Strategi eksekusi kilat:</p>
@@ -34,7 +32,6 @@ const DATA_MATERI = {
           <li><strong>Fibonacci:</strong> Angka berikutnya adalah hasil penjumlahan dua angka sebelumnya.</li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>4. Studi Kasus Soal Induktif + Solusi</h2>
         <p><strong>Soal:</strong> Tentukan angka berikutnya dari barisan: 3, 4, 7, 11, 18, 29, ...</p>
@@ -63,7 +60,6 @@ const DATA_MATERI = {
           <li><strong>Insinuasi:</strong> Tuduhan tersembunyi atau sindiran tidak langsung.</li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>2. Studi Kasus Makna Kata + Solusi</h2>
         <p><strong>Soal:</strong> Pemerintah melakukan <em>mitigasi</em> secara masif untuk menekan dampak inflasi global di sektor pangan. Kata yang paling tepat menggantikan kata <em>mitigasi</em> adalah...</p>
@@ -71,7 +67,6 @@ const DATA_MATERI = {
         Menurut KBBI, mitigasi berarti tindakan mengurangi dampak bencana atau risiko. Dalam konteks ekonomi pangan, tindakan ini berkaitan dengan pencegahan atau pengurangan dampak buruk.<br>
         <strong>Jawaban Akhir:</strong> Penanggulangan / Pengurangan dampak risiko.</p>
       </div>
-
       <div class="materi-card">
         <h2>3. Hubungan Antar-paragraf & Sikap Penulis (Attitude)</h2>
         <p>Soal tipe ini menanyakan fungsi paragraf kedua terhadap paragraf kesatu. Opsinya biasanya berupa: memperjelas, mempertanyakan, menentang, atau memberikan contoh konkret.</p>
@@ -92,7 +87,6 @@ const DATA_MATERI = {
           <li><strong>Pleonasme:</strong> Pemborosan kata (Contoh salah: <em>"Sejak dari pagi..."</em> atau <em>"Para bapak-bapak..."</em>).</li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>2. Studi Kasus Kalimat Efektif + Solusi</h2>
         <p><strong>Soal:</strong> Perbaiki kalimat berikut agar menjadi kalimat efektif: <em>"Menurut analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi."</em></p>
@@ -101,7 +95,6 @@ const DATA_MATERI = {
         Opsi Perbaikan 1 (Hilangkan 'Menurut'): <em>Analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi.</em><br>
         Opsi Perbaikan 2 (Hilangkan 'menyatakan bahwa'): <em>Menurut analisis para ahli hukum, undang-undang tersebut harus direvisi.</em></p>
       </div>
-
       <div class="materi-card">
         <h2>3. Aturan Ejaan (EYD V) & Kalimat Sumbang</h2>
         <p>Kuasai aturan penulisan kata depan <strong>di</strong> (dipisah jika menunjukkan tempat: <em>di rumah</em>, digabung jika kata kerja pasif: <em>dimakan</em>). Kalimat sumbang adalah kalimat yang keluar dari topik utama paragraf.</p>
@@ -120,7 +113,6 @@ const DATA_MATERI = {
           <li><strong>Tips:</strong> Jangan habiskan waktu mencari angka eksak jika yang ditanyakan hanya "apakah data tersebut cukup".</li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>2. Studi Kasus Aljabar Fungsi + Solusi</h2>
         <p><strong>Soal:</strong> Jika f(x) = 3x - 1 dan g(x) = x² + 2. Berapakah nilai dari komposisi fungsi (g ∘ f)(2)?</p>
@@ -132,7 +124,6 @@ const DATA_MATERI = {
         g(5) = (5)² + 2 = 25 + 2 = 27.<br>
         <strong>Jawaban Akhir:</strong> 27.</p>
       </div>
-
       <div class="materi-card">
         <h2>3. Geometri Sudut & Garis Sejajar</h2>
         <p>Kuasai sifat-sifat sudut jika dua garis sejajar dipotong oleh sebuah garis melintang: Sudut bertolak belakang besarnya sama, sudut dalam berseberangan besarnya sama, dan jumlah sudut sepihak adalah 180°.</p>
@@ -152,7 +143,6 @@ const DATA_MATERI = {
           <li>Kalimat utama di awal disebut paragraf <strong>Deduktif</strong>, di akhir disebut <strong>Induktif</strong>.</li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>2. Studi Kasus Simpulan Implisit + Solusi</h2>
         <p><strong>Teks:</strong> "Pendidikan karakter sejak usia dini di wilayah luar kota besar, seperti Pangkalan Kerinci, memperlihatkan korelasi positif terhadap ketahanan mental pelajar SMA. Survei terbaru berbasis angket menunjukkan siswa yang mendapatkan edukasi karakter lebih adaptif menghadapi ujian nasional dibandingkan siswa yang hanya fokus pada bimbingan belajar kognitif murni."<br><br>
@@ -177,7 +167,6 @@ const DATA_MATERI = {
           <li><strong>Optimistic:</strong> Penulis yakin akan ada dampak baik di masa depan.</li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>2. Advanced Grammar: Subjunctive Patterns (Past Regret)</h2>
         <p>Pola pengandaian masa lalu menggunakan kata <strong>wish</strong> sering muncul untuk menguji ketelitian tata bahasamu.</p>
@@ -186,7 +175,6 @@ const DATA_MATERI = {
           <li>Rumus ini dipakai untuk menunjukkan penyesalan atas peristiwa yang telanjur terjadi di masa lampau.</li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>3. Studi Kasus Soal Bahasa Inggris + Solusi</h2>
         <p><strong>Soal:</strong> The debate team lost the selection match yesterday due to a simple misunderstanding. The captain said, "I wish we ___ more attention to the structural constitution rules."</p>
@@ -211,7 +199,6 @@ const DATA_MATERI = {
           <li><strong>Rumus Kombinasi:</strong> <code>C(n, r) = n! / (r! × (n - r)!)</code></li>
         </ul>
       </div>
-
       <div class="materi-card">
         <h2>2. Studi Kasus Kombinatorika Tim Debat + Solusi</h2>
         <p><strong>Soal:</strong> Dari 7 orang siswa kelas 11 di sebuah SMA, akan dipilih 3 orang siswa untuk mewakili sekolah dalam kompetisi debat hukum tata negara. Berapa banyak cara pemilihan yang mungkin?</p>
@@ -223,7 +210,6 @@ const DATA_MATERI = {
         C(7, 3) = (7 × 6 × 5) / 6 = 7 × 5 = 35.<br>
         <strong>Jawaban Akhir:</strong> 35 cara.</p>
       </div>
-
       <div class="materi-card">
         <h2>3. Pemodelan Rasio Keuangan & Rasionalisasi APBN</h2>
         <p>Sering muncul soal cerita mengenai persentase kenaikan utang negara, suku bunga bank, atau perbandingan alokasi dana subsidi. Tips utamanya adalah: Ubah narasi soal cerita yang panjang menjadi persamaan matematika sederhana terlebih dahulu sebelum berhitung.</p>
@@ -231,65 +217,82 @@ const DATA_MATERI = {
     `
   }
 };
-
 // ====== DOM CONTROLLERS ======
 const sidebar = document.getElementById('sidebar');
 const menuTrigger = document.getElementById('menu-trigger');
 const sidebarOverlay = document.getElementById('sidebar-overlay');
-const themeToggle = document.getElementById('theme-toggle');
-
 const viewDashboard = document.getElementById('view-dashboard');
 const viewSubtest = document.getElementById('view-subtest');
-
 // Hamburger State Toggle
 function toggleSidebar() {
   sidebar.classList.toggle('open');
 }
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
-
-// Theme Switcher dengan Pure CSS Circular Reveal (Fixed)
-themeToggle.addEventListener('click', (event) => {
-  // Jika animasi sedang berjalan, abaikan klik
-  if (document.body.classList.contains('is-revealing')) return;
-  // 1. Tangkap posisi X dan Y dari titik klik
-  const x = event.clientX;
-  const y = event.clientY;
-  
-  // Masukkan koordinat ke CSS
-  document.body.style.setProperty('--reveal-x', x + 'px');
-  document.body.style.setProperty('--reveal-y', y + 'px');
-  // 2. Cek tema saat ini dan tentukan tema tujuan
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  // Tambahkan class warna overlay sesuai tema tujuan
-  if (targetTheme === 'light') {
-    document.body.classList.add('reveal-to-light');
-  } else {
-    document.body.classList.add('reveal-to-dark');
-  }
-  // 3. Pemicu animasi (Pakai double requestAnimationFrame agar CSS baca perubahan)
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      document.body.classList.add('is-revealing');
-    });
-  });
-  // 4. Ubah tema asli di belakang layar saat animasi mencapai 50% (0.4 detik)
-  setTimeout(() => {
-    document.documentElement.setAttribute('data-theme', targetTheme);
-    themeToggle.textContent = targetTheme === 'dark' ? '🌙' : '☀️';
-  }, 400);
-  // 5. Bersihkan class setelah animasi selesai (0.85 detik)
-  setTimeout(() => {
-    document.body.classList.remove('is-revealing');
-    document.body.classList.remove('reveal-to-light');
-    document.body.classList.remove('reveal-to-dark');
-  }, 850);
+// ====== TEMA DROPDOWN & CIRCULAR REVEAL ANIMATION ======
+const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
+const themeCurrentBtn = document.getElementById('theme-current-btn');
+const themeDropdown = document.getElementById('theme-dropdown');
+const themeOptions = document.querySelectorAll('.theme-option');
+const themeIcon = document.querySelector('.theme-icon');
+const themeName = document.querySelector('.theme-name');
+themeCurrentBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  themeDropdown.classList.toggle('open');
 });
-
-// Navigation View Router
+document.addEventListener('click', (e) => {
+  if (!themeSelectorWrapper.contains(e.target)) {
+    themeDropdown.classList.remove('open');
+  }
+});
+function updateThemeButton(theme) {
+  if (theme === 'dark') {
+    themeIcon.textContent = '🌙';
+    themeName.textContent = 'Dark';
+  } else {
+    themeIcon.textContent = '☀️';
+    themeName.textContent = 'Light';
+  }
+}
+themeOptions.forEach(option => {
+  option.addEventListener('click', (e) => {
+    const targetTheme = option.dataset.theme;
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    
+    if (targetTheme === currentTheme) {
+      themeDropdown.classList.remove('open');
+      return;
+    }
+    if (document.body.classList.contains('is-revealing')) return;
+    const x = e.clientX;
+    const y = e.clientY;
+    document.body.style.setProperty('--reveal-x', x + 'px');
+    document.body.style.setProperty('--reveal-y', y + 'px');
+    if (targetTheme === 'light') {
+      document.body.classList.add('reveal-to-light');
+    } else {
+      document.body.classList.add('reveal-to-dark');
+    }
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.body.classList.add('is-revealing');
+      });
+    });
+    setTimeout(() => {
+      document.documentElement.setAttribute('data-theme', targetTheme);
+      updateThemeButton(targetTheme);
+    }, 400);
+    setTimeout(() => {
+      document.body.classList.remove('is-revealing');
+      document.body.classList.remove('reveal-to-light');
+      document.body.classList.remove('reveal-to-dark');
+      themeDropdown.classList.remove('open');
+    }, 850);
+  });
+});
+// ====== NAVIGATION ROUTER ======
 function navigateTo(viewId, gateKey = null) {
-  sidebar.classList.remove('open'); // Tutup sidebar otomatis jika terbuka
+  sidebar.classList.remove('open');
   
   if (viewId === 'dashboard') {
     viewSubtest.classList.remove('active');
@@ -302,20 +305,14 @@ function navigateTo(viewId, gateKey = null) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
-
-// Bind Home-Brand Click
 document.getElementById('brand-home').addEventListener('click', () => navigateTo('dashboard'));
 document.getElementById('btn-back-dashboard').addEventListener('click', () => navigateTo('dashboard'));
-
-// Bind Card Grid Dashboard Clicks
 document.querySelectorAll('.node-card').forEach(card => {
   card.addEventListener('click', () => {
     const gate = card.dataset.gate;
     navigateTo('subtest', gate);
   });
 });
-
-// Bind Sidebar Links Clicks
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -329,26 +326,19 @@ document.querySelectorAll('.nav-link').forEach(link => {
     }
   });
 });
-
 // ====== RENDER DYNAMIC SUBTEST VIEW ======
 function renderSubtestPage(key) {
   const data = DATA_MATERI[key];
   if (!data) return;
-
   document.getElementById('subtest-title').textContent = data.title;
   document.getElementById('subtest-category').textContent = data.category;
   document.getElementById('subtest-category').className = `node-tag ${data.category.includes('TPS') ? 'tps' : 'lit'}`;
   document.getElementById('subtest-desc').textContent = data.desc;
   
-  // Masukkan konten materi ke zona render
   document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
-
-  // Reset tab submateri kembali ke tab 'materi'
   switchSubPanel('materi');
   resetChronoTimer();
 }
-
-// Inner Subtest Tab Switcher
 const subTabBtns = document.querySelectorAll('.sub-tab-btn');
 subTabBtns.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -357,23 +347,19 @@ subTabBtns.forEach(btn => {
     switchSubPanel(btn.dataset.mode);
   });
 });
-
 function switchSubPanel(mode) {
   document.getElementById('panel-materi').classList.toggle('active', mode === 'materi');
   document.getElementById('panel-latihan').classList.toggle('active', mode === 'latihan');
 }
-
-// ====== CHRONO TIMER MODULE (UNIQUE UX FEATURE) ======
+// ====== CHRONO TIMER MODULE ======
 let chronoInterval = null;
-let chronoRemainingSeconds = 25 * 60; // Default Pomodoro 25 Menit
+let chronoRemainingSeconds = 25 * 60;
 let isChronoRunning = false;
-
 const timerToggleSwitch = document.getElementById('timer-toggle-switch');
 const chronoDisplayContainer = document.getElementById('chrono-display-container');
 const timerDigits = document.getElementById('timer-digits');
 const btnTimerState = document.getElementById('btn-timer-state');
 const btnTimerReset = document.getElementById('btn-timer-reset');
-
 timerToggleSwitch.addEventListener('change', (e) => {
   if (e.target.checked) {
     chronoDisplayContainer.classList.remove('hidden');
@@ -382,13 +368,11 @@ timerToggleSwitch.addEventListener('change', (e) => {
     pauseChronoTimer();
   }
 });
-
 function updateChronoDisplay() {
   const mins = Math.floor(chronoRemainingSeconds / 60);
   const secs = chronoRemainingSeconds % 60;
   timerDigits.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
-
 function startChronoTimer() {
   if (isChronoRunning) return;
   isChronoRunning = true;
@@ -404,19 +388,16 @@ function startChronoTimer() {
     }
   }, 1000);
 }
-
 function pauseChronoTimer() {
   isChronoRunning = false;
   btnTimerState.textContent = 'Start';
   clearInterval(chronoInterval);
 }
-
 function resetChronoTimer() {
   pauseChronoTimer();
   chronoRemainingSeconds = 25 * 60;
   updateChronoDisplay();
 }
-
 btnTimerState.addEventListener('click', () => {
   if (isChronoRunning) {
     pauseChronoTimer();
@@ -424,5 +405,4 @@ btnTimerState.addEventListener('click', () => {
     startChronoTimer();
   }
 });
-
 btnTimerReset.addEventListener('click', resetChronoTimer);
