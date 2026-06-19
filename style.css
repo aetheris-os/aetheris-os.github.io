@@ -612,19 +612,27 @@ body::before {
   width: 100vw;
   height: 100vh;
   z-index: 9999;
-  pointer-events: none; /* Agar tidak nge-block klik saat animasi */
+  pointer-events: none;
   
-  /* Menyiapkan warna target tema yang akan muncul */
-  background-color: #060B19; /* Default Dark */
-  
-  /* Clip path awal (menutup penuh) */
-  clip-path: circle(0% at var(--reveal-x, 50%) var(--reveal-y, 50%));
-  transition: clip-path 0s; /* No transition awal */
-}
-body.light-mode-active::before {
-  background-color: #F0F4F8; /* Warna Light Mode */
-}
-body.is-revealing::before {
+  /* Default state: Lingkaran tutup penuh */
   clip-path: circle(150% at var(--reveal-x, 50%) var(--reveal-y, 50%));
-  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Durasi & Ease animasi */
+  
+  /* INI KUNCI PERBAIKANNYA: Pastikan transition 0.8s SAAT Membesar */
+  transition: clip-path 0s; 
+}
+ 
+/* State Ketika Animasi Berjalan (Lingkaran mengecil/membuka) */
+body.is-revealing::before {
+  clip-path: circle(0% at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+ 
+/* Warna overlay Dark Mode (Saat web menuju Light, overlay gelap yang mengecil) */
+body.reveal-to-light::before {
+  background-color: #060B19; 
+}
+ 
+/* Warna overlay Light Mode (Saat web menuju Dark, overlay terang yang mengecil) */
+body.reveal-to-dark::before {
+  background-color: #F0F4F8; 
 }
