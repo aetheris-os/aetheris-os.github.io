@@ -401,12 +401,9 @@ async function generateSoalDariAI(gateKey) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${GROQ_API_KEY}`
       },
-      body: JSON.stringify({
-        model: "llama3-70b-8192", // Model AI super cepat dari Groq
+     body: JSON.stringify({
+        model: "llama-3.3-70b-versatile", // Model AI super cepat dari Groq
         messages: [
-          { role: "system", content: promptSystem },
-          { role: "user", content: promptUser }
-        ],
         temperature: 0.9,
         response_format: { type: "json_object" }
       })
