@@ -1,5 +1,5 @@
 // ====== KONFIGURASI GEMINI API ======
-const GEMINI_API_KEY = "AQ.Ab8RN6KLgQtKUY76bd-sGNDwQeDPGSjzk-ZVAqSIPuaiu4D4Gg"; 
+const GEMINI_API_KEY = "AQ.Ab8RN6LHExpUqoETdUllErNYYnmJx7bY9sLS6KDJeKTcdVFWoQ"; 
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY;
 
 // ====== SOURCE BANK MATERI UTBK (AETHERIS SYSTEM CORE) ======
