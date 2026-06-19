@@ -63,7 +63,6 @@ const DATA_MATERI = {
 };
 
 // ====== BANK SOAL SIMULASI (40 SOAL UNTUK PU) ======
-// Untuk subtes lain, kamu tinggal copy format array ini dan isi sendiri.
 const BANK_SIMULASI = {
   'subtest-pu': [
     { soal: "Jika hujan turun, maka jalan basah. Jalan tidak basah. Kesimpulan yang sah adalah...", opsi: ["Hujan turun", "Hujan tidak turun", "Jalan kering", "Tidak bisa disimpulkan"], jawaban: 1, pembahasan: "Modus Tollens: p→q dan ~q, maka ~p." },
@@ -79,7 +78,7 @@ const BANK_SIMULASI = {
     { soal: "Deret: 3, 6, 11, 18, 27, ... Bilangan selanjutnya adalah...", opsi: ["36", "38", "40", "42"], jawaban: 1, pembahasan: "Selisih: 3, 5, 7, 9. Selanjutnya 11. 27+11=38." },
     { soal: "Semua benda logam menghantarkan listrik. Besi adalah logam. Kesimpulannya...", opsi: ["Besi tidak menghantarkan listrik", "Besi menghantarkan listrik", "Semua penghantar adalah besi", "Tidak ada hubungannya"], jawaban: 1, pembahasan: "Silogisme positif." },
     { soal: "Jika hari libur, Andi pergi liburan. Hari ini Andi tidak pergi liburan. Maka...", opsi: ["Hari ini libur", "Hari ini tidak libur", "Andi sakit", "Tidak tentu"], jawaban: 1, pembahasan: "Modus tollens." },
-    { soal: "Deret: 2, 4, 8, 16, 32, ... Bilangan selanjutnya adalah...", opsi: ["48", "56", "64", "72"], jawabab: 2, pembahasan: "Deret Geometri rasio x2." },
+    { soal: "Deret: 2, 4, 8, 16, 32, ... Bilangan selanjutnya adalah...", opsi: ["48", "56", "64", "72"], jawaban: 2, pembahasan: "Deret Geometri rasio x2." },
     { soal: "Semua siswa kelas 12 mengikuti UTBK. Sebagian siswa kelas 12 tidak lulus. Maka...", opsi: ["Semua yang ikut UTBK lulus", "Sebagian yang ikut UTBK tidak lulus", "Tidak ada yang lulus", "Sebagian yang lulus tidak ikut UTBK"], jawaban: 1, pembahasan: "Subjek yang sama, sebagian tidak lulus." },
     { soal: "Jika A > B dan B > C, maka...", opsi: ["A < C", "A = C", "A > C", "B = A"], jawaban: 2, pembahasan: "Sifat transitif." },
     { soal: "Deret: 1, 4, 9, 16, 25, ... Bilangan selanjutnya adalah...", opsi: ["30", "36", "49", "50"], jawaban: 1, pembahasan: "Deret kuadrat: 6² = 36." },
@@ -113,19 +112,15 @@ const BANK_SIMULASI = {
 const sidebar = document.getElementById('sidebar');
 const menuTrigger = document.getElementById('menu-trigger');
 const sidebarOverlay = document.getElementById('sidebar-overlay');
-
 const viewDashboard = document.getElementById('view-dashboard');
 const viewSubtest = document.getElementById('view-subtest');
-
 let currentGateKey = null; 
 
-function toggleSidebar() {
-  sidebar.classList.toggle('open');
-}
+function toggleSidebar() { sidebar.classList.toggle('open'); }
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
 
-// ====== TEMA DROPDOWN & CIRCULAR REVEAL ======
+// ====== TEMA DROPDOWN ======
 const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
 const themeCurrentBtn = document.getElementById('theme-current-btn');
 const themeDropdown = document.getElementById('theme-dropdown');
@@ -133,74 +128,38 @@ const themeOptions = document.querySelectorAll('.theme-option');
 const themeIcon = document.querySelector('.theme-icon');
 const themeName = document.querySelector('.theme-name');
 
-themeCurrentBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  themeDropdown.classList.toggle('open');
-});
-
-document.addEventListener('click', (e) => {
-  if (!themeSelectorWrapper.contains(e.target)) {
-    themeDropdown.classList.remove('open');
-  }
-});
+themeCurrentBtn.addEventListener('click', (e) => { e.stopPropagation(); themeDropdown.classList.toggle('open'); });
+document.addEventListener('click', (e) => { if (!themeSelectorWrapper.contains(e.target)) themeDropdown.classList.remove('open'); });
 
 function updateThemeButton(theme) {
-  if (theme === 'dark') {
-    themeIcon.textContent = '🌙';
-    themeName.textContent = 'Dark';
-  } else {
-    themeIcon.textContent = '☀️';
-    themeName.textContent = 'Light';
-  }
+  themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  themeName.textContent = theme === 'dark' ? 'Dark' : 'Light';
 }
 
 themeOptions.forEach(option => {
   option.addEventListener('click', (e) => {
     const targetTheme = option.dataset.theme;
     const currentTheme = document.documentElement.getAttribute('data-theme');
-    
-    if (targetTheme === currentTheme) {
-      themeDropdown.classList.remove('open');
-      return;
-    }
-
+    if (targetTheme === currentTheme) { themeDropdown.classList.remove('open'); return; }
     if (document.body.classList.contains('is-revealing')) return;
 
-    const x = e.clientX;
-    const y = e.clientY;
+    const x = e.clientX, y = e.clientY;
     document.body.style.setProperty('--reveal-x', x + 'px');
     document.body.style.setProperty('--reveal-y', y + 'px');
 
-    if (targetTheme === 'light') {
-      document.body.classList.add('reveal-to-light');
-    } else {
-      document.body.classList.add('reveal-to-dark');
-    }
+    if (targetTheme === 'light') document.body.classList.add('reveal-to-light');
+    else document.body.classList.add('reveal-to-dark');
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.body.classList.add('is-revealing');
-      });
-    });
+    requestAnimationFrame(() => { requestAnimationFrame(() => { document.body.classList.add('is-revealing'); }); });
 
-    setTimeout(() => {
-      document.documentElement.setAttribute('data-theme', targetTheme);
-      updateThemeButton(targetTheme);
-    }, 400);
-
-    setTimeout(() => {
-      document.body.classList.remove('is-revealing');
-      document.body.classList.remove('reveal-to-light');
-      document.body.classList.remove('reveal-to-dark');
-      themeDropdown.classList.remove('open');
-    }, 850);
+    setTimeout(() => { document.documentElement.setAttribute('data-theme', targetTheme); updateThemeButton(targetTheme); }, 400);
+    setTimeout(() => { document.body.classList.remove('is-revealing'); document.body.classList.remove('reveal-to-light'); document.body.classList.remove('reveal-to-dark'); themeDropdown.classList.remove('open'); }, 850);
   });
 });
 
 // ====== NAVIGATION ROUTER ======
 function navigateTo(viewId, gateKey = null) {
   sidebar.classList.remove('open');
-  
   if (viewId === 'dashboard') {
     viewSubtest.classList.remove('active');
     viewDashboard.classList.add('active');
@@ -215,13 +174,7 @@ function navigateTo(viewId, gateKey = null) {
 
 document.getElementById('brand-home').addEventListener('click', () => navigateTo('dashboard'));
 document.getElementById('btn-back-dashboard').addEventListener('click', () => navigateTo('dashboard'));
-
-document.querySelectorAll('.node-card').forEach(card => {
-  card.addEventListener('click', () => {
-    navigateTo('subtest', card.dataset.gate);
-  });
-});
-
+document.querySelectorAll('.node-card').forEach(card => { card.addEventListener('click', () => navigateTo('subtest', card.dataset.gate)); });
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -242,12 +195,10 @@ function renderSubtestPage(key) {
   document.getElementById('subtest-category').textContent = data.category;
   document.getElementById('subtest-category').className = `node-tag ${data.category.includes('TPS') ? 'tps' : 'lit'}`;
   document.getElementById('subtest-desc').textContent = data.desc;
-  
   document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
 
   switchSubPanel('materi');
   resetChronoTimer();
-  
   document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
 }
@@ -259,12 +210,8 @@ subTabBtns.forEach(btn => {
     btn.classList.add('active');
     const mode = btn.dataset.mode;
     switchSubPanel(mode);
-    
-    if (mode === 'latihan-ai' && currentGateKey) {
-      generateSoalDariAI(currentGateKey);
-    } else if (mode === 'latihan-sim' && currentGateKey) {
-      mulaiSimulasi(currentGateKey);
-    }
+    if (mode === 'latihan-ai' && currentGateKey) generateSoalDariAI(currentGateKey);
+    else if (mode === 'latihan-sim' && currentGateKey) mulaiSimulasi(currentGateKey);
   });
 });
 
@@ -275,21 +222,12 @@ function switchSubPanel(mode) {
 }
 
 // ====== SISTEM LATIHAN AI (GROQ) ======
-let soalAktif = [];
-let indexSoalSekarang = 0;
-let skorBenar = 0;
+let soalAktif = [], indexSoalSekarang = 0, skorBenar = 0;
 
 async function generateSoalDariAI(gateKey) {
   const dataMateri = DATA_MATERI[gateKey];
   const panelLatihan = document.getElementById('panel-latihan-ai');
-
-  panelLatihan.innerHTML = `
-    <div class="loading-state">
-      <div class="loading-spinner"></div>
-      <h3>Sedang Meracik 10 Soal Tipe UTBK...</h3>
-      <p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p>
-    </div>
-  `;
+  panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 10 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
 
   const promptSystem = `Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi". Buat soal SULIT & HOTS. WAJIB balas JSON murni.`;
   const promptUser = `Buatkan 10 soal PG untuk subtes "${dataMateri.title}". Struktur JSON: { "soal": [ { "pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..." } ] }`;
@@ -307,7 +245,6 @@ async function generateSoalDariAI(gateKey) {
     });
 
     if (!response.ok) throw new Error('Gagal memuat soal dari AI');
-    
     const resJson = await response.json();
     const parsed = JSON.parse(resJson.choices[0].message.content);
 
@@ -315,16 +252,8 @@ async function generateSoalDariAI(gateKey) {
     indexSoalSekarang = 0;
     skorBenar = 0;
     tampilkanSoal('panel-latihan-ai');
-
   } catch (error) {
-    panelLatihan.innerHTML = `
-      <div class="locked-state-card">
-        <div class="lock-icon">⚠️</div>
-        <h3>Gagal Menghubungi AI</h3>
-        <p>Error: ${error.message}</p>
-        <button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button>
-      </div>
-    `;
+    panelLatihan.innerHTML = `<div class="locked-state-card"><div class="lock-icon">⚠️</div><h3>Gagal Menghubungi AI</h3><p>Error: ${error.message}</p><button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button></div>`;
   }
 }
 
@@ -334,29 +263,19 @@ function mulaiSimulasi(gateKey) {
   const panelSim = document.getElementById('panel-latihan-sim');
 
   if (!bank || bank.length === 0) {
-    panelSim.innerHTML = `
-      <div class="locked-state-card">
-        <div class="lock-icon">⚙️</div>
-        <h3>Bank Soal Belum Tersedia</h3>
-        <p>Bank soal simulasi untuk subtes ini sedang dalam pengembangan. Silakan coba subtes Penalaran Umum (PU) terlebih dahulu!</p>
-      </div>
-    `;
+    panelSim.innerHTML = `<div class="locked-state-card"><div class="lock-icon">⚙️</div><h3>Bank Soal Belum Tersedia</h3><p>Bank soal simulasi untuk subtes ini sedang dalam pengembangan. Silakan coba subtes Penalaran Umum (PU) terlebih dahulu!</p></div>`;
     return;
   }
 
-  // Acak urutan soal (Shuffle)
   soalAktif = [...bank].sort(() => Math.random() - 0.5);
   indexSoalSekarang = 0;
   skorBenar = 0;
   tampilkanSoal('panel-latihan-sim');
 }
 
-// ====== FUNGSI RENDER SOAL UNIVERSAL (DIPAKAI AI & SIMULASI) ======
+// ====== FUNGSI RENDER SOAL UNIVERSAL ======
 function tampilkanSoal(panelId) {
-  if (indexSoalSekarang >= soalAktif.length) {
-    renderHasilAkhir(panelId);
-    return;
-  }
+  if (indexSoalSekarang >= soalAktif.length) { renderHasilAkhir(panelId); return; }
 
   const soal = soalAktif[indexSoalSekarang];
   const opsiHtml = soal.opsi.map((ops, i) => `
@@ -404,20 +323,20 @@ function jawabSoal(indexJawaban, panelId) {
   pembahasanBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function lanjutSoal(panelId) {
-  indexSoalSekarang++;
-  tampilkanSoal(panelId);
-}
+function lanjutSoal(panelId) { indexSoalSekarang++; tampilkanSoal(panelId); }
 
 function renderHasilAkhir(panelId) {
   const persentase = (skorBenar / soalAktif.length) * 100;
+  const btnText = panelId.includes('sim') ? "Ulangi Simulasi (Acak)" : "Ulangi Latihan AI";
+  const btnAction = panelId.includes('sim') ? `mulaiSimulasi('${currentGateKey}')` : `generateSoalDariAI('${currentGateKey}')`;
+  
   document.getElementById(panelId).innerHTML = `
     <div class="hasil-akhir">
       <div class="ikon-hasil">${persentase > 70 ? '🏆' : '📚'}</div>
       <h2>Sesi Latihan Selesai!</h2>
       <h1>${skorBenar} / ${soalAktif.length}</h1>
       <p>Skor kamu: ${persentase.toFixed(0)}%. ${persentase > 70 ? 'Pertahankan!' : 'Terus berlatih!'}</p>
-      <button class="btn-action" onclick="mulaiSimulasi('${currentGateKey}')">Ulangi Simulasi (Acak)</button>
+      <button class="btn-action" onclick="${btnAction}">${btnText}</button>
       <button class="btn-action shadow" onclick="keluarLatihan()">Kembali ke Materi</button>
     </div>
   `;
@@ -429,39 +348,65 @@ function keluarLatihan() {
   document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
 }
 
-// ====== CHRONO TIMER MODULE ======
+// ====== CHRONO TIMER & FLOATING TIMER MODULE ======
 let chronoInterval = null;
 let chronoRemainingSeconds = 25 * 60;
 let isChronoRunning = false;
 
 const timerToggleSwitch = document.getElementById('timer-toggle-switch');
+const timerDurationSelect = document.getElementById('timer-duration-select');
 const chronoDisplayContainer = document.getElementById('chrono-display-container');
 const timerDigits = document.getElementById('timer-digits');
 const btnTimerState = document.getElementById('btn-timer-state');
 const btnTimerReset = document.getElementById('btn-timer-reset');
 
+const floatingTimer = document.getElementById('floating-timer');
+const ftDigits = document.getElementById('ft-digits');
+const ftPauseBtn = document.getElementById('ft-pause-btn');
+const ftCloseBtn = document.getElementById('ft-close-btn');
+
+timerDurationSelect.addEventListener('change', () => {
+  if (!isChronoRunning) {
+    chronoRemainingSeconds = parseInt(timerDurationSelect.value) * 60;
+    updateChronoDisplay();
+  }
+});
+
 timerToggleSwitch.addEventListener('change', (e) => {
-  if (e.target.checked) chronoDisplayContainer.classList.remove('hidden');
-  else { chronoDisplayContainer.classList.add('hidden'); pauseChronoTimer(); }
+  if (e.target.checked) {
+    chronoDisplayContainer.classList.remove('hidden');
+    chronoRemainingSeconds = parseInt(timerDurationSelect.value) * 60;
+    updateChronoDisplay();
+    startChronoTimer();
+    floatingTimer.classList.remove('hidden');
+    updateFloatingTimer();
+  } else {
+    chronoDisplayContainer.classList.add('hidden');
+    floatingTimer.classList.add('hidden');
+    pauseChronoTimer();
+  }
 });
 
 function updateChronoDisplay() {
   const mins = Math.floor(chronoRemainingSeconds / 60);
   const secs = chronoRemainingSeconds % 60;
-  timerDigits.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  timerDigits.textContent = timeStr;
+  ftDigits.textContent = timeStr;
 }
 
 function startChronoTimer() {
   if (isChronoRunning) return;
   isChronoRunning = true;
   btnTimerState.textContent = 'Pause';
+  ftPauseBtn.textContent = '⏸️';
   chronoInterval = setInterval(() => {
     if (chronoRemainingSeconds > 0) {
       chronoRemainingSeconds--;
       updateChronoDisplay();
     } else {
       clearInterval(chronoInterval);
-      alert('Sesi fokus materi selesai! Istirahatlah sejenak.');
+      alert('Waktu latihan selesai! Saatnya istirahat.');
       resetChronoTimer();
     }
   }, 1000);
@@ -470,18 +415,20 @@ function startChronoTimer() {
 function pauseChronoTimer() {
   isChronoRunning = false;
   btnTimerState.textContent = 'Start';
+  ftPauseBtn.textContent = '▶️';
   clearInterval(chronoInterval);
 }
 
 function resetChronoTimer() {
   pauseChronoTimer();
-  chronoRemainingSeconds = 25 * 60;
+  chronoRemainingSeconds = parseInt(timerDurationSelect.value) * 60;
   updateChronoDisplay();
 }
 
-btnTimerState.addEventListener('click', () => {
-  if (isChronoRunning) pauseChronoTimer();
-  else startChronoTimer();
-});
-
+btnTimerState.addEventListener('click', () => { if (isChronoRunning) pauseChronoTimer(); else startChronoTimer(); });
 btnTimerReset.addEventListener('click', resetChronoTimer);
+ftPauseBtn.addEventListener('click', () => { if (isChronoRunning) pauseChronoTimer(); else startChronoTimer(); });
+ftCloseBtn.addEventListener('click', () => { 
+  timerToggleSwitch.checked = false; 
+  timerToggleSwitch.dispatchEvent(new Event('change')); 
+});
