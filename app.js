@@ -1,7 +1,6 @@
 // ====== KONFIGURASI GEMINI API ======
-// Ganti string di bawah dengan API Key dari Google AI Studio (aistudio.google.com)
-const GEMINI_API_KEY = "const GEMINI_API_KEY = "AQ.Ab8RN6KLgQtKUY76bd-sGNDwQeDPGSjzk-ZVAqSIPuaiu4D4Gg"; 
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY;"; 
+const GEMINI_API_KEY = "AQ.Ab8RN6KLgQtKUY76bd-sGNDwQeDPGSjzk-ZVAqSIPuaiu4D4Gg"; 
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY;
 
 // ====== SOURCE BANK MATERI UTBK (AETHERIS SYSTEM CORE) ======
 const DATA_MATERI = {
@@ -383,7 +382,6 @@ async function generateSoalDariAI(gateKey) {
   const dataMateri = DATA_MATERI[gateKey];
   const panelLatihan = document.getElementById('panel-latihan');
 
-  // Tampilkan Loading
   panelLatihan.innerHTML = `
     <div class="loading-state">
       <div class="loading-spinner"></div>
@@ -392,14 +390,13 @@ async function generateSoalDariAI(gateKey) {
     </div>
   `;
 
-  // Susun Prompt untuk AI
   const prompt = `
     Kamu adalah asisten ahli UTBK. Buatkan 10 soal pilihan ganda (opsi A, B, C, D) untuk subtes "${dataMateri.title}".
     Kategori soal: ${dataMateri.desc}.
-    Buat soal yang variatif, logis, dan sesuai standar UTBK (jangan terlalu gampang, jangan terlalu susah).
-    Berikan juga kunci jawaban yang benar (hanya tulis hurufnya: A, B, C, atau D) dan pembahasan singkat (1-2 kalimat).
+    Buat soal yang variatif, logis, dan sesuai standar UTBK.
+    Berikan juga kunci jawaban yang benar (index angka 0-3) dan pembahasan singkat.
 
-    WAJIB balas menggunakan format JSON murni tanpa markdown (\`\`\`json) tanpa teks tambahan.
+    WAJIB balas menggunakan format JSON murni tanpa markdown.
     Struktur JSON persis seperti ini:
     {
       "soal": [
@@ -411,7 +408,6 @@ async function generateSoalDariAI(gateKey) {
         }
       ]
     }
-    Catatan: nilai "jawaban" adalah index array opsi (0=A, 1=B, 2=C, 3=D).
   `;
 
   try {
@@ -420,13 +416,26 @@ async function generateSoalDariAI(gateKey) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: "application/json" }
+        generationConfig: { 
+          responseMimeType: "application/json",
+          temperature: 0.9,
+          maxOutputTokens: 8192
+        }
       })
     });
 
-    if (!response.ok) throw new Error('Gagal memuat soal dari API');
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Detail Error dari Google:", errorData);
+      throw new Error(`HTTP ${response.status}: ${errorData.error?.message || 'Gagal memuat soal'}`);
+    }
     
     const resJson = await response.json();
+    
+    if (!resJson.candidates || !resJson.candidates[0]) {
+      throw new Error('AI tidak merespons dengan benar.');
+    }
+
     const textResult = resJson.candidates[0].content.parts[0].text;
     const parsed = JSON.parse(textResult);
 
@@ -438,12 +447,12 @@ async function generateSoalDariAI(gateKey) {
     tampilkanSoal();
 
   } catch (error) {
-    console.error(error);
+    console.error("Catch Error:", error);
     panelLatihan.innerHTML = `
       <div class="locked-state-card">
         <div class="lock-icon">⚠️</div>
         <h3>Gagal Menghubungi AI</h3>
-        <p>Pastikan API Key Gemini valid dan kuota internet mencukupi. Error: ${error.message}</p>
+        <p>Pastikan API Key Gemini valid dan kuota internet mencukupi.<br><small>Error: ${error.message}</small></p>
         <button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button>
       </div>
     `;
