@@ -1,6 +1,6 @@
 // ====== KONFIGURASI GEMINI API ======
 // Ganti string di bawah dengan API Key dari Google AI Studio (aistudio.google.com)
-const GEMINI_API_KEY = "MASUKKAN_API_KEY_KAMU_DISINI"; 
+const GEMINI_API_KEY = "AQ.Ab8RN6L3VbKmhHqZrRBHs0YNUUZpU_n5WkIrKVA36qxP1aTcIw"; 
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY;
 
 // ====== SOURCE BANK MATERI UTBK (AETHERIS SYSTEM CORE) ======
