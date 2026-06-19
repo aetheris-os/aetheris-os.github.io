@@ -574,5 +574,41 @@ input:checked + .slider:before { transform: translateX(20px); }
 @media(max-width: 768px) {
   .main-matrix { padding: 24px 16px; }
   .welcome-banner h1 { font-size: 1.8rem; }
+
+/* ====== VIEW TRANSITION API (CIRCULAR THEME REVEAL) ====== */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 10;
+}
+::view-transition-new(root) {
+  z-index: 0;
+}
+/* Class khusus untuk menahan tema lama di belakang */
+.dark-transition::view-transition-old(root) {
+  z-index: 0;
+}
+.dark-transition::view-transition-new(root) {
+  z-index: 10;
+}
+/* Keyframes animasi lingkaran menyebar (Buka / Reveal) */
+@keyframes reveal-circle {
+  from {
+    clip-path: circle(0% at var(--x) var(--y));
+  }
+  to {
+    clip-path: circle(150% at var(--x) var(--y));
+  }
+}
+/* Menerapkan animasi ke tema baru yang muncul */
+html.dark-transition::view-transition-new(root) {
+  animation: reveal-circle 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html:not(.dark-transition)::view-transition-new(root) {
+  animation: reveal-circle 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
   .node-card:hover { transform: none; } /* Disable hover transform di mobile */
 }
