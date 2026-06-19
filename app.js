@@ -248,12 +248,47 @@ function toggleSidebar() {
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
 
-// Theme Switcher (Dark vs Light)
-themeToggle.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', targetTheme);
-  themeToggle.textContent = targetTheme === 'dark' ? '🌙' : '☀️';
+// Theme Switcher (Dark vs Light) dengan Animasi Circular Reveal
+themeToggle.addEventListener('click', (event) => {
+  // 1. Cek apakah browser mendukung View Transitions API
+  if (!document.startViewTransition) {
+    // Fallback biasa jika browser lama
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', targetTheme);
+    themeToggle.textContent = targetTheme === 'dark' ? '🌙' : '☀️';
+    return;
+  }
+  // 2. Tangkap koordinat X dan Y dari titik klik tombol tema
+  const x = event.clientX;
+  const y = event.clientY;
+  
+  // Cari jarak terjauh ke sudut layar agar animasi menutupi seluruh layar
+  const endRadius = Math.hypot(
+    Math.max(x, window.innerWidth - x),
+    Math.max(y, window.innerHeight - y)
+  );
+  // 3. Mulai Transisi
+  const transition = document.startViewTransition(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', targetTheme);
+    themeToggle.textContent = targetTheme === 'dark' ? '🌙' : '☀️';
+  });
+  // 4. Eksekusi animasi saat transisi siap
+  transition.ready.then(() => {
+    // Masukkan variabel X, Y, dan Radius ke CSS
+    document.documentElement.style.setProperty('--x', x + 'px');
+    document.documentElement.style.setProperty('--y', y + 'px');
+    document.documentElement.style.setProperty('--end-radius', endRadius + 'px');
+    
+    // Tambah class pemicu animasi
+    if (themeToggle.textContent === '🌙') {
+      document.documentElement.classList.add('dark-transition');
+    } else {
+      document.documentElement.classList.remove('dark-transition');
+    }
+  });
 });
 
 // Navigation View Router
