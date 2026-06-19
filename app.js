@@ -64,7 +64,7 @@ let supabase = null;
 const setupScreen = document.getElementById('setup-screen');
 const appEl = document.getElementById('app');
 
-function getStoredCreds()){
+function getStoredCreds(){
   return {
     url: localStorage.getItem('utbk_sb_url'),
     key: localStorage.getItem('utbk_sb_key')
