@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruang Belajar UTBK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="setup-screen" class="setup-screen">
+  <div class="setup-card">
+    <p class="eyebrow">Sebelum mulai</p>
+    <h1>Sambungkan database</h1>
+    <p class="setup-desc">Tempel Project URL dan anon key dari Supabase kamu. Hanya disimpan di browser ini, tidak dikirim ke siapa pun. Lihat README untuk cara membuatnya (gratis, 5 menit).</p>
+    <label>Supabase URL</label>
+    <input id="input-url" type="text" placeholder="https://xxxxx.supabase.co">
+    <label>Anon Key</label>
+    <input id="input-key" type="text" placeholder="eyJhbGciOi...">
+    <button id="btn-connect" class="btn-primary">Sambungkan</button>
+    <p id="setup-error" class="setup-error"></p>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+
+  <header class="hero">
+    <p class="eyebrow">Ruang Belajar</p>
+    <h1>UTBK&#8209;SNBT 2027</h1>
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit"><span id="cd-days">--</span><label>hari</label></div>
+      <div class="countdown-unit"><span id="cd-hours">--</span><label>jam</label></div>
+      <div class="countdown-unit"><span id="cd-mins">--</span><label>menit</label></div>
+      <div class="countdown-unit"><span id="cd-secs">--</span><label>detik</label></div>
+    </div>
+    <p class="hero-sub">menuju perkiraan pelaksanaan UTBK &middot; 21 April 2027</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="jadwal">Jadwal</button>
+    <button class="tab-btn" data-tab="errorlog">Error Log</button>
+    <button class="tab-btn" data-tab="skor">Skor Tryout</button>
+  </nav>
+
+  <main>
+
+    <!-- JADWAL TAB -->
+    <section id="tab-jadwal" class="tab-panel active">
+      <div class="phase-progress">
+        <div class="phase-progress-bar"><div id="overall-bar" class="phase-progress-fill"></div></div>
+        <span id="overall-label">0 / 0 selesai</span>
+      </div>
+
+      <div id="phases-container"></div>
+    </section>
+
+    <!-- ERROR LOG TAB -->
+    <section id="tab-errorlog" class="tab-panel">
+      <form id="error-form" class="card-form">
+        <p class="eyebrow">Catat kesalahan baru</p>
+        <div class="form-row">
+          <div>
+            <label>Topik</label>
+            <input id="err-topic" type="text" placeholder="contoh: Penalaran Umum" required>
+          </div>
+          <div>
+            <label>Jenis Soal</label>
+            <input id="err-soaltype" type="text" placeholder="contoh: silogisme">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Penyebab</label>
+            <select id="err-type">
+              <option value="konsep">Salah konsep</option>
+              <option value="teliti">Salah teliti</option>
+              <option value="waktu">Kehabisan waktu</option>
+            </select>
+          </div>
+          <div>
+            <label>Catatan perbaikan</label>
+            <input id="err-note" type="text" placeholder="apa yang akan diperbaiki">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Simpan ke log</button>
+      </form>
+
+      <div class="table-wrap">
+        <table id="error-table">
+          <thead><tr><th>Tanggal</th><th>Topik</th><th>Jenis Soal</th><th>Penyebab</th><th>Catatan</th><th></th></tr></thead>
+          <tbody id="error-tbody"></tbody>
+        </table>
+        <p id="error-empty" class="empty-state hidden">Belum ada catatan. Setiap habis latihan soal, isi form di atas.</p>
+      </div>
+    </section>
+
+    <!-- SKOR TAB -->
+    <section id="tab-skor" class="tab-panel">
+      <form id="score-form" class="card-form">
+        <p class="eyebrow">Catat skor tryout baru</p>
+        <div class="form-row">
+          <div>
+            <label>Tanggal</label>
+            <input id="sc-date" type="date" required>
+          </div>
+          <div>
+            <label>TPS</label>
+            <input id="sc-tps" type="number" min="0" max="1000" placeholder="0-1000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Literasi B. Indonesia</label>
+            <input id="sc-indo" type="number" min="0" max="1000" placeholder="0-1000">
+          </div>
+          <div>
+            <label>Literasi B. Inggris</label>
+            <input id="sc-inggris" type="number" min="0" max="1000" placeholder="0-1000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Penalaran Matematika</label>
+            <input id="sc-matematika" type="number" min="0" max="1000" placeholder="0-1000">
+          </div>
+          <div></div>
+        </div>
+        <button type="submit" class="btn-primary">Simpan skor</button>
+      </form>
+
+      <canvas id="score-chart" height="220"></canvas>
+
+      <div class="table-wrap">
+        <table id="score-table">
+          <thead><tr><th>Tanggal</th><th>TPS</th><th>Lit. Indo</th><th>Lit. Inggris</th><th>Pen. Mtk</th><th>Rata&#8209;rata</th><th></th></tr></thead>
+          <tbody id="score-tbody"></tbody>
+        </table>
+        <p id="score-empty" class="empty-state hidden">Belum ada skor tercatat. Tambahkan hasil tryout pertamamu.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <button id="btn-disconnect" class="btn-ghost">Putuskan database</button>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>
