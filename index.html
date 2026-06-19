@@ -79,7 +79,7 @@
       <div class="welcome-banner">
         <p class="eyebrow-glow">Sistem Navigasi Belajar</p>
         <h1>Akses Modul Kognitif UTBK</h1>
-        <p class="sub-text">Pilih salah satu dari 7 simpul subtes di bawah ini untuk memulai sinkronisasi materi dan latihan soal dinamis berbasis AI.</p>
+        <p class="sub-text">Pilih salah satu dari 7 simpul subtes di bawah ini untuk memulai sinkronisasi materi dan latihan soal.</p>
       </div>
 
       <div class="node-grid">
@@ -138,38 +138,11 @@
         <p id="subtest-desc" class="sub-text">Deskripsi subtest.</p>
       </div>
 
-     <div class="subtest-tabs">
+      <div class="subtest-tabs">
         <button class="sub-tab-btn active" data-mode="materi">📚 Rumah Materi</button>
         <button class="sub-tab-btn" data-mode="latihan-ai">🤖 Latihan AI (Generate)</button>
         <button class="sub-tab-btn" data-mode="latihan-sim">📝 Simulasi Bank Soal</button>
       </div>
-      <div id="panel-materi" class="sub-panel active">
-        <div class="timer-control-box">
-          <div class="timer-toggle-row">
-            <label class="switch-container">
-              <input type="checkbox" id="timer-toggle-switch">
-              <span class="slider"></span>
-            </label>
-            <span class="timer-label">Aktifkan Chrono-Timer Belajar</span>
-          </div>
-          
-          <div id="chrono-display-container" class="chrono-display hidden">
-            <div class="time-digits" id="timer-digits">25:00</div>
-            <div class="timer-actions">
-              <button id="btn-timer-state" class="btn-action">Start</button>
-              <button id="btn-timer-reset" class="btn-action shadow">Reset</button>
-            </div>
-          </div>
-        </div>
-        <div id="materi-dynamic-content" class="materi-render-zone"></div>
-      </div>
-      <div id="panel-latihan-ai" class="sub-panel">
-        <!-- Konten Latihan Soal AI akan direnda disini -->
-      </div>
-      <div id="panel-latihan-sim" class="sub-panel">
-        <!-- Konten Simulasi Bank Soal akan direnda disini -->
-      </div>
-
 
       <div id="panel-materi" class="sub-panel active">
         <div class="timer-control-box">
@@ -179,6 +152,14 @@
               <span class="slider"></span>
             </label>
             <span class="timer-label">Aktifkan Chrono-Timer Belajar</span>
+            
+            <select id="timer-duration-select" class="timer-select">
+              <option value="15">15 Menit</option>
+              <option value="25" selected>25 Menit</option>
+              <option value="45">45 Menit</option>
+              <option value="60">60 Menit</option>
+              <option value="90">90 Menit</option>
+            </select>
           </div>
           
           <div id="chrono-display-container" class="chrono-display hidden">
@@ -193,13 +174,18 @@
         <div id="materi-dynamic-content" class="materi-render-zone"></div>
       </div>
 
-      <div id="panel-latihan" class="sub-panel">
-        <!-- Konten Latihan Soal AI akan direnda disini -->
-      </div>
+      <div id="panel-latihan-ai" class="sub-panel"></div>
+      <div id="panel-latihan-sim" class="sub-panel"></div>
 
     </section>
 
   </main>
+
+  <div id="floating-timer" class="floating-timer hidden">
+    <span id="ft-digits">25:00</span>
+    <button id="ft-pause-btn">⏸️</button>
+    <button id="ft-close-btn">✖️</button>
+  </div>
 
   <script src="app.js"></script>
 </body>
