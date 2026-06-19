@@ -103,29 +103,86 @@ body {
 .menu-btn:hover .bar:nth-child(1) { transform: translateY(-2px); }
 .menu-btn:hover .bar:nth-child(3) { transform: translateY(2px); }
 
-.theme-btn {
-  background: var(--border-glow);
-  border: 1px solid var(--border-glow);
-  font-size: 1.2rem;
-  padding: 6px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+/* ====== TEMA DROPDOWN SELECTOR ====== */
+.theme-selector-wrapper {
+  position: relative;
 }
 
-.theme-btn:hover {
-  transform: rotate(20deg) scale(1.1);
+.theme-current-btn {
+  background: var(--border-glow);
+  border: 1px solid var(--border-glow);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.theme-current-btn:hover {
+  background: var(--border-glow-active);
+  border-color: var(--accent-cyan);
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: var(--bg-surface-solid);
+  border: 1px solid var(--border-glow);
+  border-radius: 12px;
+  padding: 8px;
+  min-width: 160px;
+  box-shadow: var(--shadow-matrix);
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.theme-option {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.theme-option:hover {
+  background: var(--border-glow);
+  color: var(--text-primary);
 }
 
 /* ====== SIDEBAR DRAWERS ====== */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -340px; /* Lebar sedikit ditambah */
+  left: -340px;
   width: 340px;
   height: 100vh;
   z-index: 200;
-  transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1); /* Ease Out kuat */
+  transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar.open {
@@ -245,7 +302,7 @@ body {
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: all 0.3s ease; /* Transisi halus */
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -253,7 +310,7 @@ body {
 .nav-link:hover, .nav-link.active {
   color: var(--text-primary);
   background: var(--border-glow);
-  padding-left: 20px; /* Efek geser masuk */
+  padding-left: 20px;
 }
 
 .nav-link.active {
@@ -273,7 +330,7 @@ body {
 .matrix-view { display: none; }
 .matrix-view.active {
   display: block;
-  animation: viewFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* View Transition */
+  animation: viewFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes viewFadeIn {
@@ -303,7 +360,7 @@ body {
   line-height: 1.6;
 }
 
-/* Node Grid dengan Animasi Muncul Berurutan (Staggered) */
+/* Node Grid */
 .node-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -321,7 +378,7 @@ body {
   position: relative;
   box-shadow: var(--shadow-matrix);
   transform: translateY(0px);
-  opacity: 0; /* Siap untuk animasi JS */
+  opacity: 0;
   animation: cardSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -388,7 +445,7 @@ body {
 
 .btn-back:hover {
   background: var(--border-glow);
-  transform: translateX(-5px); /* Efek mundur kiri */
+  transform: translateX(-5px);
 }
 
 .subtest-header h1 {
@@ -571,38 +628,6 @@ input:checked + .slider:before { transform: translateX(20px); }
 
 .hidden { display: none !important; }
 
-@media(max-width: 768px) {
-  .main-matrix { padding: 24px 16px; }
-  .welcome-banner h1 { font-size: 1.8rem; }
-
-/* ====== VIEW TRANSITION API (CIRCULAR THEME REVEAL) ====== */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-::view-transition-old(root) {
-  z-index: 10;
-}
-::view-transition-new(root) {
-  z-index: 0;
-}
-/* Class khusus untuk menahan tema lama di belakang */
-.dark-transition::view-transition-old(root) {
-  z-index: 0;
-}
-.dark-transition::view-transition-new(root) {
-  z-index: 10;
-}
-/* Keyframes animasi lingkaran menyebar (Buka / Reveal) */
-@keyframes reveal-circle {
-  from {
-    clip-path: circle(0% at var(--x) var(--y));
-  }
-  to {
-    clip-path: circle(150% at var(--x) var(--y));
-  }
-}
 /* ====== CIRCULAR THEME REVEAL ANIMATION ====== */
 body::before {
   content: "";
@@ -613,26 +638,20 @@ body::before {
   height: 100vh;
   z-index: 9999;
   pointer-events: none;
-  
-  /* Default state: Lingkaran tutup penuh */
   clip-path: circle(150% at var(--reveal-x, 50%) var(--reveal-y, 50%));
-  
-  /* INI KUNCI PERBAIKANNYA: Pastikan transition 0.8s SAAT Membesar */
   transition: clip-path 0s; 
 }
- 
-/* State Ketika Animasi Berjalan (Lingkaran mengecil/membuka) */
+
 body.is-revealing::before {
   clip-path: circle(0% at var(--reveal-x, 50%) var(--reveal-y, 50%));
   transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
- 
-/* Warna overlay Dark Mode (Saat web menuju Light, overlay gelap yang mengecil) */
-body.reveal-to-light::before {
-  background-color: #060B19; 
-}
- 
-/* Warna overlay Light Mode (Saat web menuju Dark, overlay terang yang mengecil) */
-body.reveal-to-dark::before {
-  background-color: #F0F4F8; 
+
+body.reveal-to-light::before { background-color: #060B19; }
+body.reveal-to-dark::before { background-color: #F0F4F8; }
+
+@media(max-width: 768px) {
+  .main-matrix { padding: 24px 16px; }
+  .welcome-banner h1 { font-size: 1.8rem; }
+  .node-card:hover { transform: none; }
 }
