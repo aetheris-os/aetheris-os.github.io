@@ -248,49 +248,50 @@ function toggleSidebar() {
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
 
-// Theme Switcher (Dark vs Light) dengan Animasi Circular Reveal
+// Theme Switcher dengan Pure CSS Circular Reveal
 themeToggle.addEventListener('click', (event) => {
-  // 1. Cek apakah browser mendukung View Transitions API
-  if (!document.startViewTransition) {
-    // Fallback biasa jika browser lama
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', targetTheme);
-    themeToggle.textContent = targetTheme === 'dark' ? '🌙' : '☀️';
-    return;
-  }
-  // 2. Tangkap koordinat X dan Y dari titik klik tombol tema
+  // 1. Tangkap posisi X dan Y dari tombol yang diklik
   const x = event.clientX;
   const y = event.clientY;
   
-  // Cari jarak terjauh ke sudut layar agar animasi menutupi seluruh layar
+  // Cari radius terjauh ke sudut layar agar menutup seluruh layar
   const endRadius = Math.hypot(
     Math.max(x, window.innerWidth - x),
     Math.max(y, window.innerHeight - y)
   );
-  // 3. Mulai Transisi
-  const transition = document.startViewTransition(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  // Set posisi X dan Y ke variabel CSS
+  document.body.style.setProperty('--reveal-x', x + 'px');
+  document.body.style.setProperty('--reveal-y', y + 'px');
+  
+  // Tentukan warna overlay berdasarkan tema tujuan
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  if (targetTheme === 'light') {
+    document.body.classList.add('light-mode-active');
+  } else {
+    document.body.classList.remove('light-mode-active');
+  }
+  // 2. Pemicu animasi (pakai requestAnimationFrame agar transition CSS terbaca)
+  document.body.classList.remove('is-revealing');
+  // Set radius awal ke 0%
+  document.body.style.setProperty('--reveal-radius', '0%');
+  
+  requestAnimationFrame(() => {
+    // Set radius target ke endRadius (membesar)
+    document.body.style.setProperty('--reveal-radius', endRadius + 'px');
+    document.body.classList.add('is-revealing');
+  });
+  // 3. Setengah jalan animasi (0.4 detik), ubah tema asli di belakang layar
+  setTimeout(() => {
     document.documentElement.setAttribute('data-theme', targetTheme);
     themeToggle.textContent = targetTheme === 'dark' ? '🌙' : '☀️';
-  });
-  // 4. Eksekusi animasi saat transisi siap
-  transition.ready.then(() => {
-    // Masukkan variabel X, Y, dan Radius ke CSS
-    document.documentElement.style.setProperty('--x', x + 'px');
-    document.documentElement.style.setProperty('--y', y + 'px');
-    document.documentElement.style.setProperty('--end-radius', endRadius + 'px');
-    
-    // Tambah class pemicu animasi
-    if (themeToggle.textContent === '🌙') {
-      document.documentElement.classList.add('dark-transition');
-    } else {
-      document.documentElement.classList.remove('dark-transition');
-    }
-  });
+  }, 400); // Setengah dari 0.8s animasi
+  // 4. Setelah animasi selesai, bersihkan class agar siap untuk klik berikutnya
+  setTimeout(() => {
+    document.body.classList.remove('is-revealing');
+  }, 850);
 });
-
 // Navigation View Router
 function navigateTo(viewId, gateKey = null) {
   sidebar.classList.remove('open'); // Tutup sidebar otomatis jika terbuka
