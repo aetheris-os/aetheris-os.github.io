@@ -603,12 +603,28 @@ input:checked + .slider:before { transform: translateX(20px); }
     clip-path: circle(150% at var(--x) var(--y));
   }
 }
-/* Menerapkan animasi ke tema baru yang muncul */
-html.dark-transition::view-transition-new(root) {
-  animation: reveal-circle 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+/* ====== CIRCULAR THEME REVEAL ANIMATION ====== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none; /* Agar tidak nge-block klik saat animasi */
+  
+  /* Menyiapkan warna target tema yang akan muncul */
+  background-color: #060B19; /* Default Dark */
+  
+  /* Clip path awal (menutup penuh) */
+  clip-path: circle(0% at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  transition: clip-path 0s; /* No transition awal */
 }
-html:not(.dark-transition)::view-transition-new(root) {
-  animation: reveal-circle 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+body.light-mode-active::before {
+  background-color: #F0F4F8; /* Warna Light Mode */
 }
-  .node-card:hover { transform: none; } /* Disable hover transform di mobile */
+body.is-revealing::before {
+  clip-path: circle(150% at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1); /* Durasi & Ease animasi */
 }
