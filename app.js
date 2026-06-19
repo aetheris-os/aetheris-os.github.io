@@ -248,50 +248,45 @@ function toggleSidebar() {
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
 
-// Theme Switcher dengan Pure CSS Circular Reveal
+// Theme Switcher dengan Pure CSS Circular Reveal (Fixed)
 themeToggle.addEventListener('click', (event) => {
-  // 1. Tangkap posisi X dan Y dari tombol yang diklik
+  // Jika animasi sedang berjalan, abaikan klik
+  if (document.body.classList.contains('is-revealing')) return;
+  // 1. Tangkap posisi X dan Y dari titik klik
   const x = event.clientX;
   const y = event.clientY;
   
-  // Cari radius terjauh ke sudut layar agar menutup seluruh layar
-  const endRadius = Math.hypot(
-    Math.max(x, window.innerWidth - x),
-    Math.max(y, window.innerHeight - y)
-  );
-  // Set posisi X dan Y ke variabel CSS
+  // Masukkan koordinat ke CSS
   document.body.style.setProperty('--reveal-x', x + 'px');
   document.body.style.setProperty('--reveal-y', y + 'px');
-  
-  // Tentukan warna overlay berdasarkan tema tujuan
+  // 2. Cek tema saat ini dan tentukan tema tujuan
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
+  // Tambahkan class warna overlay sesuai tema tujuan
   if (targetTheme === 'light') {
-    document.body.classList.add('light-mode-active');
+    document.body.classList.add('reveal-to-light');
   } else {
-    document.body.classList.remove('light-mode-active');
+    document.body.classList.add('reveal-to-dark');
   }
-  // 2. Pemicu animasi (pakai requestAnimationFrame agar transition CSS terbaca)
-  document.body.classList.remove('is-revealing');
-  // Set radius awal ke 0%
-  document.body.style.setProperty('--reveal-radius', '0%');
-  
+  // 3. Pemicu animasi (Pakai double requestAnimationFrame agar CSS baca perubahan)
   requestAnimationFrame(() => {
-    // Set radius target ke endRadius (membesar)
-    document.body.style.setProperty('--reveal-radius', endRadius + 'px');
-    document.body.classList.add('is-revealing');
+    requestAnimationFrame(() => {
+      document.body.classList.add('is-revealing');
+    });
   });
-  // 3. Setengah jalan animasi (0.4 detik), ubah tema asli di belakang layar
+  // 4. Ubah tema asli di belakang layar saat animasi mencapai 50% (0.4 detik)
   setTimeout(() => {
     document.documentElement.setAttribute('data-theme', targetTheme);
     themeToggle.textContent = targetTheme === 'dark' ? '🌙' : '☀️';
-  }, 400); // Setengah dari 0.8s animasi
-  // 4. Setelah animasi selesai, bersihkan class agar siap untuk klik berikutnya
+  }, 400);
+  // 5. Bersihkan class setelah animasi selesai (0.85 detik)
   setTimeout(() => {
     document.body.classList.remove('is-revealing');
+    document.body.classList.remove('reveal-to-light');
+    document.body.classList.remove('reveal-to-dark');
   }, 850);
 });
+
 // Navigation View Router
 function navigateTo(viewId, gateKey = null) {
   sidebar.classList.remove('open'); // Tutup sidebar otomatis jika terbuka
