@@ -373,27 +373,54 @@ function switchSubPanel(mode) {
   document.getElementById('panel-latihan').classList.toggle('active', mode === 'latihan');
 }
 
-// ====== SISTEM LATIHAN SOAL (GROQ AI / LLAMA 3) ======
+// ====== SISTEM LATIHAN SOAL (GROQ AI / LLAMA 3.3) ======
 let soalAktif = [];
 let indexSoalSekarang = 0;
 let skorBenar = 0;
-
 async function generateSoalDariAI(gateKey) {
   const dataMateri = DATA_MATERI[gateKey];
   const panelLatihan = document.getElementById('panel-latihan');
-
   // Tampilkan Loading
   panelLatihan.innerHTML = `
     <div class="loading-state">
       <div class="loading-spinner"></div>
-      <h3>Sedang Meracik 10 Soal Baru...</h3>
-      <p>AI sedang menyusun soal ${dataMateri.title} secara dinamis. Mohon tunggu sejenak.</p>
+      <h3>Sedang Meracik 10 Soal Tipe UTBK...</h3>
+      <p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p>
     </div>
   `;
-
-  const promptSystem = "Kamu adalah asisten ahli UTBK. Buat 10 soal pilihan ganda. WAJIB balas menggunakan format JSON murni tanpa markdown.";
-  const promptUser = `Buatkan 10 soal pilihan ganda (opsi A, B, C, D) untuk subtes "${dataMateri.title}". Kategori soal: ${dataMateri.desc}. Buat soal yang variatif, logis, dan sesuai standar UTBK. Berikan juga kunci jawaban yang benar (index angka 0-3) dan pembahasan singkat. Struktur JSON persis seperti ini: { "soal": [ { "pertanyaan": "...", "opsi": ["...", "...", "...", "..."], "jawaban": 0, "pembahasan": "..." } ] }`;
-
+  // Prompt Sistem: Mengatur AI menjadi pembuat soal UTBK yang kejam & profesional
+  const promptSystem = `
+    Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi" yang sangat kritis dan profesional. 
+    Tugasmu adalah membuat soal yang SANGAT SULIT dan setara dengan soal UTBK masuk PTN favorit.
+    
+    Aturan Wajib:
+    1. SOAL WAJIB KOMPLEKS: Buat soal berbentuk studi kasus, teks ilmiah pendek, atau data statistik. JANGAN buat soal definisi atau hafalan langsung.
+    2. JEBAKAN (Distractor): Buat 4 opsi jawaban (A, B, C, D) di mana 3 opsinya adalah jawaban yang "terlihat benar" jika siswa salah membaca satuan, cepat berpikir, atau salah paham logika.
+    3. Analisis Mendalam: Soal harus menguji penalaran tingkat tinggi (HOTS), bukan sekadar ingatan.
+    4. Pembahasan: Jelaskan secara detail kenapa jawaban benar itu benar, dan kenapa 3 opsi lain itu adalah jebakan.
+    
+    WAJIB balas menggunakan format JSON murni tanpa markdown.
+  `;
+  // Prompt User: Meminta output spesifik sesuai subtes
+  const promptUser = `
+    Buatkan 10 soal pilihan ganda (A, B, C, D) untuk subtes "${dataMateri.title}".
+    Kategori materi: ${dataMateri.desc}.
+    
+    Tingkatkan kesulitan: Gunakan angka-angka yang tidak bulat (desimal/pecahan) jika berhubungan dengan matematika, gunakan kalimat yang panjang dan ambigu untuk literasi/penalaran.
+    
+    Struktur JSON WAJIB persis seperti ini:
+    {
+      "soal": [
+        {
+          "pertanyaan": "Teks kasus/studi pendek diikuti pertanyaan analitis",
+          "opsi": ["Opsi A (jebakan)", "Opsi B (jebakan)", "Opsi C (benar)", "Opsi D (jebakan)"],
+          "jawaban": 2, // Index 0=A, 1=B, 2=C, 3=D
+          "pembahasan": "Penjelasan detail mengapa C benar dan opsi lain adalah jebakan."
+        }
+      ]
+    }
+    Acak posisi jawaban benar (jangan selalu di C).
+  `;
   try {
     const response = await fetch(GROQ_API_URL, {
       method: 'POST',
@@ -401,17 +428,16 @@ async function generateSoalDariAI(gateKey) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${GROQ_API_KEY}`
       },
-     body: JSON.stringify({
-        model: "llama-3.3-70b-versatile", // Model AI super cepat dari Groq
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile", // Model canggih Groq
         messages: [
           { role: "system", content: promptSystem },
           { role: "user", content: promptUser }
         ],
-        temperature: 0.9,
+        temperature: 0.8, // Disesuaikan agar AI kreatif bikin jebakan tanpa halusinasi
         response_format: { type: "json_object" }
       })
     });
-
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Detail Error dari Groq:", errorData);
@@ -421,14 +447,11 @@ async function generateSoalDariAI(gateKey) {
     const resJson = await response.json();
     const textResult = resJson.choices[0].message.content;
     const parsed = JSON.parse(textResult);
-
     if (!parsed.soal || parsed.soal.length === 0) throw new Error('Format soal kosong');
-
     soalAktif = parsed.soal;
     indexSoalSekarang = 0;
     skorBenar = 0;
     tampilkanSoal();
-
   } catch (error) {
     console.error("Catch Error:", error);
     panelLatihan.innerHTML = `
@@ -441,13 +464,11 @@ async function generateSoalDariAI(gateKey) {
     `;
   }
 }
-
 function tampilkanSoal() {
   if (indexSoalSekarang >= soalAktif.length) {
     renderHasilAkhir();
     return;
   }
-
   const soal = soalAktif[indexSoalSekarang];
   const opsiHtml = soal.opsi.map((ops, i) => `
     <button class="opsi-soal" onclick="jawabSoal(${i})">
@@ -455,7 +476,6 @@ function tampilkanSoal() {
       <span class="opsi-teks">${ops}</span>
     </button>
   `).join('');
-
   document.getElementById('panel-latihan').innerHTML = `
     <div class="latihan-header">
       <div class="info-soal">
@@ -470,19 +490,16 @@ function tampilkanSoal() {
     </div>
   `;
 }
-
 function jawabSoal(indexJawaban) {
   const soal = soalAktif[indexSoalSekarang];
   const benar = indexJawaban === soal.jawaban;
   if (benar) skorBenar++;
-
   const opsiButtons = document.querySelectorAll('.opsi-soal');
   opsiButtons.forEach((btn, i) => {
     btn.disabled = true;
     if (i === soal.jawaban) btn.classList.add('benar');
     else if (i === indexJawaban) btn.classList.add('salah');
   });
-
   const pembahasanBox = document.createElement('div');
   pembahasanBox.className = 'box-pembahasan';
   pembahasanBox.innerHTML = `
@@ -493,12 +510,10 @@ function jawabSoal(indexJawaban) {
   document.querySelector('.box-soal').appendChild(pembahasanBox);
   pembahasanBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
-
 function lanjutSoal() {
   indexSoalSekarang++;
   tampilkanSoal();
 }
-
 function renderHasilAkhir() {
   const persentase = (skorBenar / soalAktif.length) * 100;
   document.getElementById('panel-latihan').innerHTML = `
@@ -512,13 +527,9 @@ function renderHasilAkhir() {
     </div>
   `;
 }
-
 function keluarLatihan() {
   switchSubPanel('materi');
-  document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
-}
-
+  document.querySelectorAll('.sub-tab-btn').forEach(b => b.c
 // ====== CHRONO TIMER MODULE ======
 let chronoInterval = null;
 let chronoRemainingSeconds = 25 * 60;
