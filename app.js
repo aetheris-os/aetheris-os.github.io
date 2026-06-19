@@ -1,4 +1,3 @@
-// ====== KONFIGURASI ======
 const UTBK_TARGET = new Date('2027-04-21T00:00:00+07:00');
 
 const PHASES = [
