@@ -1,6 +1,6 @@
-// ====== KONFIGURASI GEMINI API ======
-const GEMINI_API_KEY = "AQ.Ab8RN6LHExpUqoETdUllErNYYnmJx7bY9sLS6KDJeKTcdVFWoQ"; 
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY;
+// ====== KONFIGURASI AI (GROQ API) ======
+const GROQ_API_KEY = "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"; 
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 // ====== SOURCE BANK MATERI UTBK (AETHERIS SYSTEM CORE) ======
 const DATA_MATERI = {
@@ -373,7 +373,7 @@ function switchSubPanel(mode) {
   document.getElementById('panel-latihan').classList.toggle('active', mode === 'latihan');
 }
 
-// ====== SISTEM LATIHAN SOAL (GEMINI AI) ======
+// ====== SISTEM LATIHAN SOAL (GROQ AI / LLAMA 3) ======
 let soalAktif = [];
 let indexSoalSekarang = 0;
 let skorBenar = 0;
@@ -382,61 +382,44 @@ async function generateSoalDariAI(gateKey) {
   const dataMateri = DATA_MATERI[gateKey];
   const panelLatihan = document.getElementById('panel-latihan');
 
+  // Tampilkan Loading
   panelLatihan.innerHTML = `
     <div class="loading-state">
       <div class="loading-spinner"></div>
       <h3>Sedang Meracik 10 Soal Baru...</h3>
-      <p>AI Gemini sedang menyusun soal ${dataMateri.title} secara dinamis. Mohon tunggu sejenak.</p>
+      <p>AI sedang menyusun soal ${dataMateri.title} secara dinamis. Mohon tunggu sejenak.</p>
     </div>
   `;
 
-  const prompt = `
-    Kamu adalah asisten ahli UTBK. Buatkan 10 soal pilihan ganda (opsi A, B, C, D) untuk subtes "${dataMateri.title}".
-    Kategori soal: ${dataMateri.desc}.
-    Buat soal yang variatif, logis, dan sesuai standar UTBK.
-    Berikan juga kunci jawaban yang benar (index angka 0-3) dan pembahasan singkat.
-
-    WAJIB balas menggunakan format JSON murni tanpa markdown.
-    Struktur JSON persis seperti ini:
-    {
-      "soal": [
-        {
-          "pertanyaan": "Teks pertanyaan di sini",
-          "opsi": ["Teks opsi A", "Teks opsi B", "Teks opsi C", "Teks opsi D"],
-          "jawaban": 0,
-          "pembahasan": "Teks pembahasan di sini"
-        }
-      ]
-    }
-  `;
+  const promptSystem = "Kamu adalah asisten ahli UTBK. Buat 10 soal pilihan ganda. WAJIB balas menggunakan format JSON murni tanpa markdown.";
+  const promptUser = `Buatkan 10 soal pilihan ganda (opsi A, B, C, D) untuk subtes "${dataMateri.title}". Kategori soal: ${dataMateri.desc}. Buat soal yang variatif, logis, dan sesuai standar UTBK. Berikan juga kunci jawaban yang benar (index angka 0-3) dan pembahasan singkat. Struktur JSON persis seperti ini: { "soal": [ { "pertanyaan": "...", "opsi": ["...", "...", "...", "..."], "jawaban": 0, "pembahasan": "..." } ] }`;
 
   try {
-    const response = await fetch(GEMINI_API_URL, {
+    const response = await fetch(GROQ_API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
+      },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { 
-          responseMimeType: "application/json",
-          temperature: 0.9,
-          maxOutputTokens: 8192
-        }
+        model: "llama3-70b-8192", // Model AI super cepat dari Groq
+        messages: [
+          { role: "system", content: promptSystem },
+          { role: "user", content: promptUser }
+        ],
+        temperature: 0.9,
+        response_format: { type: "json_object" }
       })
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error("Detail Error dari Google:", errorData);
+      console.error("Detail Error dari Groq:", errorData);
       throw new Error(`HTTP ${response.status}: ${errorData.error?.message || 'Gagal memuat soal'}`);
     }
     
     const resJson = await response.json();
-    
-    if (!resJson.candidates || !resJson.candidates[0]) {
-      throw new Error('AI tidak merespons dengan benar.');
-    }
-
-    const textResult = resJson.candidates[0].content.parts[0].text;
+    const textResult = resJson.choices[0].message.content;
     const parsed = JSON.parse(textResult);
 
     if (!parsed.soal || parsed.soal.length === 0) throw new Error('Format soal kosong');
@@ -452,7 +435,7 @@ async function generateSoalDariAI(gateKey) {
       <div class="locked-state-card">
         <div class="lock-icon">⚠️</div>
         <h3>Gagal Menghubungi AI</h3>
-        <p>Pastikan API Key Gemini valid dan kuota internet mencukupi.<br><small>Error: ${error.message}</small></p>
+        <p>Pastikan API Key Groq valid dan kuota internet mencukupi.<br><small>Error: ${error.message}</small></p>
         <button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button>
       </div>
     `;
