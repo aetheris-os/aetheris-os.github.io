@@ -1,160 +1,168 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ruang Belajar UTBK</title>
+<title>Aetheris: UTBK Learning System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="setup-screen" class="setup-screen">
-  <div class="setup-card">
-    <p class="eyebrow">Sebelum mulai</p>
-    <h1>Sambungkan database</h1>
-    <p class="setup-desc">Tempel Project URL dan anon key dari Supabase kamu. Hanya disimpan di browser ini, tidak dikirim ke siapa pun. Lihat README untuk cara membuatnya (gratis, 5 menit).</p>
-    <label>Supabase URL</label>
-    <input id="input-url" type="text" placeholder="https://xxxxx.supabase.co">
-    <label>Anon Key</label>
-    <input id="input-key" type="text" placeholder="eyJhbGciOi...">
-    <button id="btn-connect" class="btn-primary">Sambungkan</button>
-    <p id="setup-error" class="setup-error"></p>
-  </div>
-</div>
-
-<div id="app" class="app hidden">
-
-  <header class="hero">
-    <p class="eyebrow">Ruang Belajar</p>
-    <h1>UTBK&#8209;SNBT 2027</h1>
-    <div class="countdown" id="countdown">
-      <div class="countdown-unit"><span id="cd-days">--</span><label>hari</label></div>
-      <div class="countdown-unit"><span id="cd-hours">--</span><label>jam</label></div>
-      <div class="countdown-unit"><span id="cd-mins">--</span><label>menit</label></div>
-      <div class="countdown-unit"><span id="cd-secs">--</span><label>detik</label></div>
-    </div>
-    <p class="hero-sub">menuju perkiraan pelaksanaan UTBK &middot; 21 April 2027</p>
+  <header class="top-bar">
+    <button id="menu-trigger" class="menu-btn" aria-label="Buka Menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
+    <div class="brand-title" id="brand-home">AETHERIS<span>.os</span></div>
+    <button id="theme-toggle" class="theme-btn" aria-label="Ubah Tema">🌙</button>
   </header>
 
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="jadwal">Jadwal</button>
-    <button class="tab-btn" data-tab="errorlog">Error Log</button>
-    <button class="tab-btn" data-tab="skor">Skor Tryout</button>
-    <button class="tab-btn" data-tab="tryout">Latihan Soal</button> 
-  </nav>
-
-  <main>
-
-    <section id="tab-jadwal" class="tab-panel active">
-      <div class="phase-progress">
-        <div class="phase-progress-bar"><div id="overall-bar" class="phase-progress-fill"></div></div>
-        <span id="overall-label">0 / 0 selesai</span>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <div class="sidebar-content">
+      <div class="profile-card">
+        <div class="profile-avatar">U</div>
+        <div class="profile-info">
+          <h3>Siswa Taruna</h3>
+          <p class="eyebrow">Level 11 &middot; UTBK 2027</p>
+          <span class="badge-location">Pangkalan Kerinci</span>
+        </div>
       </div>
-      <div id="phases-container"></div>
-    </section>
 
-    <section id="tab-errorlog" class="tab-panel">
-      <form id="error-form" class="card-form">
-        <p class="eyebrow">Catat kesalahan baru</p>
-        <div class="form-row">
-          <div>
-            <label>Topik</label>
-            <input id="err-topic" type="text" placeholder="contoh: Penalaran Umum" required>
-          </div>
-          <div>
-            <label>Jenis Soal</label>
-            <input id="err-soaltype" type="text" placeholder="contoh: silogisme">
-          </div>
+      <div class="sidebar-section">
+        <p class="section-label">Global Matrix</p>
+        <div class="config-item">
+          <span>Neural Engine Status</span>
+          <span class="status-indicator online">Ready</span>
         </div>
-        <div class="form-row">
-          <div>
-            <label>Penyebab</label>
-            <select id="err-type">
-              <option value="konsep">Salah konsep</option>
-              <option value="teliti">Salah teliti</option>
-              <option value="waktu">Kehabisan waktu</option>
-            </select>
-          </div>
-          <div>
-            <label>Catatan perbaikan</label>
-            <input id="err-note" type="text" placeholder="apa yang akan diperbaiki">
-          </div>
+        <div class="config-item">
+          <span>Daily Focus Target</span>
+          <span class="status-value">45 Menit</span>
         </div>
-        <button type="submit" class="btn-primary">Simpan ke log</button>
-      </form>
-      <div class="table-wrap">
-        <table id="error-table">
-          <thead><tr><th>Tanggal</th><th>Topik</th><th>Jenis Soal</th><th>Penyebab</th><th>Catatan</th><th></th></tr></thead>
-          <tbody id="error-tbody"></tbody>
-        </table>
-        <p id="error-empty" class="empty-state hidden">Belum ada catatan. Setiap habis latihan soal, isi form di atas.</p>
       </div>
-    </section>
 
-    <section id="tab-skor" class="tab-panel">
-      <form id="score-form" class="card-form">
-        <p class="eyebrow">Catat skor tryout baru</p>
-        <div class="form-row">
-          <div>
-            <label>Tanggal</label>
-            <input id="sc-date" type="date" required>
-          </div>
-          <div>
-            <label>TPS</label>
-            <input id="sc-tps" type="number" min="0" max="1000" placeholder="0-1000">
-          </div>
+      <nav class="sidebar-nav">
+        <p class="section-label">Main Core</p>
+        <button class="nav-link active" data-target="dashboard">🪐 Dashboard Core</button>
+        <p class="section-label">Subtests Modules</p>
+        <button class="nav-link" data-target="subtest-pu">⚡ Penalaran Umum (PU)</button>
+        <button class="nav-link" data-target="subtest-ppu">🧠 Pengetahuan & Pemahaman (PPU)</button>
+        <button class="nav-link" data-target="subtest-pbm">✍️ Memahami Bacaan & Menulis (PBM)</button>
+        <button class="nav-link" data-target="subtest-pk">📐 Pengetahuan Kuantitatif (PK)</button>
+        <button class="nav-link" data-target="subtest-indo">🇮🇩 Literasi B. Indonesia</button>
+        <button class="nav-link" data-target="subtest-inggris">🇬🇧 Literasi B. Inggris</button>
+        <button class="nav-link" data-target="subtest-pm">🧮 Penalaran Matematika (PM)</button>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main-matrix" id="main-content">
+
+    <section id="view-dashboard" class="matrix-view active">
+      <div class="welcome-banner">
+        <p class="eyebrow-glow">Sistem Navigasi Belajar</p>
+        <h1>Akses Modul Kognitif UTBK</h1>
+        <p class="sub-text">Pilih salah satu dari 7 simpul subtes di bawah ini untuk memulai sinkronisasi materi dan latihan soal.</p>
+      </div>
+
+      <div class="node-grid">
+        <div class="node-card" data-gate="subtest-pu">
+          <div class="node-icon">⚡</div>
+          <h3>Penalaran Umum</h3>
+          <p>Induktif, Deduktif, & Kuantitatif</p>
+          <span class="node-tag tps">TPS Module</span>
         </div>
-        <div class="form-row">
-          <div>
-            <label>Literasi B. Indonesia</label>
-            <input id="sc-indo" type="number" min="0" max="1000" placeholder="0-1000">
-          </div>
-          <div>
-            <label>Literasi B. Inggris</label>
-            <input id="sc-inggris" type="number" min="0" max="1000" placeholder="0-1000">
-          </div>
+        <div class="node-card" data-gate="subtest-ppu">
+          <div class="node-icon">🧠</div>
+          <h3>Pengetahuan & Pemahaman Umum</h3>
+          <p>Penguasaan kata & konteks kebahasaan</p>
+          <span class="node-tag tps">TPS Module</span>
         </div>
-        <div class="form-row">
-          <div>
-            <label>Penalaran Matematika</label>
-            <input id="sc-matematika" type="number" min="0" max="1000" placeholder="0-1000">
-          </div>
-          <div></div>
+        <div class="node-card" data-gate="subtest-pbm">
+          <div class="node-icon">✍️</div>
+          <h3>Memahami Bacaan & Menulis</h3>
+          <p>Ejaan, tata bahasa, & kepaduan teks</p>
+          <span class="node-tag tps">TPS Module</span>
         </div>
-        <button type="submit" class="btn-primary">Simpan skor</button>
-      </form>
-      <canvas id="score-chart" height="220"></canvas>
-      <div class="table-wrap">
-        <table id="score-table">
-          <thead><tr><th>Tanggal</th><th>TPS</th><th>Lit. Indo</th><th>Lit. Inggris</th><th>Pen. Mtk</th><th>Rata&#8209;rata</th><th></th></tr></thead>
-          <tbody id="score-tbody"></tbody>
-        </table>
-        <p id="score-empty" class="empty-state hidden">Belum ada skor tercatat. Tambahkan hasil tryout pertamamu.</p>
+        <div class="node-card" data-gate="subtest-pk">
+          <div class="node-icon">📐</div>
+          <h3>Pengetahuan Kuantitatif</h3>
+          <p>Aljabar, geometri, & matematika dasar</p>
+          <span class="node-tag tps">TPS Module</span>
+        </div>
+
+        <div class="node-card" data-gate="subtest-indo">
+          <div class="node-icon">🇮🇩</div>
+          <h3>Literasi B. Indonesia</h3>
+          <p>Evaluasi, analisis, & rekonsiliasi teks</p>
+          <span class="node-tag lit">Literasi Module</span>
+        </div>
+        <div class="node-card" data-gate="subtest-inggris">
+          <div class="node-icon">🇬🇧</div>
+          <h3>Literasi B. Inggris</h3>
+          <p>Extracting info & reading comprehension</p>
+          <span class="node-tag lit">Literasi Module</span>
+        </div>
+        <div class="node-card" data-gate="subtest-pm">
+          <div class="node-icon">🧮</div>
+          <h3>Penalaran Matematika</h3>
+          <p>Pemecahan masalah dalam konteks nyata</p>
+          <span class="node-tag lit">Literasi Module</span>
+        </div>
       </div>
     </section>
 
-    <section id="tab-tryout" class="tab-panel">
-      <div id="quiz-container" class="phase-card">
-        <div id="quiz-start">
-          <h2>Simulasi Mini Tryout</h2>
-          <p class="phase-range">Latihan soal campuran langsung di tempat</p>
-          <button id="btn-start-quiz" class="btn-primary">Mulai Kerjakan</button>
-        </div>
-        <div id="quiz-questions" class="hidden"></div>
-        <div id="quiz-result" class="hidden"></div>
+    <section id="view-subtest" class="matrix-view">
+      <button class="btn-back" id="btn-back-dashboard">← Kembali ke Dashboard</button>
+      
+      <div class="subtest-header">
+        <span class="node-tag" id="subtest-category">-</span>
+        <h1 id="subtest-title">Nama Subtest</h1>
+        <p id="subtest-desc" class="sub-text">Deskripsi subtest.</p>
       </div>
+
+      <div class="subtest-tabs">
+        <button class="sub-tab-btn active" data-mode="materi">📚 Rumah Materi</button>
+        <button class="sub-tab-btn" data-mode="latihan">🎯 Simulasi Ujian (Coming Soon)</button>
+      </div>
+
+      <div id="panel-materi" class="sub-panel active">
+        <div class="timer-control-box">
+          <div class="timer-toggle-row">
+            <label class="switch-container">
+              <input type="checkbox" id="timer-toggle-switch">
+              <span class="slider"></span>
+            </label>
+            <span class="timer-label">Aktifkan Chrono-Timer Belajar</span>
+          </div>
+          
+          <div id="chrono-display-container" class="chrono-display hidden">
+            <div class="time-digits" id="timer-digits">25:00</div>
+            <div class="timer-actions">
+              <button id="btn-timer-state" class="btn-action">Start</button>
+              <button id="btn-timer-reset" class="btn-action shadow">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="materi-dynamic-content" class="materi-render-zone"></div>
+      </div>
+
+      <div id="panel-latihan" class="sub-panel">
+        <div class="locked-state-card">
+          <div class="lock-icon">🔒</div>
+          <h3>Modul Pengujian Belum Disinkronisasi</h3>
+          <p>Opsi tes dan latihan soal akan dibuka pada pembaruan UI tahap berikutnya.</p>
+        </div>
+      </div>
+
     </section>
 
   </main>
 
-  <footer class="footer">
-    <button id="btn-disconnect" class="btn-ghost">Putuskan database</button>
-  </footer>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
