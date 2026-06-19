@@ -217,18 +217,90 @@ const DATA_MATERI = {
     `
   }
 };
+
+// ====== BANK SOAL DYNAMIC GENERATOR (SOAL ACAK OTOMATIS) ======
+const BANK_SOAL = {
+  'subtest-pu': [
+    {
+      // Soal Logika Statis
+      soal: "Jika sebuah planet memiliki atmosfer tebal (p), maka planet tersebut mungkin menampung kehidupan (q). Planet X tidak menampung kehidupan (~q). Kesimpulan yang sah adalah...",
+      opsi: ["Planet X memiliki atmosfer tebal", "Planet X tidak memiliki atmosfer tebal (~p)", "Planet X adalah bintang", "Planet X pasti berbatu"],
+      jawaban: 1,
+      pembahasan: "Ini adalah prinsip Modus Tollens. Jika (p → q) dan diketahui (~q), maka kesimpulan sahnya adalah (~p). Planet X tidak memiliki atmosfer tebal."
+    },
+    {
+      // Soal Deret Dinamis (Fibonacci)
+      tipe: 'dynamic',
+      generate: () => {
+        const a = Math.floor(Math.random() * 5) + 2;
+        const b = Math.floor(Math.random() * 5) + 2;
+        const c = a + b;
+        const d = b + c;
+        const e = c + d;
+        const ans = d + e;
+        
+        return {
+          soal: `Tentukan angka berikutnya dari barisan Fibonacci berikut: ${a}, ${b}, ${c}, ${d}, ${e}, ...`,
+          opsi: [`${ans}`, `${ans + 3}`, `${ans - 2}`, `${e * 2}`],
+          jawaban: 0,
+          pembahasan: `Pola deret Fibonacci: suku berikutnya adalah penjumlahan dua suku sebelumnya. ${c}=${a}+${b}, ${d}=${b}+${c}, ${e}=${c}+${d}. Maka suku selanjutnya adalah ${d}+${e} = ${ans}.`
+        };
+      }
+    },
+    {
+      // Soal Logika Silogisme
+      soal: "Jika hari ini hujan (p), maka jalan basah (q). Jika jalan basah (q), maka terjadi kemacetan (r). Diketahui hari ini hujan (p). Kesimpulan yang sah adalah...",
+      opsi: ["Jalan tidak basah", "Tidak terjadi kemacetan", "Terjadi kemacetan (r)", "Hari ini cerah"],
+      jawaban: 2,
+      pembahasan: "Ini adalah Silogisme. (p → q) + (q → r) menghasilkan (p → r). Karena diketahui p, maka kesimpulannya adalah r (Terjadi kemacetan)."
+    }
+  ],
+  'subtest-pk': [
+    {
+      // Soal Aljabar Komposisi Fungsi Dinamis
+      tipe: 'dynamic',
+      generate: () => {
+        const k = Math.floor(Math.random() * 4) + 2; // Angka 2-5
+        const m = Math.floor(Math.random() * 3) + 1; // Angka 1-3
+        // f(x) = kx - m, g(x) = x^2 + 2 -> (g o f)(k)
+        const fk = k * k - m;
+        const gfk = (fk * fk) + 2;
+        
+        return {
+          soal: `Jika f(x) = ${k}x - ${m} dan g(x) = x² + 2. Berapakah nilai dari komposisi fungsi (g ∘ f)(${k})?`,
+          opsi: [`${gfk}`, `${gfk + 5}`, `${gfk - 4}`, `${k * k * k}`],
+          jawaban: 0,
+          pembahasan: `Selesaikan fungsi dalam dulu: f(${k}) = ${k}(${k}) - ${m} = ${fk}. Lalu masukkan ke g(x): g(${fk}) = (${fk})² + 2 = ${gfk}.`
+        };
+      }
+    },
+    {
+      // Soal Geometri Sudut
+      soal: "Dua garis sejajar dipotong oleh sebuah garis melintang. Jika salah satu sudut yang terbentuk adalah 55°, maka besar sudut dalam berseberangannya adalah...",
+      opsi: ["45°", "55°", "125°", "135°"],
+      jawaban: 1,
+      pembahasan: "Sifat sudut pada garis sejajar yang dipotong garis melintang: Sudut dalam berseberangan (alternate interior angles) besarnya selalu sama, yaitu 55°."
+    }
+  ]
+};
+
 // ====== DOM CONTROLLERS ======
 const sidebar = document.getElementById('sidebar');
 const menuTrigger = document.getElementById('menu-trigger');
 const sidebarOverlay = document.getElementById('sidebar-overlay');
+
 const viewDashboard = document.getElementById('view-dashboard');
 const viewSubtest = document.getElementById('view-subtest');
+
+let currentGateKey = null; // Menyimpan subtes yang sedang aktif
+
 // Hamburger State Toggle
 function toggleSidebar() {
   sidebar.classList.toggle('open');
 }
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
+
 // ====== TEMA DROPDOWN & CIRCULAR REVEAL ANIMATION ======
 const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
 const themeCurrentBtn = document.getElementById('theme-current-btn');
@@ -236,15 +308,18 @@ const themeDropdown = document.getElementById('theme-dropdown');
 const themeOptions = document.querySelectorAll('.theme-option');
 const themeIcon = document.querySelector('.theme-icon');
 const themeName = document.querySelector('.theme-name');
+
 themeCurrentBtn.addEventListener('click', (e) => {
   e.stopPropagation();
   themeDropdown.classList.toggle('open');
 });
+
 document.addEventListener('click', (e) => {
   if (!themeSelectorWrapper.contains(e.target)) {
     themeDropdown.classList.remove('open');
   }
 });
+
 function updateThemeButton(theme) {
   if (theme === 'dark') {
     themeIcon.textContent = '🌙';
@@ -254,6 +329,7 @@ function updateThemeButton(theme) {
     themeName.textContent = 'Light';
   }
 }
+
 themeOptions.forEach(option => {
   option.addEventListener('click', (e) => {
     const targetTheme = option.dataset.theme;
@@ -263,25 +339,31 @@ themeOptions.forEach(option => {
       themeDropdown.classList.remove('open');
       return;
     }
+
     if (document.body.classList.contains('is-revealing')) return;
+
     const x = e.clientX;
     const y = e.clientY;
     document.body.style.setProperty('--reveal-x', x + 'px');
     document.body.style.setProperty('--reveal-y', y + 'px');
+
     if (targetTheme === 'light') {
       document.body.classList.add('reveal-to-light');
     } else {
       document.body.classList.add('reveal-to-dark');
     }
+
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         document.body.classList.add('is-revealing');
       });
     });
+
     setTimeout(() => {
       document.documentElement.setAttribute('data-theme', targetTheme);
       updateThemeButton(targetTheme);
     }, 400);
+
     setTimeout(() => {
       document.body.classList.remove('is-revealing');
       document.body.classList.remove('reveal-to-light');
@@ -290,6 +372,7 @@ themeOptions.forEach(option => {
     }, 850);
   });
 });
+
 // ====== NAVIGATION ROUTER ======
 function navigateTo(viewId, gateKey = null) {
   sidebar.classList.remove('open');
@@ -305,14 +388,17 @@ function navigateTo(viewId, gateKey = null) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
+
 document.getElementById('brand-home').addEventListener('click', () => navigateTo('dashboard'));
 document.getElementById('btn-back-dashboard').addEventListener('click', () => navigateTo('dashboard'));
+
 document.querySelectorAll('.node-card').forEach(card => {
   card.addEventListener('click', () => {
     const gate = card.dataset.gate;
     navigateTo('subtest', gate);
   });
 });
+
 document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -326,40 +412,169 @@ document.querySelectorAll('.nav-link').forEach(link => {
     }
   });
 });
+
 // ====== RENDER DYNAMIC SUBTEST VIEW ======
 function renderSubtestPage(key) {
+  currentGateKey = key;
   const data = DATA_MATERI[key];
   if (!data) return;
+
   document.getElementById('subtest-title').textContent = data.title;
   document.getElementById('subtest-category').textContent = data.category;
   document.getElementById('subtest-category').className = `node-tag ${data.category.includes('TPS') ? 'tps' : 'lit'}`;
   document.getElementById('subtest-desc').textContent = data.desc;
   
   document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
+
+  // Reset tab ke materi saat baru masuk subtes
   switchSubPanel('materi');
   resetChronoTimer();
+  
+  // Reset tombol tab ke "Rumah Materi"
+  document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
 }
+
 const subTabBtns = document.querySelectorAll('.sub-tab-btn');
 subTabBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     subTabBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    switchSubPanel(btn.dataset.mode);
+    const mode = btn.dataset.mode;
+    switchSubPanel(mode);
+    
+    // Jika user klik tab Latihan, generate soal
+    if (mode === 'latihan' && currentGateKey) {
+      mulaiLatihan(currentGateKey);
+    }
   });
 });
+
 function switchSubPanel(mode) {
   document.getElementById('panel-materi').classList.toggle('active', mode === 'materi');
   document.getElementById('panel-latihan').classList.toggle('active', mode === 'latihan');
 }
+
+// ====== SISTEM LATIHAN SOAL (DYNAMIC QUIZ) ======
+let soalAktif = [];
+let indexSoalSekarang = 0;
+let skorBenar = 0;
+
+function mulaiLatihan(gateKey) {
+  const bank = BANK_SOAL[gateKey];
+  if (!bank || bank.length === 0) {
+    document.getElementById('panel-latihan').innerHTML = `
+      <div class="locked-state-card">
+        <div class="lock-icon">⚙️</div>
+        <h3>Bank Soal Sedang Disiapkan</h3>
+        <p>Modul latihan soal untuk subtes ini sedang dalam tahap penambahan data. Silakan coba subtes lain!</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Acak urutan soal (Shuffle)
+  soalAktif = bank.sort(() => Math.random() - 0.5).map(s => {
+    if (s.tipe === 'dynamic') return s.generate(); // Generate angka acak
+    return s;
+  });
+
+  indexSoalSekarang = 0;
+  skorBenar = 0;
+  tampilkanSoal();
+}
+
+function tampilkanSoal() {
+  if (indexSoalSekarang >= soalAktif.length) {
+    renderHasilAkhir();
+    return;
+  }
+
+  const soal = soalAktif[indexSoalSekarang];
+  const opsiHtml = soal.opsi.map((ops, i) => `
+    <button class="opsi-soal" onclick="jawabSoal(${i})">
+      <span class="opsi-huruf">${String.fromCharCode(65 + i)}</span>
+      <span class="opsi-teks">${ops}</span>
+    </button>
+  `).join('');
+
+  document.getElementById('panel-latihan').innerHTML = `
+    <div class="latihan-header">
+      <div class="info-soal">
+        <span class="node-tag tps">Soal ${indexSoalSekarang + 1} / ${soalAktif.length}</span>
+        <span class="node-tag lit">Skor: ${skorBenar}</span>
+      </div>
+      <button class="btn-action shadow" onclick="keluarLatihan()">Keluar</button>
+    </div>
+    <div class="box-soal">
+      <p class="teks-soal">${soal.soal}</p>
+      <div class="opsi-grid">${opsiHtml}</div>
+    </div>
+  `;
+}
+
+function jawabSoal(indexJawaban) {
+  const soal = soalAktif[indexSoalSekarang];
+  const benar = indexJawaban === soal.jawaban;
+  if (benar) skorBenar++;
+
+  const opsiButtons = document.querySelectorAll('.opsi-soal');
+  opsiButtons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === soal.jawaban) btn.classList.add('benar');
+    else if (i === indexJawaban) btn.classList.add('salah');
+  });
+
+  // Tampilkan Pembahasan
+  const pembahasanBox = document.createElement('div');
+  pembahasanBox.className = 'box-pembahasan';
+  pembahasanBox.innerHTML = `
+    <h3>${benar ? '✅ Jawaban Benar!' : '❌ Jawaban Kurang Tepat'}</h3>
+    <p>${soal.pembahasan}</p>
+    <button class="btn-action" onclick="lanjutSoal()">${indexSoalSekarang + 1 === soalAktif.length ? 'Lihat Hasil Akhir' : 'Soal Berikutnya →'}</button>
+  `;
+  document.querySelector('.box-soal').appendChild(pembahasanBox);
+  
+  // Scroll halus ke pembahasan
+  pembahasanBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function lanjutSoal() {
+  indexSoalSekarang++;
+  tampilkanSoal();
+}
+
+function renderHasilAkhir() {
+  const persentase = (skorBenar / soalAktif.length) * 100;
+  document.getElementById('panel-latihan').innerHTML = `
+    <div class="hasil-akhir">
+      <div class="ikon-hasil">${persentase > 70 ? '🏆' : '📚'}</div>
+      <h2>Sesi Latihan Selesai!</h2>
+      <h1>${skorBenar} / ${soalAktif.length}</h1>
+      <p>Skor kamu: ${persentase.toFixed(0)}%. ${persentase > 70 ? 'Pertahankan!' : 'Terus berlatih agar makin paham!'}</p>
+      <button class="btn-action" onclick="mulaiLatihan('${currentGateKey}')">Ulangi Latihan (Soal Baru)</button>
+      <button class="btn-action shadow" onclick="keluarLatihan()">Kembali ke Materi</button>
+    </div>
+  `;
+}
+
+function keluarLatihan() {
+  switchSubPanel('materi');
+  document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
+}
+
 // ====== CHRONO TIMER MODULE ======
 let chronoInterval = null;
 let chronoRemainingSeconds = 25 * 60;
 let isChronoRunning = false;
+
 const timerToggleSwitch = document.getElementById('timer-toggle-switch');
 const chronoDisplayContainer = document.getElementById('chrono-display-container');
 const timerDigits = document.getElementById('timer-digits');
 const btnTimerState = document.getElementById('btn-timer-state');
 const btnTimerReset = document.getElementById('btn-timer-reset');
+
 timerToggleSwitch.addEventListener('change', (e) => {
   if (e.target.checked) {
     chronoDisplayContainer.classList.remove('hidden');
@@ -368,11 +583,13 @@ timerToggleSwitch.addEventListener('change', (e) => {
     pauseChronoTimer();
   }
 });
+
 function updateChronoDisplay() {
   const mins = Math.floor(chronoRemainingSeconds / 60);
   const secs = chronoRemainingSeconds % 60;
   timerDigits.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
+
 function startChronoTimer() {
   if (isChronoRunning) return;
   isChronoRunning = true;
@@ -388,16 +605,19 @@ function startChronoTimer() {
     }
   }, 1000);
 }
+
 function pauseChronoTimer() {
   isChronoRunning = false;
   btnTimerState.textContent = 'Start';
   clearInterval(chronoInterval);
 }
+
 function resetChronoTimer() {
   pauseChronoTimer();
   chronoRemainingSeconds = 25 * 60;
   updateChronoDisplay();
 }
+
 btnTimerState.addEventListener('click', () => {
   if (isChronoRunning) {
     pauseChronoTimer();
@@ -405,4 +625,5 @@ btnTimerState.addEventListener('click', () => {
     startChronoTimer();
   }
 });
+
 btnTimerReset.addEventListener('click', resetChronoTimer);
