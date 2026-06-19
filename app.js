@@ -1,4 +1,4 @@
-// ====== SOURCE BANK MATERI UTBK ======
+// ====== SOURCE BANK MATERI UTBK (AETHERIS SYSTEM CORE) ======
 const DATA_MATERI = {
   'subtest-pu': {
     title: 'Penalaran Umum (PU)',
@@ -6,21 +6,46 @@ const DATA_MATERI = {
     desc: 'Menguji kemampuan bernalar secara logis melalui Penalaran Induktif, Deduktif, dan Kuantitatif.',
     htmlContent: `
       <div class="materi-card">
-        <h2>1. Penalaran Induktif</h2>
-        <p>Proses penarikan kesimpulan dari kasus khusus ke umum. Di UTBK sering keluar dalam bentuk pola barisan angka atau analogi gambar.</p>
+        <h2>1. Penalaran Deduktif (Logika Formal)</h2>
+        <p>Penarikan kesimpulan dari premis umum. Tiga aturan baku yang mutlak harus dikuasai:</p>
         <ul>
-          <li>Perhatikan selisih atau operasi kuadrat antar elemen.</li>
-          <li>Uji konsistensi pola minimal pada 3 deret pertama.</li>
+          <li><strong>Modus Ponens:</strong> [p → q] dan [p] terjadi, maka kesimpulannya <strong>q</strong>.</li>
+          <li><strong>Modus Tollens:</strong> [p → q] dan [~q (tidak q)] terjadi, maka kesimpulannya <strong>~p</strong>.</li>
+          <li><strong>Silogisme:</strong> [p → q] dan [q → r], maka kesimpulannya <strong>p → r</strong>.</li>
+        </ul>
+        <p>⚠️ <em>Hati-hati Jebakan!</em> Jika [p → q] lalu yang diketahui [q], kamu <strong>TIDAK BISA</strong> menyimpulkan [p]. Ini kesalahan logika yang paling sering dipasang pembuat soal.</p>
+      </div>
+
+      <div class="materi-card">
+        <h2>2. Studi Kasus Soal Deduktif + Solusi</h2>
+        <p><strong>Soal:</strong> Jika siswa rajin belajar (p), maka ia lulus UTBK (q). Jika siswa lulus UTBK (q), maka orang tua bahagia (r). Diketahui orang tua tidak bahagia (~r). Apa simpulan yang sah?</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Gunakan Silogisme terlebih dahulu: (p → q) + (q → r) menghasilkan (p → r) "Jika siswa rajin belajar, maka orang tua bahagia".<br>
+        Selanjutnya gunakan Modus Tollens dengan fakta baru: (p → r) dan (~r). Kesimpulannya adalah <strong>~p</strong>.<br>
+        <strong>Jawaban Akhir:</strong> Siswa tidak rajin belajar.</p>
+      </div>
+
+      <div class="materi-card">
+        <h2>3. Penalaran Induktif (Pola Deret Angka)</h2>
+        <p>Mencari pola umum dari data-data spesifik. Strategi eksekusi kilat:</p>
+        <ul>
+          <li><strong>Pola Lompat:</strong> Jangan terpaku pada urutan berdampingan (+1, +2). Coba cek pola selang satu angka (angka ke-1 ke angka ke-3, dst).</li>
+          <li><strong>Deret Bertingkat:</strong> Jika selisih pertama acak, cari selisih dari selisih tersebut (operasi tingkat 2).</li>
+          <li><strong>Fibonacci:</strong> Angka berikutnya adalah hasil penjumlahan dua angka sebelumnya.</li>
         </ul>
       </div>
+
       <div class="materi-card">
-        <h2>2. Penalaran Deduktif</h2>
-        <p>Penarikan kesimpulan dari premis-premis umum yang sudah dianggap benar. Menggunakan hukum logika matematika dasar silogisme.</p>
-        <ul>
-          <li><strong>Silogisme:</strong> Jika p → q dan q → r, maka kesimpulannya p → r.</li>
-          <li><strong>Modus Ponens:</strong> Jika p → q benar, dan p terjadi, maka q pasti terjadi.</li>
-          <li><strong>Modus Tollens:</strong> Jika p → q benar, dan tidak terjadi q, maka tidak terjadi p.</li>
-        </ul>
+        <h2>4. Studi Kasus Soal Induktif + Solusi</h2>
+        <p><strong>Soal:</strong> Tentukan angka berikutnya dari barisan: 3, 4, 7, 11, 18, 29, ...</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Mari analisis polanya:<br>
+        3 + 4 = 7<br>
+        4 + 7 = 11<br>
+        7 + 11 = 18<br>
+        11 + 18 = 29<br>
+        Ini adalah struktur deret <strong>Fibonacci</strong>. Maka suku berikutnya adalah 18 + 29 = 47.<br>
+        <strong>Jawaban Akhir:</strong> 47.</p>
       </div>
     `
   },
@@ -30,12 +55,26 @@ const DATA_MATERI = {
     desc: 'Menguji kemampuan dalam memahami dan menguasai pengetahuan serta kebahasaan umum.',
     htmlContent: `
       <div class="materi-card">
-        <h2>1. Hubungan Makna Kata (Semantik)</h2>
-        <p>Menganalisis keterkaitan antar kata dalam teks, seperti sinonim kontekstual, antonim, maupun polisemi.</p>
+        <h2>1. Sinonim Kontekstual & Polisemi</h2>
+        <p>PPU sering menguji arti kata serapan ilmiah atau kosakata bahasa Indonesia yang jarang digunakan. Kuncinya: Jangan artikan kata secara harfiah, bacalah satu kalimat utuh karena makna bisa bergeser mengikuti konteks teks.</p>
+        <ul>
+          <li><strong>Aklamasi:</strong> Pernyataan setuju secara lisan dari seluruh peserta rapat.</li>
+          <li><strong>Fluktuasi:</strong> Gejala yang menunjukkan turun-naiknya harga atau nilai.</li>
+          <li><strong>Insinuasi:</strong> Tuduhan tersembunyi atau sindiran tidak langsung.</li>
+        </ul>
       </div>
+
       <div class="materi-card">
-        <h2>2. Pemahaman Konteks Paragraf</h2>
-        <p>Mengidentifikasi kata rujukan, idiom, serta maksud implisit dari sudut pandang penulis dalam bacaan ilmiah.</p>
+        <h2>2. Studi Kasus Makna Kata + Solusi</h2>
+        <p><strong>Soal:</strong> Pemerintah melakukan <em>mitigasi</em> secara masif untuk menekan dampak inflasi global di sektor pangan. Kata yang paling tepat menggantikan kata <em>mitigasi</em> adalah...</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Menurut KBBI, mitigasi berarti tindakan mengurangi dampak bencana atau risiko. Dalam konteks ekonomi pangan, tindakan ini berkaitan dengan pencegahan atau pengurangan dampak buruk.<br>
+        <strong>Jawaban Akhir:</strong> Penanggulangan / Pengurangan dampak risiko.</p>
+      </div>
+
+      <div class="materi-card">
+        <h2>3. Hubungan Antar-paragraf & Sikap Penulis (Attitude)</h2>
+        <p>Soal tipe ini menanyakan fungsi paragraf kedua terhadap paragraf kesatu. Opsinya biasanya berupa: memperjelas, mempertanyakan, menentang, atau memberikan contoh konkret.</p>
       </div>
     `
   },
@@ -45,12 +84,27 @@ const DATA_MATERI = {
     desc: 'Menguji keterampilan tata bahasa, penerapan ejaan resmi, dan kepaduan struktur paragraf.',
     htmlContent: `
       <div class="materi-card">
-        <h2>1. Kepaduan Paragraf (Koherensi)</h2>
-        <p>Menyusun kalimat acak menjadi paragraf yang logis atau membuang kalimat yang tidak padu (kalimat sumbang).</p>
+        <h2>1. Kalimat Efektif & Struktur Inti</h2>
+        <p>Kalimat yang baik harus memiliki struktur yang jelas (minimal memiliki <strong>Subjek (S)</strong> dan <strong>Predikat (P)</strong>) serta hemat kata. Ciri kalimat rusak/tidak efektif:</p>
+        <ul>
+          <li><strong>Subjek Hilang:</strong> Terjadi karena penggunaan kata depan di awal kalimat (Contoh salah: <em>"Bagi siswa yang ingin sukses harus belajar."</em> Kata 'Bagi' membuat subjek menjadi kabur).</li>
+          <li><strong>Predikat Hilang:</strong> Menggunakan kata "yang" sebelum predikat (Contoh salah: <em>"Ayah yang membeli koran."</em>).</li>
+          <li><strong>Pleonasme:</strong> Pemborosan kata (Contoh salah: <em>"Sejak dari pagi..."</em> atau <em>"Para bapak-bapak..."</em>).</li>
+        </ul>
       </div>
+
       <div class="materi-card">
-        <h2>2. Konvensi Bahasa & Ejaan</h2>
-        <p>Fokus utama pada penggunaan tanda baca (koma, titik dua), penulisan kata berimbuhan, kata depan, serta huruf kapital sesuai PUEBI/EYD.</p>
+        <h2>2. Studi Kasus Kalimat Efektif + Solusi</h2>
+        <p><strong>Soal:</strong> Perbaiki kalimat berikut agar menjadi kalimat efektif: <em>"Menurut analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi."</em></p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Kalimat di atas kehilangan Subjek karena adanya konjungsi 'Menurut' di depan, serta rancu dengan kata 'menyatakan bahwa'.<br>
+        Opsi Perbaikan 1 (Hilangkan 'Menurut'): <em>Analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi.</em><br>
+        Opsi Perbaikan 2 (Hilangkan 'menyatakan bahwa'): <em>Menurut analisis para ahli hukum, undang-undang tersebut harus direvisi.</em></p>
+      </div>
+
+      <div class="materi-card">
+        <h2>3. Aturan Ejaan (EYD V) & Kalimat Sumbang</h2>
+        <p>Kuasai aturan penulisan kata depan <strong>di</strong> (dipisah jika menunjukkan tempat: <em>di rumah</em>, digabung jika kata kerja pasif: <em>dimakan</em>). Kalimat sumbang adalah kalimat yang keluar dari topik utama paragraf.</p>
       </div>
     `
   },
@@ -60,12 +114,28 @@ const DATA_MATERI = {
     desc: 'Menguji pemahaman dasar konsep matematika, aljabar, statistika, dan geometri.',
     htmlContent: `
       <div class="materi-card">
-        <h2>1. Aljabar & Sistem Persamaan</h2>
-        <p>Menyelesaikan operasi matriks, fungsi komposisi, kuadratik, serta perbandingan kuantitatif antara variabel P dan Q.</p>
+        <h2>1. Strategi Soal Kecukupan Data (P dan Q)</h2>
+        <p>Di UTBK, tipe soal PK sering kali meminta kamu membandingkan nilai pada kolom P dan kolom Q, atau menganalisis apakah pernyataan (1) dan (2) cukup untuk menjawab pertanyaan.</p>
+        <ul>
+          <li><strong>Tips:</strong> Jangan habiskan waktu mencari angka eksak jika yang ditanyakan hanya "apakah data tersebut cukup".</li>
+        </ul>
       </div>
+
       <div class="materi-card">
-        <h2>2. Analisis Geometri Dasar</h2>
-        <p>Menghitung luas, keliling, koordinat kartesius, sudut pada garis sejajar, serta properti bangun ruang/datar dasar.</p>
+        <h2>2. Studi Kasus Aljabar Fungsi + Solusi</h2>
+        <p><strong>Soal:</strong> Jika f(x) = 3x - 1 dan g(x) = x² + 2. Berapakah nilai dari komposisi fungsi (g ∘ f)(2)?</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Selesaikan dari fungsi yang paling dalam dulu, yaitu cari nilai f(2):<br>
+        f(2) = 3(2) - 1 = 6 - 1 = 5.<br>
+        Masukkan hasil f(2) ke fungsi g(x):<br>
+        (g ∘ f)(2) = g(f(2)) = g(5)<br>
+        g(5) = (5)² + 2 = 25 + 2 = 27.<br>
+        <strong>Jawaban Akhir:</strong> 27.</p>
+      </div>
+
+      <div class="materi-card">
+        <h2>3. Geometri Sudut & Garis Sejajar</h2>
+        <p>Kuasai sifat-sifat sudut jika dua garis sejajar dipotong oleh sebuah garis melintang: Sudut bertolak belakang besarnya sama, sudut dalam berseberangan besarnya sama, dan jumlah sudut sepihak adalah 180°.</p>
       </div>
     `
   },
@@ -75,23 +145,55 @@ const DATA_MATERI = {
     desc: 'Menguji kemampuan memahami, menganalisis, dan mengevaluasi isi teks esai kompleks.',
     htmlContent: `
       <div class="materi-card">
-        <h2>1. Evaluasi Gagasan & Inferensi</h2>
-        <p>Menemukan kesimpulan tersirat, menganalisis tujuan penulisan, serta menentukan opini vs fakta dalam teks eksplanatif.</p>
+        <h2>1. Menemukan Gagasan Utama Bersirat</h2>
+        <p>Teks Literasi Indonesia di UTBK sangat panjang (3-4 paragraf ilmiah). Jangan membaca kata per kata dari awal karena akan menghabiskan waktu.</p>
+        <ul>
+          <li><strong>Metode Skimming:</strong> Baca kalimat pertama dan kalimat terakhir di setiap paragraf untuk memetakan ide pokok secara kilat.</li>
+          <li>Kalimat utama di awal disebut paragraf <strong>Deduktif</strong>, di akhir disebut <strong>Induktif</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="materi-card">
+        <h2>2. Studi Kasus Simpulan Implisit + Solusi</h2>
+        <p><strong>Teks:</strong> "Pendidikan karakter sejak usia dini di wilayah luar kota besar, seperti Pangkalan Kerinci, memperlihatkan korelasi positif terhadap ketahanan mental pelajar SMA. Survei terbaru berbasis angket menunjukkan siswa yang mendapatkan edukasi karakter lebih adaptif menghadapi ujian nasional dibandingkan siswa yang hanya fokus pada bimbingan belajar kognitif murni."<br><br>
+        <strong>Soal:</strong> Apa simpulan yang paling didukung oleh teks di atas?</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Teks membandingkan dua variabel: edukasi karakter usia dini vs bimbingan belajar kognitif murni. Hasilnya, edukasi karakter membuat siswa lebih tangguh secara mental.<br>
+        <strong>Jawaban Simpulan:</strong> Edukasi karakter usia dini memberikan kontribusi penting bagi kesiapan mental siswa SMA menghadapi tekanan ujian.</p>
       </div>
     `
   },
   'subtest-inggris': {
     title: 'Literasi dalam Bahasa Inggris',
     category: 'Literasi Module',
-    desc: 'Menguji kemampuan pemahaman bacaan tingkat lanjut (*reading comprehension*) teks berbahasa Inggris.',
+    desc: 'Menguji kemampuan pemahaman bacaan tingkat lanjut (reading comprehension) teks berbahasa Inggris.',
     htmlContent: `
       <div class="materi-card">
-        <h2>1. Tone, Purpose, and Author’s Attitude</h2>
-        <p>Menentukan sikap penulis (objective, biased, optimistic) dan mendeteksi ide utama dari teks akademik (jurnal/artikel).</p>
+        <h2>1. Deciphering Author's Tone and Attitude</h2>
+        <p>Soal sering menanyakan: <em>"What is the author’s attitude towards the topic?"</em> Berikut glosarium kata kunci intonasi penulis yang wajib dihapal:</p>
+        <ul>
+          <li><strong>Objective / Neutral:</strong> Penulis menyajikan fakta apa adanya tanpa memihak.</li>
+          <li><strong>Critical / Skeptical:</strong> Penulis mempertanyakan keabsahan data atau tidak langsung percaya.</li>
+          <li><strong>Optimistic:</strong> Penulis yakin akan ada dampak baik di masa depan.</li>
+        </ul>
       </div>
+
       <div class="materi-card">
-        <h2>2. Subjunctive Wish & Past Regret</h2>
-        <p>Pola kalimat pengandaian masa lalu: <code>I wish + Subject + Had + V3</code>. Contoh: "I wish I had come earlier." (Faktanya: saya datang terlambat).</p>
+        <h2>2. Advanced Grammar: Subjunctive Patterns (Past Regret)</h2>
+        <p>Pola pengandaian masa lalu menggunakan kata <strong>wish</strong> sering muncul untuk menguji ketelitian tata bahasamu.</p>
+        <ul>
+          <li><strong>Rumus Kunci:</strong> <code>Subject + wish + Subject + Had + Verb-3</code></li>
+          <li>Rumus ini dipakai untuk menunjukkan penyesalan atas peristiwa yang telanjur terjadi di masa lampau.</li>
+        </ul>
+      </div>
+
+      <div class="materi-card">
+        <h2>3. Studi Kasus Soal Bahasa Inggris + Solusi</h2>
+        <p><strong>Soal:</strong> The debate team lost the selection match yesterday due to a simple misunderstanding. The captain said, "I wish we ___ more attention to the structural constitution rules."</p>
+        <p>A. paid<br>B. have paid<br>C. had paid<br>D. would pay</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Kalimat di atas menceritakan penyesalan masa lalu (terdapat penanda waktu <em>"yesterday"</em>). Sesuai aturan <em>Past Subjunctive Regret</em>, tenses yang wajib digunakan setelah kata 'wish' adalah <strong>Past Perfect (Had + V3)</strong>.<br>
+        <strong>Jawaban Akhir:</strong> C. had paid</p>
       </div>
     `
   },
@@ -101,13 +203,30 @@ const DATA_MATERI = {
     desc: 'Menguji kemampuan memecahkan masalah matematika terapan dalam konteks realistik kehidupan nyata.',
     htmlContent: `
       <div class="materi-card">
-        <h2>1. Kombinatorika dalam Kasus Riil</h2>
-        <p>Menghitung banyak kemungkinan susunan tim atau rute perjalanan tanpa memperhatikan urutan menggunakan Kombinasi.</p>
-        <p><strong>Rumus Kombinasi:</strong> C(n, r) = n! / (r! × (n-r)!)</p>
+        <h2>1. Aturan Kombinatorika Terapan</h2>
+        <p>Membedakan kapan harus menggunakan rumus Permutasi atau Kombinasi dalam masalah dunia nyata:</p>
+        <ul>
+          <li><strong>Permutasi (Urutan Penting):</strong> Digunakan untuk menentukan posisi/jabatan (Ketua, Wakil, Sekretaris). Urutan AB tidak sama dengan BA.</li>
+          <li><strong>Kombinasi (Urutan Diabaikan):</strong> Digunakan untuk memilih anggota tim, delegasi, atau bersalaman. Susunan delegasi [Andi, Budi] dihitung sama dengan [Budi, Andi].</li>
+          <li><strong>Rumus Kombinasi:</strong> <code>C(n, r) = n! / (r! × (n - r)!)</code></li>
+        </ul>
       </div>
+
       <div class="materi-card">
-        <h2>2. Pemodelan Finansial & Persentase</h2>
-        <p>Menganalisis rasio keuangan, kalkulasi pertumbuhan ekonomi, fluktuasi APBN, inflasi, atau kalkulasi bunga majemuk.</p>
+        <h2>2. Studi Kasus Kombinatorika Tim Debat + Solusi</h2>
+        <p><strong>Soal:</strong> Dari 7 orang siswa kelas 11 di sebuah SMA, akan dipilih 3 orang siswa untuk mewakili sekolah dalam kompetisi debat hukum tata negara. Berapa banyak cara pemilihan yang mungkin?</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Karena urutan pemilihan siswa masuk ke dalam tim tidak diperhatikan, kita gunakan rumus Kombinasi C(7, 3):<br>
+        C(7, 3) = 7! / (3! × (7 - 3)!)<br>
+        C(7, 3) = 7! / (3! × 4!)<br>
+        C(7, 3) = (7 × 6 × 5 × 4!) / ((3 × 2 × 1) × 4!)<br>
+        C(7, 3) = (7 × 6 × 5) / 6 = 7 × 5 = 35.<br>
+        <strong>Jawaban Akhir:</strong> 35 cara.</p>
+      </div>
+
+      <div class="materi-card">
+        <h2>3. Pemodelan Rasio Keuangan & Rasionalisasi APBN</h2>
+        <p>Sering muncul soal cerita mengenai persentase kenaikan utang negara, suku bunga bank, atau perbandingan alokasi dana subsidi. Tips utamanya adalah: Ubah narasi soal cerita yang panjang menjadi persamaan matematika sederhana terlebih dahulu sebelum berhitung.</p>
       </div>
     `
   }
