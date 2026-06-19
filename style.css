@@ -494,3 +494,14 @@ body.reveal-to-dark::before { background-color: #F0F4F8; }
   .welcome-banner h1 { font-size: 1.8rem; }
   .node-card:hover { transform: none; }
 }
+/* Tambahan styling untuk tab baru */
+.sub-tab-btn.active {
+  color: var(--accent-cyan);
+  border-bottom-color: var(--accent-cyan);
+  transform: translateY(2px);
+}
+
+/* Penyesuaian grid tab agar muat 3 tombol di mobile */
+.subtest-tabs {
+  flex-wrap: wrap;
+}
