@@ -64,7 +64,7 @@ let supabase = null;
 const setupScreen = document.getElementById('setup-screen');
 const appEl = document.getElementById('app');
 
-function getStoredCreds(){
+function getStoredCreds()){
   return {
     url: localStorage.getItem('utbk_sb_url'),
     key: localStorage.getItem('utbk_sb_key')
@@ -79,7 +79,6 @@ async function tryConnect(url, key, persist){
     // sanity check: try a harmless query
     const { error } = await client.from('checklist_items').select('id').limit(1);
     if (error && error.code !== 'PGRST116') {
-      // PGRST116 = empty result is fine; other errors mean table missing or bad creds
       if (error.message && error.message.toLowerCase().includes('relation')) {
         errEl.textContent = 'Tersambung, tapi tabel belum dibuat. Jalankan dulu SQL setup dari README.';
         return;
@@ -199,9 +198,24 @@ async function renderPhases(){
       const li = document.createElement('li');
       li.className = 'phase-item' + (item.checked ? ' checked' : '');
       li.innerHTML = `<input type="checkbox" ${item.checked ? 'checked' : ''}><span>${item.label}</span>`;
+      
+      // FIX BUG: Mengubah status secara lokal tanpa renderPhases() agar tidak berkedip
       li.querySelector('input').addEventListener('change', async (e) => {
         await supabase.from('checklist_items').update({ checked: e.target.checked }).eq('id', item.id);
-        renderPhases();
+        
+        if (e.target.checked) {
+          li.classList.add('checked');
+        } else {
+          li.classList.remove('checked');
+        }
+        
+        // Update progress bar atas secara real-time tanpa kedipan halaman
+        const allChecks = container.querySelectorAll('.phase-item input[type="checkbox"]');
+        const checkedCount = container.querySelectorAll('.phase-item input[type="checkbox"]:checked').length;
+        const totalCount = allChecks.length;
+        const pct = totalCount ? Math.round((checkedCount / totalCount) * 100) : 0;
+        document.getElementById('overall-bar').style.width = pct + '%';
+        document.getElementById('overall-label').textContent = `${checkedCount} / ${totalCount} selesai`;
       });
       ul.appendChild(li);
     });
@@ -309,7 +323,6 @@ function average(nums){
   return Math.round(valid.reduce((a,b) => a+b, 0) / valid.length);
 }
 
-// simple canvas line chart, no external libs
 function drawChart(data){
   const canvas = document.getElementById('score-chart');
   const ctx = canvas.getContext('2d');
@@ -366,4 +379,115 @@ function drawChart(data){
   ctx.fillStyle = '#646A6F';
   ctx.font = '11px IBM Plex Mono';
   ctx.fillText('Rata-rata skor tryout dari waktu ke waktu', pad, 16);
+}
+
+
+// ====== CODESYNC: FITUR TRYOUT MINI ======
+const SOAL_TRYOUT = [
+  {
+    topik: "Penalaran Kuantitatif",
+    teks: "Berdasarkan analisis fiskal, sebuah negara mencatat APBN tahun ini dengan rasio utang terhadap PDB sebesar 30%. Jika tahun depan PDB negara tersebut diproyeksikan naik 20% namun nominal utang dipertahankan tetap (tidak menambah utang baru), berapakah rasio utang terhadap PDB yang baru?",
+    opsi: ["20%", "24%", "25%", "36%", "50%"],
+    jawaban: 2, 
+    pembahasan: "Misal PDB awal adalah 100, maka nilai utang adalah 30. Saat PDB naik 20%, PDB baru menjadi 120. Karena nominal utang bernotasi tetap yaitu 30, rasio yang baru adalah 30/120 = 1/4 = 25%."
+  },
+  {
+    topik: "Penalaran Matematika",
+    teks: "Dari sebuah sekolah di wilayah Pangkalan Kerinci, 5 orang siswa akan dipilih menjadi perwakilan tim debat konstitusi. Jika terdapat 8 orang siswa potensial yang mendaftar, banyak susunan tim berbeda yang mungkin terbentuk adalah...",
+    opsi: ["28 susunan", "40 susunan", "56 susunan", "336 susunan", "6720 susunan"],
+    jawaban: 2, 
+    pembahasan: "Masalah ini menggunakan rumus kombinatorika karena urutan siswa dalam tim tidak diperhatikan (tim A, B, C sama dengan B, C, A). Rumus Kombinasi C(8,5) = 8! / (5! × 3!) = (8 × 7 × 6) / (3 × 2 × 1) = 56 susunan."
+  },
+  {
+    topik: "Literasi Bahasa Indonesia",
+    teks: "Pendidikan karakter sejak usia dini sangat berpengaruh terhadap kualitas moral siswa SMA. Nilai-nilai yang ditanamkan sebelum usia tujuh tahun terbukti menjadi fondasi utama dalam merespons tekanan akademik. Berdasarkan angket penelitian terbaru, siswa dengan edukasi karakter yang kuat memiliki tingkat empati dan kedisiplinan 40% lebih tinggi dibandingkan yang tidak.\n\nSimpulan yang paling tepat untuk paragraf di atas adalah...",
+    opsi: ["Cara mengatasi tekanan lingkungan pada siswa SMA", "Pentingnya angket untuk mengukur tingkat empati siswa", "Pengaruh edukasi karakter secara dini terhadap kualitas karakter siswa SMA", "Masa kritis pembentukan nilai moral sebelum usia tujuh tahun", "Tingkat kedisiplinan siswa yang tidak mendapat pendidikan karakter"],
+    jawaban: 2,
+    pembahasan: "Teks tersebut bersifat deduktif di mana gagasan utamanya diletakkan di kalimat awal, yaitu menyoroti pengaruh signifikan dari pendidikan secara dini dan edukasi karakter terhadap kualitas siswa SMA (dalam hal ini moral, empati, dan kedisiplinan)."
+  }
+];
+
+let currentQuizAnswers = [];
+
+document.getElementById('btn-start-quiz')?.addEventListener('click', renderQuiz);
+
+function renderQuiz() {
+  document.getElementById('quiz-start').classList.add('hidden');
+  const qContainer = document.getElementById('quiz-questions');
+  qContainer.classList.remove('hidden');
+  qContainer.innerHTML = '';
+  currentQuizAnswers = new Array(SOAL_TRYOUT.length).fill(null);
+
+  SOAL_TRYOUT.forEach((soal, i) => {
+    const div = document.createElement('div');
+    div.style.marginBottom = '24px';
+    let opsiHtml = soal.opsi.map((opsi, j) => `
+      <label style="display:block; padding:10px; border:1px solid var(--line); border-radius:9px; margin-bottom:8px; cursor:pointer; font-size:0.9rem;">
+        <input type="radio" name="q${i}" value="${j}" style="width:auto; margin:0 8px 0 0;"> ${opsi}
+      </label>
+    `).join('');
+
+    div.innerHTML = `
+      <p class="eyebrow">${soal.topik}</p>
+      <p style="font-size:0.95rem; line-height:1.5; margin-bottom:14px; font-weight:500;">${i+1}. ${soal.teks}</p>
+      <div>${opsiHtml}</div>
+    `;
+    qContainer.appendChild(div);
+
+    div.querySelectorAll('input').forEach(input => {
+      input.addEventListener('change', (e) => {
+        currentQuizAnswers[i] = parseInt(e.target.value);
+      });
+    });
+  });
+
+  const btnSubmit = document.createElement('button');
+  btnSubmit.className = 'btn-primary';
+  btnSubmit.textContent = 'Kumpulkan & Cek Skor';
+  btnSubmit.style.marginTop = '12px';
+  btnSubmit.addEventListener('click', checkQuiz);
+  qContainer.appendChild(btnSubmit);
+}
+
+function checkQuiz() {
+  const qContainer = document.getElementById('quiz-questions');
+  const rContainer = document.getElementById('quiz-result');
+  qContainer.classList.add('hidden');
+  rContainer.classList.remove('hidden');
+
+  let benar = 0;
+  let reviewHtml = '';
+
+  SOAL_TRYOUT.forEach((soal, i) => {
+    const jwbUser = currentQuizAnswers[i];
+    const isCorrect = jwbUser === soal.jawaban;
+    if(isCorrect) benar++;
+
+    const userText = jwbUser !== null ? soal.opsi[jwbUser] : "Tidak dijawab";
+    const correctText = soal.opsi[soal.jawaban];
+
+    reviewHtml += `
+      <div style="margin-bottom:16px; padding:16px; border-radius:9px; background:${isCorrect ? 'var(--accent-soft)' : '#FCE8E4'}; border-left: 4px solid ${isCorrect ? 'var(--good)' : 'var(--bad)'}">
+        <p style="margin:0 0 8px 0; font-size:0.95rem;"><strong>Soal ${i+1}</strong>: ${isCorrect ? '✅ Benar' : '❌ Salah'}</p>
+        <p style="margin:0 0 4px 0; font-size:0.85rem; color:var(--ink-soft);">Jawabanmu: ${userText}</p>
+        ${!isCorrect ? `<p style="margin:0 0 6px 0; font-size:0.85rem; color:var(--bad);">Kunci: ${correctText}</p>` : ''}
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(0,0,0,0.05);">
+          <p style="margin:0; font-size:0.85rem; line-height:1.5;"><strong>Pembahasan:</strong> ${soal.pembahasan}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  const skorAkhir = Math.round((benar / SOAL_TRYOUT.length) * 1000);
+  rContainer.innerHTML = `
+    <h2 style="margin-bottom:6px;">Skor Tryout: ${skorAkhir}</h2>
+    <p class="phase-range" style="margin-bottom:20px;">Benar ${benar} dari ${SOAL_TRYOUT.length} soal.</p>
+    <div>${reviewHtml}</div>
+    <button id="btn-retry-quiz" class="btn-ghost" style="margin-top:16px; width:100%;">Coba Lagi</button>
+  `;
+
+  document.getElementById('btn-retry-quiz').addEventListener('click', () => {
+    rContainer.classList.add('hidden');
+    renderQuiz();
+  });
 }
