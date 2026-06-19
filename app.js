@@ -1,3 +1,8 @@
+// ====== KONFIGURASI GEMINI API ======
+// Ganti string di bawah dengan API Key dari Google AI Studio (aistudio.google.com)
+const GEMINI_API_KEY = "MASUKKAN_API_KEY_KAMU_DISINI"; 
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY;
+
 // ====== SOURCE BANK MATERI UTBK (AETHERIS SYSTEM CORE) ======
 const DATA_MATERI = {
   'subtest-pu': {
@@ -13,13 +18,13 @@ const DATA_MATERI = {
           <li><strong>Modus Tollens:</strong> [p → q] dan [~q (tidak q)] terjadi, maka kesimpulannya <strong>~p</strong>.</li>
           <li><strong>Silogisme:</strong> [p → q] dan [q → r], maka kesimpulannya <strong>p → r</strong>.</li>
         </ul>
-        <p>⚠️ <em>Hati-hati Jebakan!</em> Jika [p → q] lalu yang diketahui [q], kamu <strong>TIDAK BISA</strong> menyimpulkan [p]. Ini kesalahan logika yang paling sering dipasang pembuat soal.</p>
+        <p>⚠️ <em>Hati-hati Jebakan!</em> Jika [p → q] lalu yang diketahui [q], kamu <strong>TIDAK BISA</strong> menyimpulkan [p].</p>
       </div>
       <div class="materi-card">
         <h2>2. Studi Kasus Soal Deduktif + Solusi</h2>
         <p><strong>Soal:</strong> Jika siswa rajin belajar (p), maka ia lulus UTBK (q). Jika siswa lulus UTBK (q), maka orang tua bahagia (r). Diketahui orang tua tidak bahagia (~r). Apa simpulan yang sah?</p>
         <p><strong>Pembahasan Teknis:</strong><br>
-        Gunakan Silogisme terlebih dahulu: (p → q) + (q → r) menghasilkan (p → r) "Jika siswa rajin belajar, maka orang tua bahagia".<br>
+        Gunakan Silogisme terlebih dahulu: (p → q) + (q → r) menghasilkan (p → r).<br>
         Selanjutnya gunakan Modus Tollens dengan fakta baru: (p → r) dan (~r). Kesimpulannya adalah <strong>~p</strong>.<br>
         <strong>Jawaban Akhir:</strong> Siswa tidak rajin belajar.</p>
       </div>
@@ -27,7 +32,7 @@ const DATA_MATERI = {
         <h2>3. Penalaran Induktif (Pola Deret Angka)</h2>
         <p>Mencari pola umum dari data-data spesifik. Strategi eksekusi kilat:</p>
         <ul>
-          <li><strong>Pola Lompat:</strong> Jangan terpaku pada urutan berdampingan (+1, +2). Coba cek pola selang satu angka (angka ke-1 ke angka ke-3, dst).</li>
+          <li><strong>Pola Lompat:</strong> Coba cek pola selang satu angka (angka ke-1 ke angka ke-3, dst).</li>
           <li><strong>Deret Bertingkat:</strong> Jika selisih pertama acak, cari selisih dari selisih tersebut (operasi tingkat 2).</li>
           <li><strong>Fibonacci:</strong> Angka berikutnya adalah hasil penjumlahan dua angka sebelumnya.</li>
         </ul>
@@ -36,13 +41,8 @@ const DATA_MATERI = {
         <h2>4. Studi Kasus Soal Induktif + Solusi</h2>
         <p><strong>Soal:</strong> Tentukan angka berikutnya dari barisan: 3, 4, 7, 11, 18, 29, ...</p>
         <p><strong>Pembahasan Teknis:</strong><br>
-        Mari analisis polanya:<br>
-        3 + 4 = 7<br>
-        4 + 7 = 11<br>
-        7 + 11 = 18<br>
-        11 + 18 = 29<br>
-        Ini adalah struktur deret <strong>Fibonacci</strong>. Maka suku berikutnya adalah 18 + 29 = 47.<br>
-        <strong>Jawaban Akhir:</strong> 47.</p>
+        3 + 4 = 7<br>4 + 7 = 11<br>7 + 11 = 18<br>11 + 18 = 29<br>
+        Ini adalah struktur deret <strong>Fibonacci</strong>. Maka suku berikutnya adalah 18 + 29 = 47.</p>
       </div>
     `
   },
@@ -53,7 +53,7 @@ const DATA_MATERI = {
     htmlContent: `
       <div class="materi-card">
         <h2>1. Sinonim Kontekstual & Polisemi</h2>
-        <p>PPU sering menguji arti kata serapan ilmiah atau kosakata bahasa Indonesia yang jarang digunakan. Kuncinya: Jangan artikan kata secara harfiah, bacalah satu kalimat utuh karena makna bisa bergeser mengikuti konteks teks.</p>
+        <p>PPU sering menguji arti kata serapan ilmiah. Kuncinya: Bacalah satu kalimat utuh karena makna bisa bergeser mengikuti konteks teks.</p>
         <ul>
           <li><strong>Aklamasi:</strong> Pernyataan setuju secara lisan dari seluruh peserta rapat.</li>
           <li><strong>Fluktuasi:</strong> Gejala yang menunjukkan turun-naiknya harga atau nilai.</li>
@@ -64,7 +64,7 @@ const DATA_MATERI = {
         <h2>2. Studi Kasus Makna Kata + Solusi</h2>
         <p><strong>Soal:</strong> Pemerintah melakukan <em>mitigasi</em> secara masif untuk menekan dampak inflasi global di sektor pangan. Kata yang paling tepat menggantikan kata <em>mitigasi</em> adalah...</p>
         <p><strong>Pembahasan Teknis:</strong><br>
-        Menurut KBBI, mitigasi berarti tindakan mengurangi dampak bencana atau risiko. Dalam konteks ekonomi pangan, tindakan ini berkaitan dengan pencegahan atau pengurangan dampak buruk.<br>
+        Menurut KBBI, mitigasi berarti tindakan mengurangi dampak bencana atau risiko. Dalam konteks ekonomi pangan, tindakan ini berkaitan dengan pencegahan.<br>
         <strong>Jawaban Akhir:</strong> Penanggulangan / Pengurangan dampak risiko.</p>
       </div>
       <div class="materi-card">
@@ -80,24 +80,24 @@ const DATA_MATERI = {
     htmlContent: `
       <div class="materi-card">
         <h2>1. Kalimat Efektif & Struktur Inti</h2>
-        <p>Kalimat yang baik harus memiliki struktur yang jelas (minimal memiliki <strong>Subjek (S)</strong> dan <strong>Predikat (P)</strong>) serta hemat kata. Ciri kalimat rusak/tidak efektif:</p>
+        <p>Kalimat yang baik harus memiliki struktur yang jelas (minimal S dan P) serta hemat kata. Ciri kalimat rusak:</p>
         <ul>
-          <li><strong>Subjek Hilang:</strong> Terjadi karena penggunaan kata depan di awal kalimat (Contoh salah: <em>"Bagi siswa yang ingin sukses harus belajar."</em> Kata 'Bagi' membuat subjek menjadi kabur).</li>
+          <li><strong>Subjek Hilang:</strong> Penggunaan kata depan di awal kalimat (Contoh salah: <em>"Bagi siswa yang ingin sukses harus belajar."</em>).</li>
           <li><strong>Predikat Hilang:</strong> Menggunakan kata "yang" sebelum predikat (Contoh salah: <em>"Ayah yang membeli koran."</em>).</li>
-          <li><strong>Pleonasme:</strong> Pemborosan kata (Contoh salah: <em>"Sejak dari pagi..."</em> atau <em>"Para bapak-bapak..."</em>).</li>
+          <li><strong>Pleonasme:</strong> Pemborosan kata (Contoh salah: <em>"Sejak dari pagi..."</em>).</li>
         </ul>
       </div>
       <div class="materi-card">
         <h2>2. Studi Kasus Kalimat Efektif + Solusi</h2>
-        <p><strong>Soal:</strong> Perbaiki kalimat berikut agar menjadi kalimat efektif: <em>"Menurut analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi."</em></p>
+        <p><strong>Soal:</strong> Perbaiki kalimat berikut: <em>"Menurut analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi."</em></p>
         <p><strong>Pembahasan Teknis:</strong><br>
-        Kalimat di atas kehilangan Subjek karena adanya konjungsi 'Menurut' di depan, serta rancu dengan kata 'menyatakan bahwa'.<br>
-        Opsi Perbaikan 1 (Hilangkan 'Menurut'): <em>Analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi.</em><br>
-        Opsi Perbaikan 2 (Hilangkan 'menyatakan bahwa'): <em>Menurut analisis para ahli hukum, undang-undang tersebut harus direvisi.</em></p>
+        Kalimat di atas kehilangan Subjek karena adanya konjungsi 'Menurut' di depan.<br>
+        Opsi Perbaikan 1: <em>Analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi.</em><br>
+        Opsi Perbaikan 2: <em>Menurut analisis para ahli hukum, undang-undang tersebut harus direvisi.</em></p>
       </div>
       <div class="materi-card">
         <h2>3. Aturan Ejaan (EYD V) & Kalimat Sumbang</h2>
-        <p>Kuasai aturan penulisan kata depan <strong>di</strong> (dipisah jika menunjukkan tempat: <em>di rumah</em>, digabung jika kata kerja pasif: <em>dimakan</em>). Kalimat sumbang adalah kalimat yang keluar dari topik utama paragraf.</p>
+        <p>Kuasai aturan penulisan kata depan <strong>di</strong> (dipisah jika menunjukkan tempat: <em>di rumah</em>, digabung jika kata kerja pasif: <em>dimakan</em>).</p>
       </div>
     `
   },
@@ -108,7 +108,7 @@ const DATA_MATERI = {
     htmlContent: `
       <div class="materi-card">
         <h2>1. Strategi Soal Kecukupan Data (P dan Q)</h2>
-        <p>Di UTBK, tipe soal PK sering kali meminta kamu membandingkan nilai pada kolom P dan kolom Q, atau menganalisis apakah pernyataan (1) dan (2) cukup untuk menjawab pertanyaan.</p>
+        <p>Soal PK sering meminta membandingkan nilai pada kolom P dan kolom Q.</p>
         <ul>
           <li><strong>Tips:</strong> Jangan habiskan waktu mencari angka eksak jika yang ditanyakan hanya "apakah data tersebut cukup".</li>
         </ul>
@@ -117,9 +117,7 @@ const DATA_MATERI = {
         <h2>2. Studi Kasus Aljabar Fungsi + Solusi</h2>
         <p><strong>Soal:</strong> Jika f(x) = 3x - 1 dan g(x) = x² + 2. Berapakah nilai dari komposisi fungsi (g ∘ f)(2)?</p>
         <p><strong>Pembahasan Teknis:</strong><br>
-        Selesaikan dari fungsi yang paling dalam dulu, yaitu cari nilai f(2):<br>
         f(2) = 3(2) - 1 = 6 - 1 = 5.<br>
-        Masukkan hasil f(2) ke fungsi g(x):<br>
         (g ∘ f)(2) = g(f(2)) = g(5)<br>
         g(5) = (5)² + 2 = 25 + 2 = 27.<br>
         <strong>Jawaban Akhir:</strong> 27.</p>
@@ -137,19 +135,18 @@ const DATA_MATERI = {
     htmlContent: `
       <div class="materi-card">
         <h2>1. Menemukan Gagasan Utama Bersirat</h2>
-        <p>Teks Literasi Indonesia di UTBK sangat panjang (3-4 paragraf ilmiah). Jangan membaca kata per kata dari awal karena akan menghabiskan waktu.</p>
+        <p>Teks Literasi Indonesia di UTBK sangat panjang (3-4 paragraf ilmiah).</p>
         <ul>
-          <li><strong>Metode Skimming:</strong> Baca kalimat pertama dan kalimat terakhir di setiap paragraf untuk memetakan ide pokok secara kilat.</li>
+          <li><strong>Metode Skimming:</strong> Baca kalimat pertama dan kalimat terakhir di setiap paragraf untuk memetakan ide pokok.</li>
           <li>Kalimat utama di awal disebut paragraf <strong>Deduktif</strong>, di akhir disebut <strong>Induktif</strong>.</li>
         </ul>
       </div>
       <div class="materi-card">
         <h2>2. Studi Kasus Simpulan Implisit + Solusi</h2>
-        <p><strong>Teks:</strong> "Pendidikan karakter sejak usia dini di wilayah luar kota besar, seperti Pangkalan Kerinci, memperlihatkan korelasi positif terhadap ketahanan mental pelajar SMA. Survei terbaru berbasis angket menunjukkan siswa yang mendapatkan edukasi karakter lebih adaptif menghadapi ujian nasional dibandingkan siswa yang hanya fokus pada bimbingan belajar kognitif murni."<br><br>
+        <p><strong>Teks:</strong> "Pendidikan karakter sejak usia dini memperlihatkan korelasi positif terhadap ketahanan mental pelajar SMA. Survei menunjukkan siswa yang mendapatkan edukasi karakter lebih adaptif menghadapi ujian nasional dibandingkan siswa yang hanya fokus pada bimbingan belajar kognitif murni."<br><br>
         <strong>Soal:</strong> Apa simpulan yang paling didukung oleh teks di atas?</p>
-        <p><strong>Pembahasan Teknis:</strong><br>
-        Teks membandingkan dua variabel: edukasi karakter usia dini vs bimbingan belajar kognitif murni. Hasilnya, edukasi karakter membuat siswa lebih tangguh secara mental.<br>
-        <strong>Jawaban Simpulan:</strong> Edukasi karakter usia dini memberikan kontribusi penting bagi kesiapan mental siswa SMA menghadapi tekanan ujian.</p>
+        <p><strong>Pembahasan Teknis:</strong> Teks membandingkan edukasi karakter vs bimbingan kognitif murni. Hasilnya, edukasi karakter membuat siswa lebih tangguh.<br>
+        <strong>Jawaban Simpulan:</strong> Edukasi karakter usia dini memberikan kontribusi penting bagi kesiapan mental siswa menghadapi ujian.</p>
       </div>
     `
   },
@@ -160,7 +157,7 @@ const DATA_MATERI = {
     htmlContent: `
       <div class="materi-card">
         <h2>1. Deciphering Author's Tone and Attitude</h2>
-        <p>Soal sering menanyakan: <em>"What is the author’s attitude towards the topic?"</em> Berikut glosarium kata kunci intonasi penulis yang wajib dihapal:</p>
+        <p>Soal sering menanyakan: <em>"What is the author’s attitude towards the topic?"</em></p>
         <ul>
           <li><strong>Objective / Neutral:</strong> Penulis menyajikan fakta apa adanya tanpa memihak.</li>
           <li><strong>Critical / Skeptical:</strong> Penulis mempertanyakan keabsahan data atau tidak langsung percaya.</li>
@@ -169,7 +166,7 @@ const DATA_MATERI = {
       </div>
       <div class="materi-card">
         <h2>2. Advanced Grammar: Subjunctive Patterns (Past Regret)</h2>
-        <p>Pola pengandaian masa lalu menggunakan kata <strong>wish</strong> sering muncul untuk menguji ketelitian tata bahasamu.</p>
+        <p>Pola pengandaian masa lalu menggunakan kata <strong>wish</strong>.</p>
         <ul>
           <li><strong>Rumus Kunci:</strong> <code>Subject + wish + Subject + Had + Verb-3</code></li>
           <li>Rumus ini dipakai untuk menunjukkan penyesalan atas peristiwa yang telanjur terjadi di masa lampau.</li>
@@ -177,10 +174,9 @@ const DATA_MATERI = {
       </div>
       <div class="materi-card">
         <h2>3. Studi Kasus Soal Bahasa Inggris + Solusi</h2>
-        <p><strong>Soal:</strong> The debate team lost the selection match yesterday due to a simple misunderstanding. The captain said, "I wish we ___ more attention to the structural constitution rules."</p>
+        <p><strong>Soal:</strong> The debate team lost the selection match yesterday. The captain said, "I wish we ___ more attention to the rules."</p>
         <p>A. paid<br>B. have paid<br>C. had paid<br>D. would pay</p>
-        <p><strong>Pembahasan Teknis:</strong><br>
-        Kalimat di atas menceritakan penyesalan masa lalu (terdapat penanda waktu <em>"yesterday"</em>). Sesuai aturan <em>Past Subjunctive Regret</em>, tenses yang wajib digunakan setelah kata 'wish' adalah <strong>Past Perfect (Had + V3)</strong>.<br>
+        <p><strong>Pembahasan Teknis:</strong> Kalimat menceritakan penyesalan masa lalu (terdapat penanda waktu <em>"yesterday"</em>). Sesuai aturan <em>Past Subjunctive Regret</em>, tenses yang wajib digunakan setelah kata 'wish' adalah <strong>Past Perfect (Had + V3)</strong>.<br>
         <strong>Jawaban Akhir:</strong> C. had paid</p>
       </div>
     `
@@ -192,96 +188,28 @@ const DATA_MATERI = {
     htmlContent: `
       <div class="materi-card">
         <h2>1. Aturan Kombinatorika Terapan</h2>
-        <p>Membedakan kapan harus menggunakan rumus Permutasi atau Kombinasi dalam masalah dunia nyata:</p>
+        <p>Membedakan kapan harus menggunakan rumus Permutasi atau Kombinasi:</p>
         <ul>
           <li><strong>Permutasi (Urutan Penting):</strong> Digunakan untuk menentukan posisi/jabatan (Ketua, Wakil, Sekretaris). Urutan AB tidak sama dengan BA.</li>
-          <li><strong>Kombinasi (Urutan Diabaikan):</strong> Digunakan untuk memilih anggota tim, delegasi, atau bersalaman. Susunan delegasi [Andi, Budi] dihitung sama dengan [Budi, Andi].</li>
+          <li><strong>Kombinasi (Urutan Diabaikan):</strong> Digunakan untuk memilih anggota tim atau delegasi. Susunan [Andi, Budi] sama dengan [Budi, Andi].</li>
           <li><strong>Rumus Kombinasi:</strong> <code>C(n, r) = n! / (r! × (n - r)!)</code></li>
         </ul>
       </div>
       <div class="materi-card">
         <h2>2. Studi Kasus Kombinatorika Tim Debat + Solusi</h2>
-        <p><strong>Soal:</strong> Dari 7 orang siswa kelas 11 di sebuah SMA, akan dipilih 3 orang siswa untuk mewakili sekolah dalam kompetisi debat hukum tata negara. Berapa banyak cara pemilihan yang mungkin?</p>
+        <p><strong>Soal:</strong> Dari 7 orang siswa, akan dipilih 3 orang siswa untuk mewakili sekolah. Berapa banyak cara pemilihan yang mungkin?</p>
         <p><strong>Pembahasan Teknis:</strong><br>
-        Karena urutan pemilihan siswa masuk ke dalam tim tidak diperhatikan, kita gunakan rumus Kombinasi C(7, 3):<br>
-        C(7, 3) = 7! / (3! × (7 - 3)!)<br>
+        Karena urutan tidak diperhatikan, gunakan Kombinasi C(7, 3):<br>
         C(7, 3) = 7! / (3! × 4!)<br>
-        C(7, 3) = (7 × 6 × 5 × 4!) / ((3 × 2 × 1) × 4!)<br>
-        C(7, 3) = (7 × 6 × 5) / 6 = 7 × 5 = 35.<br>
+        C(7, 3) = (7 × 6 × 5) / 6 = 35.<br>
         <strong>Jawaban Akhir:</strong> 35 cara.</p>
       </div>
       <div class="materi-card">
         <h2>3. Pemodelan Rasio Keuangan & Rasionalisasi APBN</h2>
-        <p>Sering muncul soal cerita mengenai persentase kenaikan utang negara, suku bunga bank, atau perbandingan alokasi dana subsidi. Tips utamanya adalah: Ubah narasi soal cerita yang panjang menjadi persamaan matematika sederhana terlebih dahulu sebelum berhitung.</p>
+        <p>Sering muncul soal cerita mengenai persentase kenaikan utang negara atau perbandingan alokasi dana subsidi. Tips: Ubah narasi soal cerita menjadi persamaan matematika sederhana terlebih dahulu sebelum berhitung.</p>
       </div>
     `
   }
-};
-
-// ====== BANK SOAL DYNAMIC GENERATOR (SOAL ACAK OTOMATIS) ======
-const BANK_SOAL = {
-  'subtest-pu': [
-    {
-      // Soal Logika Statis
-      soal: "Jika sebuah planet memiliki atmosfer tebal (p), maka planet tersebut mungkin menampung kehidupan (q). Planet X tidak menampung kehidupan (~q). Kesimpulan yang sah adalah...",
-      opsi: ["Planet X memiliki atmosfer tebal", "Planet X tidak memiliki atmosfer tebal (~p)", "Planet X adalah bintang", "Planet X pasti berbatu"],
-      jawaban: 1,
-      pembahasan: "Ini adalah prinsip Modus Tollens. Jika (p → q) dan diketahui (~q), maka kesimpulan sahnya adalah (~p). Planet X tidak memiliki atmosfer tebal."
-    },
-    {
-      // Soal Deret Dinamis (Fibonacci)
-      tipe: 'dynamic',
-      generate: () => {
-        const a = Math.floor(Math.random() * 5) + 2;
-        const b = Math.floor(Math.random() * 5) + 2;
-        const c = a + b;
-        const d = b + c;
-        const e = c + d;
-        const ans = d + e;
-        
-        return {
-          soal: `Tentukan angka berikutnya dari barisan Fibonacci berikut: ${a}, ${b}, ${c}, ${d}, ${e}, ...`,
-          opsi: [`${ans}`, `${ans + 3}`, `${ans - 2}`, `${e * 2}`],
-          jawaban: 0,
-          pembahasan: `Pola deret Fibonacci: suku berikutnya adalah penjumlahan dua suku sebelumnya. ${c}=${a}+${b}, ${d}=${b}+${c}, ${e}=${c}+${d}. Maka suku selanjutnya adalah ${d}+${e} = ${ans}.`
-        };
-      }
-    },
-    {
-      // Soal Logika Silogisme
-      soal: "Jika hari ini hujan (p), maka jalan basah (q). Jika jalan basah (q), maka terjadi kemacetan (r). Diketahui hari ini hujan (p). Kesimpulan yang sah adalah...",
-      opsi: ["Jalan tidak basah", "Tidak terjadi kemacetan", "Terjadi kemacetan (r)", "Hari ini cerah"],
-      jawaban: 2,
-      pembahasan: "Ini adalah Silogisme. (p → q) + (q → r) menghasilkan (p → r). Karena diketahui p, maka kesimpulannya adalah r (Terjadi kemacetan)."
-    }
-  ],
-  'subtest-pk': [
-    {
-      // Soal Aljabar Komposisi Fungsi Dinamis
-      tipe: 'dynamic',
-      generate: () => {
-        const k = Math.floor(Math.random() * 4) + 2; // Angka 2-5
-        const m = Math.floor(Math.random() * 3) + 1; // Angka 1-3
-        // f(x) = kx - m, g(x) = x^2 + 2 -> (g o f)(k)
-        const fk = k * k - m;
-        const gfk = (fk * fk) + 2;
-        
-        return {
-          soal: `Jika f(x) = ${k}x - ${m} dan g(x) = x² + 2. Berapakah nilai dari komposisi fungsi (g ∘ f)(${k})?`,
-          opsi: [`${gfk}`, `${gfk + 5}`, `${gfk - 4}`, `${k * k * k}`],
-          jawaban: 0,
-          pembahasan: `Selesaikan fungsi dalam dulu: f(${k}) = ${k}(${k}) - ${m} = ${fk}. Lalu masukkan ke g(x): g(${fk}) = (${fk})² + 2 = ${gfk}.`
-        };
-      }
-    },
-    {
-      // Soal Geometri Sudut
-      soal: "Dua garis sejajar dipotong oleh sebuah garis melintang. Jika salah satu sudut yang terbentuk adalah 55°, maka besar sudut dalam berseberangannya adalah...",
-      opsi: ["45°", "55°", "125°", "135°"],
-      jawaban: 1,
-      pembahasan: "Sifat sudut pada garis sejajar yang dipotong garis melintang: Sudut dalam berseberangan (alternate interior angles) besarnya selalu sama, yaitu 55°."
-    }
-  ]
 };
 
 // ====== DOM CONTROLLERS ======
@@ -292,16 +220,15 @@ const sidebarOverlay = document.getElementById('sidebar-overlay');
 const viewDashboard = document.getElementById('view-dashboard');
 const viewSubtest = document.getElementById('view-subtest');
 
-let currentGateKey = null; // Menyimpan subtes yang sedang aktif
+let currentGateKey = null; 
 
-// Hamburger State Toggle
 function toggleSidebar() {
   sidebar.classList.toggle('open');
 }
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
 
-// ====== TEMA DROPDOWN & CIRCULAR REVEAL ANIMATION ======
+// ====== TEMA DROPDOWN & CIRCULAR REVEAL ======
 const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
 const themeCurrentBtn = document.getElementById('theme-current-btn');
 const themeDropdown = document.getElementById('theme-dropdown');
@@ -394,8 +321,7 @@ document.getElementById('btn-back-dashboard').addEventListener('click', () => na
 
 document.querySelectorAll('.node-card').forEach(card => {
   card.addEventListener('click', () => {
-    const gate = card.dataset.gate;
-    navigateTo('subtest', gate);
+    navigateTo('subtest', card.dataset.gate);
   });
 });
 
@@ -403,13 +329,9 @@ document.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
     link.classList.add('active');
-    
     const target = link.dataset.target;
-    if (target === 'dashboard') {
-      navigateTo('dashboard');
-    } else {
-      navigateTo('subtest', target);
-    }
+    if (target === 'dashboard') navigateTo('dashboard');
+    else navigateTo('subtest', target);
   });
 });
 
@@ -426,11 +348,9 @@ function renderSubtestPage(key) {
   
   document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
 
-  // Reset tab ke materi saat baru masuk subtes
   switchSubPanel('materi');
   resetChronoTimer();
   
-  // Reset tombol tab ke "Rumah Materi"
   document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
 }
@@ -443,9 +363,8 @@ subTabBtns.forEach(btn => {
     const mode = btn.dataset.mode;
     switchSubPanel(mode);
     
-    // Jika user klik tab Latihan, generate soal
     if (mode === 'latihan' && currentGateKey) {
-      mulaiLatihan(currentGateKey);
+      generateSoalDariAI(currentGateKey);
     }
   });
 });
@@ -455,33 +374,80 @@ function switchSubPanel(mode) {
   document.getElementById('panel-latihan').classList.toggle('active', mode === 'latihan');
 }
 
-// ====== SISTEM LATIHAN SOAL (DYNAMIC QUIZ) ======
+// ====== SISTEM LATIHAN SOAL (GEMINI AI) ======
 let soalAktif = [];
 let indexSoalSekarang = 0;
 let skorBenar = 0;
 
-function mulaiLatihan(gateKey) {
-  const bank = BANK_SOAL[gateKey];
-  if (!bank || bank.length === 0) {
-    document.getElementById('panel-latihan').innerHTML = `
+async function generateSoalDariAI(gateKey) {
+  const dataMateri = DATA_MATERI[gateKey];
+  const panelLatihan = document.getElementById('panel-latihan');
+
+  // Tampilkan Loading
+  panelLatihan.innerHTML = `
+    <div class="loading-state">
+      <div class="loading-spinner"></div>
+      <h3>Sedang Meracik 10 Soal Baru...</h3>
+      <p>AI Gemini sedang menyusun soal ${dataMateri.title} secara dinamis. Mohon tunggu sejenak.</p>
+    </div>
+  `;
+
+  // Susun Prompt untuk AI
+  const prompt = `
+    Kamu adalah asisten ahli UTBK. Buatkan 10 soal pilihan ganda (opsi A, B, C, D) untuk subtes "${dataMateri.title}".
+    Kategori soal: ${dataMateri.desc}.
+    Buat soal yang variatif, logis, dan sesuai standar UTBK (jangan terlalu gampang, jangan terlalu susah).
+    Berikan juga kunci jawaban yang benar (hanya tulis hurufnya: A, B, C, atau D) dan pembahasan singkat (1-2 kalimat).
+
+    WAJIB balas menggunakan format JSON murni tanpa markdown (\`\`\`json) tanpa teks tambahan.
+    Struktur JSON persis seperti ini:
+    {
+      "soal": [
+        {
+          "pertanyaan": "Teks pertanyaan di sini",
+          "opsi": ["Teks opsi A", "Teks opsi B", "Teks opsi C", "Teks opsi D"],
+          "jawaban": 0,
+          "pembahasan": "Teks pembahasan di sini"
+        }
+      ]
+    }
+    Catatan: nilai "jawaban" adalah index array opsi (0=A, 1=B, 2=C, 3=D).
+  `;
+
+  try {
+    const response = await fetch(GEMINI_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { responseMimeType: "application/json" }
+      })
+    });
+
+    if (!response.ok) throw new Error('Gagal memuat soal dari API');
+    
+    const resJson = await response.json();
+    const textResult = resJson.candidates[0].content.parts[0].text;
+    const parsed = JSON.parse(textResult);
+
+    if (!parsed.soal || parsed.soal.length === 0) throw new Error('Format soal kosong');
+
+    soalAktif = parsed.soal;
+    indexSoalSekarang = 0;
+    skorBenar = 0;
+    tampilkanSoal();
+
+  } catch (error) {
+    console.error(error);
+    panelLatihan.innerHTML = `
       <div class="locked-state-card">
-        <div class="lock-icon">⚙️</div>
-        <h3>Bank Soal Sedang Disiapkan</h3>
-        <p>Modul latihan soal untuk subtes ini sedang dalam tahap penambahan data. Silakan coba subtes lain!</p>
+        <div class="lock-icon">⚠️</div>
+        <h3>Gagal Menghubungi AI</h3>
+        <p>Pastikan API Key Gemini valid dan kuota internet mencukupi. Error: ${error.message}</p>
+        <button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button>
       </div>
     `;
-    return;
   }
-
-  // Acak urutan soal (Shuffle)
-  soalAktif = bank.sort(() => Math.random() - 0.5).map(s => {
-    if (s.tipe === 'dynamic') return s.generate(); // Generate angka acak
-    return s;
-  });
-
-  indexSoalSekarang = 0;
-  skorBenar = 0;
-  tampilkanSoal();
 }
 
 function tampilkanSoal() {
@@ -507,7 +473,7 @@ function tampilkanSoal() {
       <button class="btn-action shadow" onclick="keluarLatihan()">Keluar</button>
     </div>
     <div class="box-soal">
-      <p class="teks-soal">${soal.soal}</p>
+      <p class="teks-soal">${soal.pertanyaan}</p>
       <div class="opsi-grid">${opsiHtml}</div>
     </div>
   `;
@@ -525,7 +491,6 @@ function jawabSoal(indexJawaban) {
     else if (i === indexJawaban) btn.classList.add('salah');
   });
 
-  // Tampilkan Pembahasan
   const pembahasanBox = document.createElement('div');
   pembahasanBox.className = 'box-pembahasan';
   pembahasanBox.innerHTML = `
@@ -534,8 +499,6 @@ function jawabSoal(indexJawaban) {
     <button class="btn-action" onclick="lanjutSoal()">${indexSoalSekarang + 1 === soalAktif.length ? 'Lihat Hasil Akhir' : 'Soal Berikutnya →'}</button>
   `;
   document.querySelector('.box-soal').appendChild(pembahasanBox);
-  
-  // Scroll halus ke pembahasan
   pembahasanBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -551,8 +514,8 @@ function renderHasilAkhir() {
       <div class="ikon-hasil">${persentase > 70 ? '🏆' : '📚'}</div>
       <h2>Sesi Latihan Selesai!</h2>
       <h1>${skorBenar} / ${soalAktif.length}</h1>
-      <p>Skor kamu: ${persentase.toFixed(0)}%. ${persentase > 70 ? 'Pertahankan!' : 'Terus berlatih agar makin paham!'}</p>
-      <button class="btn-action" onclick="mulaiLatihan('${currentGateKey}')">Ulangi Latihan (Soal Baru)</button>
+      <p>Skor kamu: ${persentase.toFixed(0)}%. ${persentase > 70 ? 'Pertahankan!' : 'Terus berlatih!'}</p>
+      <button class="btn-action" onclick="generateSoalDariAI('${currentGateKey}')">Ulangi Latihan (Soal Baru)</button>
       <button class="btn-action shadow" onclick="keluarLatihan()">Kembali ke Materi</button>
     </div>
   `;
@@ -576,12 +539,8 @@ const btnTimerState = document.getElementById('btn-timer-state');
 const btnTimerReset = document.getElementById('btn-timer-reset');
 
 timerToggleSwitch.addEventListener('change', (e) => {
-  if (e.target.checked) {
-    chronoDisplayContainer.classList.remove('hidden');
-  } else {
-    chronoDisplayContainer.classList.add('hidden');
-    pauseChronoTimer();
-  }
+  if (e.target.checked) chronoDisplayContainer.classList.remove('hidden');
+  else { chronoDisplayContainer.classList.add('hidden'); pauseChronoTimer(); }
 });
 
 function updateChronoDisplay() {
@@ -619,11 +578,8 @@ function resetChronoTimer() {
 }
 
 btnTimerState.addEventListener('click', () => {
-  if (isChronoRunning) {
-    pauseChronoTimer();
-  } else {
-    startChronoTimer();
-  }
+  if (isChronoRunning) pauseChronoTimer();
+  else startChronoTimer();
 });
 
 btnTimerReset.addEventListener('click', resetChronoTimer);
