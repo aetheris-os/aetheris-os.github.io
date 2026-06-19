@@ -138,10 +138,38 @@
         <p id="subtest-desc" class="sub-text">Deskripsi subtest.</p>
       </div>
 
-      <div class="subtest-tabs">
+     <div class="subtest-tabs">
         <button class="sub-tab-btn active" data-mode="materi">📚 Rumah Materi</button>
-        <button class="sub-tab-btn" data-mode="latihan">🎯 Simulasi & Latihan Soal</button>
+        <button class="sub-tab-btn" data-mode="latihan-ai">🤖 Latihan AI (Generate)</button>
+        <button class="sub-tab-btn" data-mode="latihan-sim">📝 Simulasi Bank Soal</button>
       </div>
+      <div id="panel-materi" class="sub-panel active">
+        <div class="timer-control-box">
+          <div class="timer-toggle-row">
+            <label class="switch-container">
+              <input type="checkbox" id="timer-toggle-switch">
+              <span class="slider"></span>
+            </label>
+            <span class="timer-label">Aktifkan Chrono-Timer Belajar</span>
+          </div>
+          
+          <div id="chrono-display-container" class="chrono-display hidden">
+            <div class="time-digits" id="timer-digits">25:00</div>
+            <div class="timer-actions">
+              <button id="btn-timer-state" class="btn-action">Start</button>
+              <button id="btn-timer-reset" class="btn-action shadow">Reset</button>
+            </div>
+          </div>
+        </div>
+        <div id="materi-dynamic-content" class="materi-render-zone"></div>
+      </div>
+      <div id="panel-latihan-ai" class="sub-panel">
+        <!-- Konten Latihan Soal AI akan direnda disini -->
+      </div>
+      <div id="panel-latihan-sim" class="sub-panel">
+        <!-- Konten Simulasi Bank Soal akan direnda disini -->
+      </div>
+
 
       <div id="panel-materi" class="sub-panel active">
         <div class="timer-control-box">
