@@ -2,7 +2,7 @@
 const GROQ_API_KEY = "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"; 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
-// ====== SOURCE BANK MATERI UTBK ======
+// ====== SOURCE BANK MATERI UTBK (AETHERIS SYSTEM CORE) ======
 const DATA_MATERI = {
   'subtest-pu': {
     title: 'Penalaran Umum (PU)',
@@ -11,16 +11,37 @@ const DATA_MATERI = {
     htmlContent: `
       <div class="materi-card">
         <h2>1. Penalaran Deduktif (Logika Formal)</h2>
-        <p>Penarikan kesimpulan dari premis umum. Tiga aturan baku:</p>
+        <p>Penarikan kesimpulan dari premis umum. Tiga aturan baku yang mutlak harus dikuasai:</p>
         <ul>
-          <li><strong>Modus Ponens:</strong> [p → q] dan [p], maka <strong>q</strong>.</li>
-          <li><strong>Modus Tollens:</strong> [p → q] dan [~q], maka <strong>~p</strong>.</li>
-          <li><strong>Silogisme:</strong> [p → q] dan [q → r], maka <strong>p → r</strong>.</li>
+          <li><strong>Modus Ponens:</strong> [p → q] dan [p] terjadi, maka kesimpulannya <strong>q</strong>.</li>
+          <li><strong>Modus Tollens:</strong> [p → q] dan [~q (tidak q)] terjadi, maka kesimpulannya <strong>~p</strong>.</li>
+          <li><strong>Silogisme:</strong> [p → q] dan [q → r], maka kesimpulannya <strong>p → r</strong>.</li>
+        </ul>
+        <p>⚠️ <em>Hati-hati Jebakan!</em> Jika [p → q] lalu yang diketahui [q], kamu <strong>TIDAK BISA</strong> menyimpulkan [p].</p>
+      </div>
+      <div class="materi-card">
+        <h2>2. Studi Kasus Soal Deduktif + Solusi</h2>
+        <p><strong>Soal:</strong> Jika siswa rajin belajar (p), maka ia lulus UTBK (q). Jika siswa lulus UTBK (q), maka orang tua bahagia (r). Diketahui orang tua tidak bahagia (~r). Apa simpulan yang sah?</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Gunakan Silogisme terlebih dahulu: (p → q) + (q → r) menghasilkan (p → r).<br>
+        Selanjutnya gunakan Modus Tollens dengan fakta baru: (p → r) dan (~r). Kesimpulannya adalah <strong>~p</strong>.<br>
+        <strong>Jawaban Akhir:</strong> Siswa tidak rajin belajar.</p>
+      </div>
+      <div class="materi-card">
+        <h2>3. Penalaran Induktif (Pola Deret Angka)</h2>
+        <p>Mencari pola umum dari data-data spesifik. Strategi eksekusi kilat:</p>
+        <ul>
+          <li><strong>Pola Lompat:</strong> Coba cek pola selang satu angka (angka ke-1 ke angka ke-3, dst).</li>
+          <li><strong>Deret Bertingkat:</strong> Jika selisih pertama acak, cari selisih dari selisih tersebut (operasi tingkat 2).</li>
+          <li><strong>Fibonacci:</strong> Angka berikutnya adalah hasil penjumlahan dua angka sebelumnya.</li>
         </ul>
       </div>
       <div class="materi-card">
-        <h2>2. Penalaran Induktif (Pola Deret Angka)</h2>
-        <p>Mencari pola umum dari data spesifik. Cek pola selang satu angka atau deret bertingkat.</p>
+        <h2>4. Studi Kasus Soal Induktif + Solusi</h2>
+        <p><strong>Soal:</strong> Tentukan angka berikutnya dari barisan: 3, 4, 7, 11, 18, 29, ...</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        3 + 4 = 7<br>4 + 7 = 11<br>7 + 11 = 18<br>11 + 18 = 29<br>
+        Ini adalah struktur deret <strong>Fibonacci</strong>. Maka suku berikutnya adalah 18 + 29 = 47.</p>
       </div>
     `
   },
@@ -28,46 +49,174 @@ const DATA_MATERI = {
     title: 'Pengetahuan & Pemahaman Umum (PPU)',
     category: 'TPS Module',
     desc: 'Menguji kemampuan dalam memahami dan menguasai pengetahuan serta kebahasaan umum.',
-    htmlContent: `<div class="materi-card"><h2>Materi PPU</h2><p>Sinonim, antonim, dan pengetahuan umum.</p></div>`
+    htmlContent: `
+      <div class="materi-card">
+        <h2>1. Sinonim Kontekstual & Polisemi</h2>
+        <p>PPU sering menguji arti kata serapan ilmiah. Kuncinya: Bacalah satu kalimat utuh karena makna bisa bergeser mengikuti konteks teks.</p>
+        <ul>
+          <li><strong>Aklamasi:</strong> Pernyataan setuju secara lisan dari seluruh peserta rapat.</li>
+          <li><strong>Fluktuasi:</strong> Gejala yang menunjukkan turun-naiknya harga atau nilai.</li>
+          <li><strong>Insinuasi:</strong> Tuduhan tersembunyi atau sindiran tidak langsung.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>2. Studi Kasus Makna Kata + Solusi</h2>
+        <p><strong>Soal:</strong> Pemerintah melakukan <em>mitigasi</em> secara masif untuk menekan dampak inflasi global di sektor pangan. Kata yang paling tepat menggantikan kata <em>mitigasi</em> adalah...</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Menurut KBBI, mitigasi berarti tindakan mengurangi dampak bencana atau risiko. Dalam konteks ekonomi pangan, tindakan ini berkaitan dengan pencegahan.<br>
+        <strong>Jawaban Akhir:</strong> Penanggulangan / Pengurangan dampak risiko.</p>
+      </div>
+      <div class="materi-card">
+        <h2>3. Hubungan Antar-paragraf & Sikap Penulis (Attitude)</h2>
+        <p>Soal tipe ini menanyakan fungsi paragraf kedua terhadap paragraf kesatu. Opsinya biasanya berupa: memperjelas, mempertanyakan, menentang, atau memberikan contoh konkret.</p>
+      </div>
+    `
   },
   'subtest-pbm': {
     title: 'Memahami Bacaan & Menulis (PBM)',
     category: 'TPS Module',
     desc: 'Menguji keterampilan tata bahasa, penerapan ejaan resmi, dan kepaduan struktur paragraf.',
-    htmlContent: `<div class="materi-card"><h2>Materi PBM</h2><p>Kalimat efektif dan EYD.</p></div>`
+    htmlContent: `
+      <div class="materi-card">
+        <h2>1. Kalimat Efektif & Struktur Inti</h2>
+        <p>Kalimat yang baik harus memiliki struktur yang jelas (minimal S dan P) serta hemat kata. Ciri kalimat rusak:</p>
+        <ul>
+          <li><strong>Subjek Hilang:</strong> Penggunaan kata depan di awal kalimat (Contoh salah: <em>"Bagi siswa yang ingin sukses harus belajar."</em>).</li>
+          <li><strong>Predikat Hilang:</strong> Menggunakan kata "yang" sebelum predikat (Contoh salah: <em>"Ayah yang membeli koran."</em>).</li>
+          <li><strong>Pleonasme:</strong> Pemborosan kata (Contoh salah: <em>"Sejak dari pagi..."</em>).</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>2. Studi Kasus Kalimat Efektif + Solusi</h2>
+        <p><strong>Soal:</strong> Perbaiki kalimat berikut: <em>"Menurut analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi."</em></p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Kalimat di atas kehilangan Subjek karena adanya konjungsi 'Menurut' di depan.<br>
+        Opsi Perbaikan 1: <em>Analisis para ahli hukum menyatakan bahwa undang-undang tersebut harus direvisi.</em><br>
+        Opsi Perbaikan 2: <em>Menurut analisis para ahli hukum, undang-undang tersebut harus direvisi.</em></p>
+      </div>
+      <div class="materi-card">
+        <h2>3. Aturan Ejaan (EYD V) & Kalimat Sumbang</h2>
+        <p>Kuasai aturan penulisan kata depan <strong>di</strong> (dipisah jika menunjukkan tempat: <em>di rumah</em>, digabung jika kata kerja pasif: <em>dimakan</em>).</p>
+      </div>
+    `
   },
   'subtest-pk': {
     title: 'Pengetahuan Kuantitatif (PK)',
     category: 'TPS Module',
     desc: 'Menguji pemahaman dasar konsep matematika, aljabar, statistika, dan geometri.',
-    htmlContent: `<div class="materi-card"><h2>Materi PK</h2><p>Aljabar, geometri, statistik.</p></div>`
+    htmlContent: `
+      <div class="materi-card">
+        <h2>1. Strategi Soal Kecukupan Data (P dan Q)</h2>
+        <p>Soal PK sering meminta membandingkan nilai pada kolom P dan kolom Q.</p>
+        <ul>
+          <li><strong>Tips:</strong> Jangan habiskan waktu mencari angka eksak jika yang ditanyakan hanya "apakah data tersebut cukup".</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>2. Studi Kasus Aljabar Fungsi + Solusi</h2>
+        <p><strong>Soal:</strong> Jika f(x) = 3x - 1 dan g(x) = x² + 2. Berapakah nilai dari komposisi fungsi (g ∘ f)(2)?</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        f(2) = 3(2) - 1 = 6 - 1 = 5.<br>
+        (g ∘ f)(2) = g(f(2)) = g(5)<br>
+        g(5) = (5)² + 2 = 25 + 2 = 27.<br>
+        <strong>Jawaban Akhir:</strong> 27.</p>
+      </div>
+      <div class="materi-card">
+        <h2>3. Geometri Sudut & Garis Sejajar</h2>
+        <p>Kuasai sifat-sifat sudut jika dua garis sejajar dipotong oleh sebuah garis melintang: Sudut bertolak belakang besarnya sama, sudut dalam berseberangan besarnya sama, dan jumlah sudut sepihak adalah 180°.</p>
+      </div>
+    `
   },
   'subtest-indo': {
     title: 'Literasi dalam Bahasa Indonesia',
     category: 'Literasi Module',
     desc: 'Menguji kemampuan memahami, menganalisis, dan mengevaluasi isi teks esai kompleks.',
-    htmlContent: `<div class="materi-card"><h2>Materi Literasi Indo</h2><p>Gagasan utama dan simpulan teks.</p></div>`
+    htmlContent: `
+      <div class="materi-card">
+        <h2>1. Menemukan Gagasan Utama Bersirat</h2>
+        <p>Teks Literasi Indonesia di UTBK sangat panjang (3-4 paragraf ilmiah).</p>
+        <ul>
+          <li><strong>Metode Skimming:</strong> Baca kalimat pertama dan kalimat terakhir di setiap paragraf untuk memetakan ide pokok.</li>
+          <li>Kalimat utama di awal disebut paragraf <strong>Deduktif</strong>, di akhir disebut <strong>Induktif</strong>.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>2. Studi Kasus Simpulan Implisit + Solusi</h2>
+        <p><strong>Teks:</strong> "Pendidikan karakter sejak usia dini memperlihatkan korelasi positif terhadap ketahanan mental pelajar SMA. Survei menunjukkan siswa yang mendapatkan edukasi karakter lebih adaptif menghadapi ujian nasional dibandingkan siswa yang hanya fokus pada bimbingan belajar kognitif murni."<br><br>
+        <strong>Soal:</strong> Apa simpulan yang paling didukung oleh teks di atas?</p>
+        <p><strong>Pembahasan Teknis:</strong> Teks membandingkan edukasi karakter vs bimbingan kognitif murni. Hasilnya, edukasi karakter membuat siswa lebih tangguh.<br>
+        <strong>Jawaban Simpulan:</strong> Edukasi karakter usia dini memberikan kontribusi penting bagi kesiapan mental siswa menghadapi ujian.</p>
+      </div>
+    `
   },
   'subtest-inggris': {
     title: 'Literasi dalam Bahasa Inggris',
     category: 'Literasi Module',
-    desc: 'Menguji kemampuan pemahaman bacaan tingkat lanjut teks berbahasa Inggris.',
-    htmlContent: `<div class="materi-card"><h2>Materi Literasi Inggris</h2><p>Reading comprehension & grammar.</p></div>`
+    desc: 'Menguji kemampuan pemahaman bacaan tingkat lanjut (reading comprehension) teks berbahasa Inggris.',
+    htmlContent: `
+      <div class="materi-card">
+        <h2>1. Deciphering Author's Tone and Attitude</h2>
+        <p>Soal sering menanyakan: <em>"What is the author’s attitude towards the topic?"</em></p>
+        <ul>
+          <li><strong>Objective / Neutral:</strong> Penulis menyajikan fakta apa adanya tanpa memihak.</li>
+          <li><strong>Critical / Skeptical:</strong> Penulis mempertanyakan keabsahan data atau tidak langsung percaya.</li>
+          <li><strong>Optimistic:</strong> Penulis yakin akan ada dampak baik di masa depan.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>2. Advanced Grammar: Subjunctive Patterns (Past Regret)</h2>
+        <p>Pola pengandaian masa lalu menggunakan kata <strong>wish</strong>.</p>
+        <ul>
+          <li><strong>Rumus Kunci:</strong> <code>Subject + wish + Subject + Had + Verb-3</code></li>
+          <li>Rumus ini dipakai untuk menunjukkan penyesalan atas peristiwa yang telanjur terjadi di masa lampau.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>3. Studi Kasus Soal Bahasa Inggris + Solusi</h2>
+        <p><strong>Soal:</strong> The debate team lost the selection match yesterday. The captain said, "I wish we ___ more attention to the rules."</p>
+        <p>A. paid<br>B. have paid<br>C. had paid<br>D. would pay</p>
+        <p><strong>Pembahasan Teknis:</strong> Kalimat menceritakan penyesalan masa lalu (terdapat penanda waktu <em>"yesterday"</em>). Sesuai aturan <em>Past Subjunctive Regret</em>, tenses yang wajib digunakan setelah kata 'wish' adalah <strong>Past Perfect (Had + V3)</strong>.<br>
+        <strong>Jawaban Akhir:</strong> C. had paid</p>
+      </div>
+    `
   },
   'subtest-pm': {
     title: 'Penalaran Matematika (PM)',
     category: 'Literasi Module',
-    desc: 'Menguji kemampuan memecahkan masalah matematika terapan dalam konteks realistik.',
-    htmlContent: `<div class="materi-card"><h2>Materi PM</h2><p>Soal cerita dan pemodelan matematika.</p></div>`
+    desc: 'Menguji kemampuan memecahkan masalah matematika terapan dalam konteks realistik kehidupan nyata.',
+    htmlContent: `
+      <div class="materi-card">
+        <h2>1. Aturan Kombinatorika Terapan</h2>
+        <p>Membedakan kapan harus menggunakan rumus Permutasi atau Kombinasi:</p>
+        <ul>
+          <li><strong>Permutasi (Urutan Penting):</strong> Digunakan untuk menentukan posisi/jabatan (Ketua, Wakil, Sekretaris). Urutan AB tidak sama dengan BA.</li>
+          <li><strong>Kombinasi (Urutan Diabaikan):</strong> Digunakan untuk memilih anggota tim atau delegasi. Susunan [Andi, Budi] sama dengan [Budi, Andi].</li>
+          <li><strong>Rumus Kombinasi:</strong> <code>C(n, r) = n! / (r! × (n - r)!)</code></li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>2. Studi Kasus Kombinatorika Tim Debat + Solusi</h2>
+        <p><strong>Soal:</strong> Dari 7 orang siswa, akan dipilih 3 orang siswa untuk mewakili sekolah. Berapa banyak cara pemilihan yang mungkin?</p>
+        <p><strong>Pembahasan Teknis:</strong><br>
+        Karena urutan tidak diperhatikan, gunakan Kombinasi C(7, 3):<br>
+        C(7, 3) = 7! / (3! × 4!)<br>
+        C(7, 3) = (7 × 6 × 5) / 6 = 35.<br>
+        <strong>Jawaban Akhir:</strong> 35 cara.</p>
+      </div>
+      <div class="materi-card">
+        <h2>3. Pemodelan Rasio Keuangan & Rasionalisasi APBN</h2>
+        <p>Sering muncul soal cerita mengenai persentase kenaikan utang negara atau perbandingan alokasi dana subsidi. Tips: Ubah narasi soal cerita menjadi persamaan matematika sederhana terlebih dahulu sebelum berhitung.</p>
+      </div>
+    `
   }
 };
 
-// ====== BANK SOAL SIMULASI (40 SOAL UNTUK PU) ======
+// ====== BANK SOAL SIMULASI (40 SOAL UTBK PU) ======
 const BANK_SIMULASI = {
   'subtest-pu': [
     { soal: "Jika hujan turun, maka jalan basah. Jalan tidak basah. Kesimpulan yang sah adalah...", opsi: ["Hujan turun", "Hujan tidak turun", "Jalan kering", "Tidak bisa disimpulkan"], jawaban: 1, pembahasan: "Modus Tollens: p→q dan ~q, maka ~p." },
     { soal: "Deret: 2, 5, 10, 17, 26, ... Bilangan selanjutnya adalah...", opsi: ["35", "36", "37", "38"], jawaban: 2, pembahasan: "Selisih: 3, 5, 7, 9. Selisih berikutnya 11. 26+11=37." },
-    { soal: "Semua mahasiswa wajib mengambil KRS. Sebagian mahasiswa tidak membayar SPP. Kesimpulannya...", opsi: ["Semua yang tidak bayar SPP tidak wajib KRS", "Sebagian yang wajib KRS tidak bayar SPP", "Semua mahasiswa tidak bayar SPP", "Tidak ada hubungan KRS dan SPP"], jawaban: 1, pembahasan: "Silogisme部分 (sebagian). Yang wajib KRS = mahasiswa. Sebagian mahasiswa tidak bayar SPP." },
+    { soal: "Semua mahasiswa wajib mengambil KRS. Sebagian mahasiswa tidak membayar SPP. Kesimpulannya...", opsi: ["Semua yang tidak bayar SPP tidak wajib KRS", "Sebagian yang wajib KRS tidak bayar SPP", "Semua mahasiswa tidak bayar SPP", "Tidak ada hubungan KRS dan SPP"], jawaban: 1, pembahasan: "Silogisme sebagian. Yang wajib KRS = mahasiswa. Sebagian mahasiswa tidak bayar SPP." },
     { soal: "Jika x adalah bilangan prima dan x > 2, maka x pasti bilangan ganjil. Jika x bilangan genap, maka...", opsi: ["x pasti prima", "x pasti ganjil", "x bukan prima atau x <= 2", "x tidak terdefinisi"], jawaban: 2, pembahasan: "Kontraposisif: ~q -> ~p. Jika genap (~ganjil), maka bukan prima ATAU <= 2." },
     { soal: "Deret: A, C, F, J, O, ... Huruf selanjutnya adalah...", opsi: ["S", "T", "U", "V"], jawaban: 2, pembahasan: "Selisih huruf: +2, +3, +4, +5. Selanjutnya +6. O(15) + 6 = U(21)." },
     { soal: "Semua dokter pandai. Sebagian dokter kaya. Maka...", opsi: ["Semua yang kaya pandai", "Sebagian yang pandai kaya", "Semua yang pandai kaya", "Sebagian yang kaya tidak pandai"], jawaban: 1, pembahasan: "Sebagian yang pandai (dokter) adalah orang kaya." },
@@ -85,7 +234,7 @@ const BANK_SIMULASI = {
     { soal: "Semua pemalas miskin. Sebagian pemalas sakit. Maka...", opsi: ["Semua yang sakit miskin", "Sebagian yang miskin sakit", "Semua yang miskin sakit", "Sebagian yang sakit miskin"], jawaban: 1, pembahasan: "Irisan himpunan." },
     { soal: "Jika nilai x positif, maka x² positif. Jika x = -2, maka...", opsi: ["x² negatif", "x² positif", "x² nol", "Tidak tentu"], jawaban: 1, pembahasan: "Bilangan negatif dikuadratkan pasti positif." },
     { soal: "Deret huruf: B, D, G, K, P, ... Huruf selanjutnya...", opsi: ["U", "V", "W", "X"], jawaban: 2, pembahasan: "Selisih +2, +3, +4, +5, +6. P+6=W." },
-    { soal: "Semau dokter lulus S1. Sebagian dokter spesialis. Maka...", opsi: ["Semua spesialis lulus S1", "Sebagian lulus S1 adalah spesialis", "Semua lulus S1 spesialis", "Tidak ada kaitannya"], jawaban: 1, pembahasan: "Silogisme sebagian." },
+    { soal: "Semua dokter lulus S1. Sebagian dokter spesialis. Maka...", opsi: ["Semua spesialis lulus S1", "Sebagian lulus S1 adalah spesialis", "Semua lulus S1 spesialis", "Tidak ada kaitannya"], jawaban: 1, pembahasan: "Silogisme sebagian." },
     { soal: "Jika baterai habis, HP mati. HP tidak mati. Maka...", opsi: ["Baterai habis", "Baterai tidak habis", "HP di-charge", "Tidak tentu"], jawaban: 1, pembahasan: "Modus tollens." },
     { soal: "Deret: 100, 50, 25, 12.5, ... Bilangan selanjutnya...", opsi: ["6.25", "5", "4", "0"], jawaban: 0, pembahasan: "Deret geometri bagi 2." },
     { soal: "Tidak ada ikan yang mamalia. Hiu adalah ikan. Maka...", opsi: ["Hiu mamalia", "Hiu bukan mamalia", "Sebagian hiu mamalia", "Tidak tentu"], jawaban: 1, pembahasan: "Silogisme negatif." },
@@ -120,7 +269,7 @@ function toggleSidebar() { sidebar.classList.toggle('open'); }
 menuTrigger.addEventListener('click', toggleSidebar);
 sidebarOverlay.addEventListener('click', toggleSidebar);
 
-// ====== TEMA DROPDOWN ======
+// ====== TEMA DROPDOWN & CIRCULAR REVEAL ======
 const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
 const themeCurrentBtn = document.getElementById('theme-current-btn');
 const themeDropdown = document.getElementById('theme-dropdown');
@@ -267,6 +416,7 @@ function mulaiSimulasi(gateKey) {
     return;
   }
 
+  // Acak urutan soal (Shuffle)
   soalAktif = [...bank].sort(() => Math.random() - 0.5);
   indexSoalSekarang = 0;
   skorBenar = 0;
