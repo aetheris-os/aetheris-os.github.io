@@ -1,6 +1,6 @@
 // ====== KONFIGURASI API GROQ ======
 // PENTING: Masukkan API Key Groq Anda di sini
-const GROQ_API_KEY = "GANTI_DENGAN_API_KEY_GROQ_KAMU"; 
+const GROQ_API_KEY = "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"; 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 // ====== MATERI UTBK 2024-2025 ======
@@ -468,7 +468,7 @@ function switchSubPanel(mode) {
   document.getElementById('panel-latihan-sim').style.display = (mode === 'latihan-sim') ? 'block' : 'none';
 }
 
-// ====== SISTEM LATIHAN AI (GROQ - 20 SOAL) ======
+// ====== SISTEM LATIHAN AI ( - 20 SOAL) ======
 let soalAktif = [], indexSoalSekarang = 0, skorBenar = 0;
 
 async function generateSoalDariAI(gateKey) {
@@ -476,7 +476,7 @@ async function generateSoalDariAI(gateKey) {
   const panelLatihan = document.getElementById('panel-latihan-ai');
   panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 20 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
 
-  if (GROQ_API_KEY === "GANTI_DENGAN_API_KEY_GROQ_KAMU") {
+  if (GROQ_API_KEY === "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") {
     panelLatihan.innerHTML = `<div class="locked-state-card"><div class="lock-icon">🔑</div><h3>API Key Groq Belum Diisi</h3><p>Silakan buka file app.js baris ke-3 dan masukkan API Key Groq Anda.</p></div>`;
     return;
   }
