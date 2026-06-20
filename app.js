@@ -1,7 +1,27 @@
-// ====== KONFIGURASI API GOOGLE GEMINI ======
-// Menggunakan Gemini 1.5 Flash karena limit free tier sangat besar (anti "Too many requests")
-const GEMINI_API_KEY = "AQ.Ab8RN6IeYsKvrRWlssRN7AONEqhRukOCkJnDMOwCTewscAZpxA"; 
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+// ====== KONFIGURASI API GROQ (MULTI-KEY ROTATION) ======
+// 5 API Keys digabungkan. Jika key pertama kena limit 429, sistem otomatis pakai key berikutnya.
+const API_KEYS = [
+    "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", // Bot 1 (API Key lama)
+    "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", // Bot 2
+    "gsk_S2Jqwk8RxfZzrm9aSHOCWGdyb3FYMel00z6w9QifOvNeWEoyEaRBm", // Bot 3
+    "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", // Bot 4
+    "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"  // Bot 5
+];
+
+// Sistem Rotasi API Key
+let currentKeyIndex = Math.floor(Math.random() * API_KEYS.length);
+function getActiveApiKey() {
+    return API_KEYS[currentKeyIndex];
+}
+function rotateApiKey() {
+    currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;
+    console.log(`API Key kena limit. Beralih ke API Key index ke-${currentKeyIndex}`);
+    return API_KEYS[currentKeyIndex];
+}
+
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+// Tetap menggunakan model 70b sesuai permintaan
+const AI_MODEL = "llama-3.3-70b-versatile"; 
 
 // ====== MATERI UTBK 2024-2026 (SANGAT KOMPREHENSIF) ======
 const DATA_MATERI = {
@@ -319,7 +339,7 @@ const BANK_SIMULASI = {
     { soal: "Suatu deret aritmatika memiliki suku pertama 5 dan beda 3. Jumlah 10 suku pertama deret tersebut adalah...", opsi: ["180", "185", "190", "195"], jawaban: 1, pembahasan: "Sn = n/2 (2a + (n-1)b) = 10/2 (2(5) + 9(3)) = 5 (10 + 27) = 5 x 37 = 185." },
     { soal: "Akar-akar persamaan kuadrat x² - 5x + 6 = 0 adalah...", opsi: ["1 dan 6", "2 dan 3", "-2 dan -3", "2 dan -3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0. Maka x=2 atau x=3." },
     { soal: "Jika sin x = 3/5 dan x sudut lancip, maka nilai cos x adalah...", opsi: ["3/4", "4/5", "5/4", "4/3"], jawaban: 1, pembahasan: "Cos x = √(1 - sin²x) = √(1 - 9/25) = √(16/25) = 4/5." },
-    { soal: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Volume tabung tersebut adalah... (π = 22/7)", opsi: ["1540 cm³", "1440 cm³", "1340 cm³", "1240 cm³"], jawaban: 0, pembahasan: "V = π r² t = 22/7 x 7 x 7 x 10 = 22 x 70 = 1540." },
+    { soal: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Volume tabung tersebut là... (π = 22/7)", opsi: ["1540 cm³", "1440 cm³", "1340 cm³", "1240 cm³"], jawaban: 0, pembahasan: "V = π r² t = 22/7 x 7 x 7 x 10 = 22 x 70 = 1540." },
     { soal: "Bentuk sederhana dari (2³ x 2⁻¹) / 2² adalah...", opsi: ["2⁰", "2¹", "2²", "2⁻¹"], jawaban: 0, pembahasan: "Pembilang: 2^(3-1) = 2². Dibagi 2² = 2^(2-2) = 2⁰ = 1." },
     { soal: "Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 adalah...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "Modus adalah data yang paling sering muncul (6 muncul 3 kali)." },
     { soal: "Median dari data: 3, 5, 7, 8, 10, 12, 15 adalah...", opsi: ["7", "8", "10", "12"], jawaban: 1, pembahasan: "Median adalah nilai tengah. Dari 7 data, urutan ke-4 adalah 8." },
@@ -332,7 +352,7 @@ const BANK_SIMULASI = {
     { soal: "Umur ayah 4 kali umur anak. Total umur mereka 50 tahun. Umur anak adalah...", opsi: ["8 tahun", "10 tahun", "12 tahun", "14 tahun"], jawaban: 1, pembahasan: "Misal anak = x, ayah = 4x. x + 4x = 50. 5x = 50, x = 10." }
   ],
   'subtest-pbm': [
-    { soal: "Perbaiki kalimat: 'Bagi siswa que rajin belajar akan lulus ujian.'", opsi: ["Bagi siswa rajin belajar, akan lulus ujian.", "Siswa yang rajin belajar akan lulus ujian.", "Bagi siswa yang rajin belajar lulus ujian.", "Siswa yang rajin belajar, akan lulus ujian."], jawaban: 1, pembahasan: "Kata depan 'bagi' membuat subjek tidak jelas. Hilangkan 'bagi' agar subjek 'siswa' jelas." },
+    { soal: "Perbaiki kalimat: 'Bagi siswa yang rajin belajar akan lulus ujian.'", opsi: ["Bagi siswa rajin belajar, akan lulus ujian.", "Siswa yang rajin belajar akan lulus ujian.", "Bagi siswa yang rajin belajar lulus ujian.", "Siswa yang rajin belajar, akan lulus ujian."], jawaban: 1, pembahasan: "Kata depan 'bagi' membuat subjek tidak jelas. Hilangkan 'bagi' agar subjek 'siswa' jelas." },
     { soal: "Perbaiki kalimat: 'Sejak dari pagi dia sudah belajar.'", opsi: ["Sejak pagi dia sudah belajar.", "Sejak dari pagi, dia sudah belajar.", "Dari pagi dia sudah belajar.", "Sejak pagi, dia sudah belajar."], jawaban: 0, pembahasan: "Pleonasme (pemborosan kata). 'Sejak' dan 'dari' maknanya sama." },
     { soal: "Penulisan kata depan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Kata depan (preposisi) yang menunjukkan tempat ditulis terpisah." },
     { soal: "Penulisan kata kerja pasif 'di' yang benar...", opsi: ["Di makan", "Dimakan", "Di-makan", "Dimakan oleh"], jawaban: 1, pembahasan: "Awalan 'di' pada kata kerja pasif digabung." },
@@ -417,7 +437,7 @@ const BANK_SIMULASI = {
     { soal: "Data: 2, 4, 4, 5, 6, 8. Nilai rata-ratanya adalah...", opsi: ["4", "5", "6", "7"], jawaban: 1, pembahasan: "Jumlah = 29. Rata-rata = 29/6 = 4.83. (Dibulatkan ke 5)" },
     { soal: "Suku ke-5 barisan aritmatika 2, 5, 8, 11, ... adalah...", opsi: ["14", "15", "16", "17"], jawaban: 0, pembahasan: "Beda = 3. Suku ke-5 = 11 + 3 = 14." },
     { soal: "Jumlah sudut dalam segi-8 (oktagon) adalah...", opsi: ["1080°", "900°", "720°", "540°"], jawaban: 0, pembahasan: "(n-2) x 180 = 6 x 180 = 1080." },
-    { soal: "Jika log 2 = 0.3, maka log 8 adalah...", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2³. log 8 = 3 x log 2 = 3(0.3) = 0.9." }
+    { soal: "Jika log 2 = 0.3, maka log 8 là...", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2³. log 8 = 3 x log 2 = 3(0.3) = 0.9." }
   ]
 };
 
@@ -568,7 +588,7 @@ function switchSubPanel(mode) {
     if(panelSim) panelSim.style.display = (mode === 'latihan-sim') ? 'block' : 'none';
 }
 
-// ====== SISTEM LATIHAN AI (GEMINI 1.5 FLASH) ======
+// ====== SISTEM LATIHAN AI (GROQ - MULTI KEY ROTATION) ======
 async function generateSoalDariAI(gateKey) {
     const dataMateri = DATA_MATERI[gateKey];
     const panelLatihan = document.getElementById('panel-latihan-ai');
@@ -607,26 +627,26 @@ WAJIB balas dalam format JSON murni tanpa markdown. Format JSON: {"soal": [{"per
     promptUser += ` Pastikan jawaban benar teracak dengan baik. Setiap soal WAJIB memiliki pembahasan yang detail dan logis.`;
 
     try {
-        const response = await fetch(GEMINI_API_URL, {
+        const response = await fetch(GROQ_API_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getActiveApiKey()}` },
             body: JSON.stringify({
-                system_instruction: {
-                    parts: [{ text: promptSystem }]
-                },
-                contents: [{
-                    parts: [{ text: promptUser }]
-                }],
-                generationConfig: {
-                    temperature: 0.8,
-                    response_mime_type: "application/json"
-                }
+                model: AI_MODEL,
+                messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
+                temperature: 0.8,
+                response_format: { type: "json_object" }
             })
         });
 
+        if (response.status === 429) {
+            // Jika kena limit, ganti API Key dan coba lagi
+            rotateApiKey();
+            return generateSoalDariAI(gateKey);
+        }
+
         if (!response.ok) throw new Error('Gagal memuat soal dari AI (Status: ' + response.status + ')');
         const resJson = await response.json();
-        const parsed = JSON.parse(resJson.candidates[0].content.parts[0].text);
+        const parsed = JSON.parse(resJson.choices[0].message.content);
 
         soalAktif = parsed.soal;
         indexSoalSekarang = 0;
@@ -766,7 +786,7 @@ function parseMarkdown(text) {
     return resultHtml;
 }
 
-// ====== FITUR CHAT AI (GEMINI 1.5 FLASH, Web Scanning, Markdown, Typing Effect) ======
+// ====== FITUR CHAT AI (GROQ - MULTI KEY ROTATION, Web Scanning, Markdown, Typing Effect) ======
 function initChatAI() {
     const floatingChatBtn = document.getElementById('floating-chat-btn');
     const chatModal = document.getElementById('chat-modal');
@@ -859,35 +879,35 @@ Kamu sedang melihat layar pengguna. Berikut adalah konteks teks dari halaman yan
 
 Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna bertanya tentang soal yang sedang dikerjakan, berikan pembahasan yang logis berdasarkan teks soal tersebut. Jika pertanyaan di luar konteks UTBK, jawab dengan sopan bahwa kamu hanya bisa membantu soal UTBK. Gunakan format markdown untuk jawabanmu (gunakan **bold**, *italic*, list, dan blok kode jika perlu) agar jawabanmu mudah dibaca.`;
         
-        // Menggunakan history chat dari Gemini format
-        let contentsHistory = chatHistoryGlobal.map(msg => ({
-            role: msg.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: msg.content }]
-        }));
-
-        contentsHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+        const messages = [
+            { role: "system", content: promptSystem },
+            ...chatHistoryGlobal.slice(-10),
+            { role: "user", content: userMessage }
+        ];
 
         await new Promise(resolve => setTimeout(resolve, 1000));
 
         try {
-            const response = await fetch(GEMINI_API_URL, {
+            const response = await fetch(GROQ_API_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getActiveApiKey()}` },
                 body: JSON.stringify({
-                    system_instruction: {
-                        parts: [{ text: promptSystem }]
-                    },
-                    contents: contentsHistory,
-                    generationConfig: {
-                        temperature: 0.7,
-                        max_output_tokens: 1024
-                    }
+                    model: AI_MODEL,
+                    messages: messages,
+                    temperature: 0.7,
+                    max_tokens: 1024
                 })
             });
 
+            if (response.status === 429) {
+                // Jika kena limit, ganti API Key dan coba lagi
+                rotateApiKey();
+                return handleSendChat();
+            }
+
             if (!response.ok) throw new Error('Gagal menghubungi AI');
             const resJson = await response.json();
-            const aiResponse = resJson.candidates[0].content.parts[0].text;
+            const aiResponse = resJson.choices[0].message.content;
 
             hideChatLoading();
             
@@ -897,8 +917,8 @@ Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna berta
             await typeText(contentDiv, aiResponse, 10);
             contentDiv.innerHTML = parseMarkdown(aiResponse);
             
-            chatHistoryGlobal.push({ role: 'user', content: userMessage });
-            chatHistoryGlobal.push({ role: 'assistant', content: aiResponse });
+            chatHistoryGlobal.push({ role: "user", content: userMessage });
+            chatHistoryGlobal.push({ role: "assistant", content: aiResponse });
         } catch (error) {
             hideChatLoading();
             addChatMessage(`Maaf, terjadi kesalahan: ${error.message}`, 'ai');
