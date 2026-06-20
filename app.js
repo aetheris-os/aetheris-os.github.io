@@ -178,7 +178,7 @@ const BANK_SIMULASI = {
     { soal: "Nilai rata-rata dari 2, 4, 6, 8, 10 adalah...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "Jumlah = 30. Rata-rata = 30/5 = 6." },
     { soal: "Jika x = -2, maka nilai dari x² - 3x + 2 adalah...", opsi: ["4", "12", "-4", "0"], jawaban: 1, pembahasan: "(-2)² - 3(-2) + 2 = 4 + 6 + 2 = 12." }
   ],
-  'subtest-pbm': [
+ 'subtest-pbm': [
     { soal: "Perbaiki kalimat: 'Bagi siswa yang rajin belajar akan lulus ujian.'", opsi: ["Bagi siswa rajin belajar, akan lulus ujian.", "Siswa yang rajin belajar akan lulus ujian.", "Bagi siswa yang rajin belajar lulus ujian.", "Siswa yang rajin belajar, akan lulus ujian."], jawaban: 1, pembahasan: "Kata depan 'bagi' membuat subjek tidak jelas. Hilangkan 'bagi' agar subjek 'siswa' jelas." },
     { soal: "Perbaiki kalimat: 'Sejak dari pagi dia sudah belajar.'", opsi: ["Sejak pagi dia sudah belajar.", "Sejak dari pagi, dia sudah belajar.", "Dari pagi dia sudah belajar.", "Sejak pagi, dia sudah belajar."], jawaban: 0, pembahasan: "Pleonasme (pemborosan kata). 'Sejak' dan 'dari' maknanya sama." },
     { soal: "Penulisan kata depan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Kata depan (preposisi) yang menunjukkan tempat ditulis terpisah." },
@@ -223,37 +223,9 @@ const BANK_SIMULASI = {
   ],
   'subtest-indo': [
     { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut adalah...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas bagian dari pendidikan"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) berada di awal paragraf." },
-    { soal: "Teks: 'Polusi udara di Jakarta meningkat. Hal ini ditandai dengan menipisnya lapisan ozon. Dampaknya, penyakit pernapasan meningkat.' Simpulan yang tepat dari teks adalah...", opsi: ["Lapisan ozon menipis karena polusi", "Polusi udara berdampak pada kesehatan pernapasan", "Jakarta kota terpolusi", "Penyakit pernapasan memicu polusi"], jawaban: 1, pembahasan: "Simpulan harus
-      // ... lanjutan BANK_SIMULASI['subtest-pbm'] (dari yang terpotong tadi, dilanjutkan sampai 40 soal)
-  { soal: "Antonim dari 'Etalase' adalah...", opsi: ["Tempat barang", "Penyimpanan tersembunyi", "Rak pameran", "Pameran"], jawaban: 1, pembahasan: "Etalase = pameran. Lawannya penyimpanan tersembunyi." },
-    { soal: "Kalimat efektif harus memiliki...", opsi: ["Banyak kata", "Struktur inti jelas", "Pernyataan berulang", "Tata bahasa kaku"], jawaban: 1, pembahasan: "Struktur inti (S+P) harus jelas." },
-    { soal: "Teks eksposisi berfungsi untuk...", opsi: ["Menghibur", "Meyakinkan", "Memaparkan fakta", "Menceritakan"], jawaban: 2, pembahasan: "Eksposisi = memaparkan informasi secara informatif." },
-    { soal: "Ciri teks argumentasi adalah...", opsi: ["Tidak ada opini", "Ada tesis dan argumen", "Hanya cerita", "Hanya data"], jawaban: 1, pembahasan: "Argumentasi = tesis + argumen." },
-    { soal: "Kalimat: 'Dia datang ke sekolah. Dia belajar dengan baik.' Hubungkan dengan kata hubung yang tepat...", opsi: ["kemudian", "karena", "sehingga", "walaupun"], jawaban: 0, pembahasan: "Urutan kejadian: kemudian/selanjutnya." },
-    { soal: "Bentuk pasif dari 'Melihat bulan' adalah...", opsi: ["Bulan dilihat", "Bulan sedang dilihat", "Bulan telah dilihat", "Bulan akan dilihat"], jawaban: 0, pembahasan: "Pasif sederhana: di + V3." },
-    { soal: "Teks: 'Kebakaran hutan disebabkan oleh pembakaran liar.' Kata hubung yang tepat...", opsi: ["sebab", "akibat", "penyebab", "sebab karena"], jawaban: 0, pembahasan: "Hubungan sebab-akibat." },
-    { soal: "Majalah-------------", opsi: ["Buku", "Penerbit", "Penulis", "Tema"], jawaban: 1, pembahasan: "Majalah = penerbit berkala." },
-    { soal: "Sinonim dari 'Berkala' adalah...", opsi: ["Terkadang", "Beraturan", "Sering", "Jarang"], jawaban: 1, pembahasan: "Berkala = teratur/berkala." },
-    { soal: "Antonim dari 'Publik' adalah...", opsi: ["Umum", "Pribadi", "Terbuka", "Semua orang"], jawaban: 1, pembahasan: "Publik (umum) lawannya pribadi." },
-    { soal: "Kalimat: 'Wajahnya seperti bulan.' Termasuk majas...", opsi: ["Metafora", "Simile", "Hiperbola", "Personifikasi"], jawaban: 1, pembahasan: "Simile: memakai kata 'seperti'." },
-    { soal: "Kalimat: 'Hati-hati, jangan tersandung.' Jenis kalimat...", opsi: ["Imperatif", "Interrogatif", "Exclamative", "Declarative"], jawaban: 0, pembahasan: "Imperatif = perintah." },
-    { soal: "Kata yang tepat: 'Pernyataan tersebut tidak sesuai dengan ... fakta.'", opsi: ["data", "data-data", "datanya", "data-datanya"], jawaban: 1, pembahasan: "Penulisan jamak: data-data." },
-    { soal: "Kalimat tanya yang benar...", opsi: ["Siapakah yang datang?", "Siapa yang datang?", "Siapa yang datang?", "Siapakah datangnya?"], jawaban: 1, pembahasan: "Siapa + yang + V." },
-    { soal: "Teks editorial termasuk teks...", opsi: ["Narasi", "Eksposisi", "Argumentasi", "Deskripsi"], jawaban: 2, pembahasan: "Editorial = teks argumentasi." },
-    { soal: "Teks: 'Berdasarkan data WHO, 60% penduduk dunia mengalami stres.' Ini kalimat...", opsi: ["Opini", "Fakta", "Deskripsi", "Narasi"], jawaban: 1, pembahasan: "Data WHO = fakta." },
-    { soal: "Tujuan teks prosedur adalah...", opsi: ["Menghibur", "Meyakinkan", "Memberi instruksi", "Menceritakan"], jawaban: 2, pembahasan: "Prosedur = langkah-langkah." },
-    { soal: "Sinonim dari 'Kritis' dalam konteks belajar adalah...", opsi: ["Kritik", "Analitis", "Pendapat", "Sarkas"], jawaban: 1, pembahasan: "Berpikir kritis = analitis." },
-    { soal: "Kalimat: 'Meskipun hujan, mbak warsi tetap jualan.' Katahubung yang tepat...", opsi: ["namun", "tetapi", "meskipun", "karena"], jawaban: 2, pembahasan: "Meskipun untuk konsesif." },
-    { soal: "Penulisan baku: 'Pemerintah ----------- program bansos.'", opsi: ["meleluncurkan", "meluncurkan", "meluncur", "melemparkan"], jawaban: 1, pembahasan: "Baku: meluncurkan." },
-    { soal: "Antonim dari 'Membengkak' adalah...", opsi: ["Kecil", "Kempes", "Mengecil", "Menggembung"], jawaban: 1, pembahasan: "Membengkak (besar) lawan kempes (kecil)." },
-    { soal: "Teks: 'Olahraga teratur membuat badan sehat. Selain itu, olahraga juga melancarkan peredaran darah.' Hubung...", opsi: ["sebab-akibat", "tambahan", "perbandingan", "kontras"], jawaban: 1, pembahasan: "Selain itu = tambahan." }
-  ],
-  'subtest-indo': [
-    // Perbaiki bagian yang terpotong tadi, lalu lanjutkan soal
-    { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut adalah...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas bagian dari pendidikan"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) berada di awal paragraf." },
     { soal: "Teks: 'Polusi udara di Jakarta meningkat. Hal ini ditandai dengan menipisnya lapisan ozon. Dampaknya, penyakit pernapasan meningkat.' Simpulan yang tepat dari teks adalah...", opsi: ["Lapisan ozon menipis karena polusi", "Polusi udara berdampak pada kesehatan pernapasan", "Jakarta kota terpolusi", "Penyakit pernapasan memicu polusi"], jawaban: 1, pembahasan: "Simpulan harus mencakup sebab dan akibat." },
     { soal: "Sinonim dari kata 'Zakat' secara kontekstual adalah...", opsi: ["Pajak", "Sumbangan wajib muslim", "Bantuan sosial", "Hutang"], jawaban: 1, pembahasan: "Zakat = kepentingan wajib muslim." },
-    { soal: "Antonim dari 'Etalase' adalah...", opsi: ["Tempat barang", "Penyimpanan tersembunyi", "Rak pameran", "Pameran"], jawaban: 1, pembahasan: "Etalase = pameran. Lawannya penyimpanan tersembunyi." },
+    { soal: "Antonim dari 'Etalase' adalah...", opsi: ["Tempat barang", "Penyimpanan tersembunyi", "Rak", "Pameran"], jawaban: 1, pembahasan: "Etalase = pameran. Lawannya penyimpanan tersembunyi." },
     { soal: "Kalimat efektif harus memiliki...", opsi: ["Banyak kata", "Struktur inti jelas", "Pernyataan berulang", "Tata bahasa kaku"], jawaban: 1, pembahasan: "Struktur inti (S+P) harus jelas." },
     { soal: "Teks eksposisi berfungsi untuk...", opsi: ["Menghibur", "Meyakinkan", "Memaparkan fakta", "Menceritakan"], jawaban: 2, pembahasan: "Eksposisi = memaparkan informasi secara informatif." },
     { soal: "Ciri teks argumentasi adalah...", opsi: ["Tidak ada opini", "Ada tesis dan argumen", "Hanya cerita", "Hanya data"], jawaban: 1, pembahasan: "Argumentasi = tesis + argumen." },
@@ -281,7 +253,7 @@ const BANK_SIMULASI = {
     { soal: "Teks: 'Kamu harus belajar keras, atau kamu akan gagal.' Kata hubung...", opsi: ["atau", "tetapi", "karena", "sehingga"], jawaban: 0, pembahasan: "Atau untuk alternatif/pilihan." },
     { soal: "Kalimat imperatif biasanya diawali dengan...", opsi: ["Kata kerja", "Kata benda", "Kata sifat", "Kata depan"], jawaban: 0, pembahasan: "Imperatif = kata kerja imperatif." },
     { soal: "Bentuk tidak baku dari 'Mencintai' adalah...", opsi: ["Mencintai", "Nyantai", "Cinta", "Mencintai"], jawaban: 1, pembahasan: "Bentuk tidak baku: nyantai (dari bahasa gaul)." },
-    { soal: "Teks: 'Bapak Rektor menekan tombol alarm untuk mulai pelajaran.' Arti kata 'menekan' adalah...", opsi: ["Menekan", "Memenangkan", "Mengaktifkan", "Memicu"], jawaban: 3, pembahasan: "Menekan tombol = memicualarm." },
+    { soal: "Teks: 'Bapak Rektor menekan tombol alarm untuk mulai pelajaran.' Arti kata 'menekan' adalah...", opsi: ["Menekan", "Memenangkan", "Mengaktifkan", "Memicu"], jawaban: 3, pembahasan: "Menekan tombol = memicu alarm." },
     { soal: "Sinonim dari 'Kurated' adalah...", opsi: ["Dikurasi", "Dipelihara", "Dijaga", "Dipilih"], jawaban: 0, pembahasan: "Kurated = diseleksi/dikurasi." },
     { soal: "Kalimat: 'Dia pergi ke pasar. Dia membeli sayur.' Hubungkan dengan 'kemudian'...", opsi: ["Urutan", "Sebab", "Akibat", "Pilihan"], jawaban: 0, pembahasan: "Kemudian menunjukkan urutan." },
     { soal: "Antonim dari 'Membesar' adalah...", opsi: ["Kecil", "Besar", "Rata", "Tinggi"], jawaban: 0, pembahasan: "Membesar lawan kecil." },
@@ -296,7 +268,6 @@ const BANK_SIMULASI = {
     { soal: "Teks: 'Quran adalah petunjuk bagi manusia.' Kalimat ini...", opsi: ["Opini", "Fakta", "Agama", "Semua benar"], jawaban: 3, pembahasan: "Ini fakta (ajaran agama)." }
   ],
   'subtest-inggris': [
-    // ... lanjutan soal Inggris yang sebelumnya cuma 20, ditambah sampai 40
     { soal: "I wish I ___ harder for the UTBK exam last year.", opsi: ["study", "studied", "had studied", "would study"], jawaban: 2, pembahasan: "Penyesalan masa lalu (wish + past perfect): S + wish + S + had V3." },
     { soal: "If she ___, she would come to the party.", opsi: ["knows", "knew", "had known", "known"], jawaban: 1, pembahasan: "Conditional type 2 (hypothetical), verb 2." },
     { soal: "The author's tone in a scientific fact report is usually...", opsi: ["Optimistic", "Subjective", "Objective", "Pessimistic"], jawaban: 2, pembahasan: "Laporan ilmiah bersifat objektif." },
@@ -335,13 +306,9 @@ const BANK_SIMULASI = {
     { soal: "Text describing person/place/thing is...", opsi: ["Narrative", "Procedure", "Descriptive", "Argumentative"], jawaban: 2, pembahasan: "Descriptive = mendeskripsikan." },
     { soal: "'Although it was raining, we went out' shows...", opsi: ["Reason", "Contrast", "Time", "Purpose"], jawaban: 1, pembahasan: "Although = pertentangan (contrast)." },
     { soal: "Synonym of 'Delicious' is...", opsi: ["Disgusting", "Tasty", "Bitter", "Spicy"], jawaban: 1, pembahasan: "Delicious = tasty (lezat)." },
-    { soal: "If you heat ice, it ___...", opsi: ["melts", "melted", "will melt", "is melting"], jawaban: 0, pembahasan: "Conditional type 0 (fakta alam)." },
-    { soal: "The opposite of 'Expand' is...", opsi: ["Grow", "Contract", "Increase", "Develop"], jawaban: 1, pembahasan: "Expand (melebarkan) lawan contract (menyusut)." },
-    { soal: "Correct passive: 'The letter ___ yesterday.'", opsi: ["send", "sent", "was sent", "is sent"], jawaban: 2, pembahasan: "Passive past: was/were + V3." },
-    { soal: "Synonym of 'Approach' is...", opsi: ["Run away", "Method", "Near", "Avoid"], jawaban: 2, pembahasan: "Approach = mendekati." }
+    { soal: "If you heat ice, it ___...", opsi: ["melts", "melted", "will melt", "is melting"], jawaban: 0, pembahasan: "Conditional type 0 (fakta alam)." }
   ],
   'subtest-pm': [
-    // ... lanjutan soal Penalaran Matematika yang sebelumnya cuma 20, ditambah sampai 40
     { soal: "Dari 7 orang, dipilih 3 pengurus OSIS. Berapa cara? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 7!/(3!4!) = 35." },
     { soal: "Dari 5 orang, pilih ketua, wakil, sekretaris. Berapa susunan? (Permutasi)", opsi: ["10", "20", "60", "120"], jawaban: 2, pembahasan: "P(5,3) = 5!/2! = 60." },
     { soal: "Modal Rp1.000.000, bunga 12%/tahun. Bunga 3 bulan?", opsi: ["10RB", "20RB", "30RB", "40RB"], jawaban: 2, pembahasan: "Bunga = 1jt x 12% x (3/12) = 30RB." },
@@ -382,8 +349,6 @@ const BANK_SIMULASI = {
     { soal: "2 jam 30 menit = ... menit?", opsi: ["120", "150", "180", "230"], jawaban: 1, pembahasan: "2x60 + 30 = 150." },
     { soal: "Kebun persegi 100m². Perbesar agar luas 4x. Perbesar sisi?", opsi: ["2x", "4x", "10x", "16x"], jawaban: 0, pembahasan: "Luas = sisi². Jika luas 4x, sisi 2x." }
   ]
-};
-
 // ====== PERBAIKAN FUNGSI TOMBOL ULANGI LATIHAN AI (sebelumnya salah panggil fungsi simulasi) ======
 function soalSelanjutnya(panelId) {
     indexSoalSekarang++;
