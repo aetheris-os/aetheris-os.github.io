@@ -501,8 +501,37 @@ async function generateSoalDariAI(gateKey) {
 
     panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 20 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
 
-    const promptSystem = `Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi". Buat soal SULIT & HOTS. WAJIB balas dalam format JSON murni tanpa markdown.`;
-    const promptUser = `Buatkan 20 soal pilihan ganda untuk subtes "${dataMateri.title}". Struktur JSON: { "soal": [ { "pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..." } ] }`;
+   // PROMPT UTBK PROFESIONAL & HOTS
+  const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT BPPPA Kemendikbud. 
+Kamu hanya akan menghasilkan soal kualitas HOTS (High Order Thinking Skills) level sulit (sekitar 70-80% persentase jawaban benar nasional).
+WAJIB balas dalam format JSON murni tanpa markdown. Format JSON: {"soal": [{"pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..."}]}.`;
+
+  let promptUser = `Buatkan 10 soal pilihan ganda TPS/Literasi UTBK yang SANGAT SULIT untuk subtes: "${dataMateri.title}". `;
+
+  // KONDISI KHUSUS UNTUK SETIAP SUBTES
+  if (gateKey === 'subtest-pu') {
+    promptUser += `Khusus subtes Penalaran Umum: Buat soal logika silogisme berantai (premis 3-4 lapis), diagram Venn yang rumit, atau deret angka/huruf dengan pola bertingkat (misal: x^2+1, selang-seling bertingkat). Jangan buat soal logika yang terlalu mudah ditebak.`;
+  } 
+  else if (gateKey === 'subtest-ppu') {
+    promptUser += `Khusus subtes PPU: Buat soal sinonim/antonim kontekstual (kata umum yang maknanya berubah tergantung kalimat), peribahasa kiasan tingkat tinggi, dan ejaan/yang disempurnakan yang sering tertukar.`;
+  } 
+  else if (gateKey === 'subtest-pbm') {
+    promptUser += `Khusus subtes PBM: Sediakan teks esai/artikel jurnalistik/ilmiah yang PANJANG (minimal 150 kata). Lalu buat 10 pertanyaan yang meminta user mengevaluasi argumen penulis, menemukan bias, menyimpulkan maksud tersirat, atau memperbaiki struktur kalimat yang kompleks pada teks tersebut. Masukkan teks tersebut ke dalam field "pertanyaan" diikuti dengan soal.`;
+  } 
+  else if (gateKey === 'subtest-pk') {
+    promptUser += `Khusus subtes PK: Buat soal matematika dasar yang membutuhkan analisis aljabar, deret tak hingga, logaritma, atau transformasi geometri. Angka yang digunakan harus tidak bulat atau membutuhkan penyederhanaan rumus terlebih dahulu.`;
+  } 
+  else if (gateKey === 'subtest-indo') {
+    promptUser += `Khusus subtes Literasi B. Indonesia: Sediakan TEKS PANJANG (minimal 200 kata, bisa berupa opini, eksposisi, atau narasi). Masukkan teks tersebut di awal field "pertanyaan". Lalu buat pertanyaan yang meminta user mengidentifikasi ide pokok, mengevaluasi keefektifan argumen, menemukan bias penulis, atau menyimpulkan maksud tersirat dari teks tersebut.`;
+  } 
+  else if (gateKey === 'subtest-inggris') {
+    promptUser += `Khusus subtes Literasi B. Inggris: Sediakan TEKS PANJANG dalam bahasa Inggris (minimal 200 kata, akademik atau jurnalistik). Masukkan teks tersebut di awal field "pertanyaan". Lalu buat pertanyaan yang meminta user doing critical reading: identifying author's tone, inferring main idea, finding detailed information, atau understanding contextual vocabulary.`;
+  } 
+  else if (gateKey === 'subtest-pm') {
+    promptUser += `Khusus subtes Penalaran Matematika: Buat soal cerita aplikatif yang panjang dan membingungkan (soal cerita asuransi, perbandingan campuran, kecepatan/jarak/waktu dengan sungai/angin, atau peluang kejadian majemuk). Hindari soal hitung cepat, fokus pada pemahaman konsep.`;
+  }
+
+  promptUser += ` Pastikan jawaban benar teracak dengan baik. Setiap soal WAJIB memiliki pembahasan yang detail dan logis.`;
 
     try {
         const response = await fetch(GROQ_API_URL, {
