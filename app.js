@@ -468,22 +468,14 @@ function switchSubPanel(mode) {
   document.getElementById('panel-latihan-sim').style.display = (mode === 'latihan-sim') ? 'block' : 'none';
 }
 
-// ====== SISTEM LATIHAN AI ( - 20 SOAL) ======
+// ====== SISTEM LATIHAN AI (GROQ - 20 SOAL) ======
 let soalAktif = [], indexSoalSekarang = 0, skorBenar = 0;
-
 async function generateSoalDariAI(gateKey) {
   const dataMateri = DATA_MATERI[gateKey];
   const panelLatihan = document.getElementById('panel-latihan-ai');
   panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 20 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
-
-  if (GROQ_API_KEY === "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") {
-    panelLatihan.innerHTML = `<div class="locked-state-card"><div class="lock-icon">🔑</div><h3>API Key Groq Belum Diisi</h3><p>Silakan buka file app.js baris ke-3 dan masukkan API Key Groq Anda.</p></div>`;
-    return;
-  }
-
   const promptSystem = `Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi". Buat soal SULIT & HOTS. WAJIB balas dalam format JSON murni tanpa markdown.`;
   const promptUser = `Buatkan 20 soal pilihan ganda untuk subtes "${dataMateri.title}". Struktur JSON: { "soal": [ { "pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..." } ] }`;
-
   try {
     const response = await fetch(GROQ_API_URL, {
       method: 'POST',
@@ -495,11 +487,9 @@ async function generateSoalDariAI(gateKey) {
         response_format: { type: "json_object" }
       })
     });
-
     if (!response.ok) throw new Error('Gagal memuat soal dari AI (Status: ' + response.status + ')');
     const resJson = await response.json();
     const parsed = JSON.parse(resJson.choices[0].message.content);
-
     soalAktif = parsed.soal;
     indexSoalSekarang = 0;
     skorBenar = 0;
