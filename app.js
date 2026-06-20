@@ -1,4 +1,4 @@
-```javascript
+
 // ====== KONFIGURASI API GROQ (MULTI-KEY ROTATION) ======
 const API_KEYS = [
     "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",
@@ -938,4 +938,4 @@ function initChatResize() {
     });
     document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
 }
-```
+
