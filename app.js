@@ -1,9 +1,7 @@
-// ====== KONFIGURASI API GROQ ======
-// API untuk Latihan AI (Generate Soal)
-const GROQ_API_KEY_SOAL = "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"; 
-// API untuk Chat AI (Tanya Jawab) - Token terpisah agar tidak cepat habis
-const GROQ_API_KEY_CHAT = "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";
-const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+// ====== KONFIGURASI API GOOGLE GEMINI ======
+// Menggunakan Gemini 1.5 Flash karena limit free tier sangat besar (anti "Too many requests")
+const GEMINI_API_KEY = "AQ.Ab8RN6IeYsKvrRWlssRN7AONEqhRukOCkJnDMOwCTewscAZpxA"; 
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 // ====== MATERI UTBK 2024-2026 (SANGAT KOMPREHENSIF) ======
 const DATA_MATERI = {
@@ -334,7 +332,7 @@ const BANK_SIMULASI = {
     { soal: "Umur ayah 4 kali umur anak. Total umur mereka 50 tahun. Umur anak adalah...", opsi: ["8 tahun", "10 tahun", "12 tahun", "14 tahun"], jawaban: 1, pembahasan: "Misal anak = x, ayah = 4x. x + 4x = 50. 5x = 50, x = 10." }
   ],
   'subtest-pbm': [
-    { soal: "Perbaiki kalimat: 'Bagi siswa yang rajin belajar akan lulus ujian.'", opsi: ["Bagi siswa rajin belajar, akan lulus ujian.", "Siswa yang rajin belajar akan lulus ujian.", "Bagi siswa yang rajin belajar lulus ujian.", "Siswa yang rajin belajar, akan lulus ujian."], jawaban: 1, pembahasan: "Kata depan 'bagi' membuat subjek tidak jelas. Hilangkan 'bagi' agar subjek 'siswa' jelas." },
+    { soal: "Perbaiki kalimat: 'Bagi siswa que rajin belajar akan lulus ujian.'", opsi: ["Bagi siswa rajin belajar, akan lulus ujian.", "Siswa yang rajin belajar akan lulus ujian.", "Bagi siswa yang rajin belajar lulus ujian.", "Siswa yang rajin belajar, akan lulus ujian."], jawaban: 1, pembahasan: "Kata depan 'bagi' membuat subjek tidak jelas. Hilangkan 'bagi' agar subjek 'siswa' jelas." },
     { soal: "Perbaiki kalimat: 'Sejak dari pagi dia sudah belajar.'", opsi: ["Sejak pagi dia sudah belajar.", "Sejak dari pagi, dia sudah belajar.", "Dari pagi dia sudah belajar.", "Sejak pagi, dia sudah belajar."], jawaban: 0, pembahasan: "Pleonasme (pemborosan kata). 'Sejak' dan 'dari' maknanya sama." },
     { soal: "Penulisan kata depan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Kata depan (preposisi) yang menunjukkan tempat ditulis terpisah." },
     { soal: "Penulisan kata kerja pasif 'di' yang benar...", opsi: ["Di makan", "Dimakan", "Di-makan", "Dimakan oleh"], jawaban: 1, pembahasan: "Awalan 'di' pada kata kerja pasif digabung." },
@@ -415,11 +413,11 @@ const BANK_SIMULASI = {
     { soal: "Nilai dari 2 pangkat 4 ditambah 3 pangkat 2 adalah...", opsi: ["16", "25", "17", "13"], jawaban: 1, pembahasan: "16 + 9 = 25." },
     { soal: "Sebuah lingkaran memiliki diameter 14 cm. Luasnya adalah... (π = 22/7)", opsi: ["154 cm²", "144 cm²", "134 cm²", "124 cm²"], jawaban: 0, pembahasan: "Jari-jari = 7. Luas = 22/7 x 7 x 7 = 154." },
     { soal: "Jika 40% dari x = 20, maka nilai x adalah...", opsi: ["40", "50", "60", "70"], jawaban: 1, pembahasan: "0.4x = 20 -> x = 50." },
-    { soal: "Sebuah kubus memiliki volume 64 cm³. Panjang rusuknya là...", opsi: ["4 cm", "6 cm", "8 cm", "16 cm"], jawaban: 0, pembahasan: "Sisi³ = 64. Sisi = √64 = 4." },
-    { soal: "Data: 2, 4, 4, 5, 6, 8. Nilai rata-ratanya là...", opsi: ["4", "5", "6", "7"], jawaban: 1, pembahasan: "Jumlah = 29. Rata-rata = 29/6 = 4.83. (Dibulatkan ke 5)" },
-    { soal: "Suku ke-5 barisan aritmatika 2, 5, 8, 11, ... là...", opsi: ["14", "15", "16", "17"], jawaban: 0, pembahasan: "Beda = 3. Suku ke-5 = 11 + 3 = 14." },
-    { soal: "Jumlah sudut dalam segi-8 (oktagon) là...", opsi: ["1080°", "900°", "720°", "540°"], jawaban: 0, pembahasan: "(n-2) x 180 = 6 x 180 = 1080." },
-    { soal: "Jika log 2 = 0.3, maka log 8 là...", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2³. log 8 = 3 x log 2 = 3(0.3) = 0.9." }
+    { soal: "Sebuah kubus memiliki volume 64 cm³. Panjang rusuknya adalah...", opsi: ["4 cm", "6 cm", "8 cm", "16 cm"], jawaban: 0, pembahasan: "Sisi³ = 64. Sisi = √64 = 4." },
+    { soal: "Data: 2, 4, 4, 5, 6, 8. Nilai rata-ratanya adalah...", opsi: ["4", "5", "6", "7"], jawaban: 1, pembahasan: "Jumlah = 29. Rata-rata = 29/6 = 4.83. (Dibulatkan ke 5)" },
+    { soal: "Suku ke-5 barisan aritmatika 2, 5, 8, 11, ... adalah...", opsi: ["14", "15", "16", "17"], jawaban: 0, pembahasan: "Beda = 3. Suku ke-5 = 11 + 3 = 14." },
+    { soal: "Jumlah sudut dalam segi-8 (oktagon) adalah...", opsi: ["1080°", "900°", "720°", "540°"], jawaban: 0, pembahasan: "(n-2) x 180 = 6 x 180 = 1080." },
+    { soal: "Jika log 2 = 0.3, maka log 8 adalah...", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2³. log 8 = 3 x log 2 = 3(0.3) = 0.9." }
   ]
 };
 
@@ -570,6 +568,7 @@ function switchSubPanel(mode) {
     if(panelSim) panelSim.style.display = (mode === 'latihan-sim') ? 'block' : 'none';
 }
 
+// ====== SISTEM LATIHAN AI (GEMINI 1.5 FLASH) ======
 async function generateSoalDariAI(gateKey) {
     const dataMateri = DATA_MATERI[gateKey];
     const panelLatihan = document.getElementById('panel-latihan-ai');
@@ -602,26 +601,32 @@ WAJIB balas dalam format JSON murni tanpa markdown. Format JSON: {"soal": [{"per
         promptUser += `Khusus subtes Literasi B. Inggris: Sediakan TEKS PANJANG dalam bahasa Inggris (minimal 200 kata, akademik atau jurnalistik). Masukkan teks tersebut di awal field "pertanyaan". Lalu buat pertanyaan yang meminta user doing critical reading: identifying author's tone, inferring main idea, finding detailed information, atau understanding contextual vocabulary.`;
     } 
     else if (gateKey === 'subtest-pm') {
-        promptUser += `Khusus subtes Penalaran Matematika: Buat soal cerita aplikatif yang panjang dan membingungkan (soal cerita asuransi, perbandingan campuran, kecepatan/jarak/waktu dengan sungai/angin, atau peluang kejadian majemuk). Hindari soal hitung cepat, fokus pada pememahan konsep.`;
+        promptUser += `Khusus subtes Penalaran Matematika: Buat soal cerita aplikatif yang panjang dan membingungkan (soal cerita asuransi, perbandingan campuran, kecepatan/jarak/waktu dengan sungai/angin, atau peluang kejadian majemuk). Hindari soal hitung cepat, fokus pada pemahaman konsep.`;
     }
 
     promptUser += ` Pastikan jawaban benar teracak dengan baik. Setiap soal WAJIB memiliki pembahasan yang detail dan logis.`;
 
     try {
-        const response = await fetch(GROQ_API_URL, {
+        const response = await fetch(GEMINI_API_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY_SOAL}` },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
-                messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
-                temperature: 0.8,
-                response_format: { type: "json_object" }
+                system_instruction: {
+                    parts: [{ text: promptSystem }]
+                },
+                contents: [{
+                    parts: [{ text: promptUser }]
+                }],
+                generationConfig: {
+                    temperature: 0.8,
+                    response_mime_type: "application/json"
+                }
             })
         });
 
         if (!response.ok) throw new Error('Gagal memuat soal dari AI (Status: ' + response.status + ')');
         const resJson = await response.json();
-        const parsed = JSON.parse(resJson.choices[0].message.content);
+        const parsed = JSON.parse(resJson.candidates[0].content.parts[0].text);
 
         soalAktif = parsed.soal;
         indexSoalSekarang = 0;
@@ -761,7 +766,7 @@ function parseMarkdown(text) {
     return resultHtml;
 }
 
-// ====== FITUR CHAT AI (API Terpisah, Web Scanning, Markdown, Typing Effect) ======
+// ====== FITUR CHAT AI (GEMINI 1.5 FLASH, Web Scanning, Markdown, Typing Effect) ======
 function initChatAI() {
     const floatingChatBtn = document.getElementById('floating-chat-btn');
     const chatModal = document.getElementById('chat-modal');
@@ -791,10 +796,8 @@ function initChatAI() {
         
         if (sender === 'ai') {
             if (isTyping) {
-                // Jika sedang mengetik, isi secara bertahap (raw text), parse nanti
                 contentDiv.textContent = text;
             } else {
-                // Jika selesai, parse markdown
                 contentDiv.innerHTML = parseMarkdown(text);
             }
         } else {
@@ -821,7 +824,6 @@ function initChatAI() {
         if(loading) loading.remove();
     }
 
-    // Fungsi untuk "memindai" konten halaman yang dilihat user
     function scanVisibleContent() {
         let contextText = "Konteks Halaman Saat Ini:\n";
         const activePanel = document.querySelector('.sub-panel:not([style*="display: none"])');
@@ -833,8 +835,7 @@ function initChatAI() {
         return contextText;
     }
 
-    // Fungsi efek mengetik (Typing Effect)
-    async function typeText(element, text, speed = 15) {
+    async function typeText(element, text, speed = 10) {
         for (let i = 0; i < text.length; i++) {
             element.textContent += text.charAt(i);
             chatHistory.scrollTop = chatHistory.scrollHeight;
@@ -858,45 +859,46 @@ Kamu sedang melihat layar pengguna. Berikut adalah konteks teks dari halaman yan
 
 Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna bertanya tentang soal yang sedang dikerjakan, berikan pembahasan yang logis berdasarkan teks soal tersebut. Jika pertanyaan di luar konteks UTBK, jawab dengan sopan bahwa kamu hanya bisa membantu soal UTBK. Gunakan format markdown untuk jawabanmu (gunakan **bold**, *italic*, list, dan blok kode jika perlu) agar jawabanmu mudah dibaca.`;
         
-        const messages = [
-            { role: "system", content: promptSystem },
-            ...chatHistoryGlobal.slice(-10),
-            { role: "user", content: userMessage }
-        ];
+        // Menggunakan history chat dari Gemini format
+        let contentsHistory = chatHistoryGlobal.map(msg => ({
+            role: msg.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: msg.content }]
+        }));
 
-        // Simulasi delay animasi "AI sedang berpikir"
+        contentsHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+
         await new Promise(resolve => setTimeout(resolve, 1000));
 
         try {
-            const response = await fetch(GROQ_API_URL, {
+            const response = await fetch(GEMINI_API_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY_CHAT}` },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: "llama-3.3-70b-versatile",
-                    messages: messages,
-                    temperature: 0.7,
-                    max_tokens: 1024
+                    system_instruction: {
+                        parts: [{ text: promptSystem }]
+                    },
+                    contents: contentsHistory,
+                    generationConfig: {
+                        temperature: 0.7,
+                        max_output_tokens: 1024
+                    }
                 })
             });
 
             if (!response.ok) throw new Error('Gagal menghubungi AI');
             const resJson = await response.json();
-            const aiResponse = resJson.choices[0].message.content;
+            const aiResponse = resJson.candidates[0].content.parts[0].text;
 
             hideChatLoading();
             
-            // Tampilkan pesan AI dengan efek mengetik
             const msgDiv = addChatMessage('', 'ai', true);
             const contentDiv = msgDiv.querySelector('.msg-content');
             
-            // Mulai efek mengetik
             await typeText(contentDiv, aiResponse, 10);
-            
-            // Setelah selesai mengetik, parse markdown agar tampilannya rapi
             contentDiv.innerHTML = parseMarkdown(aiResponse);
             
-            chatHistoryGlobal.push({ role: "user", content: userMessage });
-            chatHistoryGlobal.push({ role: "assistant", content: aiResponse });
+            chatHistoryGlobal.push({ role: 'user', content: userMessage });
+            chatHistoryGlobal.push({ role: 'assistant', content: aiResponse });
         } catch (error) {
             hideChatLoading();
             addChatMessage(`Maaf, terjadi kesalahan: ${error.message}`, 'ai');
