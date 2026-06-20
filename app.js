@@ -371,6 +371,316 @@ function switchSubPanel(mode) {
 }
 
 // ====== SISTEM LATIHAN AI (GROQ) ======
+// ====== SISTEM LATIHAN AI (GROQ) ======
+async function generateSoalDariAI(gateKey) {
+  const dataMateri = DATA_MATERI[gateKey];
+  const panelLatihan = document.getElementById('panel-latihan-ai');
+  
+  // Tampilkan Loading
+  panelLatihan.innerHTML = `
+    <div class="loading-state">
+      <div class="loading-spinner"></div>
+      <h3>Sedang Meracik 20 Soal HOTS...</h3>
+      <p>AI sedang menyusun soal ${dataMateri.title} tingkat ekstrem. Mohon tunggu 10-20 detik.</p>
+    </div>
+  `;
+
+  // Prompt Sistem: Mensimulasikan pembuat soal UTBK yang sangat kejam
+  const promptSystem = `
+    Kamu adalah "Tim Pembuat Soal UTBK SNBT Tingkat Nasional" yang sangat kejam, kritis, dan licik.
+    Tugasmu adalah membuat 20 SOAL PILIHAN GANDA yang SANGAT SULIT, analitis, dan membutuhkan penalaran tingkat tinggi (HOTS).
+
+    Aturan Mutlak (WAJIB DIPATUHI):
+    1. KOMPLEKSITAS: Setiap soal HARUS berbentuk studi kasus, paragraf ilmiah, data tabel, atau pemodelan matematika. JANGAN ADA soal definisi hafalan!
+    2. JEBAKAN MEMATIKAN (Distractor): Buat 4 opsi (A, B, C, D). 3 opsi yang salah harus dirancang sedemikian rupa sehingga "terlihat 100% benar" jika siswa salah membaca satuan, cepat berpikir, atau salah paham logika.
+    3. VARIASI: Setiap soal harus memiliki tema/konteks yang benar-benar berbeda satu sama lain. DILARANG mengulang pola soal!
+    4. ANGKA SULIT: Jika soal hitungan, gunakan pecahan, desimal, atau angka yang tidak bulat.
+    5. PEMBAHASAN: Jelaskan dengan detail mengapa jawaban benar itu benar, dan mengapa 3 opsi lain adalah jebakan.
+
+    WAJIB balas menggunakan format JSON murni tanpa markdown (\`\`\`json) dan tanpa teks tambahan apapun.
+  `;
+
+  // Prompt User: Meminta 20 soal sesuai subtes yang dipilih
+  const promptUser = `
+    Buatkan 20 SOAL BARU untuk subtes "${dataMateri.title}".
+    Kategori materi: ${dataMateri.desc}.
+
+    Struktur JSON WAJIB persis seperti ini:
+    {
+      "soal": [
+        {
+          "pertanyaan": "Teks kasus/studi panjang diikuti pertanyaan analitis",
+          "opsi": ["Opsi A (jebakan)", "Opsi B (jebakan)", "Opsi C (benar)", "Opsi D (jebakan)"],
+          "jawaban": 2,
+          "pembahasan": "Penjelasan detail mengapa C benar dan opsi lain adalah jebakan."
+        }
+      ]
+    }
+    Acak posisi jawaban benar (index 0=A, 1=B, 2=C, 3=D) di setiap soal, jangan selalu di C.
+  `;
+
+  try {
+    const response = await fetch(GROQ_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile", // Model paling pintar di Groq
+        messages: [
+          { role: "system", content: promptSystem },
+          { role: "user", content: promptUser }
+        ],
+        temperature: 0.6, // Suhu diturunkan agar fokus bikin jebakan logis, bukan ngasal
+        max_tokens: 8000, // Token dipercing agar 20 soal panjang tidak terpotong
+        response_format: { type: "json_object" }
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Detail Error dari Groq:", errorData);
+      throw new Error(`HTTP ${response.status}: ${errorData.error?.message || 'Gagal memuat soal'}`);
+    }
+    
+    const resJson = await response.json();
+    const textResult = resJson.choices[0].message.content;
+    const parsed = JSON.parse(textResult);
+
+    if (!parsed.soal || parsed.soal.length === 0) throw new Error('Format soal kosong');
+
+    soalAktif = parsed.soal;
+    indexSoalSekarang = 0;
+    skorBenar = 0;
+    tampilkanSoal('panel-latihan-ai');
+
+  } catch (error) {
+    console.error("Catch Error:", error);
+    panelLatihan.innerHTML = `
+      <div class="locked-state-card">
+        <div class="lock-icon">⚠️</div>
+        <h3>Gagal Menghubungi AI</h3>
+        <p>Pastikan API Key Groq valid dan kuota internet mencukupi.<br><small>Error: ${error.message}</small></p>
+        <button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button>
+      </div>
+    `;
+  }
+}
+
+// ====== BANK SOAL & DYNAMIC GENERATOR (ANTI BUG & SOAL TAK TERHINGGA) ======
+const BANK_SIMULASI = {
+  'subtest-pu': [
+    { soal: "Jika hujan, jalan basah. Jalan tidak basah. Maka...", opsi: ["Hujan turun", "Hujan tidak turun", "Jalan kering", "Tidak tentu"], jawaban: 1, pembahasan: "Modus Tollens: p→q dan ~q, maka ~p." },
+    { soal: "Semua mahasiswa wajib KRS. Sebagian mahasiswa belum bayar SPP. Maka...", opsi: ["Semua yang belum bayar tidak wajib KRS", "Sebagian yang wajib KRS belum bayar SPP", "Semua mahasiswa miskin", "Tidak ada hubungannya"], jawaban: 1, pembahasan: "Silogisme sebagian." },
+    { soal: "Deret: 2, 5, 10, 17, 26, ...", opsi: ["35", "36", "37", "38"], jawaban: 2, pembahasan: "Selisih +3, +5, +7, +9. Berikutnya +11. 26+11=37." },
+    { soal: "Deret huruf: B, D, G, K, P, ...", opsi: ["U", "V", "W", "X"], jawaban: 2, pembahasan: "Selisih +2, +3, +4, +5, +6. P(16)+6=V(22)." },
+    { soal: "Jika x prima dan x > 2, maka x ganjil. Jika x genap, maka...", opsi: ["x prima", "x ganjil", "x bukan prima atau x <= 2", "x nol"], jawaban: 2, pembahasan: "Kontraposisif logika." }
+  ],
+  'subtest-ppu': [
+    { soal: "Sinonim dari 'Mitigasi' adalah...", opsi: ["Pencegahan", "Penghancuran", "Pembangunan", "Penolakan"], jawaban: 0, pembahasan: "Mitigasi = usaha mengurangi dampak buruk/pencegahan." },
+    { soal: "Sinonim dari 'Fluktuasi' adalah...", opsi: ["Kestabilan", "Turun naik", "Kehilangan", "Kenaikan"], jawaban: 1, pembahasan: "Fluktuasi = naik turunnya nilai." },
+    { soal: "Sinonim dari 'Aklamasi' adalah...", opsi: ["Penolakan", "Perhitungan suara", "Persetujuan serentak", "Perdebatan"], jawaban: 2, pembahasan: "Aklamasi = persetujuan tanpa voting." },
+    { soal: "Sinonim dari 'Insinuasi' adalah...", opsi: ["Pujian", "Sindiran", "Perintah", "Janji"], jawaban: 1, pembahasan: "Insinuasi = tuduhan/sindiran tidak langsung." },
+    { soal: "Sinonim dari 'Bikameral' adalah...", opsi: ["Satu kamar", "Dua kamar", "Rapat paripurna", "Veto presiden"], jawaban: 1, pembahasan: "Bikameral = sistem dua kamar (DPR & DPD)." }
+  ],
+  'subtest-pbm': [
+    { soal: "Perbaiki kalimat: 'Bagi siswa yang rajin belajar akan lulus.'", opsi: ["Bagi siswa rajin belajar, akan lulus.", "Siswa yang rajin belajar akan lulus.", "Bagi siswa yang rajin belajar lulus.", "Siswa yang rajin belajar, akan lulus."], jawaban: 1, pembahasan: "Hilangkan kata depan 'Bagi' agar subjek (Siswa) jelas." },
+    { soal: "Perbaiki kalimat: 'Sejak dari pagi dia belajar.'", opsi: ["Sejak pagi dia belajar.", "Sejak dari pagi, dia belajar.", "Dari pagi dia belajar.", "Sejak pagi, dia belajar."], jawaban: 0, pembahasan: "Pleonasme (pemborosan). 'Sejak' dan 'dari' maknanya sama, hapus salah satu." },
+    { soal: "Penulisan kata depan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Kata depan 'di' dipisah jika menunjukkan tempat." },
+    { soal: "Penulisan kata kerja pasif 'di' yang benar...", opsi: ["Di makan", "Dimakan", "Di-makan", "Dimakan oleh"], jawaban: 1, pembahasan: "Kata kerja pasif 'di' harus digabung." },
+    { soal: "Kalimat efektif harus memiliki...", opsi: ["Subjek dan Obyek", "Subjek dan Predikat", "Predikat dan Obyek", "Keterangan"], jawaban: 1, pembahasan: "Struktur inti minimal S dan P." }
+  ],
+  'subtest-indo': [
+    { soal: "Teks: 'Edukasi karakter membuat siswa tangguh.' Gagasan utamanya adalah...", opsi: ["Siswa butuh bimbel", "Edukasi karakter penting untuk mental", "Ujian nasional menakutkan", "Siswa suka mencontek"], jawaban: 1, pembahasan: "Gagasan utama ada di kalimat pertama (deduktif)." },
+    { soal: "Paragraf yang gagasan utamanya di akhir disebut...", opsi: ["Deduktif", "Induktif", "Campuran", "Deskriptif"], jawaban: 1, pembahasan: "Induktif: khusus ke umum." },
+    { soal: "Paragraf yang gagasan utamanya di awal disebut...", opsi: ["Deduktif", "Induktif", "Campuran", "Naratif"], jawaban: 0, pembahasan: "Deduktif: umum ke khusus." },
+    { soal: "Teks: 'Penanaman pohon mengurangi polusi.' Simpulan yang tepat...", opsi: ["Pohon itu indah", "Pohon bermanfaat bagi ekologi", "Pohon butuh air", "Pohon harus ditebang"], jawaban: 1, pembahasan: "Simpulan harus sesuai isi teks." },
+    { soal: "Menyimpulkan isi teks disebut juga...", opsi: ["Skimming", "Menyimpulkan/Sintesis", "Scanning", "Membaca cepat"], jawaban: 1, pembahasan: "Sintesis adalah penggabungan gagasan untuk menyimpulkan." }
+  ],
+  'subtest-inggris': [
+    { soal: "I wish I ___ harder for the exam yesterday.", opsi: ["study", "studied", "had studied", "would study"], jawaban: 2, pembahasan: "Past regret (penyesalan masa lalu) pakai S + wish + S + had V3." },
+    { soal: "If she ___, she would come.", opsi: ["knows", "knew", "had known", "known"], jawaban: 1, pembahasan: "Conditional type 2 (hypothetical), pakai V2." },
+    { soal: "The author's tone in a scientific fact report is usually...", opsi: ["Optimistic", "Subjective", "Objective", "Pessimistic"], jawaban: 2, pembahasan: "Laporan ilmiah bersifat objektif (netral)." },
+    { soal: "Synonym of 'Abundant' is...", opsi: ["Scarce", "Plentiful", "Empty", "Small"], jawaban: 1, pembahasan: "Abundant = melimpah (plentiful)." },
+    { soal: "Antonym of 'Artificial' is...", opsi: ["Fake", "Natural", "Synthetic", "Man-made"], jawaban: 1, pembahasan: "Artificial (buatan) lawannya Natural (alami)." }
+  ],
+  'subtest-pk': [
+    { soal: "Jika f(x)=2x+1 dan g(x)=x², maka (g o f)(2)=", opsi: ["5", "10", "25", "20"], jawaban: 2, pembahasan: "f(2)=5, g(5)=25." },
+    { soal: "Faktorial 4! (4 faktorial) adalah...", opsi: ["12", "16", "24", "4"], jawaban: 2, pembahasan: "4x3x2x1 = 24." },
+    { soal: "Sudut bertolak belakang selalu...", opsi: ["90 derajat", "180 derajat", "Sama besar", "Berbeda"], jawaban: 2, pembahasan: "Sifat sudut bertolak belakang." },
+    { soal: "Log 100 basis 10 adalah...", opsi: ["1", "2", "10", "100"], jawaban: 1, pembahasan: "10 pangkat 2 = 100." },
+    { soal: "Mean (rata-rata) dari 2, 4, 6, 8 adalah...", opsi: ["4", "5", "6", "8"], jawaban: 1, pembahasan: "Jumlah 20 dibagi 4 data = 5." }
+  ],
+  'subtest-pm': [
+    { soal: "7 orang dipilih 3 untuk delegasi. Berapa caranya? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 7!/(3!4!) = 35." },
+    { soal: "Ketua, wakil, sekretaris dari 5 orang. (Permutasi)", opsi: ["10", "20", "60", "120"], jawaban: 2, pembahasan: "P(5,3) = 5!/2! = 60." },
+    { soal: "Modal Rp100.000, bunga 12%/tahun. Bunga 3 bulan?", opsi: ["Rp 1.000", "Rp 3.000", "Rp 12.000", "Rp 4.000"], jawaban: 1, pembahasan: "(12%/12) x 3 bln = 3%. 3% x 100k = 3000." },
+    { soal: "Jarak kota A-B 120 km. Motor 60 km/jam. Waktu tempuh?", opsi: ["1 jam", "2 jam", "3 jam", "0.5 jam"], jawaban: 1, pembahasan: "Jarak / Kecepatan = 120/60 = 2 jam." },
+    { soal: "Harga naik 20%, brg mula-mula Rp 50.000. Harga sekarang?", opsi: ["Rp 55.000", "Rp 60.000", "Rp 70.000", "Rp 10.000"], jawaban: 1, pembahasan: "20% x 50k = 10k. 50k+10k = 60k." }
+  ]
+};
+
+// Fungsi Generator Soal Otomatis (Membuat bank soal tak terhingga)
+function generateDynamicSoal(jumlah = 35) {
+  const arr = [];
+  for(let i=0; i<jumlah; i++) {
+    const tipe = Math.floor(Math.random() * 3);
+    
+    if(tipe === 0) { // Deret Aritmatika
+      const a = Math.floor(Math.random() * 10) + 2;
+      const b = a + Math.floor(Math.random() * 5) + 2;
+      const sel = b - a;
+      const c = b + sel;
+      const d = c + sel;
+      const ans = d + sel;
+      arr.push({
+        soal: `Deret Aritmatika: ${a}, ${b}, ${c}, ${d}, ... Bilangan selanjutnya adalah?`,
+        opsi: [`${ans}`, `${ans+2}`, `${ans-2}`, `${ans+sel}`].sort(() => Math.random() - 0.5),
+        jawaban: 0,
+        pembahasan: `Pola selisih +${sel}. Maka ${d} + ${sel} = ${ans}.`
+      });
+    } 
+    else if(tipe === 1) { // Kombinasi Sederhana
+      const n = Math.floor(Math.random() * 4) + 5; // 5-8
+      const r = 3;
+      // Rumus C(n,3) = n(n-1)(n-2)/6
+      const ans = (n * (n-1) * (n-2)) / 6;
+      arr.push({
+        soal: `Dari ${n} orang siswa, akan dipilih 3 orang sebagai pengurus OSIS. Berapa banyak cara pemilihan tim yang mungkin? (Abaikan urutan)`,
+        opsi: [`${ans}`, `${ans+5}`, `${ans-3}`, `${n*3}`].sort(() => Math.random() - 0.5),
+        jawaban: 0,
+        pembahasan: `Kombinasi C(${n}, 3) = ${n}!/ (3! x ${n-3}!) = (${n}x${n-1}x${n-2}) / 6 = ${ans}.`
+      });
+    }
+    else { // Logika Silogisme
+      arr.push({
+        soal: "Jika p maka q. Jika q maka r. Jika diketahui p terjadi, maka kesimpulan yang sah adalah?",
+        opsi: ["q terjadi", "r terjadi", "p dan q terjadi", "r tidak terjadi"],
+        jawaban: 1,
+        pembahasan: "Silogisme rantai: (p→q) + (q→r) = (p→r). Jika p maka kesimpulannya r."
+      });
+    }
+  }
+  return arr;
+}
+
+// ====== DOM CONTROLLERS ======
+const sidebar = document.getElementById('sidebar');
+const menuTrigger = document.getElementById('menu-trigger');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+const viewDashboard = document.getElementById('view-dashboard');
+const viewSubtest = document.getElementById('view-subtest');
+let currentGateKey = null; 
+
+function toggleSidebar() { sidebar.classList.toggle('open'); }
+menuTrigger.addEventListener('click', toggleSidebar);
+sidebarOverlay.addEventListener('click', toggleSidebar);
+
+// ====== TEMA DROPDOWN & CIRCULAR REVEAL ======
+const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
+const themeCurrentBtn = document.getElementById('theme-current-btn');
+const themeDropdown = document.getElementById('theme-dropdown');
+const themeOptions = document.querySelectorAll('.theme-option');
+const themeIcon = document.querySelector('.theme-icon');
+const themeName = document.querySelector('.theme-name');
+
+themeCurrentBtn.addEventListener('click', (e) => { e.stopPropagation(); themeDropdown.classList.toggle('open'); });
+document.addEventListener('click', (e) => { if (!themeSelectorWrapper.contains(e.target)) themeDropdown.classList.remove('open'); });
+
+function updateThemeButton(theme) {
+  themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  themeName.textContent = theme === 'dark' ? 'Dark' : 'Light';
+}
+
+themeOptions.forEach(option => {
+  option.addEventListener('click', (e) => {
+    const targetTheme = option.dataset.theme;
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (targetTheme === currentTheme) { themeDropdown.classList.remove('open'); return; }
+    if (document.body.classList.contains('is-revealing')) return;
+
+    const x = e.clientX, y = e.clientY;
+    document.body.style.setProperty('--reveal-x', x + 'px');
+    document.body.style.setProperty('--reveal-y', y + 'px');
+
+    if (targetTheme === 'light') document.body.classList.add('reveal-to-light');
+    else document.body.classList.add('reveal-to-dark');
+
+    requestAnimationFrame(() => { requestAnimationFrame(() => { document.body.classList.add('is-revealing'); }); });
+
+    setTimeout(() => { document.documentElement.setAttribute('data-theme', targetTheme); updateThemeButton(targetTheme); }, 400);
+    setTimeout(() => { document.body.classList.remove('is-revealing'); document.body.classList.remove('reveal-to-light'); document.body.classList.remove('reveal-to-dark'); themeDropdown.classList.remove('open'); }, 850);
+  });
+});
+
+// ====== NAVIGATION ROUTER ======
+function navigateTo(viewId, gateKey = null) {
+  sidebar.classList.remove('open');
+  if (viewId === 'dashboard') {
+    viewSubtest.classList.remove('active');
+    viewDashboard.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (viewId === 'subtest' && gateKey) {
+    viewDashboard.classList.remove('active');
+    viewSubtest.classList.add('active');
+    renderSubtestPage(gateKey);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+document.getElementById('brand-home').addEventListener('click', () => navigateTo('dashboard'));
+document.getElementById('btn-back-dashboard').addEventListener('click', () => navigateTo('dashboard'));
+document.querySelectorAll('.node-card').forEach(card => { card.addEventListener('click', () => navigateTo('subtest', card.dataset.gate)); });
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    const target = link.dataset.target;
+    if (target === 'dashboard') navigateTo('dashboard');
+    else navigateTo('subtest', target);
+  });
+});
+
+// ====== RENDER DYNAMIC SUBTEST VIEW ======
+function renderSubtestPage(key) {
+  currentGateKey = key;
+  // RESET TOTAL SOAL AGAR TIDAK BUG CAMPUR SUBTES
+  soalAktif = []; 
+  indexSoalSekarang = 0;
+  skorBenar = 0;
+
+  const data = DATA_MATERI[key];
+  if (!data) return;
+
+  document.getElementById('subtest-title').textContent = data.title;
+  document.getElementById('subtest-category').textContent = data.category;
+  document.getElementById('subtest-category').className = `node-tag ${data.category.includes('TPS') ? 'tps' : 'lit'}`;
+  document.getElementById('subtest-desc').textContent = data.desc;
+  document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
+
+  switchSubPanel('materi');
+  resetChronoTimer();
+  document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
+}
+
+const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+subTabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    subTabBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const mode = btn.dataset.mode;
+    switchSubPanel(mode);
+    if (mode === 'latihan-ai' && currentGateKey) generateSoalDariAI(currentGateKey);
+    else if (mode === 'latihan-sim' && currentGateKey) mulaiSimulasi(currentGateKey);
+  });
+});
+
+function switchSubPanel(mode) {
+  document.getElementById('panel-materi').classList.toggle('active', mode === 'materi');
+  document.getElementById('panel-latihan-ai').classList.toggle('active', mode === 'latihan-ai');
+  document.getElementById('panel-latihan-sim').classList.toggle('active', mode === 'latihan-sim');
+}
+
+// ====== SISTEM LATIHAN AI (GROQ) ======
 let soalAktif = [], indexSoalSekarang = 0, skorBenar = 0;
 
 async function generateSoalDariAI(gateKey) {
@@ -406,179 +716,22 @@ async function generateSoalDariAI(gateKey) {
   }
 }
 
-// ====== SISTEM SIMULASI BANK SOAL ======
+// ====== SISTEM SIMULASI BANK SOAL (ANTI BUG) ======
 function mulaiSimulasi(gateKey) {
-  const bank = BANK_SIMULASI[gateKey];
-  const panelSim = document.getElementById('panel-latihan-sim');
-
-  if (!bank || bank.length === 0) {
-    panelSim.innerHTML = `<div class="locked-state-card"><div class="lock-icon">⚙️</div><h3>Bank Soal Belum Tersedia</h3><p>Bank soal simulasi untuk subtes ini sedang dalam pengembangan. Silakan coba subtes Penalaran Umum (PU) terlebih dahulu!</p></div>`;
-    return;
+  // Ambil soal statis dari bank (jika ada)
+  let bank = BANK_SIMULASI[gateKey] || [];
+  
+  // Jika bank soal statis kurang dari 40, generate sisanya secara dinamis
+  let combinedBank = [...bank];
+  if(combinedBank.length < 40) {
+    const dynamicNeeded = 40 - combinedBank.length;
+    const dynamicSoal = generateDynamicSoal(dynamicNeeded);
+    combinedBank = combinedBank.concat(dynamicSoal);
   }
 
   // Acak urutan soal (Shuffle)
-  soalAktif = [...bank].sort(() => Math.random() - 0.5);
+  soalAktif = combinedBank.sort(() => Math.random() - 0.5);
   indexSoalSekarang = 0;
   skorBenar = 0;
   tampilkanSoal('panel-latihan-sim');
 }
-
-// ====== FUNGSI RENDER SOAL UNIVERSAL ======
-function tampilkanSoal(panelId) {
-  if (indexSoalSekarang >= soalAktif.length) { renderHasilAkhir(panelId); return; }
-
-  const soal = soalAktif[indexSoalSekarang];
-  const opsiHtml = soal.opsi.map((ops, i) => `
-    <button class="opsi-soal" onclick="jawabSoal(${i}, '${panelId}')">
-      <span class="opsi-huruf">${String.fromCharCode(65 + i)}</span>
-      <span class="opsi-teks">${ops}</span>
-    </button>
-  `).join('');
-
-  document.getElementById(panelId).innerHTML = `
-    <div class="latihan-header">
-      <div class="info-soal">
-        <span class="node-tag tps">Soal ${indexSoalSekarang + 1} / ${soalAktif.length}</span>
-        <span class="node-tag lit">Skor: ${skorBenar}</span>
-      </div>
-      <button class="btn-action shadow" onclick="keluarLatihan()">Keluar</button>
-    </div>
-    <div class="box-soal">
-      <p class="teks-soal">${soal.pertanyaan || soal.soal}</p>
-      <div class="opsi-grid">${opsiHtml}</div>
-    </div>
-  `;
-}
-
-function jawabSoal(indexJawaban, panelId) {
-  const soal = soalAktif[indexSoalSekarang];
-  const benar = indexJawaban === soal.jawaban;
-  if (benar) skorBenar++;
-
-  const opsiButtons = document.querySelectorAll('.opsi-soal');
-  opsiButtons.forEach((btn, i) => {
-    btn.disabled = true;
-    if (i === soal.jawaban) btn.classList.add('benar');
-    else if (i === indexJawaban) btn.classList.add('salah');
-  });
-
-  const pembahasanBox = document.createElement('div');
-  pembahasanBox.className = 'box-pembahasan';
-  pembahasanBox.innerHTML = `
-    <h3>${benar ? '✅ Jawaban Benar!' : '❌ Jawaban Kurang Tepat'}</h3>
-    <p>${soal.pembahasan}</p>
-    <button class="btn-action" onclick="lanjutSoal('${panelId}')">${indexSoalSekarang + 1 === soalAktif.length ? 'Lihat Hasil Akhir' : 'Soal Berikutnya →'}</button>
-  `;
-  document.querySelector('.box-soal').appendChild(pembahasanBox);
-  pembahasanBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function lanjutSoal(panelId) { indexSoalSekarang++; tampilkanSoal(panelId); }
-
-function renderHasilAkhir(panelId) {
-  const persentase = (skorBenar / soalAktif.length) * 100;
-  const btnText = panelId.includes('sim') ? "Ulangi Simulasi (Acak)" : "Ulangi Latihan AI";
-  const btnAction = panelId.includes('sim') ? `mulaiSimulasi('${currentGateKey}')` : `generateSoalDariAI('${currentGateKey}')`;
-  
-  document.getElementById(panelId).innerHTML = `
-    <div class="hasil-akhir">
-      <div class="ikon-hasil">${persentase > 70 ? '🏆' : '📚'}</div>
-      <h2>Sesi Latihan Selesai!</h2>
-      <h1>${skorBenar} / ${soalAktif.length}</h1>
-      <p>Skor kamu: ${persentase.toFixed(0)}%. ${persentase > 70 ? 'Pertahankan!' : 'Terus berlatih!'}</p>
-      <button class="btn-action" onclick="${btnAction}">${btnText}</button>
-      <button class="btn-action shadow" onclick="keluarLatihan()">Kembali ke Materi</button>
-    </div>
-  `;
-}
-
-function keluarLatihan() {
-  switchSubPanel('materi');
-  document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
-}
-
-// ====== CHRONO TIMER & FLOATING TIMER MODULE ======
-let chronoInterval = null;
-let chronoRemainingSeconds = 25 * 60;
-let isChronoRunning = false;
-
-const timerToggleSwitch = document.getElementById('timer-toggle-switch');
-const timerDurationSelect = document.getElementById('timer-duration-select');
-const chronoDisplayContainer = document.getElementById('chrono-display-container');
-const timerDigits = document.getElementById('timer-digits');
-const btnTimerState = document.getElementById('btn-timer-state');
-const btnTimerReset = document.getElementById('btn-timer-reset');
-
-const floatingTimer = document.getElementById('floating-timer');
-const ftDigits = document.getElementById('ft-digits');
-const ftPauseBtn = document.getElementById('ft-pause-btn');
-const ftCloseBtn = document.getElementById('ft-close-btn');
-
-timerDurationSelect.addEventListener('change', () => {
-  if (!isChronoRunning) {
-    chronoRemainingSeconds = parseInt(timerDurationSelect.value) * 60;
-    updateChronoDisplay();
-  }
-});
-
-timerToggleSwitch.addEventListener('change', (e) => {
-  if (e.target.checked) {
-    chronoDisplayContainer.classList.remove('hidden');
-    chronoRemainingSeconds = parseInt(timerDurationSelect.value) * 60;
-    updateChronoDisplay();
-    startChronoTimer();
-    floatingTimer.classList.remove('hidden');
-    updateFloatingTimer();
-  } else {
-    chronoDisplayContainer.classList.add('hidden');
-    floatingTimer.classList.add('hidden');
-    pauseChronoTimer();
-  }
-});
-
-function updateChronoDisplay() {
-  const mins = Math.floor(chronoRemainingSeconds / 60);
-  const secs = chronoRemainingSeconds % 60;
-  const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-  timerDigits.textContent = timeStr;
-  ftDigits.textContent = timeStr;
-}
-
-function startChronoTimer() {
-  if (isChronoRunning) return;
-  isChronoRunning = true;
-  btnTimerState.textContent = 'Pause';
-  ftPauseBtn.textContent = '⏸️';
-  chronoInterval = setInterval(() => {
-    if (chronoRemainingSeconds > 0) {
-      chronoRemainingSeconds--;
-      updateChronoDisplay();
-    } else {
-      clearInterval(chronoInterval);
-      alert('Waktu latihan selesai! Saatnya istirahat.');
-      resetChronoTimer();
-    }
-  }, 1000);
-}
-
-function pauseChronoTimer() {
-  isChronoRunning = false;
-  btnTimerState.textContent = 'Start';
-  ftPauseBtn.textContent = '▶️';
-  clearInterval(chronoInterval);
-}
-
-function resetChronoTimer() {
-  pauseChronoTimer();
-  chronoRemainingSeconds = parseInt(timerDurationSelect.value) * 60;
-  updateChronoDisplay();
-}
-
-btnTimerState.addEventListener('click', () => { if (isChronoRunning) pauseChronoTimer(); else startChronoTimer(); });
-btnTimerReset.addEventListener('click', resetChronoTimer);
-ftPauseBtn.addEventListener('click', () => { if (isChronoRunning) pauseChronoTimer(); else startChronoTimer(); });
-ftCloseBtn.addEventListener('click', () => { 
-  timerToggleSwitch.checked = false; 
-  timerToggleSwitch.dispatchEvent(new Event('change')); 
-});
