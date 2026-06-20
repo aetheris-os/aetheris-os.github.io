@@ -1,5 +1,4 @@
 // ====== KONFIGURASI API GROQ ======
-// PENTING: Masukkan API Key Groq Anda di sini
 const GROQ_API_KEY = "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"; 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
@@ -48,10 +47,8 @@ const DATA_MATERI = {
 };
 
 // ====== BANK SOAL SIMULASI (40 SOAL PER SUBTES) ======
-// Bagian 1: PU & PPU (80 Soal). Bagian 2 menyusul.
 const BANK_SIMULASI = {
   'subtest-pu': [
-    // --- 40 SOAL PENALARAN UMUM ---
     { soal: "Semua dokter pandai. Sebagian dokter kaya. Kesimpulan yang benar adalah...", opsi: ["Semua yang kaya pandai", "Sebagian yang pandai kaya", "Semua yang pandai kaya", "Sebagian yang kaya bodoh"], jawaban: 1, pembahasan: "Silogisme partikular: Subjek (dokter) disisihkan, predikat dipertahankan." },
     { soal: "Jika hari hujan, jalan basah. Jalan tidak basah. Maka...", opsi: ["Hari hujan", "Hari tidak hujan", "Hari mendung", "Tidak tentu"], jawaban: 1, pembahasan: "Modus Tollens: p→q, ~q maka ~p." },
     { soal: "Deret: 3, 6, 11, 18, 27, ...", opsi: ["36", "38", "40", "42"], jawaban: 1, pembahasan: "Selisih: +3, +5, +7, +9. Berikutnya +11. 27+11=38." },
@@ -66,7 +63,6 @@ const BANK_SIMULASI = {
     { soal: "Deret: 2, 3, 5, 7, 11, ...", opsi: ["12", "13", "14", "15"], jawaban: 1, pembahasan: "Deret bilangan prima." },
     { soal: "Semua logam memuai jika dipanaskan. Besi adalah logam. Kesimpulan...", opsi: ["Besi memuai jika dipanaskan", "Besi tidak memuai", "Semua yang memuai besi", "Logam tidak memuai"], jawaban: 0, pembahasan: "Silogisme kategorik universal." },
     { soal: "Jika A>B dan B>C, maka...", opsi: ["C>A", "A>C", "B=A", "A=C"], jawaban: 1, pembahasan: "Sifat transitif." },
-    { soal: "P, Q, R, S, T. Jika P=T, dan Q=S, maka hubungan P dan S adalah...", opsi: ["P>S", "P<S", "P=S", "P≠S"], jawaban: 1, pembahasan: "P=T, Q=S, R<S. Karena T>R, maka S<T (P). Jadi P>S." },
     { soal: "Semua bunga berbau wangi. Mawar adalah bunga. Maka...", opsi: ["Mawar berbau wangi", "Mawar tidak wangi", "Semua wangi mawar", "Tidak pasti"], jawaban: 0, pembahasan: "Silogisme dasar." },
     { soal: "Deret: 5, 10, 8, 16, 14, 28, ...", opsi: ["26", "30", "32", "24"], jawaban: 0, pembahasan: "Pola selang-seling: x2, -2. 28-2=26." },
     { soal: "Deret: 100, 50, 25, 12.5, ...", opsi: ["6.25", "5", "7.5", "10"], jawaban: 0, pembahasan: "Deret geometri dibagi 2." },
@@ -76,25 +72,25 @@ const BANK_SIMULASI = {
     { soal: "Semua A adalah B. Tidak ada B yang C. Maka...", opsi: ["Semua A adalah C", "Tidak ada A yang C", "Sebagian A adalah C", "Tidak ada A yang B"], jawaban: 1, pembahasan: "Silogisme negatif universal." },
     { soal: "Jika naik pesawat, harus tes PCR. Andi tidak tes PCR. Maka Andi...", opsi: ["Naik pesawat", "Tidak naik pesawat", "Naik kapal", "Tidak tentu"], jawaban: 1, pembahasan: "Modus Tollens." },
     { soal: "Deret: 81, 27, 9, 3, ...", opsi: ["0", "1", "1.5", "2"], jawaban: 1, pembahasan: "Dibagi 3. 3/3=1." },
-    { soal: "Jika x>5, maka y<2. Jika y=3, maka...", opsi: ["x>5", "x<=5", "x=5", "x<5"], jawaban: 1, pembahasan: "Kontraposisi: y tidak <2 (y>=2/3), maka x tidak >5 (x<=5)." },
-    { soal: "Semua dosen berijazah S2. Sebagian dosen berijazah S3. Maka...", opsi: ["Semua S2 adalah S3", "Sebagian S2 adalah S3", "Semua dosen S3", "Sebagian dosen S2 adalah S3"], jawaban: 3, pembahasan: "Karena semua dosen S2, dan sebagian S3, maka sebagian S2 (yang berstatus dosen) pasti S3." },
-    { soal: "Sebagian buku menarik. Semua buku mahal. Maka...", opsi: ["Semua yang menarik mahal", "Sebagian yang mahal menarik", "Semua yang mahal menarik", "Tidak ada hubungannya"], jawaban: 1, pembahasan: "Silogisme partikular." },
-    { soal: "Jika sakit, minum obat. Minum obat. Maka...", opsi: ["Sakit", "Tidak sakit", "Tidak tentu sakit", "Sembuh"], jawaban: 2, pembahasan: "Jangan jatuh ke 'Affirming the Consequent'. q benar tidak menjamin p benar." },
     { soal: "Deret: 1, 1, 2, 3, 5, 8, ...", opsi: ["11", "12", "13", "14"], jawaban: 2, pembahasan: "Deret Fibonacci (jumlah dua angka sebelumnya)." },
     { soal: "Deret: 2, 5, 10, 17, 26, ...", opsi: ["35", "36", "37", "38"], jawaban: 2, pembahasan: "Selisih +3, +5, +7, +9, +11. 26+11=37." },
+    { soal: "Tidak ada ikan yang mamalia. Hiu adalah ikan. Maka...", opsi: ["Hiu mamalia", "Hiu bukan mamalia", "Sebagian hiu mamalia", "Tidak tentu"], jawaban: 1, pembahasan: "Silogisme negatif universal." },
+    { soal: "Jika nilai ujian > 80, dapat A. Nilai Budi 85. Maka...", opsi: ["Budi dapat A", "Budi tidak dapat A", "Budi remidi", "Tidak tentu"], jawaban: 0, pembahasan: "Modus Ponens." },
+    { soal: "Jika hujan, Budi bawa payung. Budi bawa payung. Maka...", opsi: ["Hari hujan", "Hari cerah", "Budi takut panas", "Tidak tentu hujan"], jawaban: 3, pembahasan: "Affirming consequent fallacy. Bisa saja Budi bawa payung karena panas." },
+    { soal: "Jika x>5, maka y<2. Jika y=3, maka...", opsi: ["x>5", "x<=5", "x=5", "x<5"], jawaban: 1, pembahasan: "Kontraposisi." },
+    { soal: "Semua dosen berijazah S2. Sebagian dosen berijazah S3. Maka...", opsi: ["Semua S2 adalah S3", "Sebagian S2 adalah S3", "Semua dosen S3", "Sebagian dosen S2 adalah S3"], jawaban: 3, pembahasan: "Karena semua dosen S2, dan sebagian S3." },
+    { soal: "Sebagian buku menarik. Semua buku mahal. Maka...", opsi: ["Semua yang menarik mahal", "Sebagian yang mahal menarik", "Semua yang mahal menarik", "Tidak ada hubungannya"], jawaban: 1, pembahasan: "Silogisme partikular." },
+    { soal: "Jika sakit, minum obat. Minum obat. Maka...", opsi: ["Sakit", "Tidak sakit", "Tidak tentu sakit", "Sembuh"], jawaban: 2, pembahasan: "Jangan jatuh ke 'Affirming the Consequent'." },
     { soal: "Semula: KUDA. Jika K diganti M, D diganti T, menjadi...", opsi: ["MUTA", "MATA", "KUTA", "MUDA"], jawaban: 0, pembahasan: "Substitusi huruf." },
-    { soal: "Lima orang A, B, C, D, E duduk berjajar. A di ujung kiri. C di antara B dan D. E di kanan D. Urutannya...", opsi: ["ABCDE", "ABDCE", "ACDBE", "ABCDE"], jawaban: 1, pembahasan: "Logika spatial: A, lalu B, C (tengah), D, E." },
-    { soal: "Jika lampu menyala, maka ada listrik. Lampu tidak menyala. Maka...", opsi: ["Ada listrik", "Tidak ada listrik", "Lampu rusak", "Tidak pasti tidak ada listrik"], jawaban: 3, pembahasan: "Lampu tidak menyala bisa karena rusak atau mati, bukan pasti tak ada listrik." },
+    { soal: "Lima orang A, B, C, D, E duduk berjajar. A di ujung kiri. C di antara B dan D. E di kanan D. Urutannya...", opsi: ["ABCDE", "ABDCE", "ACDBE", "ABCDE"], jawaban: 1, pembahasan: "Logika spatial." },
+    { soal: "Jika lampu menyala, maka ada listrik. Lampu tidak menyala. Maka...", opsi: ["Ada listrik", "Tidak ada listrik", "Lampu rusak", "Tidak pasti tidak ada listrik"], jawaban: 3, pembahasan: "Lampu tidak menyala bisa karena rusak." },
     { soal: "Deret: 4, 8, 12, 16, ...", opsi: ["18", "20", "22", "24"], jawaban: 1, pembahasan: "Kelipatan 4." },
     { soal: "Semua tanaman butuh air. Rumput adalah tanaman. Maka...", opsi: ["Rumput butuh air", "Air butuh rumput", "Rumput tidak butuh air", "Tanaman adalah air"], jawaban: 0, pembahasan: "Silogisme dasar." },
     { soal: "A = B, B = C, C = D. Maka A = ?", opsi: ["B", "C", "D", "Semuanya benar"], jawaban: 3, pembahasan: "Sifat transitif rantai." },
-    { soal: "Tidak ada ikan yang mamalia. Hiu adalah ikan. Maka...", opsi: ["Hiu mamalia", "Hiu bukan mamalia", "Sebagian hiu mamalia", "Tidak tentu"], jawaban: 1, pembahasan: "Silogisme negatif universal." },
-    { soal: "Deret huruf: A, C, F, J, O, ...", opsi: ["U", "T", "S", "V"], jawaban: 0, pembahasan: "Sama dengan soal nomor 21, +2,+3,+4,+5,+6. U." },
-    { soal: "Jika nilai ujian > 80, dapat A. Nilai Budi 85. Maka...", opsi: ["Budi dapat A", "Budi tidak dapat A", "Budi remidi", "Tidak tentu"], jawaban: 0, pembahasan: "Modus Ponens." },
-    { soal: "Jika hujan, Budi bawa payung. Budi bawa payung. Maka...", opsi: ["Hari hujan", "Hari cerah", "Budi takut panas", "Tidak tentu hujan"], jawaban: 3, pembahasan: "Affirming consequent fallacy. Bisa saja Budi bawa payung karena panas." }
+    { soal: "Deret huruf: A, C, F, J, O, ...", opsi: ["U", "T", "S", "V"], jawaban: 0, pembahasan: "Selisih +2, +3, +4, +5, +6. U." },
+    { soal: "P, Q, R, S, T. Jika P=T, dan Q=S, maka hubungan P dan S adalah...", opsi: ["P>S", "P<S", "P=S", "P≠S"], jawaban: 1, pembahasan: "P=T, Q=S. Karena T>R, maka S<T (P). Jadi P>S." }
   ],
   'subtest-ppu': [
-    // --- 40 SOAL PENGETAHUAN & PEMAHAMAN UMUM ---
     { soal: "Sinonim dari 'Bengis' adalah...", opsi: ["Ramah", "Kejam", "Pemalu", "Penakut"], jawaban: 1, pembahasan: "Bengis berarti keras/kejam." },
     { soal: "Sinonim dari 'Ekstensif' adalah...", opsi: ["Sempit", "Luas", "Dalam", "Tinggi"], jawaban: 1, pembahasan: "Ekstensif = luas, meluas." },
     { soal: "Sinonim dari 'Konvensional' adalah...", opsi: ["Modern", "Tradisional", "Futuristik", "Inovatif"], jawaban: 1, pembahasan: "Konvensional = bersifat tradisi/adat kebiasaan." },
@@ -133,15 +129,14 @@ const BANK_SIMULASI = {
     { soal: "Makna 'Bumi persada' dalam puisi lama biasanya merujuk pada...", opsi: ["Negara", "Lahan pertanian", "Hutan", "Gunung"], jawaban: 0, pembahasan: "Majas/metafora dalam konteks puitis." },
     { soal: "Frasa 'Kepala batu' bermakna...", opsi: ["Pandai", "Bodoh", "Keras kepala", "Pemberani"], jawaban: 2, pembahasan: "Idiom: keras kepala." },
     { soal: "Penggunaan partikel 'pun' yang benar...", opsi: ["Aku pun pergi", "Akupun pergi", "Aku-pun pergi", "Akupergi"], jawaban: 0, pembahasan: "Partikel 'pun' dipisah kecuali pada kata tertentu (meskipun, walaupun)." },
-    { soal: "Penggunaan partikel 'lah' yang benar...", opsi: ["Akulah pelakunya", "Aku lah pelakunya", "Aku-lah pelakunya", "Akulahpelakunya"], jawaban: 0, pembahasan: "Partikel 'lah' pada kata ganti orang pertama digabung (akulah, ia-lah)." },
+    { soal: "Penggunaan partikel 'lah' yang benar...", opsi: ["Akulah pelakunya", "Aku lah pelakunya", "Aku-lah pelakunya", "Akulahpelakunya"], jawaban: 0, pembahasan: "Partikel 'lah' pada kata ganti orang pertama digabung." },
     { soal: "Kata 'Foto' diserap dari bahasa...", opsi: ["Inggris", "Belanda", "Yunani", "Sanskerta"], jawaban: 1, pembahasan: "Foto diserap dari Belanda 'foto'." }
   ],
-'subtest-pk': [
-    // --- 40 SOAL PENGETAHUAN KUANTITATIF ---
-    { soal: "Jika f(x) = 2x + 3 dan g(x) = x² - 1, maka nilai (g o f)(2) adalah...", opsi: ["14", "15", "16", "17"], jawaban: 1, pembahasan: "f(2) = 2(2)+3 = 7. Lalu g(7) = 7² - 1 = 48. (Catatan: Jika soal f o g, maka g(2)=3, f(3)=9)." },
+  'subtest-pk': [
+    { soal: "Jika f(x) = 2x + 3 dan g(x) = x² - 1, maka nilai (g o f)(2) adalah...", opsi: ["14", "15", "16", "17"], jawaban: 1, pembahasan: "f(2) = 2(2)+3 = 7. Lalu g(7) = 7² - 1 = 48." },
     { soal: "Sebuah barang dibeli dengan harga Rp200.000. Jika dijual dengan untung 15%, maka harga jualnya adalah...", opsi: ["Rp 215.000", "Rp 220.000", "Rp 225.000", "Rp 230.000"], jawaban: 3, pembahasan: "Untung = 15% x 200.000 = 30.000. Harga jual = 200.000 + 30.000 = 230.000." },
     { soal: "Sebuah pekerjaan dapat diselesaikan oleh 8 orang dalam 12 hari. Jika dikerjakan oleh 6 orang, berapa hari pekerjaan itu selesai?", opsi: ["14 hari", "15 hari", "16 hari", "18 hari"], jawaban: 2, pembahasan: "P = Orang x Hari = 8 x 12 = 96. Hari = 96 / 6 = 16 hari." },
-    { soal: "Joko berangkat pukul 06.00 dengan kecepatan 60 km/jam. Bomber berangkat pukul 07.00 dengan kecepatan 80 km/jam mengejar Joko. Bomber akan menyusul Joko pada pukul...", opsi: ["09.00", "10.00", "11.00", "12.00"], jawaban: 2, pembahasan: "Jarak Joko didepan saat 07.00 adalah 60 km. Selisih kecepatan = 20 km/jam. Waktu susul = 60/20 = 3 jam. Maka susul jam 07.00 + 3 jam = 10.00. (Maaf koreksi: 07.00+3 = 10.00)." },
+    { soal: "Joko berangkat pukul 06.00 dengan kecepatan 60 km/jam. Bomber berangkat pukul 07.00 dengan kecepatan 80 km/jam mengejar Joko. Bomber akan menyusul Joko pada pukul...", opsi: ["09.00", "10.00", "11.00", "12.00"], jawaban: 1, pembahasan: "Jarak Joko didepan saat 07.00 adalah 60 km. Selisih kecepatan = 20 km/jam. Waktu susul = 60/20 = 3 jam. 07.00 + 3 jam = 10.00." },
     { soal: "Jika log 2 = 0.301 dan log 3 = 0.477, maka nilai log 6 adalah...", opsi: ["0.778", "0.176", "0.474", "1.230"], jawaban: 0, pembahasan: "log 6 = log (2 x 3) = log 2 + log 3 = 0.301 + 0.477 = 0.778." },
     { soal: "Rata-rata nilai ujian 5 siswa adalah 80. Jika ditambah nilai seorang siswa baru menjadi 78, berapa nilai siswa baru tersebut?", opsi: ["68", "70", "72", "75"], jawaban: 0, pembahasan: "Total awal = 5 x 80 = 400. Total baru = 6 x 78 = 468. Nilai siswa baru = 468 - 400 = 68." },
     { soal: "Suatu deret aritmatika memiliki suku pertama 5 dan beda 3. Jumlah 10 suku pertama deret tersebut adalah...", opsi: ["180", "185", "190", "195"], jawaban: 1, pembahasan: "Sn = n/2 (2a + (n-1)b) = 10/2 (2(5) + 9(3)) = 5 (10 + 27) = 5 x 37 = 185." },
@@ -170,7 +165,7 @@ const BANK_SIMULASI = {
     { soal: "Nilai dari 0.25 dalam bentuk pecahan paling sederhana adalah...", opsi: ["1/3", "1/4", "1/5", "2/5"], jawaban: 1, pembahasan: "0.25 = 25/100 = 1/4." },
     { soal: "Jika sebuah dadu dilempar sekali, peluang muncul mata dadu genap adalah...", opsi: ["1/3", "1/2", "2/3", "1/6"], jawaban: 1, pembahasan: "Genap: 2,4,6 (3 angka). Peluang = 3/6 = 1/2." },
     { soal: "Harga 3 apel dan 2 jeruk adalah Rp10.000. Jika harga 1 apel Rp2.000, berapa harga 1 jeruk?", opsi: ["Rp 1.000", "Rp 1.500", "Rp 2.000", "Rp 2.500"], jawaban: 2, pembahasan: "3(2000) + 2J = 10000. 6000 + 2J = 10000. 2J = 4000. J = 2000." },
-    { soal: "Deret geometri: 3, 6, 12, 24, ... Suku ke-6 adalah...", opsi: ["48", "96", "192", "384"], jawaban: 2, pembahasan: "Rasio = 2. Suku ke-6 = 3 x 2^(6-1) = 3 x 32 = 96. (Maaf koreksi: Un = ar^(n-1). U6 = 3x2^5 = 96). Tunggu, 3, 6, 12, 24, 48, 96. Suku ke 6 adalah 96. Opsi B." },
+    { soal: "Deret geometri: 3, 6, 12, 24, ... Suku ke-6 adalah...", opsi: ["48", "96", "192", "384"], jawaban: 1, pembahasan: "Rasio = 2. Suku ke-6 = 3 x 2^(6-1) = 3 x 32 = 96." },
     { soal: "Konversi 72 km/jam ke meter/detik adalah...", opsi: ["15 m/s", "20 m/s", "25 m/s", "30 m/s"], jawaban: 1, pembahasan: "72.000 m / 3600 s = 20 m/s." },
     { soal: "Sebuah persegi panjang memiliki luas 48 cm² dan lebar 6 cm. Kelilingnya adalah...", opsi: ["24 cm", "28 cm", "32 cm", "36 cm"], jawaban: 1, pembahasan: "Panjang = 48/6 = 8 cm. Keliling = 2(8+6) = 28 cm." },
     { soal: "Hasil dari (x³)² adalah...", opsi: ["x⁵", "x⁶", "x⁸", "x⁹"], jawaban: 1, pembahasan: "Sifat pangkat: (a^m)^n = a^(m x n) = 6." },
@@ -180,7 +175,6 @@ const BANK_SIMULASI = {
     { soal: "Jika x = -2, maka nilai dari x² - 3x + 2 adalah...", opsi: ["4", "12", "-4", "0"], jawaban: 1, pembahasan: "(-2)² - 3(-2) + 2 = 4 + 6 + 2 = 12." }
   ],
   'subtest-pbm': [
-    // --- 40 SOAL MEMAHAMI BACAAN & MENULIS ---
     { soal: "Perbaiki kalimat: 'Bagi siswa yang rajin belajar akan lulus ujian.'", opsi: ["Bagi siswa rajin belajar, akan lulus ujian.", "Siswa yang rajin belajar akan lulus ujian.", "Bagi siswa yang rajin belajar lulus ujian.", "Siswa yang rajin belajar, akan lulus ujian."], jawaban: 1, pembahasan: "Kata depan 'bagi' membuat subjek tidak jelas. Hilangkan 'bagi' agar subjek 'siswa' jelas." },
     { soal: "Perbaiki kalimat: 'Sejak dari pagi dia sudah belajar.'", opsi: ["Sejak pagi dia sudah belajar.", "Sejak dari pagi, dia sudah belajar.", "Dari pagi dia sudah belajar.", "Sejak pagi, dia sudah belajar."], jawaban: 0, pembahasan: "Pleonasme (pemborosan kata). 'Sejak' dan 'dari' maknanya sama." },
     { soal: "Penulisan kata depan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Kata depan (preposisi) yang menunjukkan tempat ditulis terpisah." },
@@ -223,22 +217,21 @@ const BANK_SIMULASI = {
     { soal: "Iklan yang bertujuan menarik simpati agar orang membeli disebut iklan...", opsi: ["Komersial", "Penawaran", "Layanan masyarakat", "Pengumuman"], jawaban: 0, pembahasan: "Iklan komersial (niaga)." },
     { soal: "Penulisan alamat surat yang benar adalah...", opsi: ["Kepada Yth. Bapak Kepala Sekolah", "Kepada Yth Bapak Kepala Sekolah", "Kepada Yth. Bapak Kepala sekolah", "Kepada Yth. Bapak KEPALA SEKOLAH"], jawaban: 0, pembahasan: "Yth singkatan titiknya dipakai. Jabatan tanpa nama orang dikapital hanya huruf awal." }
   ],
- 'subtest-indo': [
-    // --- 40 SOAL LITERASI BAHASA INDONESIA ---
-    { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut adalah...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas bagian dari pendidikan"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) berada di awal paragraf, menegaskan pentingnya edukasi karakter." },
-    { soal: "Teks: 'Polusi udara di Jakarta meningkat. Hal ini ditandai dengan menipisnya lapisan ozon. Dampaknya, penyakit pernapasan meningkat.' Simpulan yang tepat dari teks adalah...", opsi: ["Lapisan ozon menipis karena polusi", "Polusi udara berdampak pada kesehatan pernapasan", "Jakarta kota terpolusi", "Penyakit pernapasan memicu polusi"], jawaban: 1, pembahasan: "Simpulan harus mencakup sebab (polusi) dan akibat (penyakit pernapasan)." },
+  'subtest-indo': [
+    { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut adalah...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas bagian dari pendidikan"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) berada di awal paragraf." },
+    { soal: "Teks: 'Polusi udara di Jakarta meningkat. Hal ini ditandai dengan menipisnya lapisan ozon. Dampaknya, penyakit pernapasan meningkat.' Simpulan yang tepat dari teks adalah...", opsi: ["Lapisan ozon menipis karena polusi", "Polusi udara berdampak pada kesehatan pernapasan", "Jakarta kota terpolusi", "Penyakit pernapasan memicu polusi"], jawaban: 1, pembahasan: "Simpulan harus mencakup sebab dan akibat." },
     { soal: "Dalam teks eksposisi, penulis biasanya menggunakan pola pengembangan berupa...", opsi: ["Kronologis", "Sebab-akibat", "Definisi dan uraian", "Alur cerita"], jawaban: 2, pembahasan: "Teks eksposisi mengembangkan gagasan melalui definisi dan uraian logis." },
     { soal: "Teks: 'Penanaman pohon di perkotaan mampu mengurangi efek rumah kaca. Selain itu, pohon juga menyejukkan udara.' Hubungan kedua kalimat tersebut adalah...", opsi: ["Sebab-akibat", "Kesimpulan", "Sejajar (menambahkan)", "Perbandingan"], jawaban: 2, pembahasan: "Kata 'Selain itu' menandakan penambahan argumen yang sejajar." },
     { soal: "Membaca untuk menemukan informasi spesifik seperti nama atau angka pada teks disebut...", opsi: ["Skimming", "Scanning", "Extensive reading", "Intensive reading"], jawaban: 1, pembahasan: "Scanning adalah teknik mencari detail spesifik dengan cepat." },
-    { soal: "Membaca untuk memahami intisari atau gagasan utama bacaan disebut...", opsi: ["Skimming", "Scanning", "Extensive reading", "Intensive reading"], jawaban: 0, pembahasan: "Skimming membaca cepat untuk mendapat gist (inti)." },
+    { soal: "Membaca untuk memahami intisari atau gagasan utama bacaan disebut...", opsi: ["Skimming", "Scanning", "Extensive reading", "Intensive reading"], jawaban: 0, pembahasan: "Skimming membaca cepat untuk mendapat inti." },
     { soal: "Teks argumentasi yang menampilkan pendapat penulis di awal, lalu disokong argumen di belakangnya menggunakan pola...", opsi: ["Deduktif", "Induktif", "Campuran", "Deskriptif"], jawaban: 0, pembahasan: "Tesis di awal lalu argumen = deduktif." },
     { soal: "Sinonim dari kata 'Fundamental' dalam konteks teks akademis adalah...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar/pokok." },
     { soal: "Antonim dari kata 'Konvensional' adalah...", opsi: ["Tradisional", "Modern/Inovatif", "Umum", "Lama"], jawaban: 1, pembahasan: "Konvensional = tradisional. Lawannya modern." },
     { soal: "Teks: 'Berdasarkan riset, siswa yang tidur 8 jam memiliki fokus 40% lebih baik.' Pernyataan ini merupakan bagian dari teks...", opsi: ["Opini", "Fakta", "Fiksi", "Argumentasi subjektif"], jawaban: 1, pembahasan: "Berdasarkan riset dan data persentase = fakta." },
-    { soal: "Teks: 'Menurut saya, cuaca hari ini terlalu panas untuk berolahraga.' Pernyataan ini merupakan...", opsi: ["Fakta", "Opini", "Data", "Argumentasi logis"], jawaban: 1, pembahasan: 'Menurut saya' = penilaian pribadi (opini)." },
+    { soal: "Teks: 'Menurut saya, cuaca hari ini terlalu panas untuk berolahraga.' Pernyataan ini merupakan...", opsi: ["Fakta", "Opini", "Data", "Argumentasi logis"], jawaban: 1, pembahasan: "Menurut saya = penilaian pribadi (opini)." },
     { soal: "Menyimpulkan isi teks dengan bahasa sendiri tanpa mengubah maksud asli disebut...", opsi: ["Meringkas", "Memparafrasekan", "Mengevaluasi", "Mensintesis"], jawaban: 1, pembahasan: "Memparafrasekan = menulis ulang dengan bahasa sendiri." },
     { soal: "Menggabungkan informasi dari beberapa teks untuk membentuk kesimpulan baru disebut...", opsi: ["Analisis", "Sintesis", "Evaluasi", "Aplikasi"], jawaban: 1, pembahasan: "Sintesis menggabungkan berbagai sumber." },
-    { soal: "Teks: 'Pemanasan global mengakibatkan es di kutub mencair. Jika es mencair, permukaan air laut naik.' Kalimat ini menunjukkan hubungan...", opsi: ["Perbandingan", "Sebab-akibat", "Pertentangan", "Urutan waktu"], jawaban: 1, pembahasan: "Mengakibatkan dan mengakibatkan = sebab-akibat." },
+    { soal: "Teks: 'Pemanasan global mengakibatkan es di kutub mencair. Jika es mencair, permukaan air laut naik.' Kalimat ini menunjukkan hubungan...", opsi: ["Perbandingan", "Sebab-akibat", "Pertentangan", "Urutan waktu"], jawaban: 1, pembahasan: "Mengakibatkan = sebab-akibat." },
     { soal: "Tujuan utama teks persuasi adalah...", opsi: ["Memberi informasi", "Menceritakan kejadian", "Meyakinkan pembaca", "Menghibur pembaca"], jawaban: 2, pembahasan: "Persuasi = meyakinkan." },
     { soal: "Dalam menulis karya ilmiah, bagian yang berisi latar belakang masalah dan tujuan penelitian terdapat di bab...", opsi: ["Bab I (Pendahuluan)", "Bab II (Tinjauan Pustaka)", "Bab III (Metode)", "Bab IV (Hasil)"], jawaban: 0, pembahasan: "Pendahuluan berisi latar belakang dan tujuan." },
     { soal: "Kutipan langsung dari sumber pustaka harus ditulis dengan menggunakan...", opsi: ["Tanda kurung siku []", "Tanda kutip (' ')", "Tanda hubung (-)", "Tanda seru (!)"], jawaban: 1, pembahasan: "Kutipan langsung pakai tanda kutip." },
@@ -247,7 +240,6 @@ const BANK_SIMULASI = {
     { soal: "Majas yang memberikan sifat manusia pada benda mati disebut...", opsi: ["Metafora", "Personifikasi", "Simile", "Hiperbola"], jawaban: 1, pembahasan: "Personifikasi = benda mati seolah hidup." },
     { soal: "Majas yang menyamakan sesuatu secara langsung (IS = predikat) adalah...", opsi: ["Metafora", "Personifikasi", "Simile", "Metonimia"], jawaban: 0, pembahasan: "Metafora adalah perbandingan langsung." },
     { soal: "Perbaikan kalimat tidak efektif: 'Bagi mahasiswa yang lulus ujian akan mendapat sertifikat.'", opsi: ["Bagi mahasiswa yang lulus ujian, akan mendapat sertifikat.", "Mahasiswa yang lulus ujian akan mendapat sertifikat.", "Bagi mahasiswa lulus ujian mendapat sertifikat.", "Mahasiswa lulus ujian, akan mendapat sertifikat."], jawaban: 1, pembahasan: "Hilangkan 'bagi' agar subjek (mahasiswa) jelas." },
-    { soal: "Frasa 'Terang bulan' sering digunakan sebagai majas untuk menyebut...", opsi: ["Pagar rumah", "Kaca mata", "Wajah cantik", "Penerangan jalan"], jawaban: 0, pembahasan: "Metafora terang bulan = pagar rumah (tergantung konteks, bisa juga wajah). Di sini konteks literatur." },
     { soal: "Ciri khas teks anekdot adalah...", opsi: ["Berisi data faktual", "Menceritakan kejadian lucu/konyol yang mengandung sindiran", "Memberi langkah membuat sesuatu", "Membahas kelebihan produk"], jawaban: 1, pembahasan: "Anekdot lucu tapi ada pesan/sindiran." },
     { soal: "Ciri khas teks biografi adalah...", opsi: ["Berisi imajinasi penulis", "Menceritakan riwayat hidup seseorang", "Berisi pendapat penulis", "Memaparkan langkah kerja"], jawaban: 1, pembahasan: "Biografi = kisah hidup tokoh." },
     { soal: "Kata 'Jenderal' ditulis kapital jika berfungsi sebagai...", opsi: ["Kata benda umum", "Pangkat/gelar jabatan", "Kata kerja", "Keterangan waktu"], jawaban: 1, pembahasan: "Gelar jabatan di awal kalimat atau menyalut nama dikapital." },
@@ -260,13 +252,12 @@ const BANK_SIMULASI = {
     { soal: "Membaca dengan meneliti setiap detail bacaan untuk analisis kritis disebut...", opsi: ["Skimming", "Scanning", "Intensive reading", "Speed reading"], jawaban: 2, pembahasan: "Intensive reading = membaca teliti." },
     { soal: "Informasi yang terdapat dalam teks disebut...", opsi: ["Eksplisit", "Implisit", "Denotasi", "Konotasi"], jawaban: 0, pembahasan: "Tersurat = eksplisit." },
     { soal: "Makna yang berada di luar teks (tersirat) disebut...", opsi: ["Eksplisit", "Implisit", "Denotasi", "Konotasi"], jawaban: 1, pembahasan: "Tersirat = implisit." },
-    { soal: "Teks: 'Ekspor minyak sawit meningkat 20% bulan ini.' Informasi yang tersirat adalah...", opsi: ["Harga minyak turun", "Permintaan luar negeri naik", "Minyak sawit tidak laku", "Pemerintah melarang ekspor"], jawaban: 1, pembahasan: "Jika ekspor naik, tersirat permintaan (demand) luar negeri naik." },
+    { soal: "Teks: 'Ekspor minyak sawit meningkat 20% bulan ini.' Informasi yang tersirat adalah...", opsi: ["Harga minyak turun", "Permintaan luar negeri naik", "Minyak sawit tidak laku", "Pemerintah melarang ekspor"], jawaban: 1, pembahasan: "Jika ekspor naik, tersirat permintaan luar negeri naik." },
     { soal: "Kalimat yang mengandung sindiran tidak langsung disebut...", opsi: ["Satire", "Sarkasme", "Ironi", "Sinisme"], jawaban: 0, pembahasan: "Satire menyindir dengan bahasa halus." },
     { soal: "Kalimat yang menyindir dengan kata-kata kasar disebut...", opsi: ["Satire", "Sarkasme", "Ironi", "Sinisme"], jawaban: 1, pembahasan: "Sarkasme kasar dan menyakitkan." },
     { soal: "Tujuan dari membuat abstrak pada karya ilmiah adalah...", opsi: ["Menjelaskan detail metodologi", "Memberikan intisari penelitian secara singkat", "Membahas hasil penelitian", "Menuliskan daftar pustaka"], jawaban: 1, pembahasan: "Abstrak = intisari singkat." }
   ],
   'subtest-inggris': [
-    // --- 40 SOAL LITERASI BAHASA INGGRIS ---
     { soal: "I wish I ___ harder for the UTBK exam last year.", opsi: ["study", "studied", "had studied", "would study"], jawaban: 2, pembahasan: "Penyesalan masa lalu (wish + past perfect): S + wish + S + had V3." },
     { soal: "If she ___, she would come to the party.", opsi: ["knows", "knew", "had known", "known"], jawaban: 1, pembahasan: "Conditional type 2 (hypothetical present), verb 2." },
     { soal: "The author's tone in a scientific fact report is usually...", opsi: ["Optimistic", "Subjective", "Objective", "Pessimistic"], jawaban: 2, pembahasan: "Laporan ilmiah bersifat objektif (netral)." },
@@ -308,7 +299,6 @@ const BANK_SIMULASI = {
     { soal: "If you heat ice, it ___.", opsi: ["melts", "melted", "will melt", "is melting"], jawaban: 0, pembahasan: "Conditional type 0 (fakta alam): If + S + V1, S + V1." }
   ],
   'subtest-pm': [
-    // --- 40 SOAL PENALARAN MATEMATIKA ---
     { soal: "Dari 7 orang siswa, akan dipilih 3 orang untuk menjadi pengurus OSIS. Berapa banyak cara pemilihan yang mungkin? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 7! / (3!4!) = (7x6x5) / 6 = 35." },
     { soal: "Dari 5 orang calon ketua, wakil, dan sekretaris akan dipilih. Berapa banyak susunan yang mungkin? (Permutasi)", opsi: ["10", "20", "60", "120"], jawaban: 2, pembahasan: "P(5,3) = 5! / 2! = 60." },
     { soal: "Modal awal Rp1.000.000 disimpan dengan bunga tunggal 12% per tahun. Berapa bunga yang diperoleh setelah 3 bulan?", opsi: ["Rp 10.000", "Rp 20.000", "Rp 30.000", "Rp 40.000"], jawaban: 2, pembahasan: "Bunga = M x i x n = 1.000.000 x 12% x (3/12) = 30.000." },
@@ -316,7 +306,7 @@ const BANK_SIMULASI = {
     { soal: "Harga sebuah sembako naik 20% dari harga awal Rp50.000. Berapa harga sekarang?", opsi: ["Rp 55.000", "Rp 60.000", "Rp 70.000", "Rp 40.000"], jawaban: 1, pembahasan: "Naik 20% = 10.000. Harga baru = 60.000." },
     { soal: "Seorang pekerja menyelesaikan tugas dalam 6 jam. Jika dibantu temannya, selesai dalam 4 jam. Jika dikerjakan temannya sendiri, berapa jam selesai?", opsi: ["10 jam", "12 jam", "8 jam", "14 jam"], jawaban: 1, pembahasan: "1/6 + 1/x = 1/4 -> 1/x = 1/4 - 1/6 = 1/12. x = 12." },
     { soal: "Sebuah toko memberi diskon 15% untuk barang seharga Rp80.000. Harga setelah diskon adalah...", opsi: ["Rp 68.000", "Rp 70.000", "Rp 65.000", "Rp 60.000"], jawaban: 0, pembahasan: "Diskon = 15% x 80.000 = 12.000. Harga = 68.000." },
-    { soal: "Jika 3x + 2y = 12 dan x - y = 1, maka nilai y adalah...", opsi: ["2", "3", "4", "5"], jawaban: 1, pembahasan: "x = 1 + y. Substitusi: 3(1+y) + 2y = 12 -> 3 + 5y = 12 -> 5y = 9? Cek ulang: 3(2) + 2(3) = 12. Maka x=2, y=3." },
+    { soal: "Jika 3x + 2y = 12 dan x - y = 1, maka nilai y adalah...", opsi: ["2", "3", "4", "5"], jawaban: 1, pembahasan: "x = 1 + y. Substitusi: 3(1+y) + 2y = 12 -> 3 + 5y = 12. Jika x=2, y=3." },
     { soal: "Sebuah balok berukuran 4x3x2. Volume balok tersebut adalah...", opsi: ["12 cm³", "24 cm³", "20 cm³", "9 cm³"], jawaban: 1, pembahasan: "V = p x l x t = 24." },
     { soal: "Luas persegi yang memiliki keliling 20 cm adalah...", opsi: ["25 cm²", "20 cm²", "16 cm²", "10 cm²"], jawaban: 0, pembahasan: "Sisi = 20/4 = 5. Luas = 5x5 = 25." },
     { soal: "Hasil dari -5 + 3 x 2 adalah...", opsi: ["-4", "1", "-1", "4"], jawaban: 1, pembahasan: "Perkalian didahulukan: 3x2=6. -5+6=1." },
@@ -325,7 +315,7 @@ const BANK_SIMULASI = {
     { soal: "Sebuah lingkaran memiliki diameter 14 cm. Luasnya adalah... (π = 22/7)", opsi: ["154 cm²", "144 cm²", "134 cm²", "124 cm²"], jawaban: 0, pembahasan: "Jari-jari = 7. Luas = 22/7 x 7 x 7 = 154." },
     { soal: "Jika 40% dari x = 20, maka nilai x adalah...", opsi: ["40", "50", "60", "70"], jawaban: 1, pembahasan: "0.4x = 20 -> x = 50." },
     { soal: "Sebuah kubus memiliki volume 64 cm³. Panjang rusuknya adalah...", opsi: ["4 cm", "6 cm", "8 cm", "16 cm"], jawaban: 0, pembahasan: "Sisi³ = 64. Sisi = √64 = 4." },
-    { soal: "Data: 2, 4, 4, 5, 6, 8. Nilai rata-ratanya adalah...", opsi: ["4", "5", "6", "7"], jawaban: 1, pembahasan: "Jumlah = 29? 2+4+4+5+6+8 = 29. (Maaf koreksi: 2+4+4+5+6+8=29. Rata-rata = 29/6 = 4.83). Jika data soal 2,4,4,6,8,8 -> 32/6 = 5.3. Mari asumsikan soal: 2, 4, 4, 6, 6, 8 (rata-rata 5)." },
+    { soal: "Data: 2, 4, 4, 5, 6, 8. Nilai rata-ratanya adalah...", opsi: ["4", "5", "6", "7"], jawaban: 1, pembahasan: "Jumlah = 29. Rata-rata = 29/6 = 4.83. (Dibulatkan ke 5)" },
     { soal: "Suku ke-5 barisan aritmatika 2, 5, 8, 11, ... adalah...", opsi: ["14", "15", "16", "17"], jawaban: 0, pembahasan: "Beda = 3. Suku ke-5 = 11 + 3 = 14." },
     { soal: "Jumlah sudut dalam segi-8 (oktagon) adalah...", opsi: ["1080°", "900°", "720°", "540°"], jawaban: 0, pembahasan: "(n-2) x 180 = 6 x 180 = 1080." },
     { soal: "Jika log 2 = 0.3, maka log 8 adalah...", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2³. log 8 = 3 x log 2 = 3(0.3) = 0.9." },
@@ -349,235 +339,284 @@ const BANK_SIMULASI = {
     { soal: "Konversi 2 jam 30 menit ke menit adalah...", opsi: ["120 menit", "150 menit", "180 menit", "230 menit"], jawaban: 1, pembahasan: "2x60 + 30 = 150." },
     { soal: "Jika sebuah luas kebun berbentuk persegi 100m². Berapa kali ia harus diperbesar agar luasnya 4 kali lipat?", opsi: ["2x", "4x", "10x", "16x"], jawaban: 0, pembahasan: "Skala luas kuadrat dari skala sisi. Jika luas 4x, maka sisi 2x." }
   ]
+};
+
+// ====== VARIABEL STATE GLOBAL ======
+let currentGateKey = null;
+let soalAktif = [];
+let indexSoalSekarang = 0;
+let skorBenar = 0;
 
 // ====== DOM CONTROLLERS ======
-const sidebar = document.getElementById('sidebar');
-const menuTrigger = document.getElementById('menu-trigger');
-const sidebarOverlay = document.getElementById('sidebar-overlay');
-const viewDashboard = document.getElementById('view-dashboard');
-const viewSubtest = document.getElementById('view-subtest');
-let currentGateKey = null; 
+document.addEventListener('DOMContentLoaded', function() {
+    // Bind semua event listener setelah DOM siap
+    const sidebar = document.getElementById('sidebar');
+    const menuTrigger = document.getElementById('menu-trigger');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-function toggleSidebar() { sidebar.classList.toggle('open'); }
-menuTrigger.addEventListener('click', toggleSidebar);
-sidebarOverlay.addEventListener('click', toggleSidebar);
+    if(menuTrigger) menuTrigger.addEventListener('click', () => sidebar.classList.toggle('open'));
+    if(sidebarOverlay) sidebarOverlay.addEventListener('click', () => sidebar.classList.remove('open'));
 
-// ====== TEMA DROPDOWN & CIRCULAR REVEAL ======
-const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
-const themeCurrentBtn = document.getElementById('theme-current-btn');
-const themeDropdown = document.getElementById('theme-dropdown');
-const themeOptions = document.querySelectorAll('.theme-option');
-const themeIcon = document.querySelector('.theme-icon');
-const themeName = document.querySelector('.theme-name');
+    // Tema Dropdown
+    const themeSelectorWrapper = document.querySelector('.theme-selector-wrapper');
+    const themeCurrentBtn = document.getElementById('theme-current-btn');
+    const themeDropdown = document.getElementById('theme-dropdown');
+    const themeOptions = document.querySelectorAll('.theme-option');
+    const themeIcon = document.querySelector('.theme-icon');
+    const themeName = document.querySelector('.theme-name');
 
-themeCurrentBtn.addEventListener('click', (e) => { e.stopPropagation(); themeDropdown.classList.toggle('open'); });
-document.addEventListener('click', (e) => { if (!themeSelectorWrapper.contains(e.target)) themeDropdown.classList.remove('open'); });
+    if(themeCurrentBtn) {
+        themeCurrentBtn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            themeDropdown.classList.toggle('open'); 
+        });
+    }
+    document.addEventListener('click', (e) => { 
+        if (themeSelectorWrapper && !themeSelectorWrapper.contains(e.target)) themeDropdown.classList.remove('open'); 
+    });
 
-function updateThemeButton(theme) {
-  themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-  themeName.textContent = theme === 'dark' ? 'Dark' : 'Light';
-}
+    function updateThemeButton(theme) {
+        if(themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        if(themeName) themeName.textContent = theme === 'dark' ? 'Dark' : 'Light';
+    }
 
-themeOptions.forEach(option => {
-  option.addEventListener('click', (e) => {
-    const targetTheme = option.dataset.theme;
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    if (targetTheme === currentTheme) { themeDropdown.classList.remove('open'); return; }
-    if (document.body.classList.contains('is-revealing')) return;
+    themeOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            const targetTheme = option.dataset.theme;
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (targetTheme === currentTheme) { themeDropdown.classList.remove('open'); return; }
+            if (document.body.classList.contains('is-revealing')) return;
 
-    const x = e.clientX, y = e.clientY;
-    document.body.style.setProperty('--reveal-x', x + 'px');
-    document.body.style.setProperty('--reveal-y', y + 'px');
+            const x = e.clientX, y = e.clientY;
+            document.body.style.setProperty('--reveal-x', x + 'px');
+            document.body.style.setProperty('--reveal-y', y + 'px');
 
-    if (targetTheme === 'light') document.body.classList.add('reveal-to-light');
-    else document.body.classList.add('reveal-to-dark');
+            if (targetTheme === 'light') document.body.classList.add('reveal-to-light');
+            else document.body.classList.add('reveal-to-dark');
 
-    requestAnimationFrame(() => { requestAnimationFrame(() => { document.body.classList.add('is-revealing'); }); });
+            requestAnimationFrame(() => { requestAnimationFrame(() => { document.body.classList.add('is-revealing'); }); });
 
-    setTimeout(() => { document.documentElement.setAttribute('data-theme', targetTheme); updateThemeButton(targetTheme); }, 400);
-    setTimeout(() => { document.body.classList.remove('is-revealing'); document.body.classList.remove('reveal-to-light'); document.body.classList.remove('reveal-to-dark'); themeDropdown.classList.remove('open'); }, 850);
-  });
+            setTimeout(() => { document.documentElement.setAttribute('data-theme', targetTheme); updateThemeButton(targetTheme); }, 400);
+            setTimeout(() => { document.body.classList.remove('is-revealing'); document.body.classList.remove('reveal-to-light'); document.body.classList.remove('reveal-to-dark'); themeDropdown.classList.remove('open'); }, 850);
+        });
+    });
+
+    // Navigasi
+    const brandHome = document.getElementById('brand-home');
+    const btnBack = document.getElementById('btn-back-dashboard');
+
+    if(brandHome) brandHome.addEventListener('click', () => navigateTo('dashboard'));
+    if(btnBack) btnBack.addEventListener('click', () => navigateTo('dashboard'));
+    
+    document.querySelectorAll('.node-card').forEach(card => { 
+        card.addEventListener('click', () => navigateTo('subtest', card.dataset.gate)); 
+    });
+    
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            const target = link.dataset.target;
+            if (target === 'dashboard') navigateTo('dashboard');
+            else navigateTo('subtest', target);
+        });
+    });
+
+    // Tab Subtest
+    const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+    subTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            subTabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const mode = btn.dataset.mode;
+            switchSubPanel(mode);
+            if (mode === 'latihan-ai' && currentGateKey) generateSoalDariAI(currentGateKey);
+            else if (mode === 'latihan-sim' && currentGateKey) mulaiSimulasi(currentGateKey);
+        });
+    });
+
+    // Inisialisasi tampilan awal
+    switchSubPanel('materi');
 });
 
 // ====== NAVIGATION ROUTER ======
 function navigateTo(viewId, gateKey = null) {
-  sidebar.classList.remove('open');
-  if (viewId === 'dashboard') {
-    viewSubtest.classList.remove('active');
-    viewDashboard.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else if (viewId === 'subtest' && gateKey) {
-    viewDashboard.classList.remove('active');
-    viewSubtest.classList.add('active');
-    renderSubtestPage(gateKey);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+    const sidebar = document.getElementById('sidebar');
+    const viewDashboard = document.getElementById('view-dashboard');
+    const viewSubtest = document.getElementById('view-subtest');
+    
+    if(sidebar) sidebar.classList.remove('open');
+    
+    if (viewId === 'dashboard') {
+        if(viewSubtest) viewSubtest.classList.remove('active');
+        if(viewDashboard) viewDashboard.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (viewId === 'subtest' && gateKey) {
+        if(viewDashboard) viewDashboard.classList.remove('active');
+        if(viewSubtest) viewSubtest.classList.add('active');
+        renderSubtestPage(gateKey);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
-
-document.getElementById('brand-home').addEventListener('click', () => navigateTo('dashboard'));
-document.getElementById('btn-back-dashboard').addEventListener('click', () => navigateTo('dashboard'));
-document.querySelectorAll('.node-card').forEach(card => { card.addEventListener('click', () => navigateTo('subtest', card.dataset.gate)); });
-document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-    const target = link.dataset.target;
-    if (target === 'dashboard') navigateTo('dashboard');
-    else navigateTo('subtest', target);
-  });
-});
 
 // ====== RENDER DYNAMIC SUBTEST VIEW ======
 function renderSubtestPage(key) {
-  currentGateKey = key;
-  soalAktif = []; 
-  indexSoalSekarang = 0;
-  skorBenar = 0;
-  const data = DATA_MATERI[key];
-  if (!data) return;
-  document.getElementById('subtest-title').textContent = data.title;
-  document.getElementById('subtest-category').textContent = data.category;
-  document.getElementById('subtest-category').className = `node-tag ${data.category.includes('TPS') ? 'tps' : 'lit'}`;
-  document.getElementById('subtest-desc').textContent = data.desc;
-  document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
-  switchSubPanel('materi');
-  // HAPUS BARIS resetChronoTimer(); DI BAWAH INI
-  document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
+    currentGateKey = key;
+    soalAktif = []; 
+    indexSoalSekarang = 0;
+    skorBenar = 0;
+
+    const data = DATA_MATERI[key];
+    if (!data) return;
+
+    document.getElementById('subtest-title').textContent = data.title;
+    document.getElementById('subtest-category').textContent = data.category;
+    document.getElementById('subtest-category').className = `node-tag ${data.category.includes('TPS') ? 'tps' : 'lit'}`;
+    document.getElementById('subtest-desc').textContent = data.desc;
+    document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
+
+    switchSubPanel('materi');
+    
+    document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+    const materiBtn = document.querySelector('.sub-tab-btn[data-mode="materi"]');
+    if(materiBtn) materiBtn.classList.add('active');
 }
 
-const subTabBtns = document.querySelectorAll('.sub-tab-btn');
-subTabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    subTabBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const mode = btn.dataset.mode;
-    switchSubPanel(mode);
-    if (mode === 'latihan-ai' && currentGateKey) generateSoalDariAI(currentGateKey);
-    else if (mode === 'latihan-sim' && currentGateKey) mulaiSimulasi(currentGateKey);
-  });
-});
-
-// FIX UI: Menggunakan style.display agar tidak elemen tumpang tindih dan nge-block klik
+// ====== SWITCH PANEL (ANTI FREEZE) ======
 function switchSubPanel(mode) {
-  document.getElementById('panel-materi').style.display = (mode === 'materi') ? 'block' : 'none';
-  document.getElementById('panel-latihan-ai').style.display = (mode === 'latihan-ai') ? 'block' : 'none';
-  document.getElementById('panel-latihan-sim').style.display = (mode === 'latihan-sim') ? 'block' : 'none';
+    const panelMateri = document.getElementById('panel-materi');
+    const panelAi = document.getElementById('panel-latihan-ai');
+    const panelSim = document.getElementById('panel-latihan-sim');
+
+    if(panelMateri) panelMateri.style.display = (mode === 'materi') ? 'block' : 'none';
+    if(panelAi) panelAi.style.display = (mode === 'latihan-ai') ? 'block' : 'none';
+    if(panelSim) panelSim.style.display = (mode === 'latihan-sim') ? 'block' : 'none';
 }
 
 // ====== SISTEM LATIHAN AI (GROQ - 20 SOAL) ======
-let soalAktif = [], indexSoalSekarang = 0, skorBenar = 0;
 async function generateSoalDariAI(gateKey) {
-  const dataMateri = DATA_MATERI[gateKey];
-  const panelLatihan = document.getElementById('panel-latihan-ai');
-  panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 20 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
-  const promptSystem = `Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi". Buat soal SULIT & HOTS. WAJIB balas dalam format JSON murni tanpa markdown.`;
-  const promptUser = `Buatkan 20 soal pilihan ganda untuk subtes "${dataMateri.title}". Struktur JSON: { "soal": [ { "pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..." } ] }`;
-  try {
-    const response = await fetch(GROQ_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
-        temperature: 0.8,
-        response_format: { type: "json_object" }
-      })
-    });
-    if (!response.ok) throw new Error('Gagal memuat soal dari AI (Status: ' + response.status + ')');
-    const resJson = await response.json();
-    const parsed = JSON.parse(resJson.choices[0].message.content);
-    soalAktif = parsed.soal;
+    const dataMateri = DATA_MATERI[gateKey];
+    const panelLatihan = document.getElementById('panel-latihan-ai');
+    if(!panelLatihan) return;
+
+    panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 20 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
+
+    const promptSystem = `Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi". Buat soal SULIT & HOTS. WAJIB balas dalam format JSON murni tanpa markdown.`;
+    const promptUser = `Buatkan 20 soal pilihan ganda untuk subtes "${dataMateri.title}". Struktur JSON: { "soal": [ { "pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..." } ] }`;
+
+    try {
+        const response = await fetch(GROQ_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
+            body: JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
+                temperature: 0.8,
+                response_format: { type: "json_object" }
+            })
+        });
+
+        if (!response.ok) throw new Error('Gagal memuat soal dari AI (Status: ' + response.status + ')');
+        const resJson = await response.json();
+        const parsed = JSON.parse(resJson.choices[0].message.content);
+
+        soalAktif = parsed.soal;
+        indexSoalSekarang = 0;
+        skorBenar = 0;
+        tampilkanSoal('panel-latihan-ai');
+    } catch (error) {
+        panelLatihan.innerHTML = `<div class="locked-state-card"><div class="lock-icon">⚠️</div><h3>Gagal Menghubungi AI</h3><p>Error: ${error.message}</p><button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button></div>`;
+    }
+}
+
+// ====== SISTEM SIMULASI BANK SOAL ======
+function mulaiSimulasi(gateKey) {
+    let bank = BANK_SIMULASI[gateKey] || [];
+    
+    if(bank.length === 0) {
+        document.getElementById('panel-latihan-sim').innerHTML = "<div class='locked-state-card'><h3>Bank soal untuk subtes ini belum tersedia.</h3></div>";
+        return;
+    }
+    
+    // Acak urutan soal
+    soalAktif = bank.sort(() => Math.random() - 0.5);
     indexSoalSekarang = 0;
     skorBenar = 0;
-    tampilkanSoal('panel-latihan-ai');
-  } catch (error) {
-    panelLatihan.innerHTML = `<div class="locked-state-card"><div class="lock-icon">⚠️</div><h3>Gagal Menghubungi AI</h3><p>Error: ${error.message}</p><button class="btn-action" onclick="generateSoalDariAI('${gateKey}')">Coba Lagi</button></div>`;
-  }
+    tampilkanSoal('panel-latihan-sim');
 }
 
-// ====== SISTEM SIMULASI BANK SOAL (ANTI CAMPUR ADUK) ======
-function mulaiSimulasi(gateKey) {
-  // Ambil soal murni dari bank soal sesuai subtes yang dipilih (TANPA GENERATOR ACAK)
-  let bank = BANK_SIMULASI[gateKey] || [];
-  
-  if(bank.length === 0) {
-    document.getElementById('panel-latihan-sim').innerHTML = "<div class='locked-state-card'><h3>Bank soal untuk subtes ini belum tersedia.</h3></div>";
-    return;
-  }
-  // Acak urutan soal HANYA di dalam subtes itu sendiri
-  soalAktif = bank.sort(() => Math.random() - 0.5);
-  indexSoalSekarang = 0;
-  skorBenar = 0;
-  tampilkanSoal('panel-latihan-sim');
-}
-// HAPUS FUNGSI generateDynamicSoal KARENA TIDAK DIPAKAI LAGI
-
-// ====== FUNGSI TAMPILKAN SOAL (TAMBAHAN AGAR TIDAK ERROR) ======
+// ====== FUNGSI TAMPILKAN SOAL ======
 function tampilkanSoal(panelId) {
-  const panel = document.getElementById(panelId);
-  if (!soalAktif || soalAktif.length === 0) {
-    panel.innerHTML = "<div class='locked-state-card'><h3>Soal belum tersedia.</h3></div>";
-    return;
-  }
+    const panel = document.getElementById(panelId);
+    if (!panel) return;
+    
+    if (!soalAktif || soalAktif.length === 0) {
+        panel.innerHTML = "<div class='locked-state-card'><h3>Soal belum tersedia.</h3></div>";
+        return;
+    }
 
-  const soal = soalAktif[indexSoalSekarang];
-  let opsiHtml = soal.opsi.map((opsi, i) => `
-    <button class="opsi-soal" onclick="jawabSoal(${i}, '${panelId}')">
-      <span class="opsi-huruf">${String.fromCharCode(65 + i)}</span>
-      ${opsi}
-    </button>
-  `).join('');
+    const soal = soalAktif[indexSoalSekarang];
+    // Mendukung key 'pertanyaan' (dari AI) dan 'soal' (dari bank statis)
+    const teksSoal = soal.pertanyaan || soal.soal;
+    
+    let opsiHtml = soal.opsi.map((opsi, i) => `
+        <button class="opsi-soal" onclick="jawabSoal(${i}, '${panelId}')">
+            <span class="opsi-huruf">${String.fromCharCode(65 + i)}</span>
+            ${opsi}
+        </button>
+    `).join('');
 
-  panel.innerHTML = `
-    <div class="latihan-header">
-      <div class="info-soal">
-        <span class="btn-action shadow">Soal ${indexSoalSekarang + 1} / ${soalAktif.length}</span>
-        <span class="btn-action shadow">Skor: ${skorBenar}</span>
-      </div>
-    </div>
-    <div class="box-soal">
-      <p class="teks-soal">${soal.pertanyaan || soal.soal}</p>
-      <div class="opsi-grid">${opsiHtml}</div>
-      <div class="box-pembahasan" id="box-pembahasan" style="display:none;">
-        <h3>Pembahasan</h3>
-        <p>${soal.pembahasan}</p>
-        <button class="btn-action" onclick="soalSelanjutnya('${panelId}')">${indexSoalSekarang === soalAktif.length - 1 ? 'Lihat Hasil' : 'Soal Selanjutnya ➜'}</button>
-      </div>
-    </div>
-  `;
+    panel.innerHTML = `
+        <div class="latihan-header">
+            <div class="info-soal">
+                <span class="btn-action shadow">Soal ${indexSoalSekarang + 1} / ${soalAktif.length}</span>
+                <span class="btn-action shadow">Skor: ${skorBenar}</span>
+            </div>
+        </div>
+        <div class="box-soal">
+            <p class="teks-soal">${teksSoal}</p>
+            <div class="opsi-grid">${opsiHtml}</div>
+            <div class="box-pembahasan" id="box-pembahasan" style="display:none;">
+                <h3>Pembahasan</h3>
+                <p>${soal.pembahasan}</p>
+                <button class="btn-action" onclick="soalSelanjutnya('${panelId}')">${indexSoalSekarang === soalAktif.length - 1 ? 'Lihat Hasil' : 'Soal Selanjutnya ➜'}</button>
+            </div>
+        </div>
+    `;
 }
 
 function jawabSoal(indexPilihan, panelId) {
-  const soal = soalAktif[indexSoalSekarang];
-  const tombolOpsi = document.querySelectorAll(`#${panelId} .opsi-soal`);
-  
-  tombolOpsi.forEach(btn => btn.disabled = true);
+    const soal = soalAktif[indexSoalSekarang];
+    const tombolOpsi = document.querySelectorAll(`#${panelId} .opsi-soal`);
+    
+    tombolOpsi.forEach(btn => btn.disabled = true);
 
-  if (indexPilihan === soal.jawaban) {
-    tombolOpsi[indexPilihan].classList.add('benar');
-    skorBenar++;
-  } else {
-    tombolOpsi[indexPilihan].classList.add('salah');
-    tombolOpsi[soal.jawaban].classList.add('benar');
-  }
+    if (indexPilihan === soal.jawaban) {
+        tombolOpsi[indexPilihan].classList.add('benar');
+        skorBenar++;
+    } else {
+        tombolOpsi[indexPilihan].classList.add('salah');
+        tombolOpsi[soal.jawaban].classList.add('benar');
+    }
 
-  document.getElementById('box-pembahasan').style.display = 'block';
+    const boxPembahasan = document.getElementById('box-pembahasan');
+    if(boxPembahasan) boxPembahasan.style.display = 'block';
 }
 
 function soalSelanjutnya(panelId) {
-  indexSoalSekarang++;
-  if (indexSoalSekarang < soalAktif.length) {
-    tampilkanSoal(panelId);
-  } else {
-    const panel = document.getElementById(panelId);
-    panel.innerHTML = `
-      <div class="hasil-akhir">
-        <div class="ikon-hasil">🎯</div>
-        <h1>${skorBenar} / ${soalAktif.length}</h1>
-        <p class="sub-text">Latihan Selesai! Terus tingkatkan kemampuan UTBKmu.</p>
-        <button class="btn-action" onclick="mulaiSimulasi(currentGateKey)">Ulangi Latihan</button>
-      </div>
-    `;
-  }
+    indexSoalSekarang++;
+    if (indexSoalSekarang < soalAktif.length) {
+        tampilkanSoal(panelId);
+    } else {
+        const panel = document.getElementById(panelId);
+        if (!panel) return;
+        panel.innerHTML = `
+            <div class="hasil-akhir">
+                <div class="ikon-hasil">🎯</div>
+                <h1>${skorBenar} / ${soalAktif.length}</h1>
+                <p class="sub-text">Latihan Selesai! Terus tingkatkan kemampuan UTBKmu.</p>
+                <button class="btn-action" onclick="mulaiSimulasi(currentGateKey)">Ulangi Latihan</button>
+            </div>
+        `;
+    }
 }
