@@ -1,9 +1,8 @@
 // ====== KONFIGURASI API GROQ (MULTI-KEY ROTATION) ======
-// 5 API Keys digabungkan. Jika key pertama kena limit 429, sistem otomatis pakai key berikutnya.
+// 4 API Keys valid. Jika key kena limit 429, sistem otomatis pakai key berikutnya.
 const API_KEYS = [
-    "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", // Bot 1 (API Key lama)
     "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", // Bot 2
-    "gsk_S2Jqwk8RxfZzrm9aSHOCWGdyb3FYMel00z6w9QifOvNeWEoyEaRBm", // Bot 3
+    "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", // Bot 3 (Sudah diperbaiki typo FYMel -> FYMl)
     "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", // Bot 4
     "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"  // Bot 5
 ];
@@ -21,8 +20,7 @@ function rotateApiKey() {
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 // Tetap menggunakan model 70b sesuai permintaan
-const AI_MODEL = "llama-3.3-70b-versatile"; 
-
+const AI_MODEL = "llama-3.3-70b-versatile";
 // ====== MATERI UTBK 2024-2026 (SANGAT KOMPREHENSIF) ======
 const DATA_MATERI = {
   'subtest-pu': {
