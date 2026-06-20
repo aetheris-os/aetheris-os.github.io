@@ -648,4 +648,124 @@ function soalSelanjutnya(panelId) {
             </div>
         `;
     }
+  // ====== FITUR TANYA JAWAB AI TUTOR UTBK ======
+const floatingChatBtn = document.getElementById('floating-chat-btn');
+const chatModal = document.getElementById('chat-modal');
+const closeChatBtn = document.getElementById('close-chat-btn');
+const chatHistory = document.getElementById('chat-history');
+const chatInput = document.getElementById('chat-input');
+const sendChatBtn = document.getElementById('send-chat-btn');
+
+// Buka/tutup chat modal
+if(floatingChatBtn) {
+  floatingChatBtn.addEventListener('click', () => {
+    chatModal.classList.add('open');
+  });
+}
+
+if(closeChatBtn) {
+  closeChatBtn.addEventListener('click', () => {
+    chatModal.classList.remove('open');
+  });
+}
+
+// Fungsi tambah pesan ke chat history
+function addChatMessage(text, sender) {
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('chat-message', `${sender}-message`);
+  messageDiv.textContent = text;
+  chatHistory.appendChild(messageDiv);
+  chatHistory.scrollTop = chatHistory.scrollHeight;
+}
+
+// Fungsi tampilkan loading
+function showChatLoading() {
+  const loadingDiv = document.createElement('div');
+  loadingDiv.classList.add('chat-loading');
+  loadingDiv.id = 'chat-loading';
+  loadingDiv.innerHTML = '<span></span><span></span><span></span>';
+  chatHistory.appendChild(loadingDiv);
+  chatHistory.scrollTop = chatHistory.scrollHeight;
+}
+
+// Fungsi hapus loading
+function hideChatLoading() {
+  const loading = document.getElementById('chat-loading');
+  if(loading) loading.remove();
+}
+
+// Handle kirim pesan
+async function handleSendChat() {
+  const userMessage = chatInput.value.trim();
+  if(!userMessage) return;
+
+  // Tampilkan pesan user
+  addChatMessage(userMessage, 'user');
+  chatInput.value = '';
+  showChatLoading();
+
+  // Prompt untuk AI Tutor UTBK
+  const promptSystem = `Kamu adalah Tutor UTBK profesional yang ahli dalam semua materi UTBK SNBT. 
+  Jawab pertanyaan pengguna dengan jelas, detail, dan sesuai standar UTBK. 
+  Jika ditanya tentang soal, berikan pembahasan yang logis. 
+  Jangan menjawab topik di luar UTBK. Jika pertanyaan tidak relacion dengan UTBK, jawab dengan sopan bahwa kamu hanya bisa membantu soal UTBK.`;
+  
+  const messages = [
+    { role: "system", content: promptSystem },
+    ...getChatHistory(),
+    { role: "user", content: userMessage }
+  ];
+
+  try {
+    const response = await fetch(GROQ_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: messages,
+        temperature: 0.7,
+        max_tokens: 1024
+      })
+    });
+
+    if (!response.ok) throw new Error('Gagal menghubungi AI');
+    const resJson = await response.json();
+    const aiResponse = resJson.choices[0].message.content;
+
+    hideChatLoading();
+    addChatMessage(aiResponse, 'ai');
+  } catch (error) {
+    hideChatLoading();
+    addChatMessage(`Maaf, terjadi kesalahan: ${error.message}`, 'ai');
+  }
+}
+
+// Fungsi ambil history chat dari localStorage (agar tidak hilang saat refresh)
+function getChatHistory() {
+  const history = localStorage.getItem('utbk_chat_history');
+  return history ? JSON.parse(history) : [];
+}
+
+// Fungasi simpan chat ke localStorage
+function saveChatToHistory(role, content) {
+  const history = getChatHistory();
+  history.push({ role, content });
+  localStorage.setItem('utbk_chat_history', JSON.stringify(history));
+}
+
+// Event listener untuk tombol kirim dan input enter
+if(sendChatBtn) sendChatBtn.addEventListener('click', handleSendChat);
+if(chatInput) {
+  chatInput.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') handleSendChat();
+  });
+}
+
+// Muat history chat saat halaman dibuka
+document.addEventListener('DOMContentLoaded', () => {
+  const history = getChatHistory();
+  history.forEach(msg => {
+    addChatMessage(msg.content, msg.role === 'user' ? 'user' : 'ai');
+  });
+});
 }
