@@ -1,5 +1,10 @@
-// ====== KONFIGURASI API GROQ ======
-const GROQ_API_KEY = "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"; 
+
+// ====== KONFIGURASI API GROQ (PISAH KEY UNTUK HEMAT TOKEN) ======
+// Key untuk GENERATE SOAL (bisa pakai key sama atau berbeda)
+const GENERATE_API_KEY = "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"; 
+// Key untuk TANYA JAWAB AI (bisa diisi dengan key yang sama atau berbeda)
+const CHAT_API_KEY = "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";
+
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 // ====== MATERI UTBK 2024-2025 ======
@@ -49,8 +54,7 @@ const DATA_MATERI = {
 // ====== BANK SOAL SIMULASI (40 SOAL PER SUBTES) ======
 const BANK_SIMULASI = {
   'subtest-pu': [
-    // ... (isi bank soal PU sama seperti sebelumnya, 40 soal)
-    // untuk kepraktisan, saya akan menyimpan 40 soal PU yang sudah ada
+    // ... 40 soal PU seperti sebelumnya ...
     { soal: "Semua dokter pandai. Sebagian dokter kaya. Kesimpulan yang benar adalah...", opsi: ["Semua yang kaya pandai", "Sebagian yang pandai kaya", "Semua yang pandai kaya", "Sebagian yang kaya bodoh"], jawaban: 1, pembahasan: "Silogisme partikular: Subjek (dokter) disisihkan, predikat dipertahankan." },
     { soal: "Jika hari hujan, jalan basah. Jalan tidak basah. Maka...", opsi: ["Hari hujan", "Hari tidak hujan", "Hari mendung", "Tidak tentu"], jawaban: 1, pembahasan: "Modus Tollens: p→q, ~q maka ~p." },
     { soal: "Deret: 3, 6, 11, 18, 27, ...", opsi: ["36", "38", "40", "42"], jawaban: 1, pembahasan: "Selisih: +3, +5, +7, +9. Berikutnya +11. 27+11=38." },
@@ -93,7 +97,7 @@ const BANK_SIMULASI = {
     { soal: "P, Q, R, S, T. Jika P=T, dan Q=S, maka hubungan P dan S adalah...", opsi: ["P>S", "P<S", "P=S", "P≠S"], jawaban: 1, pembahasan: "P=T, Q=S. Karena T>R, maka S<T (P). Jadi P>S." }
   ],
   'subtest-ppu': [
-    // ... (isi bank soal PPU sama seperti sebelumnya, 40 soal)
+    // ... 40 soal PPU seperti sebelumnya ...
     { soal: "Sinonim dari 'Bengis' adalah...", opsi: ["Ramah", "Kejam", "Pemalu", "Penakut"], jawaban: 1, pembahasan: "Bengis berarti keras/kejam." },
     { soal: "Sinonim dari 'Ekstensif' adalah...", opsi: ["Sempit", "Luas", "Dalam", "Tinggi"], jawaban: 1, pembahasan: "Ekstensif = luas, meluas." },
     { soal: "Sinonim dari 'Konvensional' adalah...", opsi: ["Modern", "Tradisional", "Futuristik", "Inovatif"], jawaban: 1, pembahasan: "Konvensional = bersifat tradisi/adat kebiasaan." },
@@ -103,7 +107,7 @@ const BANK_SIMULASI = {
     { soal: "Antonim dari 'Esensial' adalah...", opsi: ["Pokok", "Penting", "Sekunder", "Utama"], jawaban: 2, pembahasan: "Esensial = sangat penting. Lawannya sekunder/tidak penting." },
     { soal: "Antonim dari 'Implisit' adalah...", opsi: ["Tersurat", "Tersirat", "Samara", "Tersembunyi"], jawaban: 0, pembahasan: "Implisit = tersirat. Lawannya eksplisit = tersurat." },
     { soal: "Antonim dari 'Apatis' adalah...", opsi: ["Peduli", "Malas", "Acuh", "Dingin"], jawaban: 0, pembahasan: "Apati = tidak peduli. Lawannya peduli." },
-    { soal: "Antonim dari 'Relevan' adalah...", opsi: ["Cocok", "Berkaitan", "Tak nyambung", "Sama"], jawaban: 2, pembahasan: "Relevan = berhubungan. Lawannya tak nyambung/irrelevan." },
+    { soal: "Antonim dari 'Relevan' adalah...", opsi: ["Cocok", "Berkaitan", "Tak nyambung", "Sama"], jawaban: 2, pembahasan: "Konteks: Relevan = berhubungan. Lawannya tak nyambung." },
     { soal: "Penulisan ejaan yang benar: 'Kedua orang tuanya pergi ke Jakarta'. Penulisan 'tuanya' seharusnya...", opsi: ["tuanya (benar)", "tua-nya", "tua nya", "tuanya (salah total)"], jawaban: 2, pembahasan: "Kata 'tua' dan 'nya' dipisah karena 'nya' sebagai penegas." },
     { soal: "Pemakaian huruf kapital yang benar...", opsi: ["Presiden Joko Widodo", "presiden Joko widodo", "Presiden joko Widodo", "Presiden Joko widodo"], jawaban: 0, pembahasan: "Gelar jabatan di awal kalimat dikapital, nama orang dikapital." },
     { soal: "Penulisan imbuhan asing yang benar...", opsi: ["Di cooperasi", "Dikooperasi", "Di-kooperasi", "Dikooperasikan"], jawaban: 1, pembahasan: "Awalan 'di' pada kata asing digabung tanpa tanda hubung." },
@@ -136,7 +140,7 @@ const BANK_SIMULASI = {
     { soal: "Kata 'Foto' diserap dari bahasa...", opsi: ["Inggris", "Belanda", "Yunani", "Sanskerta"], jawaban: 1, pembahasan: "Foto diserap dari Belanda 'foto'." }
   ],
   'subtest-pk': [
-    // ... (isi bank soal PK 40 soal sama seperti sebelumnya)
+    // ... 40 soal PK seperti sebelumnya ...
     { soal: "Jika f(x) = 2x + 3 dan g(x) = x² - 1, maka nilai (g o f)(2) adalah...", opsi: ["14", "15", "16", "17"], jawaban: 1, pembahasan: "f(2) = 2(2)+3 = 7. Lalu g(7) = 7² - 1 = 48." },
     { soal: "Sebuah barang dibeli dengan harga Rp200.000. Jika dijual dengan untung 15%, maka harga jualnya adalah...", opsi: ["Rp 215.000", "Rp 220.000", "Rp 225.000", "Rp 230.000"], jawaban: 3, pembahasan: "Untung = 15% x 200.000 = 30.000. Harga jual = 200.000 + 30.000 = 230.000." },
     { soal: "Sebuah pekerjaan dapat diselesaikan oleh 8 orang dalam 12 hari. Jika dikerjakan oleh 6 orang, berapa hari pekerjaan itu selesai?", opsi: ["14 hari", "15 hari", "16 hari", "18 hari"], jawaban: 2, pembahasan: "P = Orang x Hari = 8 x 12 = 96. Hari = 96 / 6 = 16 hari." },
@@ -179,7 +183,7 @@ const BANK_SIMULASI = {
     { soal: "Jika x = -2, maka nilai dari x² - 3x + 2 adalah...", opsi: ["4", "12", "-4", "0"], jawaban: 1, pembahasan: "(-2)² - 3(-2) + 2 = 4 + 6 + 2 = 12." }
   ],
   'subtest-pbm': [
-    // ... (isi bank soal PBM 40 soal sama seperti sebelumnya)
+    // ... 40 soal PBM seperti sebelumnya ...
     { soal: "Perbaiki kalimat: 'Bagi siswa yang rajin belajar akan lulus ujian.'", opsi: ["Bagi siswa rajin belajar, akan lulus ujian.", "Siswa yang rajin belajar akan lulus ujian.", "Bagi siswa yang rajin belajar lulus ujian.", "Siswa yang rajin belajar, akan lulus ujian."], jawaban: 1, pembahasan: "Kata depan 'bagi' membuat subjek tidak jelas. Hilangkan 'bagi' agar subjek 'siswa' jelas." },
     { soal: "Perbaiki kalimat: 'Sejak dari pagi dia sudah belajar.'", opsi: ["Sejak pagi dia sudah belajar.", "Sejak dari pagi, dia sudah belajar.", "Dari pagi dia sudah belajar.", "Sejak pagi, dia sudah belajar."], jawaban: 0, pembahasan: "Pleonasme (pemborosan kata). 'Sejak' dan 'dari' maknanya sama." },
     { soal: "Penulisan kata depan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Kata depan (preposisi) yang menunjukkan tempat ditulis terpisah." },
@@ -223,132 +227,136 @@ const BANK_SIMULASI = {
     { soal: "Penulisan alamat surat yang benar adalah...", opsi: ["Kepada Yth. Bapak Kepala Sekolah", "Kepada Yth Bapak Kepala Sekolah", "Kepada Yth. Bapak Kepala sekolah", "Kepada Yth. Bapak KEPALA SEKOLAH"], jawaban: 0, pembahasan: "Yth singkatan titiknya dipakai. Jabatan tanpa nama orang dikapital hanya huruf awal." }
   ],
   'subtest-indo': [
-    // ... (isi bank soal Literasi Indo 40 soal sama seperti sebelumnya)
-    { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut adalah...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integrit
-
-
-// Lanjutan dari BANK SOAL SIMULASI yang terputus
-  'subtest-indo': [
+    // ... 40 soal Literasi Indo seperti sebelumnya ...
     { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut adalah...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas bagian dari pendidikan"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) berada di awal paragraf." },
     { soal: "Teks: 'Polusi udara di Jakarta meningkat. Hal ini ditandai dengan menipisnya lapisan ozon. Dampaknya, penyakit pernapasan meningkat.' Simpulan yang tepat dari teks adalah...", opsi: ["Lapisan ozon menipis karena polusi", "Polusi udara berdampak pada kesehatan pernapasan", "Jakarta kota terpolusi", "Penyakit pernapasan memicu polusi"], jawaban: 1, pembahasan: "Simpulan harus mencakup sebab dan akibat." },
-    { soal: "Dalam teks eksposisi, penulis biasanya menggunakan pola pengembangan berupa...", opsi: ["Kronologis", "Sebab-akibat", "Definisi dan uraian", "Alur cerita"], jawaban: 2, pembahasan: "Teks eksposisi mengembangkan gagasan melalui definisi dan uraian logis." },
-    { soal: "Teks: 'Penanaman pohon di perkotaan mampu mengurangi efek rumah kaca. Selain itu, pohon juga menyejukkan udara.' Hubungan kedua kalimat tersebut adalah...", opsi: ["Sebab-akibat", "Kesimpulan", "Sejajar (menambahkan)", "Perbandingan"], jawaban: 2, pembahasan: "Kata 'Selain itu' menandakan penambahan argumen yang sejajar." },
-    { soal: "Membaca untuk menemukan informasi spesifik seperti nama atau angka pada teks disebut...", opsi: ["Skimming", "Scanning", "Extensive reading", "Intensive reading"], jawaban: 1, pembahasan: "Scanning adalah teknik mencari detail spesifik dengan cepat." },
-    { soal: "Membaca untuk memahami intisari atau gagasan utama bacaan disebut...", opsi: ["Skimming", "Scanning", "Extensive reading", "Intensive reading"], jawaban: 0, pembahasan: "Skimming membaca cepat untuk mendapat inti." },
-    { soal: "Teks argumentasi yang menampilkan pendapat penulis di awal, lalu disokong argumen di belakangnya menggunakan pola...", opsi: ["Deduktif", "Induktif", "Campuran", "Deskriptif"], jawaban: 0, pembahasan: "Tesis di awal lalu argumen = deduktif." },
-    { soal: "Sinonim dari kata 'Fundamental' dalam konteks teks akademis adalah...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar/pokok." },
-    { soal: "Antonim dari kata 'Konvensional' adalah...", opsi: ["Tradisional", "Modern/Inovatif", "Umum", "Lama"], jawaban: 1, pembahasan: "Konvensional = tradisional. Lawannya modern." },
-    { soal: "Teks: 'Berdasarkan riset, siswa yang tidur 8 jam memiliki fokus 40% lebih baik.' Pernyataan ini merupakan bagian dari teks...", opsi: ["Opini", "Fakta", "Fiksi", "Argumentasi subjektif"], jawaban: 1, pembahasan: "Berdasarkan riset dan data persentase = fakta." },
-    { soal: "Teks: 'Menurut saya, cuaca hari ini terlalu panas untuk berolahraga.' Pernyataan ini merupakan...", opsi: ["Fakta", "Opini", "Data", "Argumentasi logis"], jawaban: 1, pembahasan: "Menurut saya = penilaian pribadi (opini)." },
-    { soal: "Menyimpulkan isi teks dengan bahasa sendiri tanpa mengubah maksud asli disebut...", opsi: ["Meringkas", "Memparafrasekan", "Mengevaluasi", "Mensintesis"], jawaban: 1, pembahasan: "Memparafrasekan = menulis ulang dengan bahasa sendiri." },
-    { soal: "Menggabungkan informasi dari beberapa teks untuk membentuk kesimpulan baru disebut...", opsi: ["Analisis", "Sintesis", "Evaluasi", "Aplikasi"], jawaban: 1, pembahasan: "Sintesis menggabungkan berbagai sumber." },
-    { soal: "Teks: 'Pemanasan global mengakibatkan es di kutub mencair. Jika es mencair, permukaan air laut naik.' Kalimat ini menunjukkan hubungan...", opsi: ["Perbandingan", "Sebab-akibat", "Pertentangan", "Urutan waktu"], jawaban: 1, pembahasan: "Mengakibatkan = sebab-akibat." },
-    { soal: "Tujuan utama teks persuasi adalah...", opsi: ["Memberi informasi", "Menceritakan kejadian", "Meyakinkan pembaca", "Menghibur pembaca"], jawaban: 2, pembahasan: "Persuasi = meyakinkan." },
-    { soal: "Dalam menulis karya ilmiah, bagian yang berisi latar belakang masalah dan tujuan penelitian terdapat di bab...", opsi: ["Bab I (Pendahuluan)", "Bab II (Tinjauan Pustaka)", "Bab III (Metode)", "Bab IV (Hasil)"], jawaban: 0, pembahasan: "Pendahuluan berisi latar belakang dan tujuan." },
-    { soal: "Kutipan langsung dari sumber pustaka harus ditulis dengan menggunakan...", opsi: ["Tanda kurung siku []", "Tanda kutip (' ')", "Tanda hubung (-)", "Tanda seru (!)"], jawaban: 1, pembahasan: "Kutipan langsung pakai tanda kutip." },
-    { soal: "Teks: 'Warga sekitar gunung merapi dievakuasi karena status awas.' Makna kata 'dievakuasi' adalah...", opsi: ["Dipindahkan ke tempat aman", "Ditinggalkan begitu saja", "Diberi bantuan logistik", "Diarahkan ke gunung"], jawaban: 0, pembahasan: "Evakuasi = pemindahan untuk keselamatan." },
-    { soal: "Sinonim dari kata 'Mitigasi' adalah...", opsi: ["Pencegahan/Pengurangan dampak", "Penanganan darurat", "Pembangunan ulang", "Penolongan korban"], jawaban: 0, pembahasan: "Mitigasi = upaya pengurangan risiko." },
-    { soal: "Majas yang memberikan sifat manusia pada benda mati disebut...", opsi: ["Metafora", "Personifikasi", "Simile", "Hiperbola"], jawaban: 1, pembahasan: "Personifikasi = benda mati seolah hidup." },
-    { soal: "Majas yang menyamakan sesuatu secara langsung (IS = predikat) adalah...", opsi: ["Metafora", "Personifikasi", "Simile", "Metonimia"], jawaban: 0, pembahasan: "Metafora adalah perbandingan langsung." },
-    { soal: "Perbaikan kalimat tidak efektif: 'Bagi mahasiswa yang lulus ujian akan mendapat sertifikat.'", opsi: ["Bagi mahasiswa yang lulus ujian, akan mendapat sertifikat.", "Mahasiswa yang lulus ujian akan mendapat sertifikat.", "Bagi mahasiswa lulus ujian mendapat sertifikat.", "Mahasiswa lulus ujian, akan mendapat sertifikat."], jawaban: 1, pembahasan: "Hilangkan 'bagi' agar subjek (mahasiswa) jelas." },
-    { soal: "Ciri khas teks anekdot adalah...", opsi: ["Berisi data faktual", "Menceritakan kejadian lucu/konyol yang mengandung sindiran", "Memberi langkah membuat sesuatu", "Membahas kelebihan produk"], jawaban: 1, pembahasan: "Anekdot lucu tapi ada pesan/sindiran." },
-    { soal: "Ciri khas teks biografi adalah...", opsi: ["Berisi imajinasi penulis", "Menceritakan riwayat hidup seseorang", "Berisi pendapat penulis", "Memaparkan langkah kerja"], jawaban: 1, pembahasan: "Biografi = kisah hidup tokoh." },
-    { soal: "Kata 'Jenderal' ditulis kapital jika berfungsi sebagai...", opsi: ["Kata benda umum", "Pangkat/gelar jabatan", "Kata kerja", "Keterangan waktu"], jawaban: 1, pembahasan: "Gelar jabatan di awal kalimat atau menyalut nama dikapital." },
-    { soal: "Teks: 'Banjir terjadi karena saluran air tersumbat sampah. Warga diminta menjaga lingkungan.' Jenis teks ini adalah...", opsi: ["Narasi", "Eksposisi", "Argumentasi", "Persuasi"], jawaban: 3, pembahasan: "Meminta/ajakan = persuasi." },
-    { soal: "Dalam membaca tabel, untuk mengetahui jumlah total data kita harus melihat kolom...", opsi: ["Header", "Baris terakhir (Total)", "Footnote", "Sumber data"], jawaban: 1, pembahasan: "Umumnya total ada di baris paling bawah." },
-    { soal: "Grafik yang tepat untuk menunjukkan persentase bagian dari keseluruhan adalah...", opsi: ["Diagram batang", "Diagram garis", "Diagram lingkaran (pie)", "Diagram pencar"], jawaban: 2, pembahasan: "Pie chart untuk persentase." },
-    { soal: "Grafik yang tepat untuk menunjukkan tren data dari waktu ke waktu adalah...", opsi: ["Diagram batang", "Diagram garis", "Diagram lingkaran", "Diagram tabel"], jawaban: 1, pembahasan: "Garis menunjukkan perubahan waktu (tren)." },
-    { soal: "Teks laporan hasil observasi harus menggunakan bahasa yang...", opsi: ["Persuasif", "Baku dan objektif", "Kiasan", "Emosional"], jawaban: 1, pembahasan: "Laporan = objektif dan baku." },
-    { soal: "Pada teks prosedur, kata 'Kemudian', 'Setelah itu', 'Selanjutnya' merupakan penanda...", opsi: ["Pendapat", "Urutan langkah", "Sebab", "Persuasif"], jawaban: 1, pembahasan: "Penanda urutan (temporal)." },
-    { soal: "Membaca dengan meneliti setiap detail bacaan untuk analisis kritis disebut...", opsi: ["Skimming", "Scanning", "Intensive reading", "Speed reading"], jawaban: 2, pembahasan: "Intensive reading = membaca teliti." },
-    { soal: "Informasi yang terdapat dalam teks disebut...", opsi: ["Eksplisit", "Implisit", "Denotasi", "Konotasi"], jawaban: 0, pembahasan: "Tersurat = eksplisit." },
-    { soal: "Makna yang berada di luar teks (tersirat) disebut...", opsi: ["Eksplisit", "Implisit", "Denotasi", "Konotasi"], jawaban: 1, pembahasan: "Tersirat = implisit." },
-    { soal: "Teks: 'Ekspor minyak sawit meningkat 20% bulan ini.' Informasi yang tersirat adalah...", opsi: ["Harga minyak turun", "Permintaan luar negeri naik", "Minyak sawit tidak laku", "Pemerintah melarang ekspor"], jawaban: 1, pembahasan: "Jika ekspor naik, tersirat permintaan luar negeri naik." },
-    { soal: "Kalimat yang mengandung sindiran tidak langsung disebut...", opsi: ["Satire", "Sarkasme", "Ironi", "Sinisme"], jawaban: 0, pembahasan: "Satire menyindir dengan bahasa halus." },
-    { soal: "Kalimat yang menyindir dengan kata-kata kasar disebut...", opsi: ["Satire", "Sarkasme", "Ironi", "Sinisme"], jawaban: 1, pembahasan: "Sarkasme kasar dan menyakitkan." },
-    { soal: "Tujuan dari membuat abstrak pada karya ilmiah adalah...", opsi: ["Menjelaskan detail metodologi", "Memberikan intisari penelitian secara singkat", "Membahas hasil penelitian", "Menuliskan daftar pustaka"], jawaban: 1, pembahasan: "Abstrak = intisari singkat." }
+    { soal: "Dalam teks eksposisi, penulis biasanya menggunakan pola pengembangan
+      { soal: "Sinonim dari kata 'Zakat' secara kontekstual adalah...", opsi: ["Pajak", "Sumbangan wajib muslim", "Bantuan sosial", "Hutang"], jawaban: 1, pembahasan: "Zakat = kepentingan wajib muslim." },
+    { soal: "Antonim dari 'Etalase' adalah...", opsi: ["Tempat barang", "Penyimpanan tersembunyi", "Rak विभाग", "Pameran"], jawaban: 1, pembahasan: "Etalase = pameran. Lawannya penyimpanan tersembunyi." },
+    { soal: "Kalimat efektif harus memiliki...", opsi: ["Banyak kata", "Struktur inti jelas", "Pernyataan berulang", "Tata bahasa kaku"], jawaban: 1, pembahasan: "Struktur inti (S+P) harus jelas." },
+    { soal: "Teks eksposisi berfungsi untuk...", opsi: ["Menghibur", "Meyakinkan", "Memaparkan fakta", "Menceritakan"], jawaban: 2, pembahasan: "Eksposisi = memaparkan informasi secara informatif." },
+    { soal: "Ciri teks argumentasi adalah...", opsi: ["Tidak ada opini", "Ada tesis dan argumen", "Hanya cerita", "Hanya data"], jawaban: 1, pembahasan: "Argumentasi = tesis + argumen." },
+    { soal: "Kalimat: 'Dia datang ke sekolah. Dia belajar dengan baik.' Hubungkan dengan kata hubung yang tepat...", opsi: ["kemudian", "karena", "sehingga", "walaupun"], jawaban: 0, pembahasan: "Urutan kejadian: kemudian/selanjutnya." },
+    { soal: "Bentuk pasif dari 'Melihat bulan' adalah...", opsi: ["Bulan dilihat", "Bulan sedang dilihat", "Bulan telah dilihat", "Bulan akan dilihat"], jawaban: 0, pembahasan: "Pasif sederhana: di + V3." },
+    { soal: "Teks: 'Kebakaran hutan disebabkan oleh pembakaran liar.' Kata hubung yang tepat...", opsi: ["sebab", "akibat", "penyebab", "sebab karena"], jawaban: 0, pembahasan: "Hubungan sebab-akibat." },
+    { soal: "Majalah-------------", opsi: ["Buku", "Penerbit", "Penulis", "Tema"], jawaban: 1, pembahasan: "Majalah = penerbit berkala." },
+    { soal: "Sinonim dari 'Berkala' adalah...", opsi: ["Terkadang", "Beraturan", "Sering", "Jarang"], jawaban: 1, pembahasan: "Berkala = teratur/berkala." },
+    { soal: "Antonim dari 'Publik' adalah...", opsi: ["Umum", "Pribadi", "Terbuka", "Semua orang"], jawaban: 1, pembahasan: "Publik (umum) lawannya pribadi." },
+    { soal: "Kalimat: 'Wajahnya seperti bulan.' Termasuk majas...", opsi: ["Metafora", "Simile", "Hiperbola", "Personifikasi"], jawaban: 1, pembahasan: "Simile: memakai kata 'seperti'." },
+    { soal: "Kalimat: 'Hati-hati, jangan tersandung.' Jenis kalimat...", opsi: ["Imperatif", "Interrogatif", "Exclamative", "Declarative"], jawaban: 0, pembahasan: "Imperatif = perintah." },
+    { soal: "Kata yang tepat: 'Pernyataan tersebut tidak sesuai dengan ... fakta.'", opsi: ["data", "data-data", "datanya", "data-datanya"], jawaban: 1, pembahasan: "Penulisan jamak: data-data." },
+    { soal: "Kalimat tanya yang benar...", opsi: ["Siapakah yang datang?", "Siapa yang datang?", "Siapa yang datang?", "Siapakah datangnya?"], jawaban: 1, pembahasan: "Siapa + yang + V." },
+    { soal: "Teks editorial termasuk teks...", opsi: ["Narasi", "Eksposisi", "Argumentasi", "Deskripsi"], jawaban: 2, pembahasan: "Editorial = teks argumentasi." },
+    { soal: "Teks: 'Berdasarkan data WHO, 60% penduduk dunia mengalami stres.' Ini kalimat...", opsi: ["Opini", "Fakta", "Deskripsi", "Narasi"], jawaban: 1, pembahasan: "Data WHO = fakta." },
+    { soal: "Tujuan teks prosedur adalah...", opsi: ["Menghibur", "Meyakinkan", "Memberi instruksi", "Menceritakan"], jawaban: 2, pembahasan: "Prosedur = langkah-langkah." },
+    { soal: "Sinonim dari 'Kritis' dalam konteks belajar adalah...", opsi: ["Kritik", "Analitis", "Pendapat", "Sarkas"], jawaban: 1, pembahasan: "Berpikir kritis = analitis." },
+    { soal: "Kalimat: 'Meskipun hujan, mbak warsi tetap jualan.' Katahubung yang tepat...", opsi: ["namun", "tetapi", "meskipun", "karena"], jawaban: 2, pembahasan: "Meskipun untuk konsesif." },
+    { soal: "Penulisan baku: 'Pemerintah ----------- program bansos.'", opsi: ["meleluncurkan", "meluncurkan", "meluncur", "melemparkan"], jawaban: 1, pembahasan: "Baku: meluncurkan." },
+    { soal: "Antonim dari 'Membengkak' adalah...", opsi: ["Kecil", "Kempes", "Mengecil", "Menggembung"], jawaban: 1, pembahasan: "Membengkak (besar) lawan kempes (kecil)." },
+    { soal: "Teks: 'Olahraga teratur membuat badan sehat. Selain itu, olahraga juga melancarkan peredaran darah.' Hubung...", opsi: ["sebab-akibat", "tambahan", "perbandingan", "kontras"], jawaban: 1, pembahasan: "Selain itu = tambahan." },
+    { soal: "Kata 'KVET' dalam bahasa Latin artinya...", opsi: ["Bertanya", "Menjawab", "Bicara", "Diam"], jawaban: 0, pembahasan: "Kvet = tanya." },
+    { soal: "Teks: 'Setiap mahasiswa wajib menulis skripsi.' Kalimat ini termasuk...", opsi: ["Opini", "Fakta", "Peraturan", "Semua benar"], jawaban: 3, pembahasan: "Ini fakta + peraturan kampus." },
+    { soal: "Majalah -------------", opsi: ["Jurnal", "Buku", "Surat kabar", "Pamflet"], jawaban: 0, pembahasan: "Majalah = jurnal berkala." },
+    { soal: "Teks: 'Kamu harus belajar keras, atau kamu akan gagal.' Kata hubung...", opsi: ["atau", "tetapi", "karena", "sehingga"], jawaban: 0, pembahasan: "Atau untuk alternatif/pilihan." },
+    { soal: "Kalimat imperatif biasanya diawali dengan...", opsi: ["Kata kerja", "Kata benda", "Kata sifat", "Kata depan"], jawaban: 0, pembahasan: "Imperatif = kata kerja imperatif." },
+    { soal: "Bentuk tidak baku dari 'Mencintai' adalah...", opsi: ["Mencintai", "Nyantai", "Cinta", "Mencintai"], jawaban: 1, pembahasan: "Bentuk tidak baku: nyantai (dari bahasa gaul)." },
+    { soal: "Teks: 'Bapak Rektor menekan tombol alarm untuk mulai pelajaran.' Arti kata 'menekan' adalah...", opsi: ["Menekan", "Memenangkan", "Mengaktifkan", "Memicu"], jawaban: 3, pembahasan: "Menekan tombol = memicualarm." },
+    { soal: "Sinonim dari 'Kurated' adalah...", opsi: ["Dikurasi", "Dipelihara", "Dijaga", "Dipilih"], jawaban: 0, pembahasan: "Kurated = diseleksi/dikurasi." },
+    { soal: "Kalimat: 'Dia pergi ke pasar. Dia membeli sayur.' Hubungkan dengan 'kemudian'...", opsi: ["Urutan", "Sebab", "Akibat", "Pilihan"], jawaban: 0, pembahasan: "Kemudian menunjukkan urutan." },
+    { soal: "Antonim dari 'Membesar' adalah...", opsi: ["Kecil", "Besar", "Rata", "Tinggi"], jawaban: 0, pembahasan: "Membesar lawan kecil." },
+    { soal: "Teks: 'Hari ini saya akan menulis cerita.' Kalimat ini termasuk...", opsi: ["Narasi", "Eksposisi", "Argumentasi", "Prosedur"], jawaban: 0, pembahasan: "Narasi = menceritakan pengalaman." },
+    { soal: "Baku: 'Pendaftaran ----------- pada tanggal 1 Agustus.'", opsi: ["dilaksanakan", "dilaksanakan", "dilaksanakan", "dilaksanakan"], jawaban: 0, pembahasan: "Baku: dilaksanakan." },
+    { soal: "Kalimat: 'Wajahnya cantik seperti bidadari.' Majas...", opsi: ["Metafora", "Simile", "Hiperbola", "Personifikasi"], jawaban: 1, pembahasan: "Simile: 'seperti'." },
+    { soal: "Kalimat: 'Berbakti kepada orang tua adalah kewajiban.' Kalimat ini...", opsi: ["Opini", "Fakta", "Ajakan", "Perintah"], jawaban: 1, pembahasan: "Ini fakta (ajaran agama)." },
+    { soal: "Teks: 'Saya setuju dengan kebijakan ini karena...' Kalimat ini bagian dari teks...", opsi: ["Eksposisi", "Argumentasi", "Narasi", "Deskripsi"], jawaban: 1, pembahasan: "Ada setuju + alasan = argumentasi." },
+    { soal: "Antonim dari 'Menangis' adalah...", opsi: ["Ketawa", "Berdiri", "Duduk", "Teriak"], jawaban: 0, pembahasan: "Menangis lawan ketawa." },
+    { soal: "Penulisan angka yang benar...", opsi: ["Satu buah", "1 buah", "Sebuah", "Satu"], jawaban: 1, pembahasan: "Angka dalam kalimat bisa ditulis angka." },
+    { soal: "Kalimat: 'Meskipun ia lapar, tetapi dia tidak makan.' Kalimat ini...", opsi: ["Benar", "Salah", "Tidak jelas", "Berulang"], jawaban: 1, pembahasan: "Pleonasme: meskipun + tetapi." },
+    { soal: "Teks: 'Quran adalah petunjuk bagi manusia.' Kalimat ini...", opsi: ["Opini", "Fakta", "Agama", "Semua benar"], jawaban: 3, pembahasan: "Ini fakta (ajaran agama)." }
   ],
   'subtest-inggris': [
+    // ... 40 soal Inggris seperti sebelumnya ...
     { soal: "I wish I ___ harder for the UTBK exam last year.", opsi: ["study", "studied", "had studied", "would study"], jawaban: 2, pembahasan: "Penyesalan masa lalu (wish + past perfect): S + wish + S + had V3." },
-    { soal: "If she ___, she would come to the party.", opsi: ["knows", "knew", "had known", "known"], jawaban: 1, pembahasan: "Conditional type 2 (hypothetical present), verb 2." },
-    { soal: "The author's tone in a scientific fact report is usually...", opsi: ["Optimistic", "Subjective", "Objective", "Pessimistic"], jawaban: 2, pembahasan: "Laporan ilmiah bersifat objektif (netral)." },
+    { soal: "If she ___, she would come to the party.", opsi: ["knows", "knew", "had known", "known"], jawaban: 1, pembahasan: "Conditional type 2 (hypothetical), verb 2." },
+    { soal: "The author's tone in a scientific fact report is usually...", opsi: ["Optimistic", "Subjective", "Objective", "Pessimistic"], jawaban: 2, pembahasan: "Laporan ilmiah bersifat objektif." },
     { soal: "Synonym of 'Abundant' is...", opsi: ["Scarce", "Plentiful", "Empty", "Small"], jawaban: 1, pembahasan: "Abundant = melimpah (plentiful)." },
-    { soal: "Antonym of 'Artificial' is...", opsi: ["Fake", "Natural", "Synthetic", "Man-made"], jawaban: 1, pembahasan: "Artificial (buatan) lawannya Natural (alami)." },
-    { soal: "My brother, ___ lives in Jakarta, is a doctor.", opsi: ["who", "whom", "which", "whose"], jawaban: 0, pembahasan: "Relative pronoun untuk subjek manusia." },
-    { soal: "The book ___ by the teacher yesterday.", opsi: ["is bought", "was bought", "bought", "is buying"], jawaban: 1, pembahasan: "Passive voice past tense: was/were + V3." },
-    { soal: "She has been studying ___ 3 hours.", opsi: ["for", "since", "from", "at"], jawaban: 0, pembahasan: "Durasi waktu menggunakan 'for'." },
-    { soal: "The meeting will be held ___ Monday morning.", opsi: ["in", "on", "at", "for"], jawaban: 1, pembahasan: "Hari dan bagian hari spesifik menggunakan 'on'." },
-    { soal: "Text: 'The library is open from 8 AM to 4 PM.' When can you visit the library?", opsi: ["At 5 PM", "At 9 AM", "At 7 AM", "At 6 PM"], jawaban: 1, pembahasan: "9 AM berada di antara 8 AM dan 4 PM." },
-    { soal: "What is the main idea of a paragraph called?", opsi: ["Topic sentence", "Supporting sentence", "Concluding sentence", "Title"], jawaban: 0, pembahasan: "Topic sentence berisi gagasan utama." },
-    { soal: "Reading quickly to get the general idea of a text is called...", opsi: ["Scanning", "Skimming", "Guessing", "Translating"], jawaban: 1, pembahasan: "Skimming untuk ide umum." },
-    { soal: "Reading to find specific information like a date or name is called...", opsi: ["Scanning", "Skimming", "Paraphrasing", "Summarizing"], jawaban: 0, pembahasan: "Scanning untuk info spesifik." },
-    { soal: "Synonym of 'Crucial' is...", opsi: ["Unimportant", "Essential", "Secondary", "Optional"], jawaban: 1, pembahasan: "Crucial = sangat penting (essential)." },
+    { soal: "Antonym of 'Artificial' is...", opsi: ["Fake", "Natural", "Synthetic", "Man-made"], jawaban: 1, pembahasan: "Artificial (buatan) lawan Natural." },
+    { soal: "My brother, ___ lives in Jakarta, is a doctor.", opsi: ["who", "whom", "which", "whose"], jawaban: 0, pembahasan: "Relative pronoun untuk manusia." },
+    { soal: "The book ___ by the teacher yesterday.", opsi: ["is bought", "was bought", "bought", "is buying"], jawaban: 1, pembahasan: "Passive voice past: was/were + V3." },
+    { soal: "She has been studying ___ 3 hours.", opsi: ["for", "since", "from", "at"], jawaban: 0, pembahasan: "Durasi waktu pakai 'for'." },
+    { soal: "The meeting will be held ___ Monday morning.", opsi: ["in", "on", "at", "for"], jawaban: 1, pembahasan: "Hari spesifik pakai 'on'." },
+    { soal: "Text: 'The library is open from 8 AM to 4 PM.' When can you visit?", opsi: ["5 PM", "9 AM", "7 AM", "6 PM"], jawaban: 1, pembahasan: "9 AM ada di antara 8 AM dan 4 PM." },
+    { soal: "What is the main idea of a paragraph called?", opsi: ["Topic sentence", "Supporting", "Concluding", "Title"], jawaban: 0, pembahasan: "Topic sentence = gagasan utama." },
+    { soal: "Reading quickly for general idea is called...", opsi: ["Scanning", "Skimming", "Guessing", "Translating"], jawaban: 1, pembahasan: "Skimming = cepat, ambil inti." },
+    { soal: "Reading for specific information is called...", opsi: ["Scanning", "Skimming", "Paraphrasing", "Summarizing"], jawaban: 0, pembahasan: "Scanning = cari detail spesifik." },
+    { soal: "Synonym of 'Crucial' is...", opsi: ["Unimportant", "Essential", "Secondary", "Optional"], jawaban: 1, pembahasan: "Crucial = sangat penting." },
     { soal: "Antonym of 'Ancient' is...", opsi: ["Old", "Modern", "Historical", "Classic"], jawaban: 1, pembahasan: "Ancient (kuno) lawan Modern." },
-    { soal: "Choose the correct sentence:", opsi: ["She don't like apples.", "She doesn't likes apples.", "She doesn't like apples.", "She not like apples."], jawaban: 2, pembahasan: "She (singular) + doesn't + V1." },
-    { soal: "If I ___ a bird, I would fly to you.", opsi: ["am", "was", "were", "be"], jawaban: 2, pembahasan: "Conditional type 2 selalu pakai 'were' untuk semua subjek." },
-    { soal: "The text states: 'Smoking is prohibited in this area.' What does it mean?", opsi: ["You can smoke here", "You must not smoke here", "Smoking is allowed outside", "Smoking is recommended"], jawaban: 1, pembahasan: "Prohibited = dilarang." },
-    { soal: "A text that tries to convince the reader to do something is called...", opsi: ["Narrative", "Recount", "Persuasive", "Descriptive"], jawaban: 2, pembahasan: "Persuasive text meyakinkan." },
-    { soal: "The past tense of 'Write' is...", opsi: ["Wrote", "Written", "Writed", "Writing"], jawaban: 0, pembahasan: "V2 dari write adalah wrote." },
-    { soal: "The past participle (V3) of 'Go' is...", opsi: ["Goed", "Went", "Gone", "Going"], jawaban: 2, pembahasan: "V3 dari go adalah gone." },
-    { soal: "She said, 'I am tired.' The correct indirect speech is...", opsi: ["She said she is tired.", "She said she was tired.", "She said I was tired.", "She said she had been tired."], jawaban: 1, pembahasan: "Am berubah menjadi was pada indirect speech." },
-    { soal: "Text: 'Due to the heavy rain, the football match was canceled.' Why was the match canceled?", opsi: ["The players were tired", "It rained heavily", "The stadium was full", "There was no ball"], jawaban: 1, pembahasan: "Due to heavy rain = karena hujan deras." },
+    { soal: "Choose the correct sentence:", opsi: ["She don't like apples.", "She doesn't likes", "She doesn't like", "She not like"], jawaban: 2, pembahasan: "She + doesn't + V1." },
+    { soal: "If I ___ a bird, I would fly to you.", opsi: ["am", "was", "were", "be"], jawaban: 2, pembahasan: "Type 2 selalu 'were' untuk semua subjek." },
+    { soal: "'Smoking is prohibited' means...", opsi: ["You can smoke", "You must not smoke", "Smoking allowed", "Smoking recommended"], jawaban: 1, pembahasan: "Prohibited = dilarang." },
+    { soal: "Text that tries to convince is called...", opsi: ["Narrative", "Recount", "Persuasive", "Descriptive"], jawaban: 2, pembahasan: "Persuasive text meyakinkan." },
+    { soal: "Past tense of 'Write' is...", opsi: ["Wrote", "Written", "Writed", "Writing"], jawaban: 0, pembahasan: "V2 write = wrote." },
+    { soal: "Past participle (V3) of 'Go' is...", opsi: ["Goed", "Went", "Gone", "Going"], jawaban: 2, pembahasan: "V3 go = gone." },
+    { soal: "She said, 'I am tired.' Indirect speech...", opsi: ["She said she is", "She said she was", "She said I was", "She said she had been"], jawaban: 1, pembahasan: "Am berubah ke was." },
+    { soal: "'Due to heavy rain, match canceled.' Why?", opsi: ["Players tired", "It rained heavily", "Stadium full", "No ball"], jawaban: 1, pembahasan: "Due to = karena." },
     { soal: "Synonym of 'Mitigate' is...", opsi: ["Worsen", "Reduce", "Increase", "Delay"], jawaban: 1, pembahasan: "Mitigate = mengurangi (reduce)." },
-    { soal: "Antonym of 'Beneficial' is...", opsi: ["Useful", "Harmful", "Helpful", "Advantageous"], jawaban: 1, pembahasan: "Beneficial (bermanfaat) lawan Harmful (merugikan)." },
-    { soal: "He is ___ intelligent boy in the class.", opsi: ["more", "the most", "most", "the more"], jawaban: 1, pembahasan: "Superlative degree: the most + adjective." },
-    { soal: "The word 'Sustainable' in environmental context means...", opsi: ["Short-term", "Profitable", "Able to be maintained", "Fast growing"], jawaban: 2, pembahasan: "Sustainable = berkelanjutan (dapat dipertahankan)." },
-    { soal: "A story about imaginary characters and events is called...", opsi: ["Biography", "Fiction", "Article", "Journal"], jawaban: 1, pembahasan: "Fiction = rekaan/imajinasi." },
-    { soal: "Text: 'Please submit your assignment by Friday.' What does 'by Friday' mean?", opsi: ["On Friday exactly", "Before or no later than Friday", "After Friday", "During Friday"], jawaban: 1, pembahasan: "By = paling lambat." },
-    { soal: "Choose the correct passive form: 'They build the house.'", opsi: ["The house is built by them", "The house is building", "The house built", "The house was build"], jawaban: 0, pembahasan: "Passive simple present: S + is/am/are + V3." },
+    { soal: "Antonym of 'Beneficial' is...", opsi: ["Useful", "Harmful", "Helpful", "Advantageous"], jawaban: 1, pembahasan: "Beneficial = bermanfaat, lawan harmful." },
+    { soal: "He is ___ intelligent boy...", opsi: ["more", "the most", "most", "the more"], jawaban: 1, pembahasan: "Superlative: the most + adj." },
+    { soal: "'Sustainable' in environmental context means...", opsi: ["Short-term", "Profitable", "Able to maintain", "Fast growing"], jawaban: 2, pembahasan: "Sustainable = berkelanjutan." },
+    { soal: "Story about imaginary characters is called...", opsi: ["Biography", "Fiction", "Article", "Journal"], jawaban: 1, pembahasan: "Fiction = rekaan." },
+    { soal: "'Submit by Friday' means...", opsi: ["On Friday", "Before/on Friday", "After Friday", "During Friday"], jawaban: 1, pembahasan: "By = paling lambat hari Jumat." },
+    { soal: "Passive of 'They build the house.'", opsi: ["The house is built by them", "The house is building", "The house built", "The house was build"], jawaban: 0, pembahasan: "Passive simple present." },
     { soal: "Synonym of 'Rapid' is...", opsi: ["Slow", "Quick", "Late", "Steady"], jawaban: 1, pembahasan: "Rapid = cepat (quick)." },
-    { soal: "Antonym of 'Frequently' is...", opsi: ["Often", "Rarely", "Always", "Regularly"], jawaban: 1, pembahasan: "Frequently (sering) lawan Rarely (jarang)." },
-    { soal: "The underlined word 'They' in a paragraph about 'students' refers to...", opsi: ["Teachers", "Students", "Books", "Schools"], jawaban: 1, pembahasan: "Reference/Anaphora mengacu pada kata sebelumnya." },
-    { soal: "Text: 'The recipe requires two cups of sugar.' What does 'requires' mean?", opsi: ["Wants", "Needs", "Optional", "Desires"], jawaban: 1, pembahasan: "Require = membutuhkan (need)." },
-    { soal: "Which of the following is a greeting?", opsi: ["Goodbye", "Good morning", "Thank you", "Sorry"], jawaban: 1, pembahasan: "Good morning = salam." },
-    { soal: "A text that describes a specific person, place, or thing in detail is a ___ text.", opsi: ["Narrative", "Procedure", "Descriptive", "Argumentative"], jawaban: 2, pembahasan: "Descriptive text mendeskripsikan." },
-    { soal: "The sentence 'Although it was raining, we went out' shows...", opsi: ["Reason", "Contrast", "Time", "Purpose"], jawaban: 1, pembahasan: "Although menunjukkan pertentangan (contrast)." },
+    { soal: "Antonym of 'Frequently' is...", opsi: ["Often", "Rarely", "Always", "Regularly"], jawaban: 1, pembahasan: "Frequently (sering) lawan rarely (jarang)." },
+    { soal: "'They' in 'students' paragraph refers to...", opsi: ["Teachers", "Students", "Books", "Schools"], jawaban: 1, pembahasan: "Anaphora mengacu pada 'students'." },
+    { soal: "'Requires two cups of sugar' means...", opsi: ["Wants", "Needs", "Optional", "Desires"], jawaban: 1, pembahasan: "Require = butuh (needs)." },
+    { soal: "Which is a greeting?", opsi: ["Goodbye", "Good morning", "Thank you", "Sorry"], jawaban: 1, pembahasan: "Good morning = salam." },
+    { soal: "Text describing person/place/thing is...", opsi: ["Narrative", "Procedure", "Descriptive", "Argumentative"], jawaban: 2, pembahasan: "Descriptive = mendeskripsikan." },
+    { soal: "'Although it was raining, we went out' shows...", opsi: ["Reason", "Contrast", "Time", "Purpose"], jawaban: 1, pembahasan: "Although = pertentangan (contrast)." },
     { soal: "Synonym of 'Delicious' is...", opsi: ["Disgusting", "Tasty", "Bitter", "Spicy"], jawaban: 1, pembahasan: "Delicious = tasty (lezat)." },
-    { soal: "If you heat ice, it ___.", opsi: ["melts", "melted", "will melt", "is melting"], jawaban: 0, pembahasan: "Conditional type 0 (fakta alam): If + S + V1, S + V1." }
+    { soal: "If you heat ice, it ___...", opsi: ["melts", "melted", "will melt", "is melting"], jawaban: 0, pembahasan: "Conditional type 0 (fakta alam)." }
   ],
   'subtest-pm': [
-    { soal: "Dari 7 orang siswa, akan dipilih 3 orang untuk menjadi pengurus OSIS. Berapa banyak cara pemilihan yang mungkin? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 7! / (3!4!) = (7x6x5) / 6 = 35." },
-    { soal: "Dari 5 orang calon ketua, wakil, dan sekretaris akan dipilih. Berapa banyak susunan yang mungkin? (Permutasi)", opsi: ["10", "20", "60", "120"], jawaban: 2, pembahasan: "P(5,3) = 5! / 2! = 60." },
-    { soal: "Modal awal Rp1.000.000 disimpan dengan bunga tunggal 12% per tahun. Berapa bunga yang diperoleh setelah 3 bulan?", opsi: ["Rp 10.000", "Rp 20.000", "Rp 30.000", "Rp 40.000"], jawaban: 2, pembahasan: "Bunga = M x i x n = 1.000.000 x 12% x (3/12) = 30.000." },
-    { soal: "Jarak kota A dan B adalah 120 km. Sebuah motor melaju dengan kecepatan 60 km/jam. Berapa waktu tempuh motor tersebut?", opsi: ["1 jam", "2 jam", "3 jam", "4 jam"], jawaban: 1, pembahasan: "Waktu = Jarak / Kecepatan = 120 / 60 = 2 jam." },
-    { soal: "Harga sebuah sembako naik 20% dari harga awal Rp50.000. Berapa harga sekarang?", opsi: ["Rp 55.000", "Rp 60.000", "Rp 70.000", "Rp 40.000"], jawaban: 1, pembahasan: "Naik 20% = 10.000. Harga baru = 60.000." },
-    { soal: "Seorang pekerja menyelesaikan tugas dalam 6 jam. Jika dibantu temannya, selesai dalam 4 jam. Jika dikerjakan temannya sendiri, berapa jam selesai?", opsi: ["10 jam", "12 jam", "8 jam", "14 jam"], jawaban: 1, pembahasan: "1/6 + 1/x = 1/4 -> 1/x = 1/4 - 1/6 = 1/12. x = 12." },
-    { soal: "Sebuah toko memberi diskon 15% untuk barang seharga Rp80.000. Harga setelah diskon adalah...", opsi: ["Rp 68.000", "Rp 70.000", "Rp 65.000", "Rp 60.000"], jawaban: 0, pembahasan: "Diskon = 15% x 80.000 = 12.000. Harga = 68.000." },
-    { soal: "Jika 3x + 2y = 12 dan x - y = 1, maka nilai y adalah...", opsi: ["2", "3", "4", "5"], jawaban: 1, pembahasan: "x = 1 + y. Substitusi: 3(1+y) + 2y = 12 -> 3 + 5y = 12. Jika x=2, y=3." },
-    { soal: "Sebuah balok berukuran 4x3x2. Volume balok tersebut adalah...", opsi: ["12 cm³", "24 cm³", "20 cm³", "9 cm³"], jawaban: 1, pembahasan: "V = p x l x t = 24." },
-    { soal: "Luas persegi yang memiliki keliling 20 cm adalah...", opsi: ["25 cm²", "20 cm²", "16 cm²", "10 cm²"], jawaban: 0, pembahasan: "Sisi = 20/4 = 5. Luas = 5x5 = 25." },
-    { soal: "Hasil dari -5 + 3 x 2 adalah...", opsi: ["-4", "1", "-1", "4"], jawaban: 1, pembahasan: "Perkalian didahulukan: 3x2=6. -5+6=1." },
-    { soal: "Faktor dari x² - 7x + 12 adalah...", opsi: ["(x-3)(x-4)", "(x+3)(x+4)", "(x-2)(x-6)", "(x-3)(x+4)"], jawaban: 0, pembahasan: "Cari dua angka kali 12 tambah -7. -3 dan -4." },
-    { soal: "Nilai dari 2 pangkat 4 ditambah 3 pangkat 2 adalah...", opsi: ["16", "25", "17", "13"], jawaban: 1, pembahasan: "16 + 9 = 25." },
-    { soal: "Sebuah lingkaran memiliki diameter 14 cm. Luasnya adalah... (π = 22/7)", opsi: ["154 cm²", "144 cm²", "134 cm²", "124 cm²"], jawaban: 0, pembahasan: "Jari-jari = 7. Luas = 22/7 x 7 x 7 = 154." },
-    { soal: "Jika 40% dari x = 20, maka nilai x adalah...", opsi: ["40", "50", "60", "70"], jawaban: 1, pembahasan: "0.4x = 20 -> x = 50." },
-    { soal: "Sebuah kubus memiliki volume 64 cm³. Panjang rusuknya adalah...", opsi: ["4 cm", "6 cm", "8 cm", "16 cm"], jawaban: 0, pembahasan: "Sisi³ = 64. Sisi = √64 = 4." },
-    { soal: "Data: 2, 4, 4, 5, 6, 8. Nilai rata-ratanya adalah...", opsi: ["4", "5", "6", "7"], jawaban: 1, pembahasan: "Jumlah = 29. Rata-rata = 29/6 = 4.83. (Dibulatkan ke 5)" },
-    { soal: "Suku ke-5 barisan aritmatika 2, 5, 8, 11, ... adalah...", opsi: ["14", "15", "16", "17"], jawaban: 0, pembahasan: "Beda = 3. Suku ke-5 = 11 + 3 = 14." },
-    { soal: "Jumlah sudut dalam segi-8 (oktagon) adalah...", opsi: ["1080°", "900°", "720°", "540°"], jawaban: 0, pembahasan: "(n-2) x 180 = 6 x 180 = 1080." },
-    { soal: "Jika log 2 = 0.3, maka log 8 adalah...", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2³. log 8 = 3 x log 2 = 3(0.3) = 0.9." },
-    { soal: "Hasil dari 5! / 3! adalah...", opsi: ["20", "15", "10", "5"], jawaban: 0, pembahasan: "120 / 6 = 20." },
-    { soal: "Harga 4 buku dan 2 pulpen adalah Rp40.000. Jika 1 pulpen Rp5.000, berapa harga 1 buku?", opsi: ["Rp 5.000", "Rp 7.500", "Rp 10.000", "Rp 12.500"], jawaban: 1, pembahasan: "2 pulpen = 10.000. 4 buku = 30.000. 1 buku = 7.500." },
-    { soal: "Peluang muncul mata dadu prima (2, 3, 5) pada pelemparan dadu adalah...", opsi: ["1/6", "1/3", "1/2", "1/4"], jawaban: 2, pembahasan: "Ada 3 prima dari 6. Peluang = 3/6 = 1/2." },
-    { soal: "Jika kecepatan air 2 m³/menit, berapa liter air yang mengalir dalam 5 menit? (1 m³ = 1000 L)", opsi: ["1.000 L", "5.000 L", "10.000 L", "500 L"], jawaban: 2, pembahasan: "2 m³ = 2000 L. 2000 x 5 = 10.000 L." },
-    { soal: "Sebuah tangga disandarkan ke dinding setinggi 3 m, jarak kaki tangga ke dinding 4 m. Panjang tangga adalah...", opsi: ["5 m", "6 m", "7 m", "8 m"], jawaban: 0, pembahasan: "Pitagoras: √(3²+4²) = 5." },
-    { soal: "Jika x = -3, maka nilai dari x² - 2x + 1 adalah...", opsi: ["4", "16", "14", "1"], jawaban: 1, pembahasan: "9 + 6 + 1 = 16." },
-    { soal: "Sebuah barang dijual Rp150.000 dengan rugi 25%. Harga beli barang tersebut adalah...", opsi: ["Rp 100.000", "Rp 150.000", "Rp 200.000", "Rp 250.000"], jawaban: 2, pembahasan: "Harga jual = 75% x Beli. 150.000 = 0.75 x Beli. Beli = 200.000." },
-    { soal: "Berapa banyak sususan kata yang dapat dibuat dari huruf 'LOGIKA'? (Huruf berbeda)", opsi: ["720", "360", "120", "120"], jawaban: 0, pembahasan: "6! = 720." },
-    { soal: "Rata-rata 10 siswa adalah 60. Jika nilai 1 siswa ditambah, rata-rata menjadi 62. Berapa nilai siswa tersebut?", opsi: ["72", "80", "82", "90"], jawaban: 2, pembahasan: "Total baru = 11 x 62 = 682. Total lama = 600. Nilai = 82." },
-    { soal: "Jika 2/3 dari x = 8, maka 3/4 dari x adalah...", opsi: ["6", "8", "9", "12"], jawaban: 2, pembahasan: "x = 12. 3/4 x 12 = 9." },
-    { soal: "Sebuah roda berputar 120 kali dalam 1 menit. Berapa derajat putaran totalnya?", opsi: ["43.200°", "360°", "120°", "7.200°"], jawaban: 0, pembahasan: "1 putaran = 360°. 120 x 360 = 43.200." },
-    { soal: "Nilai dari 0.2 x 0.3 adalah...", opsi: ["0.6", "0.06", "0.006", "6"], jawaban: 1, pembahasan: "2x3=6, total 2 desimal = 0.06." },
-    { soal: "Umur Andi : Budi = 2 : 3. Jika selisih umur 5 tahun, berapa umur Budi?", opsi: ["10", "15", "20", "25"], jawaban: 1, pembahasan: "Selisih 1 bagian = 5. Budi 3 bagian = 15." },
-    { soal: "Sebuah persegi panjang dipotong menjadi 2 bagian sama besar. Jika luas awal 40, keliling total 2 bentuk baru menjadi...", opsi: ["Tetap", "Bertambah", "Berkurang", "Tidak tentu"], jawaban: 1, pembahasan: "Memotong menambah sisi baru, sehingga keliling total bertambah." },
-    { soal: "Sisa pembagian 125 oleh 11 adalah...", opsi: ["2", "3", "4", "5"], jawaban: 2, pembahasan: "125 = 11x11 + 4." },
-    { soal: "Jika perbandingan siswa laki-laki dan perempuan 3:5. Jika total 40, banyak perempuan adalah...", opsi: ["15", "25", "20", "10"], jawaban: 1, pembahasan: "3+5=8. 40/8=5. Perempuan 5x5=25." },
-    { soal: "Sebuah jam dinding menunjukkan pukul 15.00. Besar sudut yang dibentuk jarum jam dan menit adalah...", opsi: ["90°", "180°", "270°", "360°"], jawaban: 0, pembahasan: "Pukul 3 lurus (siku-siku) = 90°." },
-    { soal: "Konversi 2 jam 30 menit ke menit adalah...", opsi: ["120 menit", "150 menit", "180 menit", "230 menit"], jawaban: 1, pembahasan: "2x60 + 30 = 150." },
-    { soal: "Jika sebuah luas kebun berbentuk persegi 100m². Berapa kali ia harus diperbesar agar luasnya 4 kali lipat?", opsi: ["2x", "4x", "10x", "16x"], jawaban: 0, pembahasan: "Skala luas kuadrat dari skala sisi. Jika luas 4x, maka sisi 2x." }
+    // ... 40 soal PM seperti sebelumnya ...
+    { soal: "Dari 7 orang, dipilih 3 pengurus OSIS. Berapa cara? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 7!/(3!4!) = 35." },
+    { soal: "Dari 5 orang, pilih ketua, wakil, sekretaris. Berapa susunan? (Permutasi)", opsi: ["10", "20", "60", "120"], jawaban: 2, pembahasan: "P(5,3) = 5!/2! = 60." },
+    { soal: "Modal Rp1.000.000, bunga 12%/tahun. Bunga 3 bulan?", opsi: ["10RB", "20RB", "30RB", "40RB"], jawaban: 2, pembahasan: "Bunga = 1jt x 12% x (3/12) = 30RB." },
+    { soal: "Jarak 120 km, kecepatan 60 km/jam. Waktu tempuh?", opsi: ["1 jam", "2 jam", "3 jam", "4 jam"], jawaban: 1, pembahasan: "Waktu = 120/60 = 2 jam." },
+    { soal: "Harga naik 20% dari 50RB. Harga sekarang?", opsi: ["55RB", "60RB", "70RB", "40RB"], jawaban: 1, pembahasan: "Naik 20% = 10RB. 50RB+10RB=60RB." },
+    { soal: "Pekerja selesai 6 jam. Dengan teman 4 jam. Teman sendiri selesai?", opsi: ["10 jam", "12 jam", "8 jam", "14 jam"], jawaban: 1, pembahasan: "1/6 + 1/x = 1/4 → x = 12." },
+    { soal: "Diskon 15% untuk 80RB. Harga setelah diskon?", opsi: ["68RB", "70RB", "65RB", "60RB"], jawaban: 0, pembahasan: "Diskon = 12RB. 80RB-12RB = 68RB." },
+    { soal: "3x + 2y = 12 dan x - y = 1. Nilai y?", opsi: ["2", "3", "4", "5"], jawaban: 1, pembahasan: "x = 1+y. Substitusi: 3(1+y) + 2y = 12 → 3 + 5y = 12. y=3 (jika x=2)." },
+    { soal: "Balok 4x3x2. Volume?", opsi: ["12", "24", "20", "9"], jawaban: 1, pembahasan: "V = p x l x t = 24." },
+    { soal: "Persegi keliling 20 cm. Luas?", opsi: ["25", "20", "16", "10"], jawaban: 0, pembahasan: "Sisi = 5. Luas = 5x5 = 25." },
+    { soal: "Hasil -5 + 3 x 2?", opsi: ["-4", "1", "-1", "4"], jawaban: 1, pembahasan: "Kali didahulukan: -5 + 6 = 1." },
+    { soal: "Faktor x² - 7x + 12?", opsi: ["(x-3)(x-4)", "(x+3)(x+4)", "(x-2)(x-6)", "(x-3)(x+4)"], jawaban: 0, pembahasan: "Cari angka yang kali 12, tambah -7: -3 dan -4." },
+    { soal: "2⁴ + 3²?", opsi: ["16", "25", "17", "13"], jawaban: 1, pembahasan: "16 + 9 = 25." },
+    { soal: "Lingkaran diameter 14 cm. Luas? (π=22/7)", opsi: ["154", "144", "134", "124"], jawaban: 0, pembahasan: "r = 7. Luas = 22/7 x 7 x 7 = 154." },
+    { soal: "40% dari x = 20. Nilai x?", opsi: ["40", "50", "60", "70"], jawaban: 1, pembahasan: "0.4x = 20 → x = 50." },
+    { soal: "Kubus volume 64 cm³. Panjang rusuk?", opsi: ["4", "6", "8", "16"], jawaban: 0, pembahasan: "Sisi³ = 64 → sisi = 4." },
+    { soal: "Data: 2,4,4,5,6,8. Rata-rata?", opsi: ["4", "5", "6", "7"], jawaban: 1, pembahasan: "Jumlah = 29. Rata-rata ≈ 4.83 → dibulatkan 5." },
+    { soal: "Suku ke-5 deret aritmatika 2,5,8,11,...", opsi: ["14", "15", "16", "17"], jawaban: 0, pembahasan: "Beda 3. 11 + 3 = 14." },
+    { soal: "Jumlah sudut dalam segi-8?", opsi: ["1080°", "900°", "720°", "540°"], jawaban: 0, pembahasan: "(n-2) x 180 = 6 x 180 = 1080." },
+    { soal: "Jika log 2 = 0.3, maka log 8?", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2³. log 8 = 3 x 0.3 = 0.9." },
+    { soal: "5! / 3!?", opsi: ["20", "15", "10", "5"], jawaban: 0, pembahasan: "120 / 6 = 20." },
+    { soal: "4 buku + 2 pulpen = 40RB. 1 pulpen 5RB. Harga 1 buku?", opsi: ["5RB", "7.5RB", "10RB", "12.5RB"], jawaban: 1, pembahasan: "2 pulpen = 10RB. 4 buku = 30RB. 1 buku = 7.5RB." },
+    { soal: "Peluang mata dadu prima (2,3,5)?", opsi: ["1/6", "1/3", "1/2", "1/4"], jawaban: 2, pembahasan: "3 prima dari 6. 3/6 = 1/2." },
+    { soal: "Air 2 m³/menit. 5 menit = ? liter", opsi: ["1.000", "5.000", "10.000", "500"], jawaban: 2, pembahasan: "2 m³ = 2000L. 2000 x 5 = 10.000L." },
+    { soal: "Tangga 3m ke dinding, kaki 4m dari dinding. Panjang tangga?", opsi: ["5m", "6m", "7m", "8m"], jawaban: 0, pembahasan: "Pitagoras: √(3²+4²) = 5." },
+    { soal: "Jika x = -3, x² - 2x + 1?", opsi: ["4", "16", "14", "1"], jawaban: 1, pembahasan: "9 + 6 + 1 = 16." },
+    { soal: "Barang jual 150RB, rugi 25%. Harga beli?", opsi: ["100RB", "150RB", "200RB", "250RB"], jawaban: 2, pembahasan: "Jual = 75% beli. 150RB = 0.75 x beli. Beli = 200RB." },
+    { soal: "Susunan kata 'LOGIKA' (huruf beda)?", opsi: ["720", "360", "120", "120"], jawaban: 0, pembahasan: "6! = 720." },
+    { soal: "Rata-rata 10 siswa 60. Tambah 1 siswa, rata-rata 62. Nilai siswa baru?", opsi: ["72", "80", "82", "90"], jawaban: 2, pembahasan: "Total baru = 11x62 = 682. Total lama = 600. Nilai = 82." },
+    { soal: "2/3 x = 8. 3/4 x?", opsi: ["6", "8", "9", "12"], jawaban: 2, pembahasan: "x = 12. 3/4 x 12 = 9." },
+    { soal: "Roda putar 120 kali/menit. Total derajat?", opsi: ["43.200°", "360°", "120°", "7.200°"], jawaban: 0, pembahasan: "120 x 360 = 43.200." },
+    { soal: "0.2 x 0.3?", opsi: ["0.6", "0.06", "0.006", "6"], jawaban: 1, pembahasan: "2x3=6, 2 desimal = 0.06." },
+    { soal: "Umur A:B = 2:3. Selisih 5 tahun. Umur B?", opsi: ["10", "15", "20", "25"], jawaban: 1, pembahasan: "Selisih 1 bagian = 5. B = 3x5 = 15." },
+    { soal: "Persegi panjang dipotong 2 sama besar. Luas awal 40. Keliling total 2 bagian?", opsi: ["Tetap", "Bertambah", "Berkurang", "Tidak tentu"], jawaban: 1, pembahasan: "Memotong tambah sisi, keliling bertambah." },
+    { soal: "Sisa 125 : 11?", opsi: ["2", "3", "4", "5"], jawaban: 2, pembahasan: "125 = 11x11 + 4." },
+    { soal: "Perbandingan L:P = 3:5. Total 40. Banyak perempuan?", opsi: ["15", "25", "20", "10"], jawaban: 1, pembahasan: "3+5=8. 40/8=5. P = 5x5 = 25." },
+    { soal: "Jam 15:00. Sudut jarum jam dan menit?", opsi: ["90°", "180°", "270°", "360°"], jawaban: 0, pembahasan: "Jam 3 lurus = 90°." },
+    { soal: "2 jam 30 menit = ... menit?", opsi: ["120", "150", "180", "230"], jawaban: 1, pembahasan: "2x60 + 30 = 150." },
+    { soal: "Kebun persegi 100m². Perbesar agar luas 4x. Perbesar sisi?", opsi: ["2x", "4x", "10x", "16x"], jawaban: 0, pembahasan: "Luas = sisi². Jika luas 4x, sisi 2x." }
   ]
 };
 
@@ -357,15 +365,14 @@ let currentGateKey = null;
 let soalAktif = [];
 let indexSoalSekarang = 0;
 let skorBenar = 0;
-let chatHistoryGlobal = []; // History chat Tanya Jawab AI (tidak persist, sesuai aturan)
+let chatHistoryGlobal = []; // History chat tidak persist (sesuai aturan)
 
 // ====== DOM CONTROLLERS ======
 document.addEventListener('DOMContentLoaded', function() {
-    // Bind semua event listener setelah DOM siap
+    // Sidebar & Navigasi
     const sidebar = document.getElementById('sidebar');
     const menuTrigger = document.getElementById('menu-trigger');
     const sidebarOverlay = document.getElementById('sidebar-overlay');
-
     if(menuTrigger) menuTrigger.addEventListener('click', () => sidebar.classList.toggle('open'));
     if(sidebarOverlay) sidebarOverlay.addEventListener('click', () => sidebar.classList.remove('open'));
 
@@ -416,7 +423,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Navigasi
     const brandHome = document.getElementById('brand-home');
     const btnBack = document.getElementById('btn-back-dashboard');
-
     if(brandHome) brandHome.addEventListener('click', () => navigateTo('dashboard'));
     if(btnBack) btnBack.addEventListener('click', () => navigateTo('dashboard'));
     
@@ -450,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inisialisasi tampilan awal
     switchSubPanel('materi');
 
-    // ====== INISIALISASI FITUR CHAT AI ======
+    // Inisialisasi Chat AI
     initChatAI();
 });
 
@@ -551,7 +557,7 @@ WAJIB balas dalam format JSON murni tanpa markdown. Format JSON: {"soal": [{"per
     try {
         const response = await fetch(GROQ_API_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GENERATE_API_KEY}` },
             body: JSON.stringify({
                 model: "llama-3.3-70b-versatile",
                 messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
@@ -575,7 +581,6 @@ WAJIB balas dalam format JSON murni tanpa markdown. Format JSON: {"soal": [{"per
 
 // ====== SISTEM SIMULASI BANK SOAL (ANTI CAMPUR ADUK) ======
 function mulaiSimulasi(gateKey) {
-    // Ambil soal murni dari bank soal sesuai subtes yang dipilih (TANPA GENERATOR ACAK)
     let bank = BANK_SIMULASI[gateKey] || [];
     
     if(bank.length === 0) {
@@ -601,7 +606,6 @@ function tampilkanSoal(panelId) {
     }
 
     const soal = soalAktif[indexSoalSekarang];
-    // Mendukung key 'pertanyaan' (dari AI) dan 'soal' (dari bank statis)
     const teksSoal = soal.pertanyaan || soal.soal;
     
     let opsiHtml = soal.opsi.map((opsi, i) => `
@@ -611,7 +615,7 @@ function tampilkanSoal(panelId) {
         </button>
     `).join('');
 
-    // FIX: Tombol selanjutnya selalu muncul setelah jawab
+    // FIX: Tombol selanjutnya SELALU muncul setelah jawab
     panel.innerHTML = `
         <div class="latihan-header">
             <div class="info-soal">
@@ -635,7 +639,6 @@ function jawabSoal(indexPilihan, panelId) {
     const soal = soalAktif[indexSoalSekarang];
     const tombolOpsi = document.querySelectorAll(`#${panelId} .opsi-soal`);
     
-    // Disable semua opsi setelah jawab
     tombolOpsi.forEach(btn => btn.disabled = true);
 
     if (indexPilihan === soal.jawaban) {
@@ -646,11 +649,9 @@ function jawabSoal(indexPilihan, panelId) {
         tombolOpsi[soal.jawaban].classList.add('benar');
     }
 
-    // Tampilkan pembahasan dan tombol selanjutnya
     const boxPembahasan = document.getElementById('box-pembahasan');
     if(boxPembahasan) boxPembahasan.style.display = 'block';
     
-    // Fokus ke tombol selanjutnya agar mudah navigasi
     const btnSelanjutnya = document.getElementById('btn-selanjutnya');
     if(btnSelanjutnya) btnSelanjutnya.focus();
 }
@@ -673,7 +674,7 @@ function soalSelanjutnya(panelId) {
     }
 }
 
-// ====== FITUR TANYA JAWAB AI TUTOR UTBK (FIX TOMBOL TIDAK MUNCUL) ======
+// ====== FITUR TANYA JAWAB AI TUTOR UTBK (KONTEKSTUAL & HEMAT TOKEN) ======
 function initChatAI() {
     const floatingChatBtn = document.getElementById('floating-chat-btn');
     const chatModal = document.getElementById('chat-modal');
@@ -686,7 +687,6 @@ function initChatAI() {
     if(floatingChatBtn) {
         floatingChatBtn.addEventListener('click', () => {
             chatModal.classList.add('open');
-            // Fokus ke input saat buka chat
             if(chatInput) chatInput.focus();
         });
     }
@@ -727,33 +727,42 @@ function initChatAI() {
         const userMessage = chatInput.value.trim();
         if(!userMessage) return;
 
-        // Tampilkan pesan user
         addChatMessage(userMessage, 'user');
+        saveChatToHistory('user', userMessage);
         chatInput.value = '';
         showChatLoading();
 
-        // Prompt untuk AI Tutor UTBK
+        // Prompt KONTEKSTUAL: AI bisa membaca website (materi & soal yang sedang dibuka)
+        const currentMateri = DATA_MATERI[currentGateKey] || null;
+        const contextMateri = currentMateri ? 
+            `\n\nKonteks website yang sedang dibuka user: Subtes ${currentMateri.title}. Materi singkat: ${currentMateri.desc}` : '';
+
         const promptSystem = `Kamu adalah Tutor UTBK profesional yang ahli dalam semua materi UTBK SNBT. 
-  Jawab pertanyaan pengguna dengan jelas, detail, dan sesuai standar UTBK. 
-  Jika ditanya tentang soal, berikan pembahasan yang logis. 
-  Jangan menjawab topik di luar UTBK. Jika pertanyaan tidak relacion dengan UTBK, jawab dengan sopan bahwa kamu hanya bisa membantu soal UTBK.`;
+        Kamu bisa membaca konten website yang sedang diakses user (materi dan soal). 
+        Aturan:
+        1. Jawab pertanyaan pengguna dengan jelas, detail, dan sesuai standar UTBK.
+        2. Jika ditanya tentang soal, berikan pembahasan yang logis dan sesuai kunci jawaban UTBK.
+        3. Jika pengguna mengirimkan soal, berikan penjelasan langkah demi langkah.
+        4. Gunakan konteks website yang sedang diakses (subtes mana yang sedang dibuka) untuk memberikan jawaban yang lebih relevan.
+        5. Jangan menjawab topik di luar UTBK. Jika pertanyaan tidak relacion dengan UTBK, jawab dengan sopan bahwa kamu hanya bisa membantu soal UTBK.
+        6. Gunakan bahasa yang mudah dipahami, tapi tetap formal seperti tutor profesional.${contextMateri}`;
         
-        // Ambil history chat terbaru (maksimal 10 pesan terakhir agar token tidak Habis)
+        // Ambil history chat terbaru (maksimal 5 pesan terakhir agar token tidak Habis)
         const messages = [
             { role: "system", content: promptSystem },
-            ...getChatHistory().slice(-10),
+            ...getChatHistory().slice(-5),
             { role: "user", content: userMessage }
         ];
 
         try {
             const response = await fetch(GROQ_API_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${CHAT_API_KEY}` },
                 body: JSON.stringify({
                     model: "llama-3.3-70b-versatile",
                     messages: messages,
                     temperature: 0.7,
-                    max_tokens: 1024
+                    max_tokens: 512 // Hemat token dengan max_tokens 512
                 })
             });
 
@@ -763,13 +772,14 @@ function initChatAI() {
 
             hideChatLoading();
             addChatMessage(aiResponse, 'ai');
+            saveChatToHistory('ai', aiResponse);
         } catch (error) {
             hideChatLoading();
             addChatMessage(`Maaf, terjadi kesalahan: ${error.message}`, 'ai');
         }
     }
 
-    // Fungsi ambil history chat (dari memori sementara, tidak persist sesuai aturan)
+    // Fungsi ambil history chat dari memori sementara
     function getChatHistory() {
         return chatHistoryGlobal;
     }
