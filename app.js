@@ -346,6 +346,7 @@ let currentGateKey = null;
 let soalAktif = [];
 let indexSoalSekarang = 0;
 let skorBenar = 0;
+let chatHistoryGlobal = []; // History chat Tanya Jawab AI (tidak persist, sesuai aturan)
 
 // ====== DOM CONTROLLERS ======
 document.addEventListener('DOMContentLoaded', function() {
