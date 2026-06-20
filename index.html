@@ -100,13 +100,15 @@
               <span class="slider"></span>
             </label>
             <span class="timer-label">Aktifkan Chrono-Timer Belajar</span>
-            <select id="timer-duration-select" class="timer-select">
-              <option value="15">15 Menit</option>
-              <option value="25" selected>25 Menit</option>
-              <option value="45">45 Menit</option>
-              <option value="60">60 Menit</option>
-              <option value="90">90 Menit</option>
-            </select>
+          </div>
+          <div id="timer-custom-input-row" class="timer-custom-input-row" style="display:none; margin-top:14px;">
+            <span class="timer-label" style="font-size:0.8rem; margin-right:8px;">Atur Waktu:</span>
+            <input type="number" id="timer-input-hours" class="timer-input-num" min="0" max="23" value="0" placeholder="Jam">
+            <span class="timer-colon">:</span>
+            <input type="number" id="timer-input-minutes" class="timer-input-num" min="0" max="59" value="25" placeholder="Menit">
+            <span class="timer-colon">:</span>
+            <input type="number" id="timer-input-seconds" class="timer-input-num" min="0" max="59" value="0" placeholder="Detik">
+            <button id="btn-timer-apply" class="btn-action" style="margin-left:8px; padding:4px 14px; font-size:0.8rem;">Set</button>
           </div>
           <div id="chrono-display-container" class="chrono-display hidden">
             <div class="time-digits" id="timer-digits">25:00</div>
@@ -125,9 +127,12 @@
   </main>
 
   <div id="floating-timer" class="floating-timer hidden">
-    <span id="ft-digits">25:00</span>
-    <button id="ft-pause-btn">⏸️</button>
-    <button id="ft-close-btn">✖️</button>
+    <div id="ft-drag-handle" class="ft-drag-handle" title="Geser untuk memindahkan">
+      <span class="ft-drag-icon">⠿</span>
+    </div>
+    <span id="ft-digits" class="ft-digits">25:00</span>
+    <button id="ft-pause-btn" class="ft-btn" title="Pause/Resume">⏸️</button>
+    <button id="ft-close-btn" class="ft-btn" title="Tutup Timer">✖️</button>
   </div>
 
   <button id="floating-chat-btn" class="floating-chat-btn">💬 Tanya AI</button>
