@@ -509,37 +509,22 @@ async function generateSoalDariAI(gateKey) {
   }
 }
 
-// ====== SISTEM SIMULASI BANK SOAL ======
+// ====== SISTEM SIMULASI BANK SOAL (ANTI CAMPUR ADUK) ======
 function mulaiSimulasi(gateKey) {
+  // Ambil soal murni dari bank soal sesuai subtes yang dipilih (TANPA GENERATOR ACAK)
   let bank = BANK_SIMULASI[gateKey] || [];
   
-  // Jika belum 40 soal (karena belum saya lengkapi di bagian 2/3), AI lokal akan generate sisanya
-  let combinedBank = [...bank];
-  if(combinedBank.length < 40) {
-    const dynamicNeeded = 40 - combinedBank.length;
-    const dynamicSoal = generateDynamicSoal(dynamicNeeded);
-    combinedBank = combinedBank.concat(dynamicSoal);
+  if(bank.length === 0) {
+    document.getElementById('panel-latihan-sim').innerHTML = "<div class='locked-state-card'><h3>Bank soal untuk subtes ini belum tersedia.</h3></div>";
+    return;
   }
-
-  soalAktif = combinedBank.sort(() => Math.random() - 0.5);
+  // Acak urutan soal HANYA di dalam subtes itu sendiri
+  soalAktif = bank.sort(() => Math.random() - 0.5);
   indexSoalSekarang = 0;
   skorBenar = 0;
   tampilkanSoal('panel-latihan-sim');
 }
-
-// Fungsi Generator lokal (dummy)
-function generateDynamicSoal(jumlah = 35) {
-  const arr = [];
-  for(let i=0; i<jumlah; i++) {
-    arr.push({
-      soal: `[Soal Generate Otomatis ${i+1}] Berapakah hasil dari ${i+2} x 2?`,
-      opsi: [`${(i+2)*2}`, `${(i+2)*3}`, `${(i+2)+2}`, `${(i+2)-1}`].sort(() => Math.random() - 0.5),
-      jawaban: 0,
-      pembahasan: `Ini adalah soal cadangan otomatis.`
-    });
-  }
-  return arr;
-}
+// HAPUS FUNGSI generateDynamicSoal KARENA TIDAK DIPAKAI LAGI
 
 // ====== FUNGSI TAMPILKAN SOAL (TAMBAHAN AGAR TIDAK ERROR) ======
 function tampilkanSoal(panelId) {
