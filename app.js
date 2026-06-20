@@ -1,99 +1,147 @@
-// ====== BANK SOAL & DYNAMIC GENERATOR (ANTI BUG & SOAL TAK TERHINGGA) ======
-const BANK_SIMULASI = {
-  'subtest-pu': [
-    { soal: "Jika hujan, jalan basah. Jalan tidak basah. Maka...", opsi: ["Hujan turun", "Hujan tidak turun", "Jalan kering", "Tidak tentu"], jawaban: 1, pembahasan: "Modus Tollens: p→q dan ~q, maka ~p." },
-    { soal: "Semua mahasiswa wajib KRS. Sebagian mahasiswa belum bayar SPP. Maka...", opsi: ["Semua yang belum bayar tidak wajib KRS", "Sebagian yang wajib KRS belum bayar SPP", "Semua mahasiswa miskin", "Tidak ada hubungannya"], jawaban: 1, pembahasan: "Silogisme sebagian." },
-    { soal: "Deret: 2, 5, 10, 17, 26, ...", opsi: ["35", "36", "37", "38"], jawaban: 2, pembahasan: "Selisih +3, +5, +7, +9. Berikutnya +11. 26+11=37." },
-    { soal: "Deret huruf: B, D, G, K, P, ...", opsi: ["U", "V", "W", "X"], jawaban: 2, pembahasan: "Selisih +2, +3, +4, +5, +6. P(16)+6=V(22)." },
-    { soal: "Jika x prima dan x > 2, maka x ganjil. Jika x genap, maka...", opsi: ["x prima", "x ganjil", "x bukan prima atau x <= 2", "x nol"], jawaban: 2, pembahasan: "Kontraposisif logika." }
-  ],
-  'subtest-ppu': [
-    { soal: "Sinonim dari 'Mitigasi' adalah...", opsi: ["Pencegahan", "Penghancuran", "Pembangunan", "Penolakan"], jawaban: 0, pembahasan: "Mitigasi = usaha mengurangi dampak buruk/pencegahan." },
-    { soal: "Sinonim dari 'Fluktuasi' adalah...", opsi: ["Kestabilan", "Turun naik", "Kehilangan", "Kenaikan"], jawaban: 1, pembahasan: "Fluktuasi = naik turunnya nilai." },
-    { soal: "Sinonim dari 'Aklamasi' adalah...", opsi: ["Penolakan", "Perhitungan suara", "Persetujuan serentak", "Perdebatan"], jawaban: 2, pembahasan: "Aklamasi = persetujuan tanpa voting." },
-    { soal: "Sinonim dari 'Insinuasi' adalah...", opsi: ["Pujian", "Sindiran", "Perintah", "Janji"], jawaban: 1, pembahasan: "Insinuasi = tuduhan/sindiran tidak langsung." },
-    { soal: "Sinonim dari 'Bikameral' adalah...", opsi: ["Satu kamar", "Dua kamar", "Rapat paripurna", "Veto presiden"], jawaban: 1, pembahasan: "Bikameral = sistem dua kamar (DPR & DPD)." }
-  ],
-  'subtest-pbm': [
-    { soal: "Perbaiki kalimat: 'Bagi siswa yang rajin belajar akan lulus.'", opsi: ["Bagi siswa rajin belajar, akan lulus.", "Siswa yang rajin belajar akan lulus.", "Bagi siswa yang rajin belajar lulus.", "Siswa yang rajin belajar, akan lulus."], jawaban: 1, pembahasan: "Hilangkan kata depan 'Bagi' agar subjek (Siswa) jelas." },
-    { soal: "Perbaiki kalimat: 'Sejak dari pagi dia belajar.'", opsi: ["Sejak pagi dia belajar.", "Sejak dari pagi, dia belajar.", "Dari pagi dia belajar.", "Sejak pagi, dia belajar."], jawaban: 0, pembahasan: "Pleonasme (pemborosan). 'Sejak' dan 'dari' maknanya sama, hapus salah satu." },
-    { soal: "Penulisan kata depan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Kata depan 'di' dipisah jika menunjukkan tempat." },
-    { soal: "Penulisan kata kerja pasif 'di' yang benar...", opsi: ["Di makan", "Dimakan", "Di-makan", "Dimakan oleh"], jawaban: 1, pembahasan: "Kata kerja pasif 'di' harus digabung." },
-    { soal: "Kalimat efektif harus memiliki...", opsi: ["Subjek dan Obyek", "Subjek dan Predikat", "Predikat dan Obyek", "Keterangan"], jawaban: 1, pembahasan: "Struktur inti minimal S dan P." }
-  ],
-  'subtest-indo': [
-    { soal: "Teks: 'Edukasi karakter membuat siswa tangguh.' Gagasan utamanya adalah...", opsi: ["Siswa butuh bimbel", "Edukasi karakter penting untuk mental", "Ujian nasional menakutkan", "Siswa suka mencontek"], jawaban: 1, pembahasan: "Gagasan utama ada di kalimat pertama (deduktif)." },
-    { soal: "Paragraf yang gagasan utamanya di akhir disebut...", opsi: ["Deduktif", "Induktif", "Campuran", "Deskriptif"], jawaban: 1, pembahasan: "Induktif: khusus ke umum." },
-    { soal: "Paragraf yang gagasan utamanya di awal disebut...", opsi: ["Deduktif", "Induktif", "Campuran", "Naratif"], jawaban: 0, pembahasan: "Deduktif: umum ke khusus." },
-    { soal: "Teks: 'Penanaman pohon mengurangi polusi.' Simpulan yang tepat...", opsi: ["Pohon itu indah", "Pohon bermanfaat bagi ekologi", "Pohon butuh air", "Pohon harus ditebang"], jawaban: 1, pembahasan: "Simpulan harus sesuai isi teks." },
-    { soal: "Menyimpulkan isi teks disebut juga...", opsi: ["Skimming", "Menyimpulkan/Sintesis", "Scanning", "Membaca cepat"], jawaban: 1, pembahasan: "Sintesis adalah penggabungan gagasan untuk menyimpulkan." }
-  ],
-  'subtest-inggris': [
-    { soal: "I wish I ___ harder for the exam yesterday.", opsi: ["study", "studied", "had studied", "would study"], jawaban: 2, pembahasan: "Past regret (penyesalan masa lalu) pakai S + wish + S + had V3." },
-    { soal: "If she ___, she would come.", opsi: ["knows", "knew", "had known", "known"], jawaban: 1, pembahasan: "Conditional type 2 (hypothetical), pakai V2." },
-    { soal: "The author's tone in a scientific fact report is usually...", opsi: ["Optimistic", "Subjective", "Objective", "Pessimistic"], jawaban: 2, pembahasan: "Laporan ilmiah bersifat objektif (netral)." },
-    { soal: "Synonym of 'Abundant' is...", opsi: ["Scarce", "Plentiful", "Empty", "Small"], jawaban: 1, pembahasan: "Abundant = melimpah (plentiful)." },
-    { soal: "Antonym of 'Artificial' is...", opsi: ["Fake", "Natural", "Synthetic", "Man-made"], jawaban: 1, pembahasan: "Artificial (buatan) lawannya Natural (alami)." }
-  ],
-  'subtest-pk': [
-    { soal: "Jika f(x)=2x+1 dan g(x)=x², maka (g o f)(2)=", opsi: ["5", "10", "25", "20"], jawaban: 2, pembahasan: "f(2)=5, g(5)=25." },
-    { soal: "Faktorial 4! (4 faktorial) adalah...", opsi: ["12", "16", "24", "4"], jawaban: 2, pembahasan: "4x3x2x1 = 24." },
-    { soal: "Sudut bertolak belakang selalu...", opsi: ["90 derajat", "180 derajat", "Sama besar", "Berbeda"], jawaban: 2, pembahasan: "Sifat sudut bertolak belakang." },
-    { soal: "Log 100 basis 10 adalah...", opsi: ["1", "2", "10", "100"], jawaban: 1, pembahasan: "10 pangkat 2 = 100." },
-    { soal: "Mean (rata-rata) dari 2, 4, 6, 8 adalah...", opsi: ["4", "5", "6", "8"], jawaban: 1, pembahasan: "Jumlah 20 dibagi 4 data = 5." }
-  ],
-  'subtest-pm': [
-    { soal: "7 orang dipilih 3 untuk delegasi. Berapa caranya? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 7!/(3!4!) = 35." },
-    { soal: "Ketua, wakil, sekretaris dari 5 orang. (Permutasi)", opsi: ["10", "20", "60", "120"], jawaban: 2, pembahasan: "P(5,3) = 5!/2! = 60." },
-    { soal: "Modal Rp100.000, bunga 12%/tahun. Bunga 3 bulan?", opsi: ["Rp 1.000", "Rp 3.000", "Rp 12.000", "Rp 4.000"], jawaban: 1, pembahasan: "(12%/12) x 3 bln = 3%. 3% x 100k = 3000." },
-    { soal: "Jarak kota A-B 120 km. Motor 60 km/jam. Waktu tempuh?", opsi: ["1 jam", "2 jam", "3 jam", "0.5 jam"], jawaban: 1, pembahasan: "Jarak / Kecepatan = 120/60 = 2 jam." },
-    { soal: "Harga naik 20%, brg mula-mula Rp 50.000. Harga sekarang?", opsi: ["Rp 55.000", "Rp 60.000", "Rp 70.000", "Rp 10.000"], jawaban: 1, pembahasan: "20% x 50k = 10k. 50k+10k = 60k." }
-  ]
+// ====== KONFIGURASI API GROQ ======
+// PENTING: Masukkan API Key Groq Anda di sini
+const GROQ_API_KEY = "GANTI_DENGAN_API_KEY_GROQ_KAMU"; 
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+// ====== MATERI UTBK 2024-2025 ======
+const DATA_MATERI = {
+  'subtest-pu': {
+    title: "Penalaran Umum (PU)",
+    category: "TPS Module",
+    desc: "Mengukur kemampuan penalaran logis (silogisme, premis), analitis (deret, permainan kata), dan penalaran kuantitatif.",
+    htmlContent: `
+      <div class="materi-card">
+        <h2>Logika Silogisme & Premis (UTBK 2024)</h2>
+        <p>Silogisme adalah penarikan kesimpulan dari dua premis. Aturan mainnya:</p>
+        <ul>
+          <li><strong>Modus Ponens:</strong> Jika p maka q. p terjadi. Maka q terjadi.</li>
+          <li><strong>Modus Tollens:</strong> Jika p maka q. q tidak terjadi. Maka p tidak terjadi.</li>
+          <li><strong>Silogisme Rantai:</strong> p→q, q→r, maka p→r.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Penalaran Analitis (Deret & Logika Diagram)</h2>
+        <p>Deret angka biasanya menggunakan pola aritmatika (+a), geometri (xa), atau pola selang-seling. Deret huruf menggunakan urutan abjad (A=1, B=2, dst).</p>
+      </div>
+    `
+  },
+  'subtest-ppu': {
+    title: "Pengetahuan & Pemahaman Umum (PPU)",
+    category: "TPS Module",
+    desc: "Mengukur penguasaan kosakata (sinonim, antonim), ejaan, dan tata bahasa praktis.",
+    htmlContent: `
+      <div class="materi-card">
+        <h2>Kosakata Berbasis Konteks (UTBK 2024)</h2>
+        <p>Soal PPU tidak lagi sekadar mencari sinonim kamus, melainkan sinonim kontekstual. Contoh: Kata "peredaran" dalam "peredaran uang" berbeda dengan "peredaran darah".</p>
+      </div>
+      <div class="materi-card">
+        <h2>Ejaan yang Disempurnakan (EYD V)</h2>
+        <p>Perhatikan penulisan huruf kapital, imbuhan asing, dan kata depan. "Di" sebagai awalan verba pasif digabung (dimakan), "di" sebagai preposisi tempat dipisah (di rumah).</p>
+      </div>
+    `
+  },
+  'subtest-pbm': { title: "Memahami Bacaan & Menulis", category: "TPS Module", desc: "Tata bahasa formal.", htmlContent: "<div class='materi-card'><h2>Materi PBM</h2><p>Belum tersedia.</p></div>" },
+  'subtest-pk': { title: "Pengetahuan Kuantitatif", category: "TPS Module", desc: "Matematika dasar.", htmlContent: "<div class='materi-card'><h2>Materi PK</h2><p>Belum tersedia.</p></div>" },
+  'subtest-indo': { title: "Literasi B. Indonesia", category: "Literasi Module", desc: "Pemahaman teks.", htmlContent: "<div class='materi-card'><h2>Materi Literasi ID</h2><p>Belum tersedia.</p></div>" },
+  'subtest-inggris': { title: "Literasi B. Inggris", category: "Literasi Module", desc: "Reading comprehension.", htmlContent: "<div class='materi-card'><h2>Materi Literasi EN</h2><p>Belum tersedia.</p></div>" },
+  'subtest-pm': { title: "Penalaran Matematika", category: "Literasi Module", desc: "Soal cerita matematika.", htmlContent: "<div class='materi-card'><h2>Materi PM</h2><p>Belum tersedia.</p></div>" }
 };
 
-// Fungsi Generator Soal Otomatis (Membuat bank soal tak terhingga)
-function generateDynamicSoal(jumlah = 35) {
-  const arr = [];
-  for(let i=0; i<jumlah; i++) {
-    const tipe = Math.floor(Math.random() * 3);
-    
-    if(tipe === 0) { // Deret Aritmatika
-      const a = Math.floor(Math.random() * 10) + 2;
-      const b = a + Math.floor(Math.random() * 5) + 2;
-      const sel = b - a;
-      const c = b + sel;
-      const d = c + sel;
-      const ans = d + sel;
-      arr.push({
-        soal: `Deret Aritmatika: ${a}, ${b}, ${c}, ${d}, ... Bilangan selanjutnya adalah?`,
-        opsi: [`${ans}`, `${ans+2}`, `${ans-2}`, `${ans+sel}`].sort(() => Math.random() - 0.5),
-        jawaban: 0,
-        pembahasan: `Pola selisih +${sel}. Maka ${d} + ${sel} = ${ans}.`
-      });
-    } 
-    else if(tipe === 1) { // Kombinasi Sederhana
-      const n = Math.floor(Math.random() * 4) + 5; // 5-8
-      const r = 3;
-      // Rumus C(n,3) = n(n-1)(n-2)/6
-      const ans = (n * (n-1) * (n-2)) / 6;
-      arr.push({
-        soal: `Dari ${n} orang siswa, akan dipilih 3 orang sebagai pengurus OSIS. Berapa banyak cara pemilihan tim yang mungkin? (Abaikan urutan)`,
-        opsi: [`${ans}`, `${ans+5}`, `${ans-3}`, `${n*3}`].sort(() => Math.random() - 0.5),
-        jawaban: 0,
-        pembahasan: `Kombinasi C(${n}, 3) = ${n}!/ (3! x ${n-3}!) = (${n}x${n-1}x${n-2}) / 6 = ${ans}.`
-      });
-    }
-    else { // Logika Silogisme
-      arr.push({
-        soal: "Jika p maka q. Jika q maka r. Jika diketahui p terjadi, maka kesimpulan yang sah adalah?",
-        opsi: ["q terjadi", "r terjadi", "p dan q terjadi", "r tidak terjadi"],
-        jawaban: 1,
-        pembahasan: "Silogisme rantai: (p→q) + (q→r) = (p→r). Jika p maka kesimpulannya r."
-      });
-    }
-  }
-  return arr;
-}
+// ====== BANK SOAL SIMULASI (40 SOAL PER SUBTES) ======
+// Bagian 1: PU & PPU (80 Soal). Bagian 2 menyusul.
+const BANK_SIMULASI = {
+  'subtest-pu': [
+    // --- 40 SOAL PENALARAN UMUM ---
+    { soal: "Semua dokter pandai. Sebagian dokter kaya. Kesimpulan yang benar adalah...", opsi: ["Semua yang kaya pandai", "Sebagian yang pandai kaya", "Semua yang pandai kaya", "Sebagian yang kaya bodoh"], jawaban: 1, pembahasan: "Silogisme partikular: Subjek (dokter) disisihkan, predikat dipertahankan." },
+    { soal: "Jika hari hujan, jalan basah. Jalan tidak basah. Maka...", opsi: ["Hari hujan", "Hari tidak hujan", "Hari mendung", "Tidak tentu"], jawaban: 1, pembahasan: "Modus Tollens: p→q, ~q maka ~p." },
+    { soal: "Deret: 3, 6, 11, 18, 27, ...", opsi: ["36", "38", "40", "42"], jawaban: 1, pembahasan: "Selisih: +3, +5, +7, +9. Berikutnya +11. 27+11=38." },
+    { soal: "Deret: 2, 6, 12, 20, 30, ...", opsi: ["40", "42", "44", "46"], jawaban: 1, pembahasan: "Selisih: +4, +6, +8, +10. Berikutnya +12. 30+12=42." },
+    { soal: "Jika p maka q. Jika q maka r. Jika r maka s. Jika p benar, maka...", opsi: ["q benar", "r benar", "s benar", "p dan q benar"], jawaban: 2, pembahasan: "Silogisme rantai: p→q→r→s. Jika p benar, konsekuensi terakhir (s) pasti benar." },
+    { soal: "Semua siswa wajib ujian. Sebagian siswa sakit. Maka...", opsi: ["Semua yang sakit tidak ujian", "Sebagian yang wajib ujian sakit", "Semua siswa sehat", "Tidak ada yang ujian"], jawaban: 1, pembahasan: "Silogisme partikular afirmatif." },
+    { soal: "A, C, E, G, I, ...", opsi: ["J", "K", "L", "M"], jawaban: 1, pembahasan: "Melompati satu huruf (A, [B], C, [D], E...). I selanjutnya adalah K." },
+    { soal: "Z, X, V, T, R, ...", opsi: ["Q", "P", "O", "N"], jawaban: 1, pembahasan: "Mundur dua huruf. R mundur dua = P." },
+    { soal: "Jika x adalah bilangan ganjil, maka x+1 adalah bilangan genap. Jika x+1 ganjil, maka...", opsi: ["x genap", "x ganjil", "x prima", "x nol"], jawaban: 0, pembahasan: "Kontraposisi: p→q, ~q maka ~p. Jika x+1 ganjil (~q), maka x bukan ganjil (genap)." },
+    { soal: "Tidak ada pemalas yang sukses. Sebagian mahasiswa pemalas. Maka...", opsi: ["Sebagian mahasiswa sukses", "Sebagian mahasiswa tidak sukses", "Semua mahasiswa sukses", "Tidak ada mahasiswa sukses"], jawaban: 1, pembahasan: "Silogisme negatif." },
+    { soal: "Deret: 1, 4, 9, 16, 25, ...", opsi: ["30", "36", "42", "49"], jawaban: 1, pembahasan: "Pola kuadrat: 1², 2², 3², 4², 5², 6²=36." },
+    { soal: "Deret: 2, 3, 5, 7, 11, ...", opsi: ["12", "13", "14", "15"], jawaban: 1, pembahasan: "Deret bilangan prima." },
+    { soal: "Semua logam memuai jika dipanaskan. Besi adalah logam. Kesimpulan...", opsi: ["Besi memuai jika dipanaskan", "Besi tidak memuai", "Semua yang memuai besi", "Logam tidak memuai"], jawaban: 0, pembahasan: "Silogisme kategorik universal." },
+    { soal: "Jika A>B dan B>C, maka...", opsi: ["C>A", "A>C", "B=A", "A=C"], jawaban: 1, pembahasan: "Sifat transitif." },
+    { soal: "P, Q, R, S, T. Jika P=T, dan Q=S, maka hubungan P dan S adalah...", opsi: ["P>S", "P<S", "P=S", "P≠S"], jawaban: 1, pembahasan: "P=T, Q=S, R<S. Karena T>R, maka S<T (P). Jadi P>S." },
+    { soal: "Semua bunga berbau wangi. Mawar adalah bunga. Maka...", opsi: ["Mawar berbau wangi", "Mawar tidak wangi", "Semua wangi mawar", "Tidak pasti"], jawaban: 0, pembahasan: "Silogisme dasar." },
+    { soal: "Deret: 5, 10, 8, 16, 14, 28, ...", opsi: ["26", "30", "32", "24"], jawaban: 0, pembahasan: "Pola selang-seling: x2, -2. 28-2=26." },
+    { soal: "Deret: 100, 50, 25, 12.5, ...", opsi: ["6.25", "5", "7.5", "10"], jawaban: 0, pembahasan: "Deret geometri dibagi 2." },
+    { soal: "Semifinalis mendapat medali. Andi bukan semifinalis. Maka...", opsi: ["Andi mendapat medali", "Andi tidak mendapat medali", "Andi finalis", "Tidak tentu"], jawaban: 3, pembahasan: "Jangan disimpulkan bahwa non-semifinalis tidak dapat medali (bisa saja ada jalur lain dapat medali)." },
+    { soal: "Jika hujan, angin kencang. Angin tidak kencang. Maka...", opsi: ["Hujan", "Tidak hujan", "Mendung", "Cerah"], jawaban: 1, pembahasan: "Modus Tollens." },
+    { soal: "A, C, F, J, O, ...", opsi: ["T", "U", "V", "S"], jawaban: 1, pembahasan: "Selisih +2, +3, +4, +5, +6. O(15)+6=U(21)." },
+    { soal: "Semua A adalah B. Tidak ada B yang C. Maka...", opsi: ["Semua A adalah C", "Tidak ada A yang C", "Sebagian A adalah C", "Tidak ada A yang B"], jawaban: 1, pembahasan: "Silogisme negatif universal." },
+    { soal: "Jika naik pesawat, harus tes PCR. Andi tidak tes PCR. Maka Andi...", opsi: ["Naik pesawat", "Tidak naik pesawat", "Naik kapal", "Tidak tentu"], jawaban: 1, pembahasan: "Modus Tollens." },
+    { soal: "Deret: 81, 27, 9, 3, ...", opsi: ["0", "1", "1.5", "2"], jawaban: 1, pembahasan: "Dibagi 3. 3/3=1." },
+    { soal: "Jika x>5, maka y<2. Jika y=3, maka...", opsi: ["x>5", "x<=5", "x=5", "x<5"], jawaban: 1, pembahasan: "Kontraposisi: y tidak <2 (y>=2/3), maka x tidak >5 (x<=5)." },
+    { soal: "Semua dosen berijazah S2. Sebagian dosen berijazah S3. Maka...", opsi: ["Semua S2 adalah S3", "Sebagian S2 adalah S3", "Semua dosen S3", "Sebagian dosen S2 adalah S3"], jawaban: 3, pembahasan: "Karena semua dosen S2, dan sebagian S3, maka sebagian S2 (yang berstatus dosen) pasti S3." },
+    { soal: "Sebagian buku menarik. Semua buku mahal. Maka...", opsi: ["Semua yang menarik mahal", "Sebagian yang mahal menarik", "Semua yang mahal menarik", "Tidak ada hubungannya"], jawaban: 1, pembahasan: "Silogisme partikular." },
+    { soal: "Jika sakit, minum obat. Minum obat. Maka...", opsi: ["Sakit", "Tidak sakit", "Tidak tentu sakit", "Sembuh"], jawaban: 2, pembahasan: "Jangan jatuh ke 'Affirming the Consequent'. q benar tidak menjamin p benar." },
+    { soal: "Deret: 1, 1, 2, 3, 5, 8, ...", opsi: ["11", "12", "13", "14"], jawaban: 2, pembahasan: "Deret Fibonacci (jumlah dua angka sebelumnya)." },
+    { soal: "Deret: 2, 5, 10, 17, 26, ...", opsi: ["35", "36", "37", "38"], jawaban: 2, pembahasan: "Selisih +3, +5, +7, +9, +11. 26+11=37." },
+    { soal: "Semula: KUDA. Jika K diganti M, D diganti T, menjadi...", opsi: ["MUTA", "MATA", "KUTA", "MUDA"], jawaban: 0, pembahasan: "Substitusi huruf." },
+    { soal: "Lima orang A, B, C, D, E duduk berjajar. A di ujung kiri. C di antara B dan D. E di kanan D. Urutannya...", opsi: ["ABCDE", "ABDCE", "ACDBE", "ABCDE"], jawaban: 1, pembahasan: "Logika spatial: A, lalu B, C (tengah), D, E." },
+    { soal: "Jika lampu menyala, maka ada listrik. Lampu tidak menyala. Maka...", opsi: ["Ada listrik", "Tidak ada listrik", "Lampu rusak", "Tidak pasti tidak ada listrik"], jawaban: 3, pembahasan: "Lampu tidak menyala bisa karena rusak atau mati, bukan pasti tak ada listrik." },
+    { soal: "Deret: 4, 8, 12, 16, ...", opsi: ["18", "20", "22", "24"], jawaban: 1, pembahasan: "Kelipatan 4." },
+    { soal: "Semua tanaman butuh air. Rumput adalah tanaman. Maka...", opsi: ["Rumput butuh air", "Air butuh rumput", "Rumput tidak butuh air", "Tanaman adalah air"], jawaban: 0, pembahasan: "Silogisme dasar." },
+    { soal: "A = B, B = C, C = D. Maka A = ?", opsi: ["B", "C", "D", "Semuanya benar"], jawaban: 3, pembahasan: "Sifat transitif rantai." },
+    { soal: "Tidak ada ikan yang mamalia. Hiu adalah ikan. Maka...", opsi: ["Hiu mamalia", "Hiu bukan mamalia", "Sebagian hiu mamalia", "Tidak tentu"], jawaban: 1, pembahasan: "Silogisme negatif universal." },
+    { soal: "Deret huruf: A, C, F, J, O, ...", opsi: ["U", "T", "S", "V"], jawaban: 0, pembahasan: "Sama dengan soal nomor 21, +2,+3,+4,+5,+6. U." },
+    { soal: "Jika nilai ujian > 80, dapat A. Nilai Budi 85. Maka...", opsi: ["Budi dapat A", "Budi tidak dapat A", "Budi remidi", "Tidak tentu"], jawaban: 0, pembahasan: "Modus Ponens." },
+    { soal: "Jika hujan, Budi bawa payung. Budi bawa payung. Maka...", opsi: ["Hari hujan", "Hari cerah", "Budi takut panas", "Tidak tentu hujan"], jawaban: 3, pembahasan: "Affirming consequent fallacy. Bisa saja Budi bawa payung karena panas." }
+  ],
+  'subtest-ppu': [
+    // --- 40 SOAL PENGETAHUAN & PEMAHAMAN UMUM ---
+    { soal: "Sinonim dari 'Bengis' adalah...", opsi: ["Ramah", "Kejam", "Pemalu", "Penakut"], jawaban: 1, pembahasan: "Bengis berarti keras/kejam." },
+    { soal: "Sinonim dari 'Ekstensif' adalah...", opsi: ["Sempit", "Luas", "Dalam", "Tinggi"], jawaban: 1, pembahasan: "Ekstensif = luas, meluas." },
+    { soal: "Sinonim dari 'Konvensional' adalah...", opsi: ["Modern", "Tradisional", "Futuristik", "Inovatif"], jawaban: 1, pembahasan: "Konvensional = bersifat tradisi/adat kebiasaan." },
+    { soal: "Sinonim dari 'Prematur' adalah...", opsi: ["Tepat waktu", "Terlambat", "Lebih awal", "Sangat tua"], jawaban: 2, pembahasan: "Prematur = lahir/tumbuh sebelum waktunya." },
+    { soal: "Sinonim dari 'Filantropis' adalah...", opsi: ["Pecinta uang", "Pecinta manusia", "Pecinta alam", "Pecinta diri"], jawaban: 1, pembahasan: "Filantropis = orang yang suka berbuat baik/dermawan." },
+    { soal: "Antonim dari 'Defisit' adalah...", opsi: ["Rugi", "Surplus", "Merugikan", "Bangkrut"], jawaban: 1, pembahasan: "Defisit = kekurangan. Lawannya surplus/kelebihan." },
+    { soal: "Antonim dari 'Esensial' adalah...", opsi: ["Pokok", "Penting", "Sekunder", "Utama"], jawaban: 2, pembahasan: "Esensial = sangat penting. Lawannya sekunder/tidak penting." },
+    { soal: "Antonim dari 'Implisit' adalah...", opsi: ["Tersurat", "Tersirat", "Samara", "Tersembunyi"], jawaban: 0, pembahasan: "Implisit = tersirat. Lawannya eksplisit = tersurat." },
+    { soal: "Antonim dari 'Apatis' adalah...", opsi: ["Peduli", "Malas", "Acuh", "Dingin"], jawaban: 0, pembahasan: "Apati = tidak peduli. Lawannya peduli." },
+    { soal: "Antonim dari 'Relevan' adalah...", opsi: ["Cocok", "Berkaitan", "Tak nyambung", "Sama"], jawaban: 2, pembahasan: "Relevan = berhubungan. Lawannya tak nyambung/irrelevan." },
+    { soal: "Penulisan ejaan yang benar: 'Kedua orang tuanya pergi ke Jakarta'. Penulisan 'tuanya' seharusnya...", opsi: ["tuanya (benar)", "tua-nya", "tua nya", "tuanya (salah total)"], jawaban: 2, pembahasan: "Kata 'tua' dan 'nya' dipisah karena 'nya' sebagai penegas." },
+    { soal: "Pemakaian huruf kapital yang benar...", opsi: ["Presiden Joko Widodo", "presiden Joko widodo", "Presiden joko Widodo", "Presiden Joko widodo"], jawaban: 0, pembahasan: "Gelar jabatan di awal kalimat dikapital, nama orang dikapital." },
+    { soal: "Penulisan imbuhan asing yang benar...", opsi: ["Di cooperasi", "Dikooperasi", "Di-kooperasi", "Dikooperasikan"], jawaban: 1, pembahasan: "Awalan 'di' pada kata asing digabung tanpa tanda hubung." },
+    { soal: "Penggunaan tanda baca yang tepat: 'Bawa buku pensil dan penghapus'", opsi: ["Bawa buku, pensil, dan penghapus", "Bawa buku pensil, dan penghapus", "Bawa buku pensil dan penghapus.", "Bawa buku; pensil; dan penghapus"], jawaban: 0, pembahasan: "Sistem konjungsi antara objek terakhir menggunakan koma." },
+    { soal: "Arti dari peribahasa 'Sambil menyelam minum air' adalah...", opsi: ["Iring-iringan", "Bekerja sambil mengambil kesempatan", "Bekerja keras", "Bermalas-malasan"], jawaban: 1, pembahasan: "Mengerjakan sesuatu sambil mengambil keuntungan pribadi." },
+    { soal: "Arti dari 'Bunga bank' dalam kalimat 'Bunga bank bulan ini naik' adalah...", opsi: ["Bunga melati", "Keuntungan tambahan", "Bunga simpanan/pinjaman", "Kembang indah"], jawaban: 2, pembahasan: "Sinonim kontekstual: bunga = jasa uang." },
+    { soal: "Arti kata 'Kausa' dalam teks hukum adalah...", opsi: ["Kaos baju", "Penyebab", "Akibat", "Tuntutan"], jawaban: 1, pembahasan: "Kausa = sebab (kausalitas)." },
+    { soal: "Padanan kata 'Implementasi' adalah...", opsi: ["Perencanaan", "Pelaksanaan", "Penundaan", "Pembatalan"], jawaban: 1, pembahasan: "Implementasi = pelaksanaan." },
+    { soal: "Padanan kata 'Resiprokitas' adalah...", opsi: ["Saling menguntungkan", "Saling menukar", "Saling merugikan", "Hubungan timbal balik"], jawaban: 3, pembahasan: "Resiprokal = timbal balik." },
+    { soal: "Kata 'Mitra' dalam konteks bisnis berarti...", opsi: ["Lawan", "Rekan kerja", "Pesaing", "Pembeli"], jawaban: 1, pembahasan: "Mitra = partner/rekan." },
+    { soal: "Penulisan kata baku yang benar...", opsi: ["Aktifitas", "Aktivitas", "Activity", "Aktipitas"], jawaban: 1, pembahasan: "Kata baku dari aktivitas." },
+    { soal: "Penulisan kata baku yang benar...", opsi: ["Fundamental", "Pondamental", "Pondasi", "Fundamen"], jawaban: 3, pembahasan: "Kata baku serapan: fundamen." },
+    { soal: "Penulisan kata baku yang benar...", opsi: ["Kwalitas", "Kualitas", "Quality", "Kualiti"], jawaban: 1, pembahasan: "Penulisan baku: kualitas." },
+    { soal: "Penggunaan kata 'yang' berlebihan (pleonasme) terdapat pada...", opsi: ["Buku yang merah", "Anak yang baik", "Sedangkan yang lain", "Agar supaya"], jawaban: 3, pembahasan: "Agar dan supaya maknanya sama, jangan dipakai bersamaan." },
+    { soal: "Bentuk tidak baku dari 'Khusus' adalah...", opsi: ["Kusus", "Khusu", "Istikhusus", "Khususnya"], jawaban: 0, pembahasan: "Bentuk salah yang sering ditulis: kusus." },
+    { soal: "Sinonim dari 'Interaksi' adalah...", opsi: ["Hubungan", "Pertemuan", "Perubahan", "Jaringan"], jawaban: 0, pembahasan: "Interaksi = hubungan timbal balik." },
+    { soal: "Sinonim dari 'Estetika' adalah...", opsi: ["Etika", "Keindahan", "Logika", "Estafet"], jawaban: 1, pembahasan: "Estetika = ilmu keindahan." },
+    { soal: "Sinonim dari 'Kulminasi' adalah...", opsi: ["Awal", "Puncak", "Dasar", "Proses"], jawaban: 1, pembahasan: "Kulminasi = puncak." },
+    { soal: "Sinonim dari 'Esensi' adalah...", opsi: ["Wujud", "Inti", "Bentuk", "Kulit"], jawaban: 1, pembahasan: "Esensi = inti sari." },
+    { soal: "Antonim dari 'Optimis' adalah...", opsi: ["Positif", "Pantang menyerah", "Pesimis", "Realistis"], jawaban: 2, pembahasan: "Optimis lawan pesimis." },
+    { soal: "Antonim dari 'Fatal' adalah...", opsi: ["Mematikan", "Ringan", "Bahaya", "Biasa"], jawaban: 1, pembahasan: "Fatal = berakibat mati/sangat buruk. Lawan: ringan." },
+    { soal: "Antonim dari 'Generik' adalah...", opsi: ["Umum", "Spesifik", "Bersama", "Khas"], jawaban: 1, pembahasan: "Generik = umum. Lawan spesifik = khusus." },
+    { soal: "Antonim dari 'Otonom' adalah...", opsi: ["Mandiri", "Bebas", "Bawahan/Terikat", "Kuat"], jawaban: 2, pembahasan: "Otonom = mandiri. Lawannya terikat." },
+    { soal: "Penulisan kata depan 'ke' yang benar...", opsi: ["Kesekolah", "Ke sekolah", "Ke-sekolah", "Kesekolahnya"], jawaban: 1, pembahasan: "Preposisi 'ke' dipisah." },
+    { soal: "Penulisan kata depan 'dari' yang benar...", opsi: ["Darimana", "Dari mana", "Dari-mana", "Darimana saja"], jawaban: 1, pembahasan: "Dua kata yang mengikuti 'dari' (mana, pada, dll) ditulis terpisah." },
+    { soal: "Makna 'Bumi persada' dalam puisi lama biasanya merujuk pada...", opsi: ["Negara", "Lahan pertanian", "Hutan", "Gunung"], jawaban: 0, pembahasan: "Majas/metafora dalam konteks puitis." },
+    { soal: "Frasa 'Kepala batu' bermakna...", opsi: ["Pandai", "Bodoh", "Keras kepala", "Pemberani"], jawaban: 2, pembahasan: "Idiom: keras kepala." },
+    { soal: "Penggunaan partikel 'pun' yang benar...", opsi: ["Aku pun pergi", "Akupun pergi", "Aku-pun pergi", "Akupergi"], jawaban: 0, pembahasan: "Partikel 'pun' dipisah kecuali pada kata tertentu (meskipun, walaupun)." },
+    { soal: "Penggunaan partikel 'lah' yang benar...", opsi: ["Akulah pelakunya", "Aku lah pelakunya", "Aku-lah pelakunya", "Akulahpelakunya"], jawaban: 0, pembahasan: "Partikel 'lah' pada kata ganti orang pertama digabung (akulah, ia-lah)." },
+    { soal: "Kata 'Foto' diserap dari bahasa...", opsi: ["Inggris", "Belanda", "Yunani", "Sanskerta"], jawaban: 1, pembahasan: "Foto diserap dari Belanda 'foto'." }
+  ],
+  'subtest-pbm': [ /* Akan diisi di Bagian 2 */ ],
+  'subtest-pk': [ /* Akan diisi di Bagian 2 */ ],
+  'subtest-indo': [ /* Akan diisi di Bagian 3 */ ],
+  'subtest-inggris': [ /* Akan diisi di Bagian 3 */ ],
+  'subtest-pm': [ /* Akan diisi di Bagian 3 */ ]
+};
 
 // ====== DOM CONTROLLERS ======
 const sidebar = document.getElementById('sidebar');
@@ -175,7 +223,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
 // ====== RENDER DYNAMIC SUBTEST VIEW ======
 function renderSubtestPage(key) {
   currentGateKey = key;
-  // RESET TOTAL SOAL AGAR TIDAK BUG CAMPUR SUBTES
   soalAktif = []; 
   indexSoalSekarang = 0;
   skorBenar = 0;
@@ -207,22 +254,28 @@ subTabBtns.forEach(btn => {
   });
 });
 
+// FIX UI: Menggunakan style.display agar tidak elemen tumpang tindih dan nge-block klik
 function switchSubPanel(mode) {
-  document.getElementById('panel-materi').classList.toggle('active', mode === 'materi');
-  document.getElementById('panel-latihan-ai').classList.toggle('active', mode === 'latihan-ai');
-  document.getElementById('panel-latihan-sim').classList.toggle('active', mode === 'latihan-sim');
+  document.getElementById('panel-materi').style.display = (mode === 'materi') ? 'block' : 'none';
+  document.getElementById('panel-latihan-ai').style.display = (mode === 'latihan-ai') ? 'block' : 'none';
+  document.getElementById('panel-latihan-sim').style.display = (mode === 'latihan-sim') ? 'block' : 'none';
 }
 
-// ====== SISTEM LATIHAN AI (GROQ) ======
+// ====== SISTEM LATIHAN AI (GROQ - 20 SOAL) ======
 let soalAktif = [], indexSoalSekarang = 0, skorBenar = 0;
 
 async function generateSoalDariAI(gateKey) {
   const dataMateri = DATA_MATERI[gateKey];
   const panelLatihan = document.getElementById('panel-latihan-ai');
-  panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 10 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
+  panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 20 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
 
-  const promptSystem = `Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi". Buat soal SULIT & HOTS. WAJIB balas JSON murni.`;
-  const promptUser = `Buatkan 10 soal PG untuk subtes "${dataMateri.title}". Struktur JSON: { "soal": [ { "pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..." } ] }`;
+  if (GROQ_API_KEY === "GANTI_DENGAN_API_KEY_GROQ_KAMU") {
+    panelLatihan.innerHTML = `<div class="locked-state-card"><div class="lock-icon">🔑</div><h3>API Key Groq Belum Diisi</h3><p>Silakan buka file app.js baris ke-3 dan masukkan API Key Groq Anda.</p></div>`;
+    return;
+  }
+
+  const promptSystem = `Kamu adalah seorang "Tim Pembuat Soal UTBK Resmi". Buat soal SULIT & HOTS. WAJIB balas dalam format JSON murni tanpa markdown.`;
+  const promptUser = `Buatkan 20 soal pilihan ganda untuk subtes "${dataMateri.title}". Struktur JSON: { "soal": [ { "pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..." } ] }`;
 
   try {
     const response = await fetch(GROQ_API_URL, {
@@ -236,7 +289,7 @@ async function generateSoalDariAI(gateKey) {
       })
     });
 
-    if (!response.ok) throw new Error('Gagal memuat soal dari AI');
+    if (!response.ok) throw new Error('Gagal memuat soal dari AI (Status: ' + response.status + ')');
     const resJson = await response.json();
     const parsed = JSON.parse(resJson.choices[0].message.content);
 
@@ -249,12 +302,11 @@ async function generateSoalDariAI(gateKey) {
   }
 }
 
-// ====== SISTEM SIMULASI BANK SOAL (ANTI BUG) ======
+// ====== SISTEM SIMULASI BANK SOAL ======
 function mulaiSimulasi(gateKey) {
-  // Ambil soal statis dari bank (jika ada)
   let bank = BANK_SIMULASI[gateKey] || [];
   
-  // Jika bank soal statis kurang dari 40, generate sisanya secara dinamis
+  // Jika belum 40 soal (karena belum saya lengkapi di bagian 2/3), AI lokal akan generate sisanya
   let combinedBank = [...bank];
   if(combinedBank.length < 40) {
     const dynamicNeeded = 40 - combinedBank.length;
@@ -262,9 +314,91 @@ function mulaiSimulasi(gateKey) {
     combinedBank = combinedBank.concat(dynamicSoal);
   }
 
-  // Acak urutan soal (Shuffle)
   soalAktif = combinedBank.sort(() => Math.random() - 0.5);
   indexSoalSekarang = 0;
   skorBenar = 0;
   tampilkanSoal('panel-latihan-sim');
+}
+
+// Fungsi Generator lokal (dummy)
+function generateDynamicSoal(jumlah = 35) {
+  const arr = [];
+  for(let i=0; i<jumlah; i++) {
+    arr.push({
+      soal: `[Soal Generate Otomatis ${i+1}] Berapakah hasil dari ${i+2} x 2?`,
+      opsi: [`${(i+2)*2}`, `${(i+2)*3}`, `${(i+2)+2}`, `${(i+2)-1}`].sort(() => Math.random() - 0.5),
+      jawaban: 0,
+      pembahasan: `Ini adalah soal cadangan otomatis.`
+    });
+  }
+  return arr;
+}
+
+// ====== FUNGSI TAMPILKAN SOAL (TAMBAHAN AGAR TIDAK ERROR) ======
+function tampilkanSoal(panelId) {
+  const panel = document.getElementById(panelId);
+  if (!soalAktif || soalAktif.length === 0) {
+    panel.innerHTML = "<div class='locked-state-card'><h3>Soal belum tersedia.</h3></div>";
+    return;
+  }
+
+  const soal = soalAktif[indexSoalSekarang];
+  let opsiHtml = soal.opsi.map((opsi, i) => `
+    <button class="opsi-soal" onclick="jawabSoal(${i}, '${panelId}')">
+      <span class="opsi-huruf">${String.fromCharCode(65 + i)}</span>
+      ${opsi}
+    </button>
+  `).join('');
+
+  panel.innerHTML = `
+    <div class="latihan-header">
+      <div class="info-soal">
+        <span class="btn-action shadow">Soal ${indexSoalSekarang + 1} / ${soalAktif.length}</span>
+        <span class="btn-action shadow">Skor: ${skorBenar}</span>
+      </div>
+    </div>
+    <div class="box-soal">
+      <p class="teks-soal">${soal.pertanyaan || soal.soal}</p>
+      <div class="opsi-grid">${opsiHtml}</div>
+      <div class="box-pembahasan" id="box-pembahasan" style="display:none;">
+        <h3>Pembahasan</h3>
+        <p>${soal.pembahasan}</p>
+        <button class="btn-action" onclick="soalSelanjutnya('${panelId}')">${indexSoalSekarang === soalAktif.length - 1 ? 'Lihat Hasil' : 'Soal Selanjutnya ➜'}</button>
+      </div>
+    </div>
+  `;
+}
+
+function jawabSoal(indexPilihan, panelId) {
+  const soal = soalAktif[indexSoalSekarang];
+  const tombolOpsi = document.querySelectorAll(`#${panelId} .opsi-soal`);
+  
+  tombolOpsi.forEach(btn => btn.disabled = true);
+
+  if (indexPilihan === soal.jawaban) {
+    tombolOpsi[indexPilihan].classList.add('benar');
+    skorBenar++;
+  } else {
+    tombolOpsi[indexPilihan].classList.add('salah');
+    tombolOpsi[soal.jawaban].classList.add('benar');
+  }
+
+  document.getElementById('box-pembahasan').style.display = 'block';
+}
+
+function soalSelanjutnya(panelId) {
+  indexSoalSekarang++;
+  if (indexSoalSekarang < soalAktif.length) {
+    tampilkanSoal(panelId);
+  } else {
+    const panel = document.getElementById(panelId);
+    panel.innerHTML = `
+      <div class="hasil-akhir">
+        <div class="ikon-hasil">🎯</div>
+        <h1>${skorBenar} / ${soalAktif.length}</h1>
+        <p class="sub-text">Latihan Selesai! Terus tingkatkan kemampuan UTBKmu.</p>
+        <button class="btn-action" onclick="mulaiSimulasi(currentGateKey)">Ulangi Latihan</button>
+      </div>
+    `;
+  }
 }
