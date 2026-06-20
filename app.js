@@ -1,5 +1,4 @@
 // ====== KONFIGURASI API GROQ (MULTI-KEY ROTATION) ======
-// 4 API Keys valid. Jika key kena limit 429, sistem otomatis pakai key berikutnya.
 const API_KEYS = [
     "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", // Bot 2
     "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", // Bot 3
@@ -147,8 +146,8 @@ const DATA_MATERI = {
           <li><strong>Paragraf Persuasi:</strong> Meyakinkan pembaca untuk melakukan sesuatu.</li>
         </ul>
         <h3>Contoh Soal Gagasan Utama (Tipe UTBK 2024)</h3>
-        <p><strong>Soal:</strong> Teks: "Kemarau tahun ini cukup panjang. Banyak sumur kering. Warga kesulitan air bersih." Gagasan utamanya adalah...</p>
-        <p><strong>Pembahasan:</strong> Kalimat pertama sebab, kedua sebab, ketiga (akibat inti) adalah gagasan utamanya. Jawaban: "Kesulitan air bersih".</p>
+        <p><strong>Soal:</strong> Teks: "Kemarau tahun ini cukup panjang. Banyak sumur kering. Warga kesulitan air bersih." Gagasan utamanya là...</p>
+        <p><strong>Pembahasan:</strong> Kalimat pertama sebab, kedua sebab, ketiga (akibat inti) là gagasan utamanya. Jawaban: "Kesulitan air bersih".</p>
       </div>
       <div class="materi-card">
         <h2>Teks Prosedur & Laporan</h2>
@@ -169,7 +168,7 @@ const DATA_MATERI = {
         <h2>Aljabar & Aritmatika Sosial (UTBK 2024-2026)</h2>
         <p>Fokus pada pemahaman konsep dan manipulasi aljabar.</p>
         <ul>
-          <li><strong>Persamaan Linear:</strong> Substitusi dan eliminasi untuk mencari nilai variabel.</li>
+          <li><strong>Persamaan Linear:</strong> Substitusi và eliminasi untuk mencari nilai variabel.</li>
           <li><strong>Aritmatika Sosial:</strong> Untung, rugi, diskon, pajak, dan bunga tunggal.</li>
           <li><strong>Deret Aritmatika & Geometri:</strong> Rumus jumlah n suku pertama (Sn).</li>
           <li><strong>Barisan & Deret Tak Hingga:</strong> Hanya geometri yang memiliki deret tak hingga (S∞ = a / (1-r)).</li>
@@ -188,7 +187,7 @@ const DATA_MATERI = {
           <li><strong>Volume Tabung:</strong> π r² t. Volume Kerucut: (1/3) π r² t.</li>
         </ul>
         <h3>Contoh Soal Geometri (Tipe UTBK 2024)</h3>
-        <p><strong>Soal:</strong> Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Volume tabung tersebut adalah... (π = 22/7)</p>
+        <p><strong>Soal:</strong> Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Volume tabung tersebut là... (π = 22/7)</p>
         <p><strong>Pembahasan:</strong> V = π r² t = 22/7 x 7 x 7 x 10 = 22 x 70 = 1540 cm³.</p>
       </div>
       <div class="materi-card">
@@ -199,8 +198,8 @@ const DATA_MATERI = {
           <li><strong>Kombinasi & Permutasi:</strong> Kombinasi urutan tidak penting (memilih tim), Permutasi urutan penting (menyusun kursi).</li>
         </ul>
         <h3>Contoh Soal Statistika (Tipe UTBK 2024)</h3>
-        <p><strong>Soal:</strong> Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 adalah...</p>
-        <p><strong>Pembahasan:</strong> Modus adalah data yang paling sering muncul (6 muncul 3 kali).</p>
+        <p><strong>Soal:</strong> Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 là...</p>
+        <p><strong>Pembahasan:</strong> Modus adalah data yang paling sering muncul (6 muncul 3 lần).</p>
       </div>
     `
   },
@@ -216,7 +215,7 @@ const DATA_MATERI = {
           <li><strong>Membedakan Fakta & Opini:</strong> Fakta berdasarkan data/riset, opini berdasarkan penilaian pribadi.</li>
           <li><strong>Menemukan Bias:</strong> Identifikasi apakah penulis berpihak pada satu sudut pandang tertentu.</li>
           <li><strong>Sintesis:</strong> Menggabungkan informasi dari beberapa teks untuk menarik kesimpulan baru.</li>
-          <li><strong>Parafrase:</strong> Menyimpulkan isi teks dengan bahasa sendiri tanpa mengubah maksud asli.</li>
+          <li><strong>Parafrase:</strong> Menyimpulkan isi teks với bahasa sendiri tanpa mengubah maksud asli.</li>
         </ul>
         <h3>Contoh Soal Literasi (Tipe UTBK 2024)</h3>
         <p><strong>Soal:</strong> Teks: "Berdasarkan riset, siswa yang tidur 8 jam memiliki fokus 40% lebih baik." Pernyataan ini merupakan bagian dari teks...</p>
@@ -230,7 +229,7 @@ const DATA_MATERI = {
           <li><strong>Ciri Persuasi:</strong> Mengandung ajakan, imbauan, atau paksaan halus.</li>
         </ul>
         <h3>Contoh Soal Argumentasi (Tipe UTBK 2024)</h3>
-        <p><strong>Soal:</strong> Teks: "Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan." Gagasan utama teks tersebut adalah...</p>
+        <p><strong>Soal:</strong> Teks: "Edukasi karakter sangat penting untuk membentuk generasi yang tangguh dan berintegritas. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan." Gagasan utama teks tersebut là...</p>
         <p><strong>Pembahasan:</strong> Kalimat utama (deduktif) berada di awal paragraf. Jawaban: "Pentingnya edukasi karakter".</p>
       </div>
       <div class="materi-card">
@@ -339,13 +338,13 @@ const BANK_SIMULASI = {
     { soal: "Semua siswa wajib ujian. Sebagian siswa sakit. Maka...", opsi: ["Semua yang sakit tidak ujian", "Sebagian yang wajib ujian sakit", "Semua siswa sehat", "Tidak ada yang ujian"], jawaban: 1, pembahasan: "Silogisme partikular afirmatif." },
     { soal: "A, C, E, G, I, ...", opsi: ["J", "K", "L", "M"], jawaban: 1, pembahasan: "Melompati satu huruf (A, [B], C, [D], E...). I selanjutnya adalah K." },
     { soal: "Z, X, V, T, R, ...", opsi: ["Q", "P", "O", "N"], jawaban: 1, pembahasan: "Mundur dua huruf. R mundur dua = P." },
-    { soal: "Jika x adalah bilangan ganjil, maka x+1 adalah bilangan genap. Jika x+1 ganjil, maka...", opsi: ["x genap", "x ganjil", "x prima", "x nol"], jawaban: 0, pembahasan: "Kontraposisi: p→q, ~q maka ~p. Jika x+1 ganjil (~q), maka x bukan ganjil (genap)." },
+    { soal: "Jika x adalah bilangan ganjil, maka x+1 là bilangan genap. Jika x+1 ganjil, maka...", opsi: ["x genap", "x ganjil", "x prima", "x nol"], jawaban: 0, pembahasan: "Kontraposisi: p→q, ~q maka ~p. Jika x+1 ganjil (~q), maka x bukan ganjil (genap)." },
     { soal: "Tidak ada pemalas yang sukses. Sebagian mahasiswa pemalas. Maka...", opsi: ["Sebagian mahasiswa sukses", "Sebagian mahasiswa tidak sukses", "Semua mahasiswa sukses", "Tidak ada mahasiswa sukses"], jawaban: 1, pembahasan: "Silogisme negatif." },
     { soal: "Deret: 1, 4, 9, 16, 25, ...", opsi: ["30", "36", "42", "49"], jawaban: 1, pembahasan: "Pola kuadrat: 1², 2², 3², 4², 5², 6²=36." },
     { soal: "Deret: 2, 3, 5, 7, 11, ...", opsi: ["12", "13", "14", "15"], jawaban: 1, pembahasan: "Deret bilangan prima." },
-    { soal: "Semua logam memuai jika dipanaskan. Besi adalah logam. Kesimpulan...", opsi: ["Besi memuai jika dipanaskan", "Besi tidak memuai", "Semua yang memuai besi", "Logam tidak memuai"], jawaban: 0, pembahasan: "Silogisme kategorik universal." },
-    { soal: "Jika A>B dan B>C, maka...", opsi: ["C>A", "A>C", "B=A", "A=C"], jawaban: 1, pembahasan: "Sifat transitif." },
-    { soal: "Semua bunga berbau wangi. Mawar adalah bunga. Maka...", opsi: ["Mawar berbau wangi", "Mawar tidak wangi", "Semua wangi mawar", "Tidak pasti"], jawaban: 0, pembahasan: "Silogisme dasar." },
+    { soal: "Semua logam memuai jika dipanaskan. Besi là logam. Kesimpulan...", opsi: ["Besi memuai jika dipanaskan", "Besi tidak memuai", "Semua yang memuai besi", "Logam tidak memuai"], jawaban: 0, pembahasan: "Silogisme kategorik universal." },
+    { soal: "Jika A>B và B>C, maka...", opsi: ["C>A", "A>C", "B=A", "A=C"], jawaban: 1, pembahasan: "Sifat transitif." },
+    { soal: "Semua bunga berbau wangi. Mawar là bunga. Maka...", opsi: ["Mawar berbau wangi", "Mawar tidak wangi", "Semua wangi mawar", "Tidak pasti"], jawaban: 0, pembahasan: "Silogisme dasar." },
     { soal: "Deret: 5, 10, 8, 16, 14, 28, ...", opsi: ["26", "30", "32", "24"], jawaban: 0, pembahasan: "Pola selang-seling: x2, -2. 28-2=26." },
     { soal: "Deret: 100, 50, 25, 12.5, ...", opsi: ["6.25", "5", "7.5", "10"], jawaban: 0, pembahasan: "Deret geometri dibagi 2." },
     { soal: "Semifinalis mendapat medali. Andi bukan semifinalis. Maka...", opsi: ["Andi mendapat medali", "Andi tidak mendapat medali", "Andi finalis", "Tidak tentu"], jawaban: 3, pembahasan: "Jangan disimpulkan bahwa non-semifinalis tidak dapat medali (bisa saja ada jalur lain dapat medali)." },
@@ -353,15 +352,15 @@ const BANK_SIMULASI = {
     { soal: "A, C, F, J, O, ...", opsi: ["T", "U", "V", "S"], jawaban: 1, pembahasan: "Selisih +2, +3, +4, +5, +6. O(15)+6=U(21)." }
   ],
   'subtest-ppu': [
-    { soal: "Sinonim dari 'Bengis' adalah...", opsi: ["Ramah", "Kejam", "Pemalu", "Penakut"], jawaban: 1, pembahasan: "Bengis berarti keras/kejam." },
-    { soal: "Sinonim dari 'Ekstensif' adalah...", opsi: ["Sempit", "Luas", "Dalam", "Tinggi"], jawaban: 1, pembahasan: "Ekstensif = luas, meluas." },
-    { soal: "Sinonim dari 'Konvensional' adalah...", opsi: ["Modern", "Tradisional", "Futuristik", "Inovatif"], jawaban: 1, pembahasan: "Konvensional = bersifat tradisi/adat kebiasaan." },
-    { soal: "Sinonim dari 'Prematur' adalah...", opsi: ["Tepat waktu", "Terlambat", "Lebih awal", "Sangat tua"], jawaban: 2, pembahasan: "Prematur = lahir/tumbuh sebelum waktunya." },
-    { soal: "Sinonim dari 'Filantropis' adalah...", opsi: ["Pecinta uang", "Pecinta manusia", "Pecinta alam", "Pecinta diri"], jawaban: 1, pembahasan: "Filantropis = orang yang suka berbuat baik/dermawan." },
-    { soal: "Antonim dari 'Defisit' adalah...", opsi: ["Rugi", "Surplus", "Merugikan", "Bangkrut"], jawaban: 1, pembahasan: "Defisit = kekurangan. Lawannya surplus/kelebihan." },
-    { soal: "Antonim dari 'Esensial' adalah...", opsi: ["Pokok", "Penting", "Sekunder", "Utama"], jawaban: 2, pembahasan: "Esensial = sangat penting. Lawannya sekunder/tidak penting." },
+    { soal: "Sinonim dari 'Bengis' là...", opsi: ["Ramah", "Kejam", "Pemalu", "Penakut"], jawaban: 1, pembahasan: "Bengis berarti keras/kejam." },
+    { soal: "Sinonim dari 'Ekstensif' là...", opsi: ["Sempit", "Luas", "Dalam", "Tinggi"], jawaban: 1, pembahasan: "Ekstensif = luas, meluas." },
+    { soal: "Sinonim dari 'Konvensional' là...", opsi: ["Modern", "Tradisional", "Futuristik", "Inovatif"], jawaban: 1, pembahasan: "Konvensional = bersifat tradisi/adat kebiasaan." },
+    { soal: "Sinonim dari 'Prematur' là...", opsi: ["Tepat waktu", "Terlambat", "Lebih awal", "Sangat tua"], jawaban: 2, pembahasan: "Prematur = lahir/tumbuh sebelum waktunya." },
+    { soal: "Sinonim dari 'Filantropis' là...", opsi: ["Pecinta uang", "Pecinta manusia", "Pecinta alam", "Pecinta diri"], jawaban: 1, pembahasan: "Filantropis = orang yang suka berbuat baik/dermawan." },
+    { soal: "Antonim dari 'Defisit' là...", opsi: ["Rugi", "Surplus", "Merugikan", "Bangkrut"], jawaban: 1, pembahasan: "Defisit = kekurangan. Lawannya surplus/kelebihan." },
+    { soal: "Antonim dari 'Esensial' là...", opsi: ["Pokok", "Penting", "Sekunder", "Utama"], jawaban: 2, pembahasan: "Esensial = sangat penting. Lawannya sekunder/tidak penting." },
     { soal: "Antonim dari 'Implisit' là...", opsi: ["Tersurat", "Tersirat", "Samara", "Tersembunyi"], jawaban: 0, pembahasan: "Implisit = tersirat. Lawannya eksplisit = tersurat." },
-    { soal: "Antonim dari 'Apatis' là...", opsi: ["Peduli", "Malas", "Acuh", "Dingin"], jawaban: 0, pembahasan: "Apati = tidak peduli. Lawannya peduli." },
+    { soal: "Antonim dari 'Apatis' là...", opsi: ["Peduli", "Malas", "Acuh", "Dingin"], jawaban: 0, pembahasan: "Apati = không peduli. Lawannya peduli." },
     { soal: "Antonim dari 'Relevan' là...", opsi: ["Cocok", "Berkaitan", "Tak nyambung", "Sama"], jawaban: 2, pembahasan: "Relevan = berhubungan. Lawannya tak nyambung/irrelevan." },
     { soal: "Penulisan ejaan yang benar: 'Kedua orang tuanya pergi ke Jakarta'. Penulisan 'tuanya' seharusnya...", opsi: ["tuanya (benar)", "tua-nya", "tua nya", "tuanya (salah total)"], jawaban: 2, pembahasan: "Kata 'tua' dan 'nya' dipisah karena 'nya' sebagai penegas." },
     { soal: "Pemakaian huruf kapital yang benar...", opsi: ["Presiden Joko Widodo", "presiden Joko widodo", "Presiden joko Widodo", "Presiden Joko widodo"], jawaban: 0, pembahasan: "Gelar jabatan di awal kalimat dikapital, nama orang dikapital." },
@@ -369,24 +368,24 @@ const BANK_SIMULASI = {
     { soal: "Penggunaan tanda baca yang tepat: 'Bawa buku pensil dan penghapus'", opsi: ["Bawa buku, pensil, dan penghapus", "Bawa buku pensil, dan penghapus", "Bawa buku pensil dan penghapus.", "Bawa buku; pensil; dan penghapus"], jawaban: 0, pembahasan: "Sistem konjungsi antara objek terakhir menggunakan koma." },
     { soal: "Arti dari peribahasa 'Sambil menyelam minum air' là...", opsi: ["Iring-iringan", "Bekerja sambil mengambil kesempatan", "Bekerja keras", "Bermalas-malasan"], jawaban: 1, pembahasan: "Mengerjakan sesuatu sambil mengambil keuntungan pribadi." },
     { soal: "Arti dari 'Bunga bank' trong kalimat 'Bunga bank bulan ini naik' là...", opsi: ["Bunga melati", "Keuntungan tambahan", "Bunga simpanan/pinjaman", "Kembang indah"], jawaban: 2, pembahasan: "Sinonim kontekstual: bunga = jasa uang." },
-    { soal: "Arti kata 'Kausa' dalam teks hukum là...", opsi: ["Kaos baju", "Penyebab", "Akibat", "Tuntutan"], jawaban: 1, pembahasan: "Kausa = sebab (kausalitas)." },
+    { soal: "Arti kata 'Kausa' trong teks hukum là...", opsi: ["Kaos baju", "Penyebab", "Akibat", "Tuntutan"], jawaban: 1, pembahasan: "Kausa = sebab (kausalitas)." },
     { soal: "Padanan kata 'Implementasi' là...", opsi: ["Perencanaan", "Pelaksanaan", "Penundaan", "Pembatalan"], jawaban: 1, pembahasan: "Implementasi = pelaksanaan." },
     { soal: "Padanan kata 'Resiprokitas' là...", opsi: ["Saling menguntungkan", "Saling menukar", "Saling merugikan", "Hubungan timbal balik"], jawaban: 3, pembahasan: "Resiprokal = timbal balik." },
     { soal: "Kata 'Mitra' trong konteks bisnis berarti...", opsi: ["Lawan", "Rekan kerja", "Pesaing", "Pembeli"], jawaban: 1, pembahasan: "Mitra = partner/rekan." }
   ],
   'subtest-pk': [
     { soal: "Jika f(x) = 2x + 3 dan g(x) = x² - 1, maka nilai (g o f)(2) là...", opsi: ["14", "15", "16", "17"], jawaban: 1, pembahasan: "f(2) = 2(2)+3 = 7. Lalu g(7) = 7² - 1 = 48." },
-    { soal: "Sebuah barang dibeli dengan harga Rp200.000. Jika dijual dengan untung 15%, maka harga jualnya là...", opsi: ["Rp 215.000", "Rp 220.000", "Rp 225.000", "Rp 230.000"], jawaban: 3, pembahasan: "Untung = 15% x 200.000 = 30.000. Harga jual = 200.000 + 30.000 = 230.000." },
+    { soal: "Sebuah barang dibeli dengan harga Rp200.000. Jika dijual với untung 15%, maka harga jualnya là...", opsi: ["Rp 215.000", "Rp 220.000", "Rp 225.000", "Rp 230.000"], jawaban: 3, pembahasan: "Untung = 15% x 200.000 = 30.000. Harga jual = 200.000 + 30.000 = 230.000." },
     { soal: "Sebuah pekerjaan dapat diselesaikan oleh 8 orang dalam 12 hari. Jika dikerjakan oleh 6 orang, berapa hari pekerjaan itu selesai?", opsi: ["14 hari", "15 hari", "16 hari", "18 hari"], jawaban: 2, pembahasan: "P = Orang x Hari = 8 x 12 = 96. Hari = 96 / 6 = 16 hari." },
     { soal: "Joko berangkat pukul 06.00 dengan kecepatan 60 km/jam. Bomber berangkat pukul 07.00 dengan kecepatan 80 km/jam mengejar Joko. Bomber akan menyusul Joko pada pukul...", opsi: ["09.00", "10.00", "11.00", "12.00"], jawaban: 1, pembahasan: "Jarak Joko didepan saat 07.00 là 60 km. Selisih kecepatan = 20 km/jam. Waktu susul = 60/20 = 3 jam. 07.00 + 3 jam = 10.00." },
     { soal: "Jika log 2 = 0.301 dan log 3 = 0.477, maka nilai log 6 là...", opsi: ["0.778", "0.176", "0.474", "1.230"], jawaban: 0, pembahasan: "log 6 = log (2 x 3) = log 2 + log 3 = 0.301 + 0.477 = 0.778." },
     { soal: "Rata-rata nilai ujian 5 siswa là 80. Jika ditambah nilai seorang siswa baru menjadi 78, berapa nilai siswa baru tersebut?", opsi: ["68", "70", "72", "75"], jawaban: 0, pembahasan: "Total awal = 5 x 80 = 400. Total baru = 6 x 78 = 468. Nilai siswa baru = 468 - 400 = 68." },
     { soal: "Suatu deret aritmatika memiliki suku pertama 5 dan beda 3. Jumlah 10 suku pertama deret tersebut là...", opsi: ["180", "185", "190", "195"], jawaban: 1, pembahasan: "Sn = n/2 (2a + (n-1)b) = 10/2 (2(5) + 9(3)) = 5 (10 + 27) = 5 x 37 = 185." },
-    { soal: "Akar-akar persamaan kuadrat x² - 5x + 6 = 0 là...", opsi: ["1 dan 6", "2 dan 3", "-2 dan -3", "2 dan -3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0. Maka x=2 atau x=3." },
+    { soal: "Akar-akar persamaan kuadrat x² - 5x + 6 = 0 là...", opsi: ["1 dan 6", "2 dan 3", "-2 dan -3", "2 dan -3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0. Maka x=2 hoặc x=3." },
     { soal: "Jika sin x = 3/5 dan x sudut lancip, maka nilai cos x là...", opsi: ["3/4", "4/5", "5/4", "4/3"], jawaban: 1, pembahasan: "Cos x = √(1 - sin²x) = √(1 - 9/25) = √(16/25) = 4/5." },
     { soal: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Volume tabung tersebut là... (π = 22/7)", opsi: ["1540 cm³", "1440 cm³", "1340 cm³", "1240 cm³"], jawaban: 0, pembahasan: "V = π r² t = 22/7 x 7 x 7 x 10 = 22 x 70 = 1540." },
     { soal: "Bentuk sederhana dari (2³ x 2⁻¹) / 2² là...", opsi: ["2⁰", "2¹", "2²", "2⁻¹"], jawaban: 0, pembahasan: "Pembilang: 2^(3-1) = 2². Dibagi 2² = 2^(2-2) = 2⁰ = 1." },
-    { soal: "Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 là...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "Modus adalah data yang paling sering muncul (6 muncul 3 kali)." },
+    { soal: "Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 là...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "Modus là data yang paling sering muncul (6 muncul 3 kali)." },
     { soal: "Median dari data: 3, 5, 7, 8, 10, 12, 15 là...", opsi: ["7", "8", "10", "12"], jawaban: 1, pembahasan: "Median là nilai tengah. Dari 7 data, urutan ke-4 là 8." },
     { soal: "Jika 3x - 5 = 10, maka nilai x là...", opsi: ["3", "4", "5", "6"], jawaban: 2, pembahasan: "3x = 15, x = 5." },
     { soal: "Hasil dari 15% dari 300 là...", opsi: ["35", "40", "45", "50"], jawaban: 2, pembahasan: "15/100 x 300 = 45." },
@@ -412,10 +411,10 @@ const BANK_SIMULASI = {
     { soal: "Perbaiki kalimat: 'Harga beras naik dan juga turun.'", opsi: ["Harga beras naik dan turun.", "Harga beras naik serta turun.", "Harga beras naik tetapi turun.", "Harga beras naik atau turun."], jawaban: 0, pembahasan: "Kata 'juga' tidak diperlukan setelah konjungsi 'dan'." },
     { soal: "Gagasan utama trong sebuah paragraf disebut juga...", opsi: ["Kalimat penjelas", "Ide pokok", "Kesimpulan", "Opini"], jawaban: 1, pembahasan: "Gagasan utama = ide pokok." },
     { soal: "Teks yang bertujuan menjelaskan langkah-langkah membuat sesuatu disebut teks...", opsi: ["Eksposisi", "Deskripsi", "Prosedur", "Argumentasi"], jawaban: 2, pembahasan: "Teks prosedur memuat langkah-langkah." },
-    { soal: "Perbaikan kalimat ambigu: 'Ibu membawa tas ke pasar berwarna merah.'", opsi: ["Ibu berwarna merah membawa tas ke pasar.", "Ibu membawa tas berwarna merah ke pasar.", "Ke pasar ibu membawa tas merah.", "Tas merah dibawa ibu ke pasar."], jawaban: 1, pembahasan: "Agar không rancu, penjelas (berwarna merah) harus berdekatan dengan yang dijelaskan (tas)." },
+    { soal: "Perbaikan kalimat ambigu: 'Ibu membawa tas ke pasar berwarna merah.'", opsi: ["Ibu berwarna merah membawa tas ke pasar.", "Ibu membawa tas berwarna merah ke pasar.", "Ke pasar ibu membawa tas merah.", "Tas merah dibawa ibu ke pasar."], jawaban: 1, pembahasan: "Agar không rancu, penjelas (berwarna merah) phải berdekatan dengan yang dijelaskan (tas)." },
     { soal: "Majas yang membandingkan sesuatu dengan kata 'seperti' atau 'bagai' là...", opsi: ["Metafora", "Hiperbola", "Simile", "Personifikasi"], jawaban: 2, pembahasan: "Simile menggunakan kata pembanding eksplisit." },
     { soal: "Majas yang berarti melebih-lebihkan là...", opsi: ["Metafora", "Hiperbola", "Simile", "Litotes"], jawaban: 1, pembahasan: "Hiperbola là majas lebay." },
-    { soal: "Perbaiki kalimat: 'Karena hujan deras, maka dia tidak datang.'", opsi: ["Karena hujan deras, dia tidak datang.", "Hujan deras, maka dia tidak datang.", "Karena hujan deras maka dia tidak datang.", "Karena hujan deras, oleh karena itu dia tidak datang."], jawaban: 0, pembahasan: "Jangan gunakan 'karena' dan 'maka' dalam satu kalimat penyebab-akibat. Hilangkan salah satu." },
+    { soal: "Perbaiki kalimat: 'Karena hujan deras, maka dia tidak datang.'", opsi: ["Karena hujan deras, dia tidak datang.", "Hujan deras, maka dia tidak datang.", "Karena hujan deras maka dia tidak datang.", "Karena hujan deras, oleh karena itu dia tidak datang."], jawaban: 0, pembahasan: "Jangan gunakan 'karena' dan 'maka' trong satu kalimat penyebab-akibat. Hilangkan salah satu." },
     { soal: "Teks: 'Kemarau tahun ini cukup panjang. Banyak sumur kering. Warga kesulitan air bersih.' Gagasan utamanya là...", opsi: ["Kemarau panjang", "Sumur kering", "Kesulitan air bersih", "Warga panik"], jawaban: 2, pembahasan: "Kalimat pertama sebab, kedua sebab, ketiga (akibat inti) là gagasan utamanya." }
   ],
   'subtest-indo': [
@@ -644,7 +643,7 @@ async function generateSoalDariAI(gateKey) {
     panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 10 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS). Mohon tunggu sejenak.</p></div>`;
 
     const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT BPPPA Kemendikbud. 
-Kamu hanya akan menghasilkan soal kualitas HOTS (High Order Thinking Skills) level sulit (sekitar 70-80% persentase jawaban benar nasional).
+Kamu chỉ akan menghasilkan soal kualitas HOTS (High Order Thinking Skills) level sulit (sekitar 70-80% persentase jawaban benar nasional).
 WAJIB balas trong format JSON murni tanpa markdown. Format JSON: {"soal": [{"pertanyaan": "...", "opsi": ["A", "B", "C", "D"], "jawaban": 0, "pembahasan": "..."}]}.`;
 
     let promptUser = `Buatkan 10 soal pilihan ganda TPS/Literasi UTBK yang SANGAT SULIT untuk subtes: "${dataMateri.title}". `;
@@ -659,7 +658,7 @@ WAJIB balas trong format JSON murni tanpa markdown. Format JSON: {"soal": [{"per
         promptUser += `Khusus subtes PBM: Sediakan teks esai/artikel jurnalistik/ilmiah yang PANJANG (minimal 150 kata). Lalu buat 10 pertanyaan yang meminta user mengevaluasi argumen penulis, menemukan bias, menyimpulkan maksud tersirat, atau memperbaiki struktur kalimat yang kompleks pada teks tersebut. Masukkan teks tersebut ke dalam field "pertanyaan" diikuti dengan soal.`;
     } 
     else if (gateKey === 'subtest-pk') {
-        promptUser += `Khusus subtes PK: Buat soal matematika dasar yang membutuhkan analisis aljabar, deret tak hingga, logaritma, atau transformasi geometri. Angka yang digunakan harus tidak bulat atau membutuhkan penyederhanaan rumus terlebih dahulu.`;
+        promptUser += `Khusus subtes PK: Buat soal matematika dasar yang membutuhkan analisis aljabar, deret tak hingga, logaritma, hoặc transformasi geometri. Angka yang digunakan harus tidak bulat atau membutuhkan penyederhanaan rumus terlebih dahulu.`;
     } 
     else if (gateKey === 'subtest-indo') {
         promptUser += `Khusus subtes Literasi B. Indonesia: Sediakan TEKS PANJANG (minimal 200 kata, bisa berupa opini, eksposisi, atau narasi). Masukkan teks tersebut di awal field "pertanyaan". Lalu buat pertanyaan yang meminta user mengidentifikasi ide pokok, mengevaluasi keefektifan argumen, menemukan bias penulis, atau menyimpulkan maksud tersirat dari teks tersebut.`;
@@ -836,7 +835,6 @@ function parseMarkdown(text) {
 function initChatAI() {
     const floatingChatBtn = document.getElementById('floating-chat-btn');
     const chatModal = document.getElementById('chat-modal');
-    const closeChatBtn = document.getElementById('close-chat-btn');
     const chatHistory = document.getElementById('chat-history');
     const chatInput = document.getElementById('chat-input');
     const sendChatBtn = document.getElementById('send-chat-btn');
@@ -844,14 +842,13 @@ function initChatAI() {
 
     if(floatingChatBtn) {
         floatingChatBtn.addEventListener('click', () => {
-            chatModal.classList.add('open');
-            if(chatInput) chatInput.focus();
-        });
-    }
-
-    if(closeChatBtn) {
-        closeChatBtn.addEventListener('click', () => {
-            chatModal.classList.remove('open');
+            // Toggle logic: Buka jika tertutup, Tutup jika terbuka
+            if (chatModal.classList.contains('open')) {
+                chatModal.classList.remove('open');
+            } else {
+                chatModal.classList.add('open');
+                if(chatInput) chatInput.focus();
+            }
         });
     }
 
@@ -873,7 +870,6 @@ function initChatAI() {
         
         messageDiv.appendChild(contentDiv);
 
-        // Tambahkan tombol Salin dan Edit
         const actionsDiv = document.createElement('div');
         actionsDiv.classList.add('msg-actions');
         
@@ -888,7 +884,6 @@ function initChatAI() {
         
         actionsDiv.appendChild(copyBtn);
 
-        // Tombol edit hanya untuk pesan user
         if (sender === 'user') {
             const editBtn = document.createElement('button');
             editBtn.classList.add('msg-action-btn', 'edit-btn');
@@ -936,7 +931,7 @@ function initChatAI() {
     async function typeText(element, text, speed = 10) {
         isTyping = true;
         for (let i = 0; i < text.length; i++) {
-            if (!isTyping) break; // Jika di-stop, hentikan typing
+            if (!isTyping) break;
             element.textContent += text.charAt(i);
             chatHistory.scrollTop = chatHistory.scrollHeight;
             await new Promise(resolve => setTimeout(resolve, speed));
@@ -956,11 +951,11 @@ function initChatAI() {
 
         const pageContext = scanVisibleContent();
 
-        const promptSystem = `Kamu là Tutor UTBK profesional yang ahli dalam semua materi UTBK SNBT. 
+        const promptSystem = `Kamu là Tutor UTBK profesional yang ahli trong semua materi UTBK SNBT. 
 Kamu sedang melihat layar pengguna. Berikut adalah konteks teks dari halaman yang sedang dilihat pengguna:
 "${pageContext}"
 
-Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna bertanya tentang soal yang sedang dikerjakan, berikan pembahasan yang logis berdasarkan teks soal tersebut. Jika pertanyaan di luar konteks UTBK, jawab dengan sopan bahwa kamu hanya bisa membantu soal UTBK. Gunakan format markdown untuk jawabanmu (gunakan **bold**, *italic*, list, dan blok kode jika perlu) agar jawabanmu mudah dibaca.`;
+Gunakan konteks tersebut để menjawab pertanyaan pengguna. Jika pengguna bertanya tentang soal yang sedang dikerjakan, berikan pembahasan yang logis berdasarkan teks soal tersebut. Jika pertanyaan di luar konteks UTBK, jawab dengan sopan bahwa kamu chỉ bisa membantu soal UTBK. Gunakan format markdown untuk jawabanmu (gunakan **bold**, *italic*, list, dan blok kode jika perlu) agar jawabanmu mudah dibaca.`;
         
         const messages = [
             { role: "system", content: promptSystem },
@@ -971,7 +966,7 @@ Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna berta
         abortController = new AbortController();
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Delay agar loading muncul
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
             const response = await fetch(GROQ_API_URL, {
                 method: 'POST',
@@ -990,7 +985,7 @@ Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna berta
                 hideChatLoading();
                 sendChatBtn.classList.remove('hidden');
                 stopChatBtn.classList.add('hidden');
-                return handleSendChat(); // Coba lagi dengan key baru
+                return handleSendChat();
             }
 
             if (!response.ok) throw new Error('Gagal menghubungi AI');
@@ -1005,7 +1000,6 @@ Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna berta
             await typeText(contentDiv, aiResponse, 10);
             contentDiv.innerHTML = parseMarkdown(aiResponse);
             
-            // Update tombol copy agar menyalin teks penuh
             const copyBtn = msgDiv.querySelector('.copy-btn');
             if(copyBtn) {
                 copyBtn.onclick = () => {
@@ -1036,9 +1030,9 @@ Gunakan konteks tersebut untuk menjawab pertanyaan pengguna. Jika pengguna berta
     if(sendChatBtn) sendChatBtn.addEventListener('click', handleSendChat);
     if(stopChatBtn) {
         stopChatBtn.addEventListener('click', () => {
-            isTyping = false; // Hentikan efek mengetik
+            isTyping = false;
             if (abortController) {
-                abortController.abort(); // Batalkan request fetch
+                abortController.abort();
             }
         });
     }
