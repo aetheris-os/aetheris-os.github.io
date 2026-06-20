@@ -433,18 +433,15 @@ function renderSubtestPage(key) {
   soalAktif = []; 
   indexSoalSekarang = 0;
   skorBenar = 0;
-
   const data = DATA_MATERI[key];
   if (!data) return;
-
   document.getElementById('subtest-title').textContent = data.title;
   document.getElementById('subtest-category').textContent = data.category;
   document.getElementById('subtest-category').className = `node-tag ${data.category.includes('TPS') ? 'tps' : 'lit'}`;
   document.getElementById('subtest-desc').textContent = data.desc;
   document.getElementById('materi-dynamic-content').innerHTML = data.htmlContent;
-
   switchSubPanel('materi');
-  resetChronoTimer();
+  // HAPUS BARIS resetChronoTimer(); DI BAWAH INI
   document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelector('.sub-tab-btn[data-mode="materi"]').classList.add('active');
 }
