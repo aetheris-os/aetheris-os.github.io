@@ -1281,6 +1281,18 @@ function ulangiLatihan() {
     }
 }
 
+// ====== TAMBAHKAN FUNGSI INI (Untuk format simbol matematika dari AI) ======
+function formatMathText(text) {
+    if (!text) return '';
+    let formatted = String(text);
+    // Ganti sqrt( atau √( menjadi &radic;(
+    formatted = formatted.replace(/sqrt\(/g, '&radic;(').replace(/√\(/g, '&radic;(');
+    // Ganti pangkat seperti x^2 menjadi x<sup>2</sup> atau x^(n-1) menjadi x<sup>n-1</sup>
+    formatted = formatted.replace(/\^([0-9]+|[a-zA-Z]+|\([^)]+\))/g, '<sup>$1</sup>');
+    return formatted;
+}
+
+// ====== GANTI FUNGSI tampilkanSoal MENJADI INI ======
 function tampilkanSoal(panelId) {
     const panel = document.getElementById(panelId);
     if (!panel) return;
@@ -1289,13 +1301,15 @@ function tampilkanSoal(panelId) {
         return;
     }
     const soal = soalAktif[indexSoalSekarang];
-    const teksSoal = soal.pertanyaan || soal.soal;
+    
+    // Gunakan formatMathText agar simbol ^ dan sqrt berubah jadi pangkat/akar
+    const teksSoal = formatMathText(soal.pertanyaan || soal.soal);
     const isMulti = soal.multi === true;
     
     let opsiHtml = soal.opsi.map((opsi, i) => `
         <button class="opsi-soal" onclick="pilihJawab(${i}, '${panelId}')">
             <span class="opsi-huruf">${String.fromCharCode(65 + i)}</span>
-            ${opsi}
+            ${formatMathText(opsi)}
         </button>
     `).join('');
     
@@ -1304,6 +1318,9 @@ function tampilkanSoal(panelId) {
         tombolKirim = `<button class="btn-action" style="margin-top:16px;" onclick="kirimJawabanMulti('${panelId}')">Kirim Jawaban</button>`;
     }
     
+    // Gunakan formatMathText di pembahasan juga
+    const pembahasanText = formatMathText(soal.pembahasan);
+
     panel.innerHTML = `
         <div class="latihan-header">
             <div class="info-soal">
@@ -1318,13 +1335,12 @@ function tampilkanSoal(panelId) {
             ${tombolKirim}
             <div class="box-pembahasan" id="box-pembahasan" style="display:none;">
                 <h3>Pembahasan</h3>
-                <p>${soal.pembahasan}</p>
+                <p>${pembahasanText}</p>
                 <button class="btn-action" id="btn-selanjutnya" onclick="soalSelanjutnya('${panelId}')">${indexSoalSekarang === soalAktif.length - 1 ? 'Lihat Hasil' : 'Soal Selanjutnya ➜'}</button>
             </div>
         </div>
     `;
 }
-
 let pilihanMultiSementara = [];
 
 function pilihJawab(indexPilihan, panelId) {
