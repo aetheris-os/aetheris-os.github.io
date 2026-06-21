@@ -1592,4 +1592,4 @@ function initChatResize() {
     });
     document.addEventListener('mouseup', () => { if (isResizing) { isResizing = false; document.body.style.cursor = ''; document.body.style.userSelect = ''; } });
 }
-\
+
