@@ -715,7 +715,7 @@ const BANK_SIMULASI = {
     { soal: "Sinonim 'Inovatif' adalah...", opsi: ["Kuno", "Kreatif", "Statis", "Tradisional"], jawaban: 1, pembahasan: "Inovatif = kreatif/pembaharuan." }
   ],
   'subtest-pk': [
-    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3) là...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor: (x+3). Masukkan x=3: 6." },
+    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3) adalah...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor: (x+3). Masukkan x=3: 6." },
     { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup2; &minus; 4) per (x&sup2; &minus; 2x) là...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktor: (x+2)/x. Masukkan x=2: 2." },
     { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup2; &minus; 2x + 1) per (x&sup2; + 5) là...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien tertinggi: 3 per 1 = 3." },
     { soal: "Nilai lim<sub>x&rarr;0</sub> (sin 2x) per x là...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim sin(ax)/x = a. Maka 2." },
@@ -1160,9 +1160,11 @@ async function generateSoalDariAI(gateKey) {
 
     const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT. Hanya hasilkan soal HOTS tingkat SANGAT SULIT, penjelasan nya juga jangan ngawur, berikan penjelasan yang bagus dan matang, Rapihkan penjelasan juga jangan berantakan!
 PENTING: Gunakan simbol matematika standar seperti ^ untuk pangkat (contoh: x^2), sqrt() untuk akar, dan * untuk kali. JANGAN gunakan format LaTeX atau simbol $ dan {}.
+PENTING: Field "opsi" HARUS BERUPA ARRAY berisi 5 string jawaban. JANGAN memasukkan teks pembahasan ke dalam array opsi.
 Jika soal memerlukan jawaban lebih dari satu (multi-jawaban), set field "multi" ke true dan "jawaban" menjadi array berisi indeks jawaban benar (contoh: "jawaban": [0, 2]). Berikan opsi A sampai E (5 opsi).
 PENTING: PASTIKAN INDEKS JAWABAN BENAR-BENAR TEPAT SESUAI LOGIKA. CEK 3 KALI KESESUAIAN ANTARA INDEKS JAWABAN DAN TEKS PEMBAHASAN SEBELUM MENGIRIM JSON. JANGAN SALAH MENEMPATKAN INDEKS.
 PENTING: Selalu acak angka, nama, dan skenario soal agar tidak ada soal yang berulang setiap kali diminta.
+Pada akhir teks "pembahasan", WAJIB sertakan kalimat: "Oleh karena itu, jawaban yang benar adalah (Huruf Opsi)." Contoh: "Oleh karena itu, jawaban yang benar adalah B."
 WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A", "B", "C", "D", "E"], "multi": false, "jawaban": 0, "pembahasan": "..."}]}.`;
 
     let promptUser = `Buatkan 10 soal PG UTBK SANGAT SULIT untuk subtes: "${dataMateri.title}". Buat 2-3 soal di antaranya memiliki jawaban lebih dari satu (multi-jawaban) dengan opsi A-E. Gunakan angka dan skenario yang benar-benar acak berbeda dari biasanya. `;
@@ -1196,6 +1198,8 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         Contoh: 2^2026. Pola satuan 2: 2, 4, 8, 6 (berulang tiap 4). 2026 dibagi 4 sisa 2, maka ambil angka ke-2 yaitu 4.
         Contoh: 7^3035. Pola satuan 7: 7, 9, 3, 1 (berulang tiap 4). 3035 dibagi 4 sisa 3, maka ambil angka ke-3 yaitu 3.
         Contoh: 5^2026. Pola satuan 5: 5, 5, 5, 5 (selalu 5). Maka jawabannya pasti 5.
+
+        BUAT SOAL seperti itu semua lagi,jangan berulang-ulang,harus randomize tapi harus soal" seperti utbk,dapatkan soal utbk entah darimanapun!
         
         Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ atau {}.`;
     }
