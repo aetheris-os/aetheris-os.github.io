@@ -382,7 +382,7 @@ const DATA_MATERI = {
           <li><strong>Kombinasi (Urutan tidak penting):</strong> C(n,r) = n! / (r!(n&minus;r)!)</li>
         </ul>
         <h3>Contoh Soal Statistika</h3>
-        <p><strong>Soal:</strong> Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 adalah...</p>
+        <p><strong>Soal:</strong> Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 là...</p>
         <p><strong>Pembahasan:</strong> Modus = data paling sering muncul = 6 (muncul 3 kali).</p>
       </div>
     `
@@ -603,7 +603,7 @@ const DATA_MATERI = {
           <li><strong>Fungsi:</strong> Memahami komposisi dan invers fungsi dalam konteks nyata.</li>
         </ul>
         <h3>Contoh Soal Aljabar</h3>
-        <p><strong>Soal:</strong> Jika 3x + 2y = 12 dan x &minus; y = 1, maka nilai y adalah...</p>
+        <p><strong>Soal:</strong> Jika 3x + 2y = 12 và x &minus; y = 1, maka nilai y là...</p>
         <p><strong>Pembahasan:</strong> Dari x &minus; y = 1, didapat x = 1 + y. Substitusi: 3(1+y) + 2y = 12 &rarr; 3 + 5y = 12 &rarr; 5y = 9 &rarr; y = 9/5 = 1.8.</p>
       </div>
       <div class="materi-card">
@@ -643,11 +643,11 @@ const DATA_MATERI = {
         <h2>Geometri Terapan</h2>
         <ul>
           <li><strong>Skala & Perbandingan:</strong> Hubungan antara ukuran pada peta dan ukuran sebenarnya.</li>
-          <li><strong>Transformasi Geometri:</strong> Translasi, refleksi, rotasi, dan dilatasi.</li>
-          <li><strong>Trigonometri dalam Konteks:</strong> Menghitung ketinggian, jarak, dan sudut elevasi/depresi.</li>
+          <li><strong>Transformasi Geometri:</strong> Translasi, refleksi, rotasi, và dilatasi.</li>
+          <li><strong>Trigonometri trong Konteks:</strong> Menghitung ketinggian, jarak, và sudut elevasi/depresi.</li>
         </ul>
         <h3>Contoh Soal Skala</h3>
-        <p><strong>Soal:</strong> Jarak kota A dan B pada peta 1:1.000.000 adalah 5 cm. Jarak sebenarnya?</p>
+        <p><strong>Soal:</strong> Jarak kota A và B pada peta 1:1.000.000 là 5 cm. Jarak sebenarnya?</p>
         <p><strong>Pembahasan:</strong> Jarak = 5 cm &times; 1.000.000 = 5.000.000 cm = 50 km.</p>
       </div>
       <div class="materi-card">
@@ -679,7 +679,7 @@ const BANK_SIMULASI = {
     { soal: "Semua siswa kelas 12 wajib tryout. Sebagian kelas 12 anggota OSIS. Kesimpulan?", opsi: ["Semua OSIS wajib tryout", "Sebagian wajib tryout adalah OSIS", "Sebagian OSIS tidak wajib", "Tidak ada wajib tryout"], jawaban: 1, pembahasan: "Silogisme partikular." },
     { soal: "Harga sembako naik &rarr; inflasi naik &rarr; BI rate naik. BI rate tidak naik. Kesimpulan?", opsi: ["Harga sembako naik", "Harga sembako turun", "Harga sembako tidak naik", "Inflasi tetap"], jawaban: 2, pembahasan: "Modus tollens berantai: ~r &rarr; ~q &rarr; ~p." },
     { soal: "Semua peserta ujian wajib bawa KTP. Sebagian yang bawa KTP lupa kartu ujian. Maka...", opsi: ["Semua lupa kartu ujian", "Sebagian peserta ujian lupa kartu ujian", "Tidak ada bawa KTP", "Semua lupa kartu = peserta ujian"], jawaban: 1, pembahasan: "Silogisme partikular." },
-    { soal: "Jika cerah, Budi main bola. Budi tidak main bola. Maka...", opsi: ["Cerah", "Tidak cerah", "Budi sakit", "Hujan"], jawaban: 1, pembahasan: "Modus tollens: ~q &rarr; ~p." },
+    { soal: "Jika cerah, Budi main bola. Budi không main bola. Maka...", opsi: ["Cerah", "Tidak cerah", "Budi sakit", "Hujan"], jawaban: 1, pembahasan: "Modus tollens: ~q &rarr; ~p." },
     { soal: "Tidak ada ikan mamalia. Hiu ikan. Paus mamalia. Kesimpulan?", opsi: ["Hiu paus", "Hiu bukan mamalia", "Paus ikan", "Paus hiu"], jawaban: 1, pembahasan: "Semua ikan bukan mamalia, hiu ikan, maka hiu bukan mamalia." },
     { soal: "Deret: 2, 6, 12, 20, 30, ...", opsi: ["40", "42", "44", "46"], jawaban: 1, pembahasan: "Selisih +4, +6, +8, +10. Berikutnya +12. 30+12=42." },
     { soal: "Deret: 1, 4, 9, 16, 25, ...", opsi: ["30", "36", "42", "49"], jawaban: 1, pembahasan: "Pola kuadrat: 6&sup2;=36." },
@@ -693,16 +693,16 @@ const BANK_SIMULASI = {
     { soal: "Deret: 2, 5, 10, 17, 26, ...", opsi: ["35", "37", "36", "38"], jawaban: 1, pembahasan: "Pola n&sup2;+1: 6&sup2;+1=37." }
   ],
   'subtest-ppu': [
-    { soal: "Sinonim 'Bengis' adalah...", opsi: ["Ramah", "Kejam", "Pemalu", "Penakut"], jawaban: 1, pembahasan: "Bengis = kejam." },
-    { soal: "Sinonim 'Ekstensif' adalah...", opsi: ["Sempit", "Luas", "Dalam", "Tinggi"], jawaban: 1, pembahasan: "Ekstensif = luas." },
-    { soal: "Sinonim 'Konvensional' adalah...", opsi: ["Modern", "Tradisional", "Futuristik", "Inovatif"], jawaban: 1, pembahasan: "Konvensional = tradisional." },
-    { soal: "Sinonim 'Prematur' adalah...", opsi: ["Tepat waktu", "Terlambat", "Lebih awal", "Tua"], jawaban: 2, pembahasan: "Prematur = sebelum waktunya." },
-    { soal: "Sinonim 'Filantropis' adalah...", opsi: ["Pecinta uang", "Pecinta manusia", "Pecinta alam", "Pecinta diri"], jawaban: 1, pembahasan: "Filantropis = dermawan." },
-    { soal: "Antonim 'Defisit' adalah...", opsi: ["Rugi", "Surplus", "Merugikan", "Bangkrut"], jawaban: 1, pembahasan: "Defisit = kekurangan. Lawan surplus." },
-    { soal: "Antonim 'Esensial' adalah...", opsi: ["Pokok", "Penting", "Sekunder", "Utama"], jawaban: 2, pembahasan: "Esensial = penting. Lawan sekunder." },
-    { soal: "Antonim 'Implisit' adalah...", opsi: ["Tersurat", "Tersirat", "Samara", "Tersembunyi"], jawaban: 0, pembahasan: "Implisit = tersirat. Lawan eksplisit (tersurat)." },
-    { soal: "Antonim 'Apatis' adalah...", opsi: ["Peduli", "Malas", "Acuh", "Dingin"], jawaban: 0, pembahasan: "Apati = tidak peduli. Lawan peduli." },
-    { soal: "Antonim 'Relevan' adalah...", opsi: ["Cocok", "Berkaitan", "Tak nyambung", "Sama"], jawaban: 2, pembahasan: "Relevan = berhubungan. Lawan tak nyambung." },
+    { soal: "Sinonim 'Bengis' là...", opsi: ["Ramah", "Kejam", "Pemalu", "Penakut"], jawaban: 1, pembahasan: "Bengis = kejam." },
+    { soal: "Sinonim 'Ekstensif' là...", opsi: ["Sempit", "Luas", "Dalam", "Tinggi"], jawaban: 1, pembahasan: "Ekstensif = luas." },
+    { soal: "Sinonim 'Konvensional' là...", opsi: ["Modern", "Tradisional", "Futuristik", "Inovatif"], jawaban: 1, pembahasan: "Konvensional = tradisional." },
+    { soal: "Sinonim 'Prematur' là...", opsi: ["Tepat waktu", "Terlambat", "Lebih awal", "Tua"], jawaban: 2, pembahasan: "Prematur = sebelum waktunya." },
+    { soal: "Sinonim 'Filantropis' là...", opsi: ["Pecinta uang", "Pecinta manusia", "Pecinta alam", "Pecinta diri"], jawaban: 1, pembahasan: "Filantropis = dermawan." },
+    { soal: "Antonim 'Defisit' là...", opsi: ["Rugi", "Surplus", "Merugikan", "Bangkrut"], jawaban: 1, pembahasan: "Defisit = kekurangan. Lawan surplus." },
+    { soal: "Antonim 'Esensial' là...", opsi: ["Pokok", "Penting", "Sekunder", "Utama"], jawaban: 2, pembahasan: "Esensial = penting. Lawan sekunder." },
+    { soal: "Antonim 'Implisit' là...", opsi: ["Tersurat", "Tersirat", "Samara", "Tersembunyi"], jawaban: 0, pembahasan: "Implisit = tersirat. Lawan eksplisit (tersurat)." },
+    { soal: "Antonim 'Apatis' là...", opsi: ["Peduli", "Malas", "Acuh", "Dingin"], jawaban: 0, pembahasan: "Apati = tidak peduli. Lawan peduli." },
+    { soal: "Antonim 'Relevan' là...", opsi: ["Cocok", "Berkaitan", "Tak nyambung", "Sama"], jawaban: 2, pembahasan: "Relevan = berhubungan. Lawan tak nyambung." },
     { soal: "Ejaan benar: 'Kedua orang tuanya pergi ke Jakarta'. Penulisan 'tuanya'...", opsi: ["tuanya", "tua-nya", "tua nya", "tuanya"], jawaban: 2, pembahasan: "'tua' dan 'nya' dipisah." },
     { soal: "Huruf kapital yang benar...", opsi: ["Presiden Joko Widodo", "presiden Joko widodo", "Presiden joko Widodo", "Presiden Joko widodo"], jawaban: 0, pembahasan: "Gelar di awal kalimat dan nama orang dikapital." },
     { soal: "Imbuhan asing benar...", opsi: ["Di cooperasi", "Dikooperasi", "Di-kooperasi", "Dikooperasikan"], jawaban: 1, pembahasan: "Awalan 'di' pada kata asing digabung." },
@@ -710,17 +710,17 @@ const BANK_SIMULASI = {
     { soal: "Peribahasa 'Sambil menyelam minum air' artinya...", opsi: ["Iring-iringan", "Bekerja sambil ambil kesempatan", "Bekerja keras", "Bermalas-malasan"], jawaban: 1, pembahasan: "Ambil keuntungan pribadi." },
     { soal: "'Bunga bank' dalam 'Bunga bank naik' artinya...", opsi: ["Bunga melati", "Keuntungan", "Bunga simpanan/pinjaman", "Kembang"], jawaban: 2, pembahasan: "Bunga = jasa uang." },
     { soal: "'Kausa' dalam teks hukum artinya...", opsi: ["Kaos", "Penyebab", "Akibat", "Tuntutan"], jawaban: 1, pembahasan: "Kausa = sebab." },
-    { soal: "Padanan kata 'Implementasi' adalah...", opsi: ["Perencanaan", "Pelaksanaan", "Penundaan", "Pembatalan"], jawaban: 1, pembahasan: "Implementasi = pelaksanaan." },
-    { soal: "Majas yang menyindir dengan kata berlawanan...", opsi: ["Sarkasme", "Ironi", "Sinisme", "Satire"], jawaban: 1, pembahasan: "Ironi = sindiran halus kata berlawanan." },
-    { soal: "Sinonim 'Inovatif' adalah...", opsi: ["Kuno", "Kreatif", "Statis", "Tradisional"], jawaban: 1, pembahasan: "Inovatif = kreatif/pembaharuan." }
+    { soal: "Padanan kata 'Implementasi' là...", opsi: ["Perencanaan", "Pelaksanaan", "Penundaan", "Pembatalan"], jawaban: 1, pembahasan: "Implementasi = pelaksanaan." },
+    { soal: "Majas yang menyindir với kata berlawanan...", opsi: ["Sarkasme", "Ironi", "Sinisme", "Satire"], jawaban: 1, pembahasan: "Ironi = sindiran halus kata berlawanan." },
+    { soal: "Sinonim 'Inovatif' là...", opsi: ["Kuno", "Kreatif", "Statis", "Tradisional"], jawaban: 1, pembahasan: "Inovatif = kreatif/pembaharuan." }
   ],
   'subtest-pk': [
-    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3) adalah...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor: (x+3). Masukkan x=3: 6." },
-    { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup2; &minus; 4) per (x&sup2; &minus; 2x) là...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktor: (x+2)/x. Masukkan x=2: 2." },
-    { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup2; &minus; 2x + 1) per (x&sup2; + 5) là...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien tertinggi: 3 per 1 = 3." },
+    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3) là...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor: (x+3). Masukkan x=3: 6." },
+    { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup²; &minus; 4) per (x&sup²; &minus; 2x) là...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktor: (x+2)/x. Masukkan x=2: 2." },
+    { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup²; &minus; 2x + 1) per (x&sup²; + 5) là...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien tertinggi: 3 per 1 = 3." },
     { soal: "Nilai lim<sub>x&rarr;0</sub> (sin 2x) per x là...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim sin(ax)/x = a. Maka 2." },
     { soal: "Nilai lim<sub>x&rarr;5</sub> (&radic;(x+4) &minus; 3) per (x &minus; 5) là...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "Kali akar sekawan: 1 per (&radic;9 + 3) = 1 per 6." },
-    { soal: "Jika &sup²;log 3 = a dan &sup²;log 5 = b, nilai &sup²;log 45...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45=3&sup2;&times;5. Maka 2a + b." },
+    { soal: "Jika &sup²;log 3 = a và &sup²;log 5 = b, nilai &sup²;log 45...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45=3&sup²;&times;5. Maka 2a + b." },
     { soal: "Hasil &sup4;log 8 + &sup4;log 2...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup4;log 16 = 2." },
     { soal: "Jika &sup²;log 3 = a, maka &sup8;log 81...", opsi: ["a/3", "3a", "4a per 3", "a"], jawaban: 2, pembahasan: "&sup³;&sup²;log 3&sup4; = 4a per 3." },
     { soal: "Nilai &sup5;log 125 &minus; &sup5;log 5...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup5;log 25 = 2." },
@@ -728,10 +728,10 @@ const BANK_SIMULASI = {
     { soal: "Satuan dari 2<sup>2026</sup>...", opsi: ["2", "4", "6", "8"], jawaban: 1, pembahasan: "Pola 2,4,8,6. 2026 mod 4 = 2, maka 4." },
     { soal: "Satuan dari 7<sup>3035</sup>...", opsi: ["1", "3", "5", "7"], jawaban: 1, pembahasan: "Pola 7,9,3,1. 3035 mod 4 = 3, maka 3." },
     { soal: "Nilai 2<sup>3</sup> &times; 2<sup>&minus;2</sup> &times; 2<sup>0</sup>...", opsi: ["1", "2", "4", "8"], jawaban: 1, pembahasan: "2<sup>(3-2+0)</sup> = 2." },
-    { soal: "Sederhanakan (x<sup>3</sup> &times; x<sup>5</sup>) per x<sup>6</sup>...", opsi: ["x&sup2;", "x&sup4;", "x<sup>8</sup>", "x<sup>14</sup>"], jawaban: 0, pembahasan: "x<sup>(3+5-6)</sup> = x&sup2;." },
-    { soal: "Jika f(x)=2x+3, g(x)=x&sup2;&minus;1, nilai (g o f)(2)...", opsi: ["14", "15", "47", "48"], jawaban: 3, pembahasan: "f(2)=7, g(7)=48." },
+    { soal: "Sederhanakan (x<sup>3</sup> &times; x<sup>5</sup>) per x<sup>6</sup>...", opsi: ["x&sup²;", "x&sup4;", "x<sup>8</sup>", "x<sup>14</sup>"], jawaban: 0, pembahasan: "x<sup>(3+5-6)</sup> = x&sup2;." },
+    { soal: "Jika f(x)=2x+3, g(x)=x&sup²;&minus;1, nilai (g o f)(2)...", opsi: ["14", "15", "47", "48"], jawaban: 3, pembahasan: "f(2)=7, g(7)=48." },
     { soal: "Jika f(x)=(x-2) per (x+3), maka f&minus;<sup>1</sup>(x)...", opsi: ["(3x+2) per (1-x)", "(x+2) per (x-3)", "(2x+3) per (1-x)", "(x-3) per (x+2)"], jawaban: 0, pembahasan: "y=(x-2)/(x+3) &rarr; x=(3y+2)/(1-y)." },
-    { soal: "Akar x&sup2; &minus; 5x + 6 = 0...", opsi: ["1,6", "2,3", "-2,-3", "2,-3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0." },
+    { soal: "Akar x&sup²; &minus; 5x + 6 = 0...", opsi: ["1,6", "2,3", "-2,-3", "2,-3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0." },
     { soal: "Jumlah & akar 2x&sup²; &minus; 4x + 1 = 0...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "-2 dan -1/2"], jawaban: 0, pembahasan: "Jumlah=2, Hasil=1/2." },
     { soal: "Barang Rp200.000 dijual untung 15%. Harga jual?", opsi: ["215rb", "220rb", "225rb", "230rb"], jawaban: 3, pembahasan: "Untung 30rb. HJ 230rb." },
     { soal: "8 orang 12 hari. 6 orang berapa hari?", opsi: ["14", "15", "16", "18"], jawaban: 2, pembahasan: "8&times;12=96. 96/6=16." }
@@ -746,7 +746,7 @@ const BANK_SIMULASI = {
     { soal: "Perbaiki: 'Karena hujan, maka dia tidak datang.'", opsi: ["Karena hujan, dia tidak datang.", "Hujan, maka dia tidak datang.", "Karena hujan maka dia tidak datang.", "Karena hujan, oleh karena itu dia tidak datang."], jawaban: 0, pembahasan: "Jangan gunakan 'karena' dan 'maka' bersamaan." },
     { soal: "Perbaikan ambigu: 'Ibu bawa tas ke pasar berwarna merah.'", opsi: ["Ibu merah bawa tas ke pasar.", "Ibu bawa tas berwarna merah ke pasar.", "Ke pasar Ibu bawa tas merah.", "Tas merah dibawa Ibu ke pasar."], jawaban: 1, pembahasan: "Penjelas berdekatan dengan yang dijelaskan." },
     { soal: "Perbaiki: 'Adik sangat gembira sekali.'", opsi: ["Adik gembira sekali", "Adik sangat gembira", "Adik sangat gembira sekali", "Adik gembira"], jawaban: 1, pembahasan: "Pleonasme. Hilangkan 'sekali'." },
-    { soal: "Kalimat subjek tak jelas karena preposisi 'bagi' disebut...", opsi: ["Ambigu", "Tidak efektif", "Pasif", "Rancu"], jawaban: 1, pembahasan: "Tidak efektif karena subjek tertutup." },
+    { soal: "Kalimat subjek tak jelas karena preposisi 'bagi' disebut...", opsi: ["Ambigu", "Tidak efektif", "Pasif", "Rancu"], jawaban: 1, pembahasan: "Tidak efektif vì subjek tertutup." },
     { soal: "Perbaiki: 'Meskipun hujan, tetapi dia datang.'", opsi: ["Meskipun hujan, dia datang.", "Hujan, tetapi dia datang.", "Meskipun hujan tetapi dia datang.", "Walaupun hujan, tetapi dia datang."], jawaban: 0, pembahasan: "Jangan gunakan 'meskipun' dan 'tetapi' bersamaan." },
     { soal: "Perbaiki: 'Harga beras naik dan juga turun.'", opsi: ["Naik dan turun.", "Naik serta turun.", "Naik tetapi turun.", "Naik atau turun."], jawaban: 0, pembahasan: "Hilangkan 'juga'." },
     { soal: "Penulisan 'di' yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Preposisi tempat dipisah." },
@@ -756,15 +756,15 @@ const BANK_SIMULASI = {
     { soal: "Tanda baca kalimat langsung...", opsi: ["Ia berkata saya lapar", "Ia berkata: 'Saya lapar.'", "Ia berkata saya lapar.", "Ia berkata; saya lapar."], jawaban: 1, pembahasan: "Pakai titik dua dan tanda kutip." },
     { soal: "Gagasan utama paragraf disebut...", opsi: ["Kalimat penjelas", "Ide pokok", "Kesimpulan", "Opini"], jawaban: 1, pembahasan: "Gagasan utama = ide pokok." },
     { soal: "Teks langkah membuat sesuatu disebut...", opsi: ["Eksposisi", "Deskripsi", "Prosedur", "Argumentasi"], jawaban: 2, pembahasan: "Teks prosedur memuat langkah." },
-    { soal: "Majas 'seperti' atau 'bagai' adalah...", opsi: ["Metafora", "Hiperbola", "Simile", "Personifikasi"], jawaban: 2, pembahasan: "Simile pakai kata pembanding eksplisit." }
+    { soal: "Majas 'seperti' atau 'bagai' là...", opsi: ["Metafora", "Hiperbola", "Simile", "Personifikasi"], jawaban: 2, pembahasan: "Simile pakai kata pembanding eksplisit." }
   ],
   'subtest-indo': [
     { soal: "Teks: 'Tumbuhan fotosintesis butuh cahaya, air, CO2. Polusi menghambat. Smog tutupi daun, stomata sulit serap CO2. Hujan asam rusak klorofil. Akibatnya, pertumbuhan terhambat.'\nGagasan utama?", opsi: ["Fotosintesis", "Pengaruh polusi terhadap fotosintesis", "Fungsi stomata", "Hujan asam"], jawaban: 1, pembahasan: "Sebab-akibat: polusi menghambat fotosintesis." },
-    { soal: "Berdasarkan teks, pernyataan opini?", opsi: ["Tumbuhan fotosintesis", "Butuh cahaya", "Polusi berlebih dapat menghambat", "Smog tutupi daun"], jawaban: 2, pembahasan: "'Dapat menghambat' adalah penilaian penulis." },
+    { soal: "Berdasarkan teks, pernyataan opini?", opsi: ["Tumbuhan fotosintesis", "Butuh cahaya", "Polusi berlebih dapat menghambat", "Smog tutupi daun"], jawaban: 2, pembahasan: "'Dapat menghambat' là penilaian penulis." },
     { soal: "Berdasarkan teks, hubungan kausalitas?", opsi: ["Hujan asam merusak klorofil", "Tumbuhan fotosintesis", "Stomata serap CO2", "Cahaya dibutuhkan"], jawaban: 0, pembahasan: "Hujan asam (sebab) merusak klorofil (akibat)." },
-    { soal: "Teks: 'Globalisasi dampak ganda. Akses pasar luas untuk UMKM, tapi produk asing mengancam. Pemerintah perlu lindungi UMKM.'\nSimpulan?", opsi: ["Globalisasi dampak negatif", "UMKM tidak mampu bersaing", "Perlindungan pemerintah diperlukan", "Produk asing selalu murah"], jawaban: 2, pembahasan: "Ada tantangan, perlu solusi (perlindungan)." },
+    { soal: "Teks: 'Globalisasi dampak ganda. Akses pasar luas untuk UMKM, tapi produk asing mengancam. Pemerintah perlu lindungi UMKM.'\nSimpulan?", opsi: ["Globalisasi dampak negatif", "UMKM không mampu bersaing", "Perlindungan pemerintah diperlukan", "Produk asing selalu murah"], jawaban: 2, pembahasan: "Ada tantangan, perlu solusi (perlindungan)." },
     { soal: "'Edukasi karakter penting. Tanpa karakter, ilmu merugikan.' Gagasan utama?", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas"], jawaban: 1, pembahasan: "Deduktif, di awal." },
-    { soal: "'Polusi Jakarta meningkat. Ozon menipis. Penyakit pernapasan meningkat.' Simpulan?", opsi: ["Ozon menipis karena polusi", "Polusi berdampak pernapasan", "Jakarta terpolusi", "Penyakit memicu polusi"], jawaban: 1, pembahasan: "Simpulan mencakup sebab-akibat." },
+    { soal: "'Polusi Jakarta meningkat. Ozon menipis. Penyakit pernapasan meningkat.' Simpulan?", opsi: ["Ozon menipis vì polusi", "Polusi berdampak pernapasan", "Jakarta terpolusi", "Penyakit memicu polusi"], jawaban: 1, pembahasan: "Simpulan mencakup sebab-akibat." },
     { soal: "'Pohon kurangi rumah kaca. Selain itu, pohon sejukkan udara.' Hubungan kalimat?", opsi: ["Sebab-akibat", "Kesimpulan", "Sejajar (menambahkan)", "Perbandingan"], jawaban: 2, pembahasan: "'Selain itu' = penambahan." },
     { soal: "'Riset: tidur 8 jam fokus 40% lebih baik.' Pernyataan ini?", opsi: ["Opini", "Fakta", "Fiksi", "Argumen subjektif"], jawaban: 1, pembahasan: "Riset & data = fakta." },
     { soal: "'Menurut saya, cuaca panas untuk olahraga.' Pernyataan ini?", opsi: ["Fakta", "Opini", "Data", "Argumen logis"], jawaban: 1, pembahasan: "'Menurut saya' = opini." },
@@ -803,7 +803,7 @@ const BANK_SIMULASI = {
     { soal: "Tone in scientific report...", opsi: ["Optimistic", "Subjective", "Objective", "Pessimistic"], jawaban: 2, pembahasan: "Objektif." }
   ],
   'subtest-pm': [
-    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3)...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor (x+3), x=3 &rarr; 6." },
+    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup²; &minus; 9) per (x &minus; 3)...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor (x+3), x=3 &rarr; 6." },
     { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup²; &minus; 4) per (x&sup²; &minus; 2x)...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "(x+2)/x = 4/2 = 2." },
     { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup²; &minus; 2x + 1) per (x&sup²; + 5)...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Koefisien x&sup²;: 3." },
     { soal: "Nilai lim<sub>x&rarr;0</sub> (sin 2x) per x...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "sin(ax)/x = a." },
@@ -835,6 +835,7 @@ let skorBenar = 0;
 let chatHistoryGlobal = [];
 let abortController = null;
 let isTyping = false;
+let isUserScrolledUp = false; // Variabel penting untuk deteksi scroll manual
 
 // ====== CHRONO TIMER STATE ======
 let timerInterval = null;
@@ -1177,7 +1178,7 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         promptUser += `Buat soal sinonim/antonim kata sulit (ambivalen, esensial, marjinal), peribahasa jarang, ejaan sering salah. Pilihan jawaban sangat mirip.`;
     } 
     if (gateKey === 'subtest-pk') {
-        promptUser += `WAJIB sertakan: 1) LIMIT (lim x->3 dari bentuk aljabar/akar), 2) LOGARITMA (^4log 8 + ^4log 2, atau jika ^2log 3 = a maka ^8log 81), 3) Eksponen (satuan dari 2^2026 + 7^3035), 4) Sistem persamaan 3 variabel, 5) Deret tak hingga. 
+        promptUser += `WAJIB sertakan: 1) LIMIT (lim x->3 dari bentuk aljabar/akar), 2) LOGARITMA (^4log 8 + ^4log 2, hoặc nếu ^2log 3 = a thì ^8log 81), 3) Eksponen (satuan dari 2^2026 + 7^3035), 4) Sistem persamaan 3 variabel, 5) Deret tak hingga. 
         
         PENTING UNTUK SOAL PANGKAT TINGGI: Cara mencari satuan pangkat adalah melihat pola 4 angka terakhir yang berulang.
         Contoh: 2^2026. Pola satuan 2: 2, 4, 8, 6 (berulang tiap 4). 2026 dibagi 4 sisa 2, maka ambil angka ke-2 yaitu 4.
@@ -1200,10 +1201,10 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         Contoh: 7^3035. Pola satuan 7: 7, 9, 3, 1 (berulang tiap 4). 3035 dibagi 4 sisa 3, maka ambil angka ke-3 yaitu 3.
         Contoh: 5^2026. Pola satuan 5: 5, 5, 5, 5 (selalu 5). Maka jawabannya pasti 5.
         
-        Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ atau {}.`;
+        Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ hoặc {}.`;
     }
 
-    promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail. Pastikan soal selalu berbeda dan acak setiap kali di-generate. Jika ada soal jumlahan pangkat, INGAT bahwa jumlah satuan bisa berupa 2 digit, ambil SATU digit terakhirnya saja sebagai jawaban. Format soal pangkat harus dalam bentuk a^bcde + a^fghi (acak angkanya setiap kali generate).`;
+    promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail. Pastikan soal selalu berbeda và acak setiap kali di-generate. Jika ada soal jumlahan pangkat, INGAT bahwa jumlah satuan bisa berupa 2 digit, ambil SATU digit terakhirnya saja sebagai jawaban. Format soal pangkat harus dalam bentuk a^bcde + a^fghi (acak angkanya setiap kali generate).`;
 
     try {
         const response = await fetch(GROQ_API_URL, {
@@ -1290,7 +1291,7 @@ function formatMathText(text) {
     let formatted = String(text);
     
     // 0. Decode HTML entities secara paksa menggunakan textarea
-    // Ini untuk menangani &sup2; &sup3; &sup5; &minus; dll yang nyangkut dari bank soal
+    // Ini untuk menangani &sup2; &sup³; &sup5; &minus; dll yang nyangkut dari bank soal
     const txtArea = document.createElement('textarea');
     txtArea.innerHTML = formatted;
     formatted = txtArea.value;
@@ -1301,16 +1302,16 @@ function formatMathText(text) {
     formatted = formatted.replace(/⁴/g, '^4');
     formatted = formatted.replace(/⁵/g, '^5');
     
-    // 1. Hilangkan tanda kurung pada pecahan seperti (3 per 2) atau (3/2) agar tidak ikut terbaca
+    // 1. Hilangkan tanda kurung pada pecahan seperti (3 per 2) hoặc (3/2) agar tidak ikut terbaca
     formatted = formatted.replace(/\(\s*(\d+)\s*(?:per|\/)\s*(\d+)\s*\)/g, '$1 per $2');
-    // 2. Ganti tulisan "per" atau "/" menjadi pecahan visual ³⁄₂ (menyamping/sejajar)
+    // 2. Ganti tulisan "per" hoặc "/" menjadi pecahan visual ³⁄₂ (menyamping/sejajar)
     formatted = formatted.replace(/(?<=\s|\(|^)(\d+|[a-zA-Z])\s*(?:per|\/)\s*(\d+|[a-zA-Z])(?=\s|\)|$)/g, 
         '<span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1; margin:0 2px;">' +
         '<span style="display:block; border-bottom:1px solid currentColor; padding:0 2px;">$1</span>' +
         '<span style="display:block; padding:0 2px;">$2</span></span>');
-    // 3. Ganti sqrt( atau √( menjadi &radic;(
+    // 3. Ganti sqrt( hoặc √( thành &radic;(
     formatted = formatted.replace(/sqrt\(/g, '&radic;(').replace(/√\(/g, '&radic;(');
-    // 4. Ganti pangkat seperti x^2 atau 2^2026 menjadi x<sup>2</sup> atau 2<sup>2026</sup>
+    // 4. Ganti pangkat seperti x^2 hoặc 2^2026 menjadi x<sup>2</sup> hoặc 2<sup>2026</sup>
     formatted = formatted.replace(/\^([0-9]+|[a-zA-Z]+|\([^)]+\))/g, '<sup>$1</sup>');
     // 5. Rapikan format Limit (contoh: lim x->3 menjadi lim dengan x panah 3 di bawahnya)
     formatted = formatted.replace(/lim\s*x->(\d+|∞|a)/g, 'lim<sub style="font-size:0.75em;">x&rarr;$1</sub>');
@@ -1489,7 +1490,7 @@ function parseMarkdown(text) {
     return resultHtml;
 }
 
-// ====== CHAT AI ======
+// ====== CHAT AI DENGAN SMART SCROLL ======
 function initChatAI() {
     const floatingChatBtn = document.getElementById('floating-chat-btn');
     const chatModal = document.getElementById('chat-modal');
@@ -1502,6 +1503,17 @@ function initChatAI() {
         floatingChatBtn.addEventListener('click', () => {
             if (chatModal.classList.contains('open')) chatModal.classList.remove('open');
             else { chatModal.classList.add('open'); if(chatInput) chatInput.focus(); }
+        });
+    }
+
+    // SISTEM DETEKSI SCROLL MANUAL
+    if(chatHistory) {
+        chatHistory.addEventListener('scroll', () => {
+            if (!isTyping) return;
+            // Hitung jarak dari bawah
+            const scrollPos = chatHistory.scrollTop + chatHistory.clientHeight;
+            const isNearBottom = chatHistory.scrollHeight - scrollPos < 50;
+            isUserScrolledUp = !isNearBottom;
         });
     }
 
@@ -1531,7 +1543,6 @@ function initChatAI() {
         }
         messageDiv.appendChild(actionsDiv);
         chatHistory.appendChild(messageDiv);
-        chatHistory.scrollTop = chatHistory.scrollHeight;
         return messageDiv;
     }
 
@@ -1541,7 +1552,9 @@ function initChatAI() {
         loadingDiv.id = 'chat-loading';
         loadingDiv.innerHTML = '<span></span><span></span><span></span>';
         chatHistory.appendChild(loadingDiv);
+        // Paksa scroll ke bawah saat loading muncul
         chatHistory.scrollTop = chatHistory.scrollHeight;
+        isUserScrolledUp = false;
     }
     function hideChatLoading() { const loading = document.getElementById('chat-loading'); if(loading) loading.remove(); }
 
@@ -1555,13 +1568,28 @@ function initChatAI() {
 
     async function typeText(element, text, speed = 10) {
         isTyping = true;
+        isUserScrolledUp = false; // Reset status scroll saat AI mulai menjawab
+        
         for (let i = 0; i < text.length; i++) {
             if (!isTyping) break;
             element.textContent += text.charAt(i);
-            chatHistory.scrollTop = chatHistory.scrollHeight;
+            
+            // HANYA SCROLL OTOMATIS JIKA USER TIDAK SEDANG SCROLL KE ATAS
+            if (!isUserScrolledUp) {
+                chatHistory.scrollTo({
+                    top: chatHistory.scrollHeight,
+                    behavior: 'smooth' // Menggunakan smooth agar tidak lompat-lompat kasar
+                });
+            }
             await new Promise(resolve => setTimeout(resolve, speed));
         }
         isTyping = false;
+        
+        // Pastikan di akhir jawaban, scroll selalu diatur ke paling bawah
+        chatHistory.scrollTo({
+            top: chatHistory.scrollHeight,
+            behavior: 'smooth'
+        });
     }
 
     async function handleSendChat() {
@@ -1573,7 +1601,7 @@ function initChatAI() {
         sendChatBtn.classList.add('hidden');
         stopChatBtn.classList.remove('hidden');
         const pageContext = scanVisibleContent();
-        const promptSystem = `Kamu adalah Tutor UTBK. Konteks: "${pageContext}". Gunakan format markdown.`;
+        const promptSystem = `Kamu là Tutor UTBK. Konteks: "${pageContext}". Gunakan format markdown.`;
         const messages = [{ role: "system", content: promptSystem }, ...chatHistoryGlobal.slice(-10), { role: "user", content: userMessage }];
         abortController = new AbortController();
         try {
