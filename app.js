@@ -1158,7 +1158,7 @@ async function generateSoalDariAI(gateKey) {
     if(!panelLatihan) return;
     panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 10 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS).</p></div>`;
 
-    const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT. Hanya hasilkan soal HOTS tingkat SANGAT SULIT. 
+    const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT. Hanya hasilkan soal HOTS tingkat SANGAT SULIT,penjelasan nya juga jangan ngawur,berikan penjelasan yang bagus dan matang,Rapihkan penjelasan juga jangan berantakan!
 PENTING: Gunakan simbol matematika standar seperti ^ untuk pangkat (contoh: x^2), sqrt() untuk akar, dan * untuk kali. JANGAN gunakan format LaTeX atau simbol $ dan {}.
 Jika soal memerlukan jawaban lebih dari satu (multi-jawaban), set field "multi" ke true dan "jawaban" menjadi array berisi indeks jawaban benar (contoh: "jawaban": [0, 2]). Berikan opsi A sampai E (5 opsi).
 WAJIB balis dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A", "B", "C", "D", "E"], "multi": false, "jawaban": 0, "pembahasan": "..."}]}.`;
@@ -1171,11 +1171,15 @@ WAJIB balis dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
     else if (gateKey === 'subtest-ppu') {
         promptUser += `Buat soal sinonim/antonim kata sulit (ambivalen, esensial, marjinal), peribahasa jarang, ejaan sering salah. Pilihan jawaban sangat mirip.`;
     } 
-    else if (gateKey === 'subtest-pbm') {
-        promptUser += `Sertakan TEKS EKSPOSISI PANJANG (300+ kata) di AWAL field "pertanyaan" soal pertama. Buat 5 soal merujuk teks (kalimat utama, bias, parafrase). Sisanya kalimat efektif tingkat lanjut.`;
-    } 
-    else if (gateKey === 'subtest-pk') {
-        promptUser += `WAJIB sertakan: 1) LIMIT (lim x->3 dari bentuk aljabar/akar), 2) LOGARITMA (^4log 8 + ^4log 2, hoặc nếu ^2log 3 = a thì ^8log 81), 3) Eksponen (satuan dari 2^2026 + 7^3035), 4) Sistem persamaan 3 variabel, 5) Deret tak hingga. Gunakan simbol ^ untuk pangkat và sqrt() cho akar. Jangan gunakan $ hoặc {}.`;
+  if (gateKey === 'subtest-pk') {
+        promptUser += `WAJIB sertakan: 1) LIMIT (lim x->3 dari bentuk aljabar/akar), 2) LOGARITMA (^4log 8 + ^4log 2, atau jika ^2log 3 = a maka ^8log 81), 3) Eksponen (satuan dari 2^2026 + 7^3035), 4) Sistem persamaan 3 variabel, 5) Deret tak hingga. 
+        
+        PENTING UNTUK SOAL PANGKAT TINGGI: Cara mencari satuan pangkat adalah melihat pola 4 angka terakhir yang berulang.
+        Contoh: 2^2026. Pola satuan 2: 2, 4, 8, 6 (berulang tiap 4). 2026 dibagi 4 sisa 2, maka ambil angka ke-2 yaitu 4.
+        Contoh: 7^3035. Pola satuan 7: 7, 9, 3, 1 (berulang tiap 4). 3035 dibagi 4 sisa 3, maka ambil angka ke-3 yaitu 3.
+        Contoh: 5^2026. Pola satuan 5: 5, 5, 5, 5 (selalu 5). Maka jawabannya pasti 5.
+        
+        Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ atau {}.`;
     } 
     else if (gateKey === 'subtest-indo') {
         promptUser += `WAJIB sertakan TEKS OPINI/AKADEMIK PANJANG (350+ kata) di AWAL field "pertanyaan" soal pertama. Buat 5-6 soal merujuk teks (bias, evaluasi argumen, makna kontekstual, inferensi). Sisanya majas/sinonim tingkat lanjut.`;
@@ -1184,7 +1188,14 @@ WAJIB balis dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         promptUser += `WAJIB sertakan TEKS AKADEMIK PANJANG (350+ words) di AWAL field "pertanyaan" soal pertama. Buat 5-6 soal merujuk teks (tone, inference, contextual vocab, purpose). Sisanya grammar tingkat lanjut (conditional type 3, passive modal, reported speech).`;
     } 
     else if (gateKey === 'subtest-pm') {
-        promptUser += `WAJIB sertakan: 1) LIMIT (lim x->a), 2) LOGARITMA (jika ^2log 3 = a, cari ^8log 81), 3) Pangkat tinggi (satuan 2^2026), 4) Soal cerita kecepatan với arus sungai, 5) Bunga majemuk vs tunggal, 6) Peluang majemuk. Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ hoặc {}.`;
+        promptUser += `WAJIB sertakan: 1) LIMIT (lim x->a), 2) LOGARITMA (jika ^2log 3 = a, cari ^8log 81), 3) Pangkat tinggi (satuan 2^2026), 4) Soal cerita kecepatan dengan arus sungai, 5) Bunga majemuk vs tunggal, 6) Peluang majemuk. 
+        
+        PENTING UNTUK SOAL PANGKAT TINGGI: Cara mencari satuan pangkat adalah melihat pola 4 angka terakhir yang berulang.
+        Contoh: 2^2026. Pola satuan 2: 2, 4, 8, 6 (berulang tiap 4). 2026 dibagi 4 sisa 2, maka ambil angka ke-2 yaitu 4.
+        Contoh: 7^3035. Pola satuan 7: 7, 9, 3, 1 (berulang tiap 4). 3035 dibagi 4 sisa 3, maka ambil angka ke-3 yaitu 3.
+        Contoh: 5^2026. Pola satuan 5: 5, 5, 5, 5 (selalu 5). Maka jawabannya pasti 5.
+        
+        Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ atau {}.`;
     }
 
     promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail.`;
@@ -1236,30 +1247,25 @@ function ulangiLatihan() {
     }
 }
 
-// ====== FUNGSI FORMAT MATEMATIKA (PECAHAN VERTIKAL) ======
+// ====== GANTI FUNGSI formatMathText MENJADI INI ======
 function formatMathText(text) {
     if (!text) return '';
     let formatted = String(text);
-
     // 1. Hilangkan tanda kurung pada pecahan seperti (3 per 2) atau (3/2) agar tidak ikut terbaca
     formatted = formatted.replace(/\(\s*(\d+)\s*(?:per|\/)\s*(\d+)\s*\)/g, '$1 per $2');
-
-    // 2. Ganti tulisan "per" hoặc "/" thành pecahan visual ³⁄₂ (menyamping/sejajar)
-    formatted = formatted.replace(/(\d+|[a-zA-Z])\s*(?:per|\/)\s*(\d+|[a-zA-Z])/g, 
+    // 2. Ganti tulisan "per" atau "/" menjadi pecahan visual ³⁄₂ (menyamping/sejajar)
+    // Regex ini hanya akan berjalan jika ada spasi sebelum "per" atau tanda kurung, agar tidak memotong kata "seperti" atau "pergi"
+    formatted = formatted.replace(/(?<=\s|\(|^)(\d+|[a-zA-Z])\s*(?:per|\/)\s*(\d+|[a-zA-Z])(?=\s|\)|$)/g, 
         '<span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1; margin:0 2px;">' +
         '<span style="display:block; border-bottom:1px solid currentColor; padding:0 2px;">$1</span>' +
         '<span style="display:block; padding:0 2px;">$2</span></span>');
-
     // 3. Ganti sqrt( atau √( menjadi &radic;(
     formatted = formatted.replace(/sqrt\(/g, '&radic;(').replace(/√\(/g, '&radic;(');
-
-    // 4. Ganti pangkat seperti x^2 atau 2^2026 menjadi x<sup>2</sup> hoặc 2<sup>2026</sup>
+    // 4. Ganti pangkat seperti x^2 atau 2^2026 menjadi x<sup>2</sup> atau 2<sup>2026</sup>
     formatted = formatted.replace(/\^([0-9]+|[a-zA-Z]+|\([^)]+\))/g, '<sup>$1</sup>');
-
     // 5. Rapikan format Limit (contoh: lim x->3 menjadi lim dengan x panah 3 di bawahnya)
     formatted = formatted.replace(/lim\s*x->(\d+|∞|a)/g, 'lim<sub style="font-size:0.75em;">x&rarr;$1</sub>');
     formatted = formatted.replace(/lim\s*x&rarr;(\d+|∞|a)/g, 'lim<sub style="font-size:0.75em;">x&rarr;$1</sub>');
-
     return formatted;
 }
 
