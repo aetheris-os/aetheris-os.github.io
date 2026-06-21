@@ -122,7 +122,7 @@ const DATA_MATERI = {
         <h3>Partikel "pun"</h3>
         <ul>
           <li><strong>Dipisah:</strong> Umumnya dipisah (Saya pun pergi, Apa pun terjadi).</li>
-          <li><strong>Digabung:</strong> Pada kata tertentu (meskipun, walau pun, bagaimanapun, kendatipun, biarpun).</li>
+          <li><strong>Digabung:</strong> Pada kata tertentu (meskipun, walai pun, bagaimanapun, kendatipun, biarpun).</li>
         </ul>
         <h3>Partikel "lah", "kah", "tah"</h3>
         <ul>
@@ -715,7 +715,7 @@ const BANK_SIMULASI = {
     { soal: "Sinonim 'Inovatif' adalah...", opsi: ["Kuno", "Kreatif", "Statis", "Tradisional"], jawaban: 1, pembahasan: "Inovatif = kreatif/pembaharuan." }
   ],
   'subtest-pk': [
-    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3) adalah...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor: (x+3). Masukkan x=3: 6." },
+    { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3) là...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor: (x+3). Masukkan x=3: 6." },
     { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup2; &minus; 4) per (x&sup2; &minus; 2x) là...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktor: (x+2)/x. Masukkan x=2: 2." },
     { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup2; &minus; 2x + 1) per (x&sup2; + 5) là...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien tertinggi: 3 per 1 = 3." },
     { soal: "Nilai lim<sub>x&rarr;0</sub> (sin 2x) per x là...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim sin(ax)/x = a. Maka 2." },
@@ -775,8 +775,8 @@ const BANK_SIMULASI = {
     { soal: "Karya ilmiah, latar belakang di bab...", opsi: ["Bab I", "Bab II", "Bab III", "Bab IV"], jawaban: 0, pembahasan: "Pendahuluan (Bab I)." },
     { soal: "Simpulkan teks bahasa sendiri tanpa ubah maksud...", opsi: ["Meringkas", "Memparafrasekan", "Mengevaluasi", "Mensintesis"], jawaban: 1, pembahasan: "Parafrase." },
     { soal: "Gabungkan info beberapa teks untuk kesimpulan baru...", opsi: ["Analisis", "Sintesis", "Evaluasi", "Aplikasi"], jawaban: 1, pembahasan: "Sintesis." },
-    { soal: "Sinonim 'Fundamental' adalah...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar." },
-    { soal: "Antonim 'Konvensional' adalah...", opsi: ["Tradisional", "Modern", "Umum", "Lama"], jawaban: 1, pembahasan: "Konvensional = tradisional. Lawan modern." },
+    { soal: "Sinonim 'Fundamental' là...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar." },
+    { soal: "Antonim 'Konvensional' là...", opsi: ["Tradisional", "Modern", "Umum", "Lama"], jawaban: 1, pembahasan: "Konvensional = tradisional. Lawan modern." },
     { soal: "Majas sifat manusia pada benda mati...", opsi: ["Metafora", "Personifikasi", "Simile", "Hiperbola"], jawaban: 1, pembahasan: "Personifikasi." },
     { soal: "Majas melebih-lebihkan...", opsi: ["Metafora", "Hiperbola", "Simile", "Litotes"], jawaban: 1, pembahasan: "Hiperbola." }
   ],
@@ -1150,7 +1150,7 @@ function initFloatingTimerDrag() {
     });
 }
 
-// ====== SISTEM LATIHAN AI ======
+// ====== SISTEM LATIHAN AI (TWO-TIER GENERATION) ======
 async function generateSoalDariAI(gateKey) {
     currentSoalSource = 'ai';
     const dataMateri = DATA_MATERI[gateKey];
@@ -1203,13 +1203,19 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
     promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail. Pastikan soal selalu berbeda dan acak setiap kali di-generate. Jika ada soal jumlahan pangkat, INGAT bahwa jumlah satuan bisa berupa 2 digit, ambil SATU digit terakhirnya saja sebagai jawaban.`;
 
     try {
+        // TAHAP 1: Memaksa AI menulis skema jawaban agar tidak lupa
+        const promptThink = promptUser + " Langkah 1: Tulis skema jawaban singkat (Soal 1: Jawaban A, Soal 2: Jawaban B, dst) sebelum membuat JSON. Pastikan skema jawaban benar. Langkah 2: Buat JSON dengan field 'jawaban' berisi indeks yang SESUAI dengan skema jawaban. Pastikan teks pembahasan mendukung pilihan jawaban tersebut.";
+        
         const response = await fetch(GROQ_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getActiveApiKey()}` },
             body: JSON.stringify({
                 model: AI_MODEL,
-                messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
-                temperature: 1.3, // Ditingkatkan signifikan agar soal selalu acak dan tidak berulang
+                messages: [ 
+                    { role: "system", content: promptSystem }, 
+                    { role: "user", content: promptThink } 
+                ],
+                temperature: 1.3,
                 response_format: { type: "json_object" }
             })
         });
@@ -1228,6 +1234,34 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         rawContent = rawContent.replace(/\\times/g, '*').replace(/\\div/g, '/').replace(/\\pm/g, '+-').replace(/\\cdot/g, '*');
 
         const parsed = JSON.parse(rawContent);
+
+        // TAHAP 2: VALIDASI & REKONSTRUKSI JAWABAN DARI TEKS PEMBAHASAN
+        parsed.soal.forEach(item => {
+            if (item.multi === true) {
+                // Untuk multi-jawaban, kita cari teks A, B, C di pembahasan
+                // Jika AI memberikan format array [0, 2], biarkan.
+                if (!Array.isArray(item.jawaban)) {
+                    // Coba ekstrak dari teks jika AI lupa memberi array
+                    item.jawaban = []; // Fallback sederhana
+                }
+            } else {
+                // Untuk soal biasa, ekstrak huruf jawaban dari teks pembahasan AI
+                const teksPembahasanLower = (item.pembahasan || "").toLowerCase();
+                const regexJawaban = /jawaban\s*(?:yang benar\s*)?(?:adalah|:)\s*([a-e])/i;
+                const match = teksPembahasanLower.match(regexJawaban);
+                
+                if (match) {
+                    const hurufJawabanDariTeks = match[1].toLowerCase();
+                    const indeksDariTeks = hurufJawabanDariTeks.charCodeAt(0) - 97; // a=0, b=1, dst
+                    
+                    // Jika indeks teks tidak cocok dengan indeks JSON, GANTI dengan indeks teks
+                    // Ini memastikan opsi yang menyala di layar SESUAI dengan teks pembahasan AI
+                    if (indeksDariTeks >= 0 && indeksDariTeks < item.opsi.length) {
+                        item.jawaban = indeksDariTeks;
+                    }
+                }
+            }
+        });
 
         soalAktif = parsed.soal;
         indexSoalSekarang = 0;
