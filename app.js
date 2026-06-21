@@ -189,7 +189,7 @@ const DATA_MATERI = {
         <p>Kalimat efektif harus memenuhi syarat: hemat kata, logis, dan strukturnya jelas (Subjek-Predikat).</p>
         <h3>Syarat Kalimat Efektif</h3>
         <ul>
-          <li><strong>Keseparasan (Struktur S-P):</strong> Subjek dan predikat harus jelas. Hindari kalimat tanpa subjek (misal: "Bagi siswa que rajin akan lulus" &rarr; "Siswa yang rajin akan lulus").</li>
+          <li><strong>Keseparasan (Struktur S-P):</strong> Subjek dan predikat harus jelas. Hindari kalimat tanpa subjek (misal: "Bagi siswa yang rajin akan lulus" &rarr; "Siswa yang rajin akan lulus").</li>
           <li><strong>Kehematan Kata:</strong> Hindari pleonasme (pemborosan kata). Contoh: "agar supaya" (salah), "sejak dari" (salah), "pada hal" (salah, yang benar "padahal"), "sangat sekali" (salah).</li>
           <li><strong>Kevarian Kalimat:</strong> Hindari penggunaan konjungsi yang berlebihan dalam satu kalimat.</li>
           <li><strong>Kelogisan:</strong> Hindari kalimat ambigu (bermakna ganda).</li>
@@ -530,7 +530,7 @@ const DATA_MATERI = {
           <li><strong>Narrative:</strong> Menceritakan kisah fiksi (orientation, complication, resolution).</li>
           <li><strong>Procedure:</strong> Memberi instruksi langkah demi langkah (goal, materials, steps).</li>
           <li><strong>Report:</strong> Menyajikan informasi umum secara sistematis (general classification, description).</li>
-          <li><strong>Recount:</strong> Menceritakan pengalangan masa lalu (orientation, events, reorientation).</li>
+          <li><strong>Recount:</strong> Menceritakan pengalaman masa lalu (orientation, events, reorientation).</li>
           <li><strong>Exposition (Analytical):</strong> Membuktikan pendapat (thesis, arguments, reiteration).</li>
           <li><strong>Hortatory:</strong> Membujuk (thesis, arguments, recommendation).</li>
         </ul>
@@ -732,7 +732,7 @@ const BANK_SIMULASI = {
     { soal: "Jika f(x)=2x+3, g(x)=x&sup2;&minus;1, nilai (g o f)(2)...", opsi: ["14", "15", "47", "48"], jawaban: 3, pembahasan: "f(2)=7, g(7)=48." },
     { soal: "Jika f(x)=(x-2) per (x+3), maka f&minus;<sup>1</sup>(x)...", opsi: ["(3x+2) per (1-x)", "(x+2) per (x-3)", "(2x+3) per (1-x)", "(x-3) per (x+2)"], jawaban: 0, pembahasan: "y=(x-2)/(x+3) &rarr; x=(3y+2)/(1-y)." },
     { soal: "Akar x&sup2; &minus; 5x + 6 = 0...", opsi: ["1,6", "2,3", "-2,-3", "2,-3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0." },
-    { soal: "Jumlah & akar 2x&sup2; &minus; 4x + 1 = 0...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "-2 dan -1/2"], jawaban: 0, pembahasan: "Jumlah=2, Hasil=1/2." },
+    { soal: "Jumlah & akar 2x&sup²; &minus; 4x + 1 = 0...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "-2 dan -1/2"], jawaban: 0, pembahasan: "Jumlah=2, Hasil=1/2." },
     { soal: "Barang Rp200.000 dijual untung 15%. Harga jual?", opsi: ["215rb", "220rb", "225rb", "230rb"], jawaban: 3, pembahasan: "Untung 30rb. HJ 230rb." },
     { soal: "8 orang 12 hari. 6 orang berapa hari?", opsi: ["14", "15", "16", "18"], jawaban: 2, pembahasan: "8&times;12=96. 96/6=16." }
   ],
@@ -804,11 +804,11 @@ const BANK_SIMULASI = {
   ],
   'subtest-pm': [
     { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3)...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor (x+3), x=3 &rarr; 6." },
-    { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup2; &minus; 4) per (x&sup2; &minus; 2x)...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "(x+2)/x = 4/2 = 2." },
-    { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup2; &minus; 2x + 1) per (x&sup2; + 5)...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Koefisien x&sup2;: 3." },
+    { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup²; &minus; 4) per (x&sup²; &minus; 2x)...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "(x+2)/x = 4/2 = 2." },
+    { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup²; &minus; 2x + 1) per (x&sup²; + 5)...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Koefisien x&sup²;: 3." },
     { soal: "Nilai lim<sub>x&rarr;0</sub> (sin 2x) per x...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "sin(ax)/x = a." },
     { soal: "Nilai lim<sub>x&rarr;5</sub> (&radic;(x+4) &minus; 3) per (x &minus; 5)...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "1 per (&radic;9 + 3) = 1/6." },
-    { soal: "Jika &sup²;log 3 = a, &sup²;log 5 = b, nilai &sup²;log 45...", opsi: ["a+2b", "2a+b", "a+b", "2ab"], jawaban: 0, pembahasan: "45=3&sup2;&times;5. 2a+b." },
+    { soal: "Jika &sup²;log 3 = a, &sup²;log 5 = b, nilai &sup²;log 45...", opsi: ["a+2b", "2a+b", "a+b", "2ab"], jawaban: 0, pembahasan: "45=3&sup²;&times;5. 2a+b." },
     { soal: "Hasil &sup4;log 8 + &sup4;log 2...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup4;log 16 = 2." },
     { soal: "Jika &sup²;log 3 = a, &sup8;log 81...", opsi: ["a/3", "3a", "4a per 3", "a"], jawaban: 2, pembahasan: "4a per 3." },
     { soal: "Nilai &sup5;log 125 &minus; &sup5;log 5...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup5;log 25 = 2." },
@@ -817,10 +817,10 @@ const BANK_SIMULASI = {
     { soal: "Satuan 7<sup>3035</sup>...", opsi: ["1", "3", "5", "7"], jawaban: 1, pembahasan: "Pola 7,9,3,1. 3035 mod 4 = 3." },
     { soal: "Nilai 2<sup>3</sup> &times; 2<sup>&minus;2</sup> &times; 2<sup>0</sup>...", opsi: ["1", "2", "4", "8"], jawaban: 1, pembahasan: "2<sup>1</sup> = 2." },
     { soal: "Sederhanakan (x<sup>3</sup> &times; x<sup>5</sup>) per x<sup>6</sup>...", opsi: ["x&sup2;", "x&sup4;", "x<sup>8</sup>", "x<sup>14</sup>"], jawaban: 0, pembahasan: "x<sup>2</sup>." },
-    { soal: "f(x)=2x+3, g(x)=x&sup2;&minus;1. Nilai (g o f)(2)...", opsi: ["14", "15", "47", "48"], jawaban: 3, pembahasan: "f(2)=7, g(7)=48." },
+    { soal: "f(x)=2x+3, g(x)=x&sup²;&minus;1. Nilai (g o f)(2)...", opsi: ["14", "15", "47", "48"], jawaban: 3, pembahasan: "f(2)=7, g(7)=48." },
     { soal: "f(x)=(x-2) per (x+3). f&minus;<sup>1</sup>(x)...", opsi: ["(3x+2) per (1-x)", "(x+2) per (x-3)", "(2x+3) per (1-x)", "(x-3) per (x+2)"], jawaban: 0, pembahasan: "(3y+2)/(1-y)." },
-    { soal: "Akar x&sup2; &minus; 5x + 6 = 0...", opsi: ["1,6", "2,3", "-2,-3", "2,-3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0." },
-    { soal: "Jumlah & akar 2x&sup2; &minus; 4x + 1 = 0...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "-2 dan -1/2"], jawaban: 0, pembahasan: "Jumlah 2, hasil 1/2." },
+    { soal: "Akar x&sup²; &minus; 5x + 6 = 0...", opsi: ["1,6", "2,3", "-2,-3", "2,-3"], jawaban: 1, pembahasan: "(x-2)(x-3)=0." },
+    { soal: "Jumlah & akar 2x&sup²; &minus; 4x + 1 = 0...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "-2 dan -1/2"], jawaban: 0, pembahasan: "Jumlah 2, hasil 1/2." },
     { soal: "7 siswa dipilih 3 OSIS. Berapa cara? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 35." },
     { soal: "Joko 60km/jam 06.00. Budi 80km/jam 07.00 mengejar. Budi susul pukul?", opsi: ["09.00", "10.00", "11.00", "12.00"], jawaban: 1, pembahasan: "Jarak 60km. Selisih 20km/j. Susul 3 jam. 07.00+3=10.00." }
   ]
@@ -1212,7 +1212,7 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
             body: JSON.stringify({
                 model: AI_MODEL,
                 messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
-                temperature: 1.3, // Ditingkatkan signifikan agar soal selalu acak dan tidak berulang
+                temperature: 1.3,
                 response_format: { type: "json_object" }
             })
         });
@@ -1232,17 +1232,13 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
 
         const parsed = JSON.parse(rawContent);
 
-        // TAHAP 2: VALIDASI & REKONSTRUKSI JAWABAN DARI TEKS PEMBAHASAN
+        // VALIDASI & REKONSTRUKSI JAWABAN DARI TEKS PEMBAHASAN
         parsed.soal.forEach(item => {
             if (item.multi === true) {
-                // Untuk multi-jawaban, kita cari teks A, B, C di pembahasan
-                // Jika AI memberikan format array [0, 2], biarkan.
                 if (!Array.isArray(item.jawaban)) {
-                    // Coba ekstrak dari teks jika AI lupa memberi array
-                    item.jawaban = []; // Fallback sederhana
+                    item.jawaban = []; 
                 }
             } else {
-                // Untuk soal biasa, ekstrak huruf jawaban dari teks pembahasan AI
                 const teksPembahasanLower = (item.pembahasan || "").toLowerCase();
                 const regexJawaban = /jawaban\s*(?:yang benar\s*)?(?:adalah|:)\s*([a-e])/i;
                 const match = teksPembahasanLower.match(regexJawaban);
@@ -1251,8 +1247,6 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
                     const hurufJawabanDariTeks = match[1].toLowerCase();
                     const indeksDariTeks = hurufJawabanDariTeks.charCodeAt(0) - 97; // a=0, b=1, dst
                     
-                    // Jika indeks teks tidak cocok dengan indeks JSON, GANTI dengan indeks teks
-                    // Ini memastikan opsi yang menyala di layar SESUAI dengan teks pembahasan AI
                     if (indeksDariTeks >= 0 && indeksDariTeks < item.opsi.length) {
                         item.jawaban = indeksDariTeks;
                     }
@@ -1290,19 +1284,22 @@ function ulangiLatihan() {
     }
 }
 
-// ====== GANTI FUNGSI formatMathText MENJADI INI ======
+// ====== FUNGSI formatMathText YANG SUDAH DIPERBAIKI TOTAL ======
 function formatMathText(text) {
     if (!text) return '';
     let formatted = String(text);
-    // 0. Decode HTML entities supaya tidak literal seperti &sup5;
-    formatted = formatted.replace(/&sup(\d);/g, '^$1');
-    formatted = formatted.replace(/&radic;/g, '√');
-    formatted = formatted.replace(/&minus;/g, '-');
-    formatted = formatted.replace(/&times;/g, '*');
-    formatted = formatted.replace(/&plusmn;/g, '+-');
-    formatted = formatted.replace(/&divide;/g, '/');
-    formatted = formatted.replace(/&rarr;/g, '->');
-    formatted = formatted.replace(/&amp;/g, '&');
+    
+    // 0. Decode HTML entities secara paksa menggunakan textarea
+    // Ini untuk menangani &sup2; &sup3; &sup5; &minus; dll yang nyangkut dari bank soal
+    const txtArea = document.createElement('textarea');
+    txtArea.innerHTML = formatted;
+    formatted = txtArea.value;
+    
+    // Konversi karakter Unicode pangkat (², ³) kembali ke format ^2, ^3 agar seragam
+    formatted = formatted.replace(/²/g, '^2');
+    formatted = formatted.replace(/³/g, '^3');
+    formatted = formatted.replace(/⁴/g, '^4');
+    formatted = formatted.replace(/⁵/g, '^5');
     
     // 1. Hilangkan tanda kurung pada pecahan seperti (3 per 2) atau (3/2) agar tidak ikut terbaca
     formatted = formatted.replace(/\(\s*(\d+)\s*(?:per|\/)\s*(\d+)\s*\)/g, '$1 per $2');
@@ -1321,7 +1318,7 @@ function formatMathText(text) {
     return formatted;
 }
 
-// ====== GANTI FUNGSI tampilkanSoal MENJADI INI ======
+// ====== FUNGSI tampilkanSoal ======
 function tampilkanSoal(panelId) {
     const panel = document.getElementById(panelId);
     if (!panel) return;
@@ -1331,7 +1328,6 @@ function tampilkanSoal(panelId) {
     }
     const soal = soalAktif[indexSoalSekarang];
     
-    // Gunakan formatMathText agar simbol ^ dan sqrt berubah jadi pangkat/akar
     const teksSoal = formatMathText(soal.pertanyaan || soal.soal);
     const isMulti = soal.multi === true;
     
@@ -1347,7 +1343,6 @@ function tampilkanSoal(panelId) {
         tombolKirim = `<button class="btn-action" style="margin-top:16px;" onclick="kirimJawabanMulti('${panelId}')">Kirim Jawaban</button>`;
     }
     
-    // Gunakan formatMathText di pembahasan juga
     const pembahasanText = formatMathText(soal.pembahasan);
 
     panel.innerHTML = `
