@@ -189,7 +189,7 @@ const DATA_MATERI = {
         <p>Kalimat efektif harus memenuhi syarat: hemat kata, logis, dan strukturnya jelas (Subjek-Predikat).</p>
         <h3>Syarat Kalimat Efektif</h3>
         <ul>
-          <li><strong>Keseparasan (Struktur S-P):</strong> Subjek dan predikat harus jelas. Hindari kalimat tanpa subjek (misal: "Bagi siswa yang rajin akan lulus" &rarr; "Siswa yang rajin akan lulus").</li>
+          <li><strong>Keseparasan (Struktur S-P):</strong> Subjek dan predikat harus jelas. Hindari kalimat tanpa subjek (misal: "Bagi siswa que rajin akan lulus" &rarr; "Siswa yang rajin akan lulus").</li>
           <li><strong>Kehematan Kata:</strong> Hindari pleonasme (pemborosan kata). Contoh: "agar supaya" (salah), "sejak dari" (salah), "pada hal" (salah, yang benar "padahal"), "sangat sekali" (salah).</li>
           <li><strong>Kevarian Kalimat:</strong> Hindari penggunaan konjungsi yang berlebihan dalam satu kalimat.</li>
           <li><strong>Kelogisan:</strong> Hindari kalimat ambigu (bermakna ganda).</li>
@@ -530,7 +530,7 @@ const DATA_MATERI = {
           <li><strong>Narrative:</strong> Menceritakan kisah fiksi (orientation, complication, resolution).</li>
           <li><strong>Procedure:</strong> Memberi instruksi langkah demi langkah (goal, materials, steps).</li>
           <li><strong>Report:</strong> Menyajikan informasi umum secara sistematis (general classification, description).</li>
-          <li><strong>Recount:</strong> Menceritakan pengalaman masa lalu (orientation, events, reorientation).</li>
+          <li><strong>Recount:</strong> Menceritakan pengalangan masa lalu (orientation, events, reorientation).</li>
           <li><strong>Exposition (Analytical):</strong> Membuktikan pendapat (thesis, arguments, reiteration).</li>
           <li><strong>Hortatory:</strong> Membujuk (thesis, arguments, recommendation).</li>
         </ul>
@@ -1150,7 +1150,7 @@ function initFloatingTimerDrag() {
     });
 }
 
-// ====== SISTEM LATIHAN AI (TWO-TIER GENERATION) ======
+// ====== SISTEM LATIHAN AI ======
 async function generateSoalDariAI(gateKey) {
     currentSoalSource = 'ai';
     const dataMateri = DATA_MATERI[gateKey];
@@ -1158,16 +1158,17 @@ async function generateSoalDariAI(gateKey) {
     if(!panelLatihan) return;
     panelLatihan.innerHTML = `<div class="loading-state"><div class="loading-spinner"></div><h3>Sedang Meracik 10 Soal Tipe UTBK...</h3><p>AI sedang menyusun soal ${dataMateri.title} tingkat sulit (HOTS).</p></div>`;
 
-    const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT. Hanya hasilkan soal HOTS tingkat SANGAT SULIT, penjelasan nya juga jangan ngawur, berikan penjelasan yang bagus dan matang, Rapihkan penjelasan juga jangan berantakan!
+    const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT. Hanya hasilkan soal HOTS tingkat SANGAT SULIT.
 PENTING: Gunakan simbol matematika standar seperti ^ untuk pangkat (contoh: x^2), sqrt() untuk akar, dan * untuk kali. JANGAN gunakan format LaTeX atau simbol $ dan {}.
 PENTING: Field "opsi" HARUS BERUPA ARRAY berisi 5 string jawaban. JANGAN memasukkan teks pembahasan ke dalam array opsi.
 Jika soal memerlukan jawaban lebih dari satu (multi-jawaban), set field "multi" ke true dan "jawaban" menjadi array berisi indeks jawaban benar (contoh: "jawaban": [0, 2]). Berikan opsi A sampai E (5 opsi).
 PENTING: PASTIKAN INDEKS JAWABAN BENAR-BENAR TEPAT SESUAI LOGIKA. CEK 3 KALI KESESUAIAN ANTARA INDEKS JAWABAN DAN TEKS PEMBAHASAN SEBELUM MENGIRIM JSON. JANGAN SALAH MENEMPATKAN INDEKS.
 PENTING: Selalu acak angka, nama, dan skenario soal agar tidak ada soal yang berulang setiap kali diminta.
 Pada akhir teks "pembahasan", WAJIB sertakan kalimat: "Oleh karena itu, jawaban yang benar adalah (Huruf Opsi)." Contoh: "Oleh karena itu, jawaban yang benar adalah B."
+PENTING: Buatlah pembahasan yang SANGAT RINGKAS, PADAT, DAN LANGSUNG MENUNJUK JAWABAN. Jangan bertele-tele. Maksimal 3-4 kalimat saja di pembahasan.
 WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A", "B", "C", "D", "E"], "multi": false, "jawaban": 0, "pembahasan": "..."}]}.`;
 
-    let promptUser = `Buatkan 10 soal PG UTBK SANGAT SULIT untuk subtes: "${dataMateri.title}". Buat 2-3 soal di antaranya memiliki jawaban lebih dari satu (multi-jawaban) dengan opsi A-E. Gunakan angka dan skenario yang benar-benar acak berbeda dari biasanya. `;
+    let promptUser = `Buatkan 10 soal PG UTBK SANGAT SULIT untuk subtes: "${dataMateri.title}". Buat 2-3 soal di antaranya memiliki jawaban lebih dari satu (multi-jawaban) dengan opsi A-E. Gunakan angka dan skenario yang benar-benar acak berbeda. `;
 
     if (gateKey === 'subtest-pu') {
         promptUser += `Sertakan SATU teks naratif panjang (250+ kata) berisi aturan rumit di AWAL field "pertanyaan" soal pertama. Buat 4-5 soal merujuk teks tersebut. Sisanya: silogisme berantai 3-4 premis, deret angka pola bertingkat, deret huruf.`;
@@ -1198,28 +1199,20 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         Contoh: 2^2026. Pola satuan 2: 2, 4, 8, 6 (berulang tiap 4). 2026 dibagi 4 sisa 2, maka ambil angka ke-2 yaitu 4.
         Contoh: 7^3035. Pola satuan 7: 7, 9, 3, 1 (berulang tiap 4). 3035 dibagi 4 sisa 3, maka ambil angka ke-3 yaitu 3.
         Contoh: 5^2026. Pola satuan 5: 5, 5, 5, 5 (selalu 5). Maka jawabannya pasti 5.
-
-        BUAT SOAL seperti itu semua lagi,jangan berulang-ulang,harus randomize tapi harus soal" seperti utbk,dapatkan soal utbk entah darimanapun!
         
         Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ atau {}.`;
     }
 
-    promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail. Pastikan soal selalu berbeda dan acak setiap kali di-generate. Jika ada soal jumlahan pangkat, INGAT bahwa jumlah satuan bisa berupa 2 digit, ambil SATU digit terakhirnya saja sebagai jawaban.`;
+    promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail. Pastikan soal selalu berbeda dan acak setiap kali di-generate. Jika ada soal jumlahan pangkat, INGAT bahwa jumlah satuan bisa berupa 2 digit, ambil SATU digit terakhirnya saja sebagai jawaban. Format soal pangkat harus dalam bentuk a^bcde + a^fghi (acak angkanya setiap kali generate).`;
 
     try {
-        // TAHAP 1: Memaksa AI menulis skema jawaban agar tidak lupa
-        const promptThink = promptUser + " Langkah 1: Tulis skema jawaban singkat (Soal 1: Jawaban A, Soal 2: Jawaban B, dst) sebelum membuat JSON. Pastikan skema jawaban benar. Langkah 2: Buat JSON dengan field 'jawaban' berisi indeks yang SESUAI dengan skema jawaban. Pastikan teks pembahasan mendukung pilihan jawaban tersebut.";
-        
         const response = await fetch(GROQ_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getActiveApiKey()}` },
             body: JSON.stringify({
                 model: AI_MODEL,
-                messages: [ 
-                    { role: "system", content: promptSystem }, 
-                    { role: "user", content: promptThink } 
-                ],
-                temperature: 1.3,
+                messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
+                temperature: 1.3, // Ditingkatkan signifikan agar soal selalu acak dan tidak berulang
                 response_format: { type: "json_object" }
             })
         });
@@ -1301,10 +1294,19 @@ function ulangiLatihan() {
 function formatMathText(text) {
     if (!text) return '';
     let formatted = String(text);
+    // 0. Decode HTML entities supaya tidak literal seperti &sup5;
+    formatted = formatted.replace(/&sup(\d);/g, '^$1');
+    formatted = formatted.replace(/&radic;/g, '√');
+    formatted = formatted.replace(/&minus;/g, '-');
+    formatted = formatted.replace(/&times;/g, '*');
+    formatted = formatted.replace(/&plusmn;/g, '+-');
+    formatted = formatted.replace(/&divide;/g, '/');
+    formatted = formatted.replace(/&rarr;/g, '->');
+    formatted = formatted.replace(/&amp;/g, '&');
+    
     // 1. Hilangkan tanda kurung pada pecahan seperti (3 per 2) atau (3/2) agar tidak ikut terbaca
     formatted = formatted.replace(/\(\s*(\d+)\s*(?:per|\/)\s*(\d+)\s*\)/g, '$1 per $2');
     // 2. Ganti tulisan "per" atau "/" menjadi pecahan visual ³⁄₂ (menyamping/sejajar)
-    // Regex ini hanya akan berjalan jika ada spasi sebelum "per" atau tanda kurung, agar tidak memotong kata "seperti" atau "pergi"
     formatted = formatted.replace(/(?<=\s|\(|^)(\d+|[a-zA-Z])\s*(?:per|\/)\s*(\d+|[a-zA-Z])(?=\s|\)|$)/g, 
         '<span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1; margin:0 2px;">' +
         '<span style="display:block; border-bottom:1px solid currentColor; padding:0 2px;">$1</span>' +
