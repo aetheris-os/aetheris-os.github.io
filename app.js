@@ -14,79 +14,646 @@ function rotateApiKey() { currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.len
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const AI_MODEL = "llama-3.3-70b-versatile";
 
-// ====== MATERI UTBK ======
+// ====== MATERI UTBK 2024-2026 (SANGAT KOMPREHENSIF & PADAT) ======
 const DATA_MATERI = {
   'subtest-pu': {
     title: "Penalaran Umum (PU)", category: "TPS Module",
     desc: "Mengukur kemampuan penalaran logis (silogisme, premis), analitis (deret, permainan kata), dan penalaran kuantitatif.",
     htmlContent: `
-      <div class="materi-card"><h2>Logika Silogisme & Premis</h2><p>Silogisme adalah penarikan kesimpulan dari dua premis.</p><ul><li><strong>Modus Ponens:</strong> Jika p maka q. p terjadi. Maka q terjadi.</li><li><strong>Modus Tollens:</strong> Jika p maka q. q tidak terjadi. Maka p tidak terjadi.</li><li><strong>Silogisme Rantai:</strong> p&rarr;q, q&rarr;r, maka p&rarr;r.</li><li><strong>Silogisme Partikular:</strong> Subjek disisihkan, predikat dipertahankan.</li></ul><h3>Jebakan Logika (Fallacies)</h3><ul><li><strong>Affirming the Consequent:</strong> Jika p maka q. q terjadi. Maka p terjadi (SALAH).</li><li><strong>Denying the Antecedent:</strong> Jika p maka q. p tidak terjadi. Maka q tidak terjadi (SALAH).</li></ul></div>
-      <div class="materi-card"><h2>Penalaran Analitis: Deret</h2><ul><li><strong>Bertingkat:</strong> Selisih membentuk pola baru (+2, +4, +6, +8).</li><li><strong>Silang:</strong> Dua pola berselang-seling.</li><li><strong>Fibonacci:</strong> Suku ke-n = jumlah dua suku sebelumnya.</li><li><strong>Pangkat:</strong> n&sup2;, n&sup3;, atau kombinasi (n&sup2;+1).</li></ul></div>
-      <div class="materi-card"><h2>Penalaran Analitis: Soal Cerita Logis</h2><p>Pengaturan posisi, pencocokan karakteristik, atau urutan peristiwa.</p><h3>Strategi</h3><ul><li><strong>Buat Tabel/Grid.</strong></li><li><strong>Tandai Clue Pasti vs Tidak Pasti.</strong></li><li><strong>Gunakan Eliminasi.</strong></li></ul></div>
-      <div class="materi-card"><h2>Penalaran Kuantitatif (PU)</h2><ul><li><strong>Perbandingan Senilai & Berbalik Nilai.</strong></li><li><strong>Analisis Diagram Venn.</strong></li></ul></div>
-      <div class="materi-card"><h2>Permainan Kata & Analogi</h2><ul><li><strong>Sinonim, Antonim, Part-Whole, Cause-Effect, Tool-Object.</strong></li></ul></div>
+      <div class="materi-card">
+        <h2>Logika Silogisme & Premis (UTBK 2024-2026)</h2>
+        <p>Silogisme adalah penarikan kesimpulan dari dua premis. Aturan mainnya:</p>
+        <ul>
+          <li><strong>Modus Ponens:</strong> Jika p maka q. p terjadi. Maka q terjadi. Contoh: Jika hujan, jalan basah. Hujan. Maka jalan basah.</li>
+          <li><strong>Modus Tollens:</strong> Jika p maka q. q tidak terjadi. Maka p tidak terjadi. Contoh: Jika hujan, jalan basah. Jalan tidak basah. Maka tidak hujan.</li>
+          <li><strong>Silogisme Rantai:</strong> p&rarr;q, q&rarr;r, maka p&rarr;r.</li>
+          <li><strong>Silogisme Partikular:</strong> Subjek disisihkan, predikat dipertahankan. "Semua A adalah B. Sebagian A adalah C. Maka sebagian B adalah C."</li>
+        </ul>
+        <h3>Jebakan Logika (Fallacies) yang Sering Muncul</h3>
+        <ul>
+          <li><strong>Affirming the Consequent:</strong> Jika p maka q. q terjadi. Maka p terjadi (SALAH). Bisa saja q terjadi karena sebab lain.</li>
+          <li><strong>Denying the Antecedent:</strong> Jika p maka q. p tidak terjadi. Maka q tidak terjadi (SALAH).</li>
+          <li><strong>Post Hoc Ergo Propter Hoc:</strong> Karena B terjadi setelah A, maka A menyebabkan B (Tidak selalu benar).</li>
+          <li><strong>False Dilemma:</strong> Hanya memberikan dua pilihan ekstrem, padahal ada pilihan lain.</li>
+        </ul>
+        <h3>Contoh Soal Silogisme (Tipe UTBK 2024)</h3>
+        <p><strong>Soal:</strong> Jika harga BBM naik, maka ongkos angkutan umum naik. Jika ongkos angkutan umum naik, maka biaya hidup meningkat. Diketahui biaya hidup tidak meningkat. Kesimpulan yang benar adalah...</p>
+        <p><strong>Pembahasan:</strong> Ini adalah modus tollens berantai. p&rarr;q, q&rarr;r. ~r maka ~p. Jadi, harga BBM tidak naik.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Penalaran Analitis: Deret Angka & Huruf</h2>
+        <p>Deret angka menggunakan pola aritmatika (+a), geometri (&times;a), atau kombinasi. Deret huruf menggunakan urutan abjad (A=1, B=2, dst).</p>
+        <h3>Pola Deret Tingkat Lanjut</h3>
+        <ul>
+          <li><strong>Pola Bertingkat (Selisih Berbeda):</strong> Selisih antar suku tidak konstan, tapi membentuk pola baru (misal: +2, +4, +6, +8).</li>
+          <li><strong>Pola Silang (Alternating):</strong> Dua pola yang berselang-seling (misal: &times;2, &minus;2, &times;2, &minus;2).</li>
+          <li><strong>Fibonacci:</strong> Suku ke-n adalah jumlah dua suku sebelumnya (1,1,2,3,5,8,...).</li>
+          <li><strong>Pola Pangkat:</strong> Kuadrat (n&sup2;), Kubik (n&sup3;), atau kombinasi (n&sup2;+1). Contoh: 2, 5, 10, 17, 26 (pola n&sup2;+1).</li>
+          <li><strong>Pola Akar:</strong> 1, &radic;2, &radic;3, 2, &radic;5... (pola &radic;n).</li>
+          <li><strong>Pola Selisih Bertingkat Dua Kali:</strong> Selisih pertama tidak pola, tapi selisih dari selisihnya membentuk pola.</li>
+        </ul>
+        <h3>Contoh Soal Deret (Tipe UTBK 2024)</h3>
+        <p><strong>Soal:</strong> Deret: 2, 5, 10, 17, 26, ...</p>
+        <p><strong>Pembahasan:</strong> Selisih: +3, +5, +7, +9. Berikutnya +11. 26+11=37. Atau pola n&sup2;+1: 1&sup2;+1=2, 2&sup2;+1=5, 3&sup2;+1=10, 4&sup2;+1=17, 5&sup2;+1=26, 6&sup2;+1=37.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Penalaran Analitis: Soal Cerita Logis</h2>
+        <p>Soal cerita logis melibatkan pengaturan posisi, pencocokan karakteristik, atau urutan peristiwa. Contoh tipe soal "Siapa yang duduk di sebelah siapa?" atau "Siapa yang memakai baju apa?".</p>
+        <h3>Strategi Pengerjaan</h3>
+        <ul>
+          <li><strong>Buat Tabel/Grid:</strong> Untuk soal pencocokan, buat tabel dengan baris (orang) dan kolom (atribut).</li>
+          <li><strong>Tandai Clue Pasti vs Tidak Pasti:</strong> "A duduk di ujung" (pasti), "B tidak duduk di samping C" (tidak pasti, gunakan eliminasi).</li>
+          <li><strong>Gunakan Eliminasi:</strong> Jika atribut A sudah diambil oleh orang 1, maka orang lain tidak bisa pakai atribut A.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Penalaran Kuantitatif (PU)</h2>
+        <p>Berbeda dari PK, PU Kuantitatif lebih fokus pada logika perbandingan dan analisis data singkat, bukan hitungan rumit.</p>
+        <ul>
+          <li><strong>Perbandingan Senilai & Berbalik Nilai:</strong> Memahami hubungan kausal antar variabel. Jika a~b, maka a/b konstan. Jika a~1/b, maka a&times;b konstan.</li>
+          <li><strong>Analisis Diagram Venn:</strong> Membaca Venn diagram 3-4 himpunan untuk menarik kesimpulan irisan. Rumus: n(A&cup;B) = n(A) + n(B) &minus; n(A&cap;B).</li>
+          <li><strong>Operasi Bilangan Cepat:</strong> Sifat komutatif, asosiatif, distributif untuk mempercepat hitung.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Permainan Kata & Analogi</h2>
+        <p>Soal analogi meminta Anda mencari hubungan antar kata. Contoh: "Dokter : Pasien = Guru : ?" (Jawaban: Murid).</p>
+        <h3>Tipe Hubungan Analogi</h3>
+        <ul>
+          <li><strong>Sinonim:</strong> Kata yang maknanya sama (Besar : Luas).</li>
+          <li><strong>Antonim:</strong> Kata yang maknanya berlawanan (Tinggi : Rendah).</li>
+          <li><strong>Part-Whole (Bagian-Keseluruhan):</strong> Halaman : Buku.</li>
+          <li><strong>Cause-Effect (Sebab-Akibat):</strong> Hujan : Basah.</li>
+          <li><strong>Tool-Object (Alat-Objek):</strong> Pisau : Memotong.</li>
+          <li><strong>Symbol-Representation:</strong> Merpati : Damai.</li>
+        </ul>
+      </div>
     `
   },
   'subtest-ppu': {
     title: "Pengetahuan & Pemahaman Umum (PPU)", category: "TPS Module",
     desc: "Mengukur penguasaan kosakata (sinonim, antonim), ejaan, dan tata bahasa praktis.",
     htmlContent: `
-      <div class="materi-card"><h2>Kosakata Berbasis Konteks</h2><p>Soal PPU mencari sinonim kontekstual. Contoh: "peredaran" dalam "peredaran uang" berbeda dengan "peredaran darah".</p><h3>Kata Serapan Asing</h3><ul><li><strong>Quality</strong> &rarr; <code>kualitas</code></li><li><strong>Complex</strong> &rarr; <code>kompleks</code></li><li><strong>Technique</strong> &rarr; <code>teknik</code></li></ul></div>
-      <div class="materi-card"><h2>Ejaan yang Disempurnakan (EYD V)</h2><ul><li><strong>"Di" sebagai awalan verba pasif:</strong> digabung (dimakan).</li><li><strong>"Di" sebagai preposisi tempat:</strong> dipisah (di rumah).</li><li><strong>Partikel "pun":</strong> Umumnya dipisah, kecuali meskipun, walaupun.</li></ul></div>
-      <div class="materi-card"><h2>Tata Bahasa & Majas</h2><h3>Konjungsi Antarklausa</h3><ul><li><strong>Sebab-Akibat:</strong> karena, sehingga.</li><li><strong>Pertentangan:</strong> tetapi, sedangkan, namun.</li></ul><h3>Jenis Majas</h3><ul><li><strong>Metafora:</strong> Perbandingan langsung (anak emas).</li><li><strong>Personifikasi:</strong> Benda mati seolah hidup.</li><li><strong>Hiperbola:</strong> Melebih-lebihkan.</li><li><strong>Ironi:</strong> Sindiran halus.</li></ul></div>
-      <div class="materi-card"><h2>Peribahasa & Pepatah</h2><ul><li><strong>Sambil menyelam minum air:</strong> Bekerja sambil mengambil kesempatan pribadi.</li><li><strong>Bagai aur dengan tebing:</strong> Saling membantu.</li><li><strong>Besar pasak daripada tiang:</strong> Pengeluaran lebih besar dari pemasukan.</li></ul></div>
+      <div class="materi-card">
+        <h2>Kosakata Berbasis Konteks (UTBK 2024-2026)</h2>
+        <p>Soal PPU tidak lagi sekadar mencari sinonim kamus, melainkan sinonim kontekstual. Contoh: Kata "peredaran" dalam "peredaran uang" berbeda dengan "peredaran darah".</p>
+        <h3>Kata Serapan Asing</h3>
+        <p>Banyak kata serapan dari bahasa Inggris/Arab yang penulisannya disesuaikan:</p>
+        <ul>
+          <li><strong>Quality</strong> menjadi <code>kualitas</code> (bukan kwalitas)</li>
+          <li><strong>Complex</strong> menjadi <code>kompleks</code> (bukan compleks)</li>
+          <li><strong>Technique</strong> menjadi <code>teknik</code></li>
+          <li><strong>System</strong> menjadi <code>sistem</code> (bukan systeem)</li>
+          <li><strong>Detail</strong> menjadi <code>detail</code> (bukan detil)</li>
+          <li><strong>Standard</strong> menjadi <code>standar</code> (bukan standard)</li>
+          <li><strong>Analysis</strong> menjadi <code>analisis</code> (bukan analisa)</li>
+        </ul>
+        <h3>Contoh Soal Sinonim Kontekstual</h3>
+        <p><strong>Soal:</strong> Makna kata "bunga" dalam kalimat "Bunga bank bulan ini naik" adalah...</p>
+        <p><strong>Pembahasan:</strong> Dalam konteks keuangan, "bunga" berarti keuntungan tambahan (jasa uang), bukan kembang tumbuhan.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Ejaan yang Disempurnakan (EYD V)</h2>
+        <p>Perhatikan penulisan huruf kapital, imbuhan asing, dan kata depan.</p>
+        <h3>Aturan "Di" vs "Di"</h3>
+        <ul>
+          <li><strong>"Di" sebagai awalan verba pasif:</strong> digabung (dimakan, dipukul, ditulis).</li>
+          <li><strong>"Di" sebagai preposisi tempat:</strong> dipisah (di rumah, di sekolah, di atas).</li>
+        </ul>
+        <h3>Partikel "pun"</h3>
+        <ul>
+          <li><strong>Dipisah:</strong> Umumnya dipisah (Saya pun pergi, Apa pun terjadi).</li>
+          <li><strong>Digabung:</strong> Pada kata tertentu (meskipun, walaupun, bagaimanapun, kendatipun, biarpun).</li>
+        </ul>
+        <h3>Partikel "lah", "kah", "tah"</h3>
+        <ul>
+          <li><strong>Digabung:</strong> pada kata ganti orang pertama (Akulah, Kamikah).</li>
+          <li><strong>Dipisah:</strong> pada kata lain (Mari kita pergi lah, Siapakah dia).</li>
+        </ul>
+        <h3>Tanda Baca</h3>
+        <ul>
+          <li><strong>Tanda titik dua (:):</strong> Digunakan pada kalimat langsung setelah pengantar.</li>
+          <li><strong>Tanda hubung (-):</strong> Digunakan pada kata ulang sebagian (anak-anak) veya imbuhan asing (neo-kolonialisme).</li>
+          <li><strong>Tanda seru (!):</strong> Digunakan untuk perintah atau seruan.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Tata Bahasa & Majas</h2>
+        <p>Memahami penggunaan kata penghubung antarklausa dan majas.</p>
+        <h3>Konjungsi Antarklausa</h3>
+        <ul>
+          <li><strong>Sebab-Akibat:</strong> karena, sehingga, oleh karena itu.</li>
+          <li><strong>Akibat-Sebab:</strong> karena, sebab.</li>
+          <li><strong>Pertentangan:</strong> tetapi, sedangkan, namun, melainkan.</li>
+          <li><strong>Pilihan:</strong> atau, baik...maupun...</li>
+          <li><strong>Penambah:</strong> dan, serta.</li>
+        </ul>
+        <p>Jangan gunakan dua konjungsi sekaligus dalam satu klausa (Pleonasme). Contoh salah: "Karena hujan, maka dia tidak datang." (Gunakan salah satu saja).</p>
+        <h3>Jenis Majas</h3>
+        <ul>
+          <li><strong>Metafora:</strong> Perbandingan langsung tanpa kata pembanding (Anak emas, kambing hitam, tulang punggung).</li>
+          <li><strong>Personifikasi:</strong> Benda mati seolah-olah hidup (Angin berbisik, matahari tersenyum).</li>
+          <li><strong>Hiperbola:</strong> Melebih-lebihkan (Darah mengalir deras sebagi air bah).</li>
+          <li><strong>Ironi:</strong> Sindiran halus dengan kata-kata berlawanan (Wah, bagus sekali nilaimu, merah semua).</li>
+          <li><strong>Sarkasme:</strong> Sindiran kasar dan menyakitkan (Bodoh sekali kamu ini).</li>
+          <li><strong>Satire:</strong> Sindiran dengan kiasan (Sambil menyelam minum air).</li>
+          <li><strong>Simile:</strong> Perbandingan eksplisit dengan kata "seperti/bagai" (Wajahnya pucat seperti bulan).</li>
+          <li><strong>Metonimia:</strong> Mengganti nama benda dengan nama yang ada hubungannya (Saya sedang membaca Pramoedya = buku karya Pramoedya).</li>
+          <li><strong>Sinekdoke:</strong> Pertukaran nama, sebagian untuk menyatakan keseluruhan atau sebaliknya (Saya belum melihat batang hidungnya = orangnya).</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Peribahasa & Pepatah</h2>
+        <p>Soal PPU sering menanyakan makna peribahasa dalam konteks tertentu.</p>
+        <h3>Peribahasa Populer</h3>
+        <ul>
+          <li><strong>Sambil menyelam minum air:</strong> Bekerja sambil mengambil kesempatan pribadi.</li>
+          <li><strong>Tak bisa menari dikatakan lantai yang berbatu:</strong> Mencari alasan untuk menutupi kelemahan diri.</li>
+          <li><strong>Bagai aur dengan tebing:</strong> Saling membantu/membutuhkan.</li>
+          <li><strong>Bersatu kita teguh, bercerai kita runtuh:</strong> Pentingnya persatuan.</li>
+          <li><strong>Karena mulut badan binasa:</strong> Karena ucapan sendiri, diri sendiri yang rugi.</li>
+          <li><strong>Besar pasak daripada tiang:</strong> Pengeluaran lebih besar dari pemasukan.</li>
+          <li><strong>Di mana bumi dipijak, di situ langit dijunjung:</strong> Menghormati adat istiadat setempat.</li>
+          <li><strong>Bagai air dengan minyak:</strong> Tidak bisa bersatu.</li>
+          <li><strong>Buat alur, alur lepas:</strong> Siasat yang kalah licik dengan siasat lawan.</li>
+          <li><strong>Malu bertanya sesat di jalan:</strong> Pentingnya bertanya jika tidak tahu.</li>
+        </ul>
+      </div>
     `
   },
   'subtest-pbm': {
     title: "Memahami Bacaan & Menulis (PBM)", category: "TPS Module",
     desc: "Mengukur kemampuan memahami teks, menemukan gagasan utama, dan menyusun kalimat efektif.",
     htmlContent: `
-      <div class="materi-card"><h2>Kalimat Efektif</h2><ul><li><strong>Keseparasan:</strong> Subjek dan predikat harus jelas.</li><li><strong>Kehematan Kata:</strong> Hindari pleonasme ("agar supaya" salah).</li><li><strong>Kelogisan:</strong> Hindari kalimat ambigu.</li></ul></div>
-      <div class="materi-card"><h2>Gagasan Utama & Kalimat Utama</h2><p>Letaknya bisa di awal (deduktif), akhir (induktif), atau awal-akhir (campuran).</p></div>
-      <div class="materi-card"><h2>Teks Prosedur & Laporan</h2><p>Teks prosedur memuat langkah-langkah membuat sesuatu.</p></div>
-      <div class="materi-card"><h2>Teks Argumentasi & Persuasi</h2><p>Teks argumentasi membuktikan pendapat dengan logis, persuasi membujuk.</p><ul><li><strong>Struktur:</strong> Tesis, Argumentasi, Penegasan ulang.</li></ul></div>
-      <div class="materi-card"><h2>Teks Eksposisi & Berita</h2><p>Unsur Berita (5W+1H): Who, What, When, Where, Why, How.</p></div>
+      <div class="materi-card">
+        <h2>Kalimat Efektif (UTBK 2024-2026)</h2>
+        <p>Kalimat efektif harus memenuhi syarat: hemat kata, logis, dan strukturnya jelas (Subjek-Predikat).</p>
+        <h3>Syarat Kalimat Efektif</h3>
+        <ul>
+          <li><strong>Keseparasan (Struktur S-P):</strong> Subjek dan predikat harus jelas. Hindari kalimat tanpa subjek (misal: "Bagi siswa yang rajin akan lulus" &rarr; "Siswa yang rajin akan lulus").</li>
+          <li><strong>Kehematan Kata:</strong> Hindari pleonasme (pemborosan kata). Contoh: "agar supaya" (salah), "sejak dari" (salah), "pada hal" (salah, yang benar "padahal"), "sangat sekali" (salah).</li>
+          <li><strong>Kevarian Kalimat:</strong> Hindari penggunaan konjungsi yang berlebihan dalam satu kalimat.</li>
+          <li><strong>Kelogisan:</strong> Hindari kalimat ambigu (bermakna ganda).</li>
+          <li><strong>Keparalel:</strong> Struktur yang sejajar, terutama pada daftar atau pilihan.</li>
+        </ul>
+        <h3>Contoh Soal Kalimat Efektif</h3>
+        <p><strong>Soal:</strong> Perbaiki kalimat: "Bagi siswa yang rajin belajar akan lulus ujian."</p>
+        <p><strong>Pembahasan:</strong> Kata depan "bagi" membuat subjek tidak jelas. Hilangkan "bagi" agar subjek "siswa" jelas. Hasilnya: "Siswa yang rajin belajar akan lulus ujian."</p>
+      </div>
+      <div class="materi-card">
+        <h2>Gagasan Utama & Kalimat Utama</h2>
+        <p>Gagasan utama adalah inti pikiran paragraf. Letaknya bisa di awal (deduktif), akhir (induktif), atau awal-akhir (campuran).</p>
+        <h3>Jenis Paragraf</h3>
+        <ul>
+          <li><strong>Paragraf Deskripsi:</strong> Menggambarkan objek secara detail (panca indra).</li>
+          <li><strong>Paragraf Narasi:</strong> Menceritakan peristiwa secara kronologis.</li>
+          <li><strong>Paragraf Eksposisi:</strong> Memaparkan data/fakta secara informatif.</li>
+          <li><strong>Paragraf Argumentasi:</strong> Menyampaikan pendapat disertai alasan logis.</li>
+          <li><strong>Paragraf Persuasi:</strong> Meyakinkan pembaca untuk melakukan sesuatu.</li>
+        </ul>
+        <h3>Cara Menemukan Gagasan Utama</h3>
+        <ul>
+          <li><strong>Paragraf Deduktif:</strong> Gagasan utama di awal paragraf.</li>
+          <li><strong>Paragraf Induktif:</strong> Gagasan utama di akhir paragraf.</li>
+          <li><strong>Paragraf Campuran:</strong> Gagasan utama di awal dan akhir.</li>
+          <li><strong>Kalimat Utama:</strong> Kalimat yang berisi gagasan utama.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Teks Prosedur & Laporan</h2>
+        <p>Teks prosedur memuat langkah-langkah membuat sesuatu, sedangkan laporan hasil observasi memaparkan hasil pengamatan secara objektif.</p>
+        <h3>Struktur Teks Prosedur</h3>
+        <ul>
+          <li><strong>Tujuan:</strong> Tujuan dari pembuatan sesuatu.</li>
+          <li><strong>Alat & Bahan:</strong> Daftar alat dan bahan yang digunakan.</li>
+          <li><strong>Langkah-langkah:</strong> Uraian cara membuat secara berurutan.</li>
+          <li><strong>Penutup:</strong> Hasil akhir atau saran.</li>
+        </ul>
+        <h3>Struktur Laporan Hasil Observasi</h3>
+        <ul>
+          <li><strong>Pernyataan umum:</strong> Definisi dan klasifikasi objek.</li>
+          <li><strong>Deskripsi bagian:</strong> Uraian ciri-ciri objek.</li>
+          <li><strong>Penutup:</strong> Kesimpulan atau manfaat.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Teks Argumentasi & Persuasi</h2>
+        <p>Teks argumentasi membuktikan pendapat dengan logis, sedangkan persuasi membujuk pembaca untuk melakukan sesuatu.</p>
+        <h3>Struktur Teks Argumentasi</h3>
+        <ul>
+          <li><strong>Tesis (Pendapat):</strong> Pernyataan posisi penulis di awal.</li>
+          <li><strong>Argumentasi (Alasan/Bukti):</strong> Data, fakta, atau logika yang mendukung tesis.</li>
+          <li><strong>Penegasan ulang:</strong> Kesimpulan yang menegaskan kembali tesis.</li>
+        </ul>
+        <h3>Ciri Persuasi</h3>
+        <ul>
+          <li>Mengandung ajakan, imbauan, atau paksaan halus.</li>
+          <li>Bertujuan mengubah perilaku pembaca.</li>
+          <li>Argumentasi dipakai untuk meyakinkan, bukan sekadar membuktikan.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Teks Eksposisi & Berita</h2>
+        <p>Teks eksposisi memaparkan fakta dan data. Teks berita memuat peristiwa aktual.</p>
+        <h3>Struktur Teks Eksposisi</h3>
+        <ul>
+          <li><strong>Tesis:</strong> Pendapat awal yang akan dibahas.</li>
+          <li><strong>Argumentasi:</strong> Data dan fakta pendukung.</li>
+          <li><strong>Penegasan ulang:</strong> Kesimpulan.</li>
+        </ul>
+        <h3>Unsur Berita (5W+1H)</h3>
+        <ul>
+          <li><strong>Who:</strong> Siapa yang terlibat.</li>
+          <li><strong>What:</strong> Apa yang terjadi.</li>
+          <li><strong>When:</strong> Kapan terjadi.</li>
+          <li><strong>Where:</strong> Di mana terjadi.</li>
+          <li><strong>Why:</strong> Mengapa terjadi.</li>
+          <li><strong>How:</strong> Bagaimana prosesnya.</li>
+        </ul>
+      </div>
     `
   },
   'subtest-pk': {
     title: "Pengetahuan Kuantitatif (PK)", category: "TPS Module",
     desc: "Mengukur kemampuan matematika dasar: aljabar, aritmatika, geometri, dan statistik.",
     htmlContent: `
-      <div class="materi-card"><h2>Aljabar & Aritmatika Sosial</h2><ul><li><strong>Untung:</strong> HJ &gt; HB. <strong>Rugi:</strong> HJ &lt; HB.</li><li><strong>Diskon:</strong> Harga &times; (1 &minus; %diskon).</li><li><strong>Bunga Tunggal:</strong> Bunga = Modal &times; i &times; n.</li></ul></div>
-      <div class="materi-card"><h2>Deret Aritmatika & Geometri</h2><ul><li><strong>Suku ke-n Aritmatika:</strong> Un = a + (n&minus;1)b</li><li><strong>Jumlah n suku:</strong> Sn = n/2 &times; (2a + (n&minus;1)b)</li><li><strong>Geometri:</strong> Un = a &times; r<sup>n&minus;1</sup></li><li><strong>Deret tak hingga:</strong> S&infin; = a / (1 &minus; r)</li></ul></div>
-      <div class="materi-card"><h2>Geometri & Trigonometri</h2><ul><li><strong>Pythagoras:</strong> a&sup2; + b&sup2; = c&sup2;.</li><li><strong>Lingkaran:</strong> Luas = &pi; r&sup2;. Keliling = 2 &pi; r.</li><li><strong>Tabung:</strong> Volume = &pi; r&sup2; t.</li></ul></div>
-      <div class="materi-card"><h2>Statistika & Peluang</h2><ul><li><strong>Mean, Median, Modus, Kuartil.</strong></li><li><strong>Peluang:</strong> P(A) = n(A) / n(S).</li><li><strong>Permutasi:</strong> P(n,r) = n! / (n&minus;r)!</li><li><strong>Kombinasi:</strong> C(n,r) = n! / (r!(n&minus;r)!)</li></ul></div>
-      <div class="materi-card"><h2>Logaritma & Eksponen</h2><h3>Sifat Eksponen</h3><ul><li>a<sup>m</sup> &times; a<sup>n</sup> = a<sup>m+n</sup></li><li>a<sup>m</sup> / a<sup>n</sup> = a<sup>m&minus;n</sup></li><li>a<sup>0</sup> = 1</li></ul><h3>Sifat Logaritma</h3><ul><li>log(a &times; b) = log a + log b</li><li>log(a / b) = log a &minus; log b</li><li>log(a<sup>n</sup>) = n &times; log a</li></ul></div>
+      <div class="materi-card">
+        <h2>Aljabar & Aritmatika Sosial (UTBK 2024-2026)</h2>
+        <h3>Persamaan Linear</h3>
+        <ul>
+          <li><strong>Substitusi:</strong> Ganti variabel dengan nilai yang diketahui.</li>
+          <li><strong>Eliminasi:</strong> Hilangkan satu variabel dengan menjumlahkan/mengurangkan persamaan.</li>
+        </ul>
+        <h3>Aritmatika Sosial</h3>
+        <ul>
+          <li><strong>Untung:</strong> Harga Jual &gt; Harga Beli. Untung = HJ &minus; HB.</li>
+          <li><strong>Rugi:</strong> Harga Jual &lt; Harga Beli. Rugi = HB &minus; HJ.</li>
+          <li><strong>Diskon:</strong> Potongan harga. Harga setelah diskon = Harga &times; (1 &minus; %diskon).</li>
+          <li><strong>Pajak:</strong> Persentase dari penghasilan/penjualan.</li>
+          <li><strong>Bunga Tunggal:</strong> Bunga = Modal &times; i &times; n (i = suku bunga, n = periode).</li>
+          <li><strong>Bruto vs Neto:</strong> Bruto = berat kotor. Neto = berat bersih (berat kotor &minus; tara).</li>
+        </ul>
+        <h3>Contoh Soal Aritmatika Sosial</h3>
+        <p><strong>Soal:</strong> Sebuah barang dibeli Rp200.000. Dijual dengan untung 15%. Harga jual?</p>
+        <p><strong>Pembahasan:</strong> Untung = 15% &times; 200.000 = 30.000. HJ = 200.000 + 30.000 = 230.000.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Deret Aritmatika & Geometri</h2>
+        <h3>Barisan Aritmatika</h3>
+        <ul>
+          <li><strong>Suku ke-n:</strong> Un = a + (n&minus;1)b</li>
+          <li><strong>Jumlah n suku:</strong> Sn = n/2 &times; (2a + (n&minus;1)b) atau Sn = n/2 &times; (a + Un)</li>
+        </ul>
+        <h3>Barisan Geometri</h3>
+        <ul>
+          <li><strong>Suku ke-n:</strong> Un = a &times; r<sup>n&minus;1</sup></li>
+          <li><strong>Jumlah n suku:</strong> Sn = a &times; (r<sup>n</sup> &minus; 1) / (r &minus; 1) untuk r &gt; 1</li>
+          <li><strong>Jumlah n suku tak hingga:</strong> S&infin; = a / (1 &minus; r) untuk |r| &lt; 1</li>
+        </ul>
+        <h3>Contoh Soal Deret</h3>
+        <p><strong>Soal:</strong> Suku pertama deret aritmatika 5, beda 3. Jumlah 10 suku pertama?</p>
+        <p><strong>Pembahasan:</strong> Sn = 10/2 &times; (2(5) + 9(3)) = 5 &times; (10 + 27) = 5 &times; 37 = 185.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Geometri & Trigonometri</h2>
+        <h3>Bangun Datar</h3>
+        <ul>
+          <li><strong>Persegi:</strong> Luas = s&sup2;. Keliling = 4s.</li>
+          <li><strong>Persegi Panjang:</strong> Luas = p &times; l. Keliling = 2(p + l).</li>
+          <li><strong>Segitiga:</strong> Luas = 1/2 &times; a &times; t. Keliling = jumlah sisi.</li>
+          <li><strong>Lingkaran:</strong> Luas = &pi; r&sup2;. Keliling = 2 &pi; r.</li>
+          <li><strong>Trapesium:</strong> Luas = 1/2 &times; (sisi sejajar) &times; t.</li>
+          <li><strong>Jajaran genjang:</strong> Luas = alas &times; tinggi.</li>
+          <li><strong>Layang-layang:</strong> Luas = 1/2 &times; d1 &times; d2.</li>
+        </ul>
+        <h3>Bangun Ruang</h3>
+        <ul>
+          <li><strong>Kubus:</strong> Volume = s&sup3;. Luas permukaan = 6s&sup2;.</li>
+          <li><strong>Balok:</strong> Volume = p &times; l &times; t. Luas = 2(pl + pt + lt).</li>
+          <li><strong>Tabung:</strong> Volume = &pi; r&sup2; t. Luas = 2&pi;r(r + t).</li>
+          <li><strong>Kerucut:</strong> Volume = 1/3 &pi; r&sup2; t. Luas = &pi;r(r + s).</li>
+          <li><strong>Bola:</strong> Volume = 4/3 &pi; r&sup3;. Luas = 4 &pi; r&sup2;.</li>
+          <li><strong>Limas:</strong> Volume = 1/3 &times; luas alas &times; t.</li>
+          <li><strong>Prisma:</strong> Volume = luas alas &times; t.</li>
+        </ul>
+        <h3>Trigonometri</h3>
+        <ul>
+          <li><strong>Pythagoras:</strong> a&sup2; + b&sup2; = c&sup2; (segitiga siku-siku).</li>
+          <li><strong>Perbandingan:</strong> sin = depan/miring, cos = samping/miring, tan = depan/samping.</li>
+          <li><strong>Aturan Sinus:</strong> a/sin A = b/sin B = c/sin C = 2R (segitiga sembarang).</li>
+          <li><strong>Aturan Cosinus:</strong> c&sup2; = a&sup2; + b&sup2; &minus; 2ab cos C (segitiga sembarang).</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Statistika & Peluang</h2>
+        <h3>Ukuran Pemusatan Data</h3>
+        <ul>
+          <li><strong>Mean (Rata-rata):</strong> Jumlah data / banyak data.</li>
+          <li><strong>Median (Nilai tengah):</strong> Data diurutkan, ambil tengah. Jika genap, rata-rata dua tengah.</li>
+          <li><strong>Modus (Paling sering):</strong> Nilai yang paling banyak muncul.</li>
+          <li><strong>Kuartil:</strong> Q1 (25%), Q2 (median/50%), Q3 (75%).</li>
+        </ul>
+        <h3>Peluang</h3>
+        <ul>
+          <li><strong>Peluang:</strong> P(A) = n(A) / n(S).</li>
+          <li><strong>Peluang Komplemen:</strong> P(A') = 1 &minus; P(A).</li>
+          <li><strong>Permutasi (Urutan penting):</strong> P(n,r) = n! / (n&minus;r)!</li>
+          <li><strong>Kombinasi (Urutan tidak penting):</strong> C(n,r) = n! / (r!(n&minus;r)!)</li>
+        </ul>
+        <h3>Contoh Soal Statistika</h3>
+        <p><strong>Soal:</strong> Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 adalah...</p>
+        <p><strong>Pembahasan:</strong> Modus = data paling sering muncul = 6 (muncul 3 kali).</p>
+      </div>
+      <div class="materi-card">
+        <h2>Logaritma & Eksponen</h2>
+        <h3>Sifat Eksponen</h3>
+        <ul>
+          <li>a<sup>m</sup> &times; a<sup>n</sup> = a<sup>m+n</sup></li>
+          <li>a<sup>m</sup> / a<sup>n</sup> = a<sup>m&minus;n</sup></li>
+          <li>(a<sup>m</sup>)<sup>n</sup> = a<sup>m&times;n</sup></li>
+          <li>a<sup>0</sup> = 1</li>
+          <li>a<sup>&minus;n</sup> = 1/a<sup>n</sup></li>
+        </ul>
+        <h3>Sifat Logaritma</h3>
+        <ul>
+          <li>log(a &times; b) = log a + log b</li>
+          <li>log(a / b) = log a &minus; log b</li>
+          <li>log(a<sup>n</sup>) = n &times; log a</li>
+          <li><sup>a</sup>log a = 1</li>
+          <li>log 1 = 0</li>
+        </ul>
+        <h3>Contoh Soal Logaritma</h3>
+        <p><strong>Soal:</strong> Jika log 2 = 0.3 dan log 3 = 0.48, hitung log 6.</p>
+        <p><strong>Pembahasan:</strong> log 6 = log(2&times;3) = log 2 + log 3 = 0.3 + 0.48 = 0.78.</p>
+      </div>
     `
   },
   'subtest-indo': {
     title: "Literasi B. Indonesia", category: "Literasi Module",
     desc: "Mengukur kemampuan membaca kritis, evaluasi teks, dan sintesis informasi.",
     htmlContent: `
-      <div class="materi-card"><h2>Membaca Kritis & Evaluatif</h2><ul><li><strong>Fakta vs Opini.</strong></li><li><strong>Menemukan Bias.</strong></li><li><strong>Sintesis & Parafrase.</strong></li></ul></div>
-      <div class="materi-card"><h2>Teks Argumentasi & Persuasi</h2><ul><li><strong>Struktur:</strong> Tesis, Argumentasi, Penegasan.</li></ul></div>
-      <div class="materi-card"><h2>Majas & Gaya Bahasa</h2><ul><li><strong>Hiperbola, Ironi, Sarkasme, Metafora, Personifikasi, Simile.</strong></li></ul></div>
-      <div class="materi-card"><h2>Teknik Membaca</h2><ul><li><strong>Skimming:</strong> Gagasan utama. <strong>Scanning:</strong> Info spesifik.</li></ul></div>
+      <div class="materi-card">
+        <h2>Membaca Kritis & Evaluatif (UTBK 2024-2026)</h2>
+        <p>Literasi Bahasa Indonesia tidak sekadar memahami teks, tapi mengevaluasi argumen penulis.</p>
+        <h3>Bedah Teks</h3>
+        <ul>
+          <li><strong>Membedakan Fakta & Opini:</strong> Fakta berdasarkan data/riset, opini berdasarkan penilaian pribadi.</li>
+          <li><strong>Menemukan Bias:</strong> Identifikasi apakah penulis berpihak pada satu sudut pandang tertentu.</li>
+          <li><strong>Sintesis:</strong> Menggabungkan informasi dari beberapa teks untuk menarik kesimpulan baru.</li>
+          <li><strong>Parafrase:</strong> Menyimpulkan isi teks dengan bahasa sendiri tanpa mengubah maksud asli.</li>
+          <li><strong>Inferensi:</strong> Menyimpulkan makna tersirat dari teks.</li>
+        </ul>
+        <h3>Contoh Soal Literasi</h3>
+        <p><strong>Soal:</strong> Teks: "Berdasarkan riset, siswa yang tidur 8 jam memiliki fokus 40% lebih baik." Pernyataan ini merupakan...</p>
+        <p><strong>Pembahasan:</strong> Berdasarkan riset dan data persentase = fakta.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Teks Argumentasi & Persuasi</h2>
+        <p>Teks argumentasi membuktikan pendapat dengan logis, sedangkan persuasi membujuk pembaca untuk melakukan sesuatu.</p>
+        <h3>Struktur Teks Argumentasi</h3>
+        <ul>
+          <li><strong>Tesis:</strong> Pendapat penulis di awal.</li>
+          <li><strong>Argumentasi:</strong> Alasan/bukti pendukung.</li>
+          <li><strong>Penegasan ulang:</strong> Kesimpulan.</li>
+        </ul>
+        <h3>Ciri Persuasi</h3>
+        <ul>
+          <li>Mengandung ajakan, imbauan, veya paksaan halus.</li>
+          <li>Bertujuan mengubah perilaku pembaca.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Majas & Gaya Bahasa</h2>
+        <ul>
+          <li><strong>Hiperbola:</strong> Melebih-lebihkan.</li>
+          <li><strong>Ironi:</strong> Sindiran halus dengan kata-kata berlawanan.</li>
+          <li><strong>Sarkasme:</strong> Sindiran kasar dan menyakitkan.</li>
+          <li><strong>Satire:</strong> Sindiran dengan kiasan.</li>
+          <li><strong>Metafora:</strong> Perbandingan langsung (anak emas).</li>
+          <li><strong>Personifikasi:</strong> Benda mati seolah hidup (angin berbisik).</li>
+          <li><strong>Simile:</strong> Perbandingan dengan "seperti/bagai".</li>
+          <li><strong>Metonimia:</strong> Mengganti nama benda dengan nama yang berhubungan.</li>
+          <li><strong>Sinekdoke:</strong> Sebagian untuk keseluruhan veya sebaliknya.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Struktur Teks & Kebahasaan</h2>
+        <h3>Teks Eksposisi</h3>
+        <ul>
+          <li><strong>Tesis:</strong> Pendapat awal.</li>
+          <li><strong>Argumentasi:</strong> Data/fakta.</li>
+          <li><strong>Penegasan ulang:</strong> Kesimpulan.</li>
+        </ul>
+        <h3>Teks Negosiasi</h3>
+        <ul>
+          <li><strong>Orientation:</strong> Pengenalan.</li>
+          <li><strong>Request:</strong> Permintaan.</li>
+          <li><strong>Fulfillment:</strong> Pemenuhan.</li>
+          <li><strong>Acceptance:</strong> Persetujuan.</li>
+          <li><strong>Closure:</strong> Penutup.</li>
+        </ul>
+        <h3>Teks Cerita Sejarah</h3>
+        <ul>
+          <li><strong>Orientasi:</strong> Pengenalan latar.</li>
+          <li><strong>Events:</strong> Peristiwa berurutan.</li>
+          <li><strong>Reorientation:</strong> Kesimpulan penulis.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Teknik Membaca</h2>
+        <ul>
+          <li><strong>Skimming:</strong> Membaca cepat untuk gagasan utama.</li>
+          <li><strong>Scanning:</strong> Mencari informasi spesifik (nama, angka, tanggal).</li>
+          <li><strong>Intensive Reading:</strong> Membaca detail untuk pemahaman mendalam.</li>
+          <li><strong>Extensive Reading:</strong> Membaca untuk hiburan/pengetahuan umum.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Kata Penghubung (Konjungsi)</h2>
+        <ul>
+          <li><strong>Aditif:</strong> menambah (dan, serta).</li>
+          <li><strong>Antitetis:</strong> menentang (tetapi, namun, sedangkan).</li>
+          <li><strong>Kausal:</strong> sebab-akibat (karena, sehingga, maka).</li>
+          <li><strong>Temporal:</strong> waktu (sebelum, sesudah, ketika).</li>
+          <li><strong>Kondisional:</strong> syarat (jika, kalau, apabila).</li>
+          <li><strong>Konsesif:</strong> urun rem (walaupun, meskipun).</li>
+        </ul>
+      </div>
     `
   },
   'subtest-inggris': {
     title: "Literasi B. Inggris", category: "Literasi Module",
     desc: "Mengukur kemampuan reading comprehension, critical reading, dan contextual vocabulary.",
     htmlContent: `
-      <div class="materi-card"><h2>Critical Reading & Comprehension</h2><ul><li><strong>Main Idea, Inference, Contextual Vocabulary, Author's Tone & Purpose.</strong></li></ul></div>
-      <div class="materi-card"><h2>Grammar & Structure</h2><h3>Conditional Sentences</h3><ul><li><strong>Type 0:</strong> Fakta alam. <strong>Type 1:</strong> Mungkin terjadi. <strong>Type 2:</strong> Tidak nyata. <strong>Type 3:</strong> Penyesalan.</li></ul><h3>Passive Voice: To be + V3.</h3></div>
-      <div class="materi-card"><h2>Text Types</h2><ul><li><strong>Descriptive, Narrative, Procedure, Report, Recount, Exposition.</strong></li></ul></div>
-      <div class="materi-card"><h2>Vocabulary & Idioms</h2><ul><li><strong>Piece of cake:</strong> Sangat mudah.</li><li><strong>Break a leg:</strong> Semoga sukses.</li></ul></div>
+      <div class="materi-card">
+        <h2>Critical Reading & Comprehension (UTBK 2024-2026)</h2>
+        <p>Fokus pada pemahaman teks akademik dan jurnalistik berbahasa Inggris.</p>
+        <ul>
+          <li><strong>Main Idea & Topic Sentence:</strong> Menemukan gagasan utama paragraf.</li>
+          <li><strong>Inference:</strong> Menyimpulkan informasi tersirat (implied meaning) dari teks.</li>
+          <li><strong>Contextual Vocabulary:</strong> Menebak makna kata berdasarkan konteks kalimat.</li>
+          <li><strong>Author's Tone:</strong> Mengidentifikasi sikap penulis (objektif, subjektif, skeptis, optimis, pesimis, ironis).</li>
+          <li><strong>Author's Purpose:</strong> Menemukan tujuan penulis (to inform, to persuade, to entertain).</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Grammar & Structure</h2>
+        <h3>Conditional Sentences</h3>
+        <ul>
+          <li><strong>Type 0:</strong> Fakta alam. If + simple present, simple present. (If you heat ice, it melts.)</li>
+          <li><strong>Type 1:</strong> Mungkin terjadi. If + simple present, will + V1. (If it rains, I will stay.)</li>
+          <li><strong>Type 2:</strong> Tidak nyata di masa kini. If + past simple, would + V1. (If I were rich, I would travel.)</li>
+          <li><strong>Type 3:</strong> Penyesalan masa lalu. If + past perfect, would have + V3. (If I had studied, I would have passed.)</li>
+        </ul>
+        <h3>Passive Voice</h3>
+        <ul>
+          <li><strong>Rumus:</strong> To be + V3. (The book was bought by John.)</li>
+          <li><strong>Modal:</strong> Modal + be + V3. (The room must be cleaned.)</li>
+        </ul>
+        <h3>Relative Pronouns</h3>
+        <ul>
+          <li><strong>Who:</strong> subjek manusia. (The man who lives next door...)</li>
+          <li><strong>Whom:</strong> objek manusia. (The woman whom I met...)</li>
+          <li><strong>Which:</strong> benda/hewan. (The book which is on the table...)</li>
+          <li><strong>Whose:</strong> milik. (The boy whose father is a doctor...)</li>
+          <li><strong>That:</strong> benda veya manusia (informal).</li>
+        </ul>
+        <h3>Reported Speech</h3>
+        <ul>
+          <li><strong>Direct:</strong> He said, "I am happy."</li>
+          <li><strong>Indirect:</strong> He said that he was happy. (Tense mundur 1 tingkat).</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Text Types</h2>
+        <ul>
+          <li><strong>Descriptive:</strong> Menggambarkan ciri-ciri subjek.</li>
+          <li><strong>Narrative:</strong> Menceritakan kisah fiksi (orientation, complication, resolution).</li>
+          <li><strong>Procedure:</strong> Memberi instruksi langkah demi langkah (goal, materials, steps).</li>
+          <li><strong>Report:</strong> Menyajikan informasi umum secara sistematis (general classification, description).</li>
+          <li><strong>Recount:</strong> Menceritakan pengalaman masa lalu (orientation, events, reorientation).</li>
+          <li><strong>Exposition (Analytical):</strong> Membuktikan pendapat (thesis, arguments, reiteration).</li>
+          <li><strong>Hortatory:</strong> Membujuk (thesis, arguments, recommendation).</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Vocabulary & Idioms</h2>
+        <h3>Prefixes (Awalan)</h3>
+        <ul>
+          <li><strong>Un-, In-, Dis-:</strong> Tidak (unhappy, invisible, disagree).</li>
+          <li><strong>Re-:</strong> Ulang (rewrite).</li>
+          <li><strong>Pre-:</strong> Sebelum (preview).</li>
+        </ul>
+        <h3>Suffixes (Akhiran)</h3>
+        <ul>
+          <li><strong>-able, -ible:</strong> Bisa dibilang (readable).</li>
+          <li><strong>-ful:</strong> Penuh (beautiful).</li>
+          <li><strong>-less:</strong> Tanpa (hopeless).</li>
+          <li><strong>-er, -or:</strong> Orang (teacher, actor).</li>
+          <li><strong>-tion, -ment:</strong> Proses/hasil (education, development).</li>
+        </ul>
+        <h3>Idioms Populer</h3>
+        <ul>
+          <li><strong>Piece of cake:</strong> Sangat mudah.</li>
+          <li><strong>Break a leg:</strong> Semoga sukses.</li>
+          <li><strong>Once in a blue moon:</strong> Sangat jarang.</li>
+          <li><strong>Cost an arm and a leg:</strong> Sangat mahal.</li>
+          <li><strong>Let the cat out of the bag:</strong> Tidak sengaja membocorkan rahasia.</li>
+          <li><strong>Bite the bullet:</strong> Menghadapi situasi sulit dengan berani.</li>
+          <li><strong>Under the weather:</strong> Tidak sehat.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Tenses</h2>
+        <ul>
+          <li><strong>Simple Present:</strong> Fakta/kebiasaan. (She works every day.)</li>
+          <li><strong>Present Continuous:</strong> Sedang terjadi. (She is working now.)</li>
+          <li><strong>Present Perfect:</strong> Sudah selesai. (She has worked here for 5 years.)</li>
+          <li><strong>Simple Past:</strong> Lampau. (She worked yesterday.)</li>
+          <li><strong>Past Continuous:</strong> Sedang terjadi di lampau. (She was working when I called.)</li>
+          <li><strong>Future (will):</strong> Masa depan. (She will work tomorrow.)</li>
+        </ul>
+      </div>
     `
   },
   'subtest-pm': {
     title: "Penalaran Matematika", category: "Literasi Module",
     desc: "Mengukur kemampuan pemecahan masalah matematika dalam konteks nyata.",
     htmlContent: `
-      <div class="materi-card"><h2>Pemecahan Masalah Kontekstual</h2><ul><li><strong>Perbandingan & Skala.</strong></li><li><strong>Kecepatan, Jarak, Waktu.</strong></li><li><strong>Peluang Majemuk.</strong></li><li><strong>Barisan & Deret Aplikatif (Bunga Majemuk).</strong></li></ul></div>
-      <div class="materi-card"><h2>Aljabar Terapan</h2><ul><li><strong>Sistem Persamaan Linear.</strong></li><li><strong>Fungsi Kuadrat:</strong> Maksimum/minimum.</li><li><strong>Fungsi:</strong> Komposisi dan invers.</li></ul></div>
-      <div class="materi-card"><h2>Geometri Terapan</h2><ul><li><strong>Skala, Transformasi, Trigonometri (Sudut elevasi).</strong></li></ul></div>
-      <div class="materi-card"><h2>Limit, Logaritma & Eksponen</h2><ul><li><strong>Limit:</strong> lim(x&rarr;a) f(x).</li><li><strong>Logaritma:</strong> &sup2;log 3 = a, maka &sup8;log 81 = 4a/3.</li><li><strong>Eksponen:</strong> Satuan dari 2<sup>2026</sup>.</li></ul></div>
+      <div class="materi-card">
+        <h2>Pemecahan Masalah Kontekstual (UTBK 2024-2026)</h2>
+        <p>Soal Penalaran Matematika sering berbentuk soal cerita panjang yang membutuhkan translasi ke bahasa matematika.</p>
+        <h3>Topik yang Sering Diujikan</h3>
+        <ul>
+          <li><strong>Perbandingan & Skala:</strong> Perbandingan senilai, berbalik nilai, dan campuran.</li>
+          <li><strong>Kecepatan, Jarak, Waktu:</strong> Termasuk konsep arus sungai dan angin (kecepatan relatif).</li>
+          <li><strong>Peluang Majemuk:</strong> Kombinasi dan permutasi dalam kasus nyata.</li>
+          <li><strong>Barisan & Deret Aplikatif:</strong> Bunga majemuk, pertumbuhan populasi, atau penurunan nilai barang.</li>
+          <li><strong>Aritmatika Sosial:</strong> Untung, rugi, diskon berurutan, pajak, bruto-neto.</li>
+        </ul>
+        <h3>Contoh Soal Kecepatan</h3>
+        <p><strong>Soal:</strong> Joko berangkat pukul 06.00 dengan kecepatan 60 km/jam. Budi berangkat pukul 07.00 dengan kecepatan 80 km/jam mengejar Joko. Budi akan menyusul Joko pada pukul...</p>
+        <p><strong>Pembahasan:</strong> Jarak Joko didepan saat 07.00 adalah 60 km. Selisih kecepatan = 20 km/jam. Waktu susul = 60/20 = 3 jam. 07.00 + 3 jam = 10.00.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Aljabar Terapan</h2>
+        <ul>
+          <li><strong>Sistem Persamaan Linear:</strong> Menyelesaikan masalah cerita dengan dua atau lebih variabel.</li>
+          <li><strong>Fungsi Kuadrat:</strong> Mencari titik puncak (maksimum/minimum) dalam konteks ekonomi (untung/rugi maksimal).</li>
+          <li><strong>Pertidaksamaan:</strong> Menentukan syarat atau batasan nilai agar suatu kondisi terpenuhi.</li>
+          <li><strong>Fungsi:</strong> Memahami komposisi dan invers fungsi dalam konteks nyata.</li>
+        </ul>
+        <h3>Contoh Soal Aljabar</h3>
+        <p><strong>Soal:</strong> Jika 3x + 2y = 12 dan x &minus; y = 1, maka nilai y adalah...</p>
+        <p><strong>Pembahasan:</strong> Dari x &minus; y = 1, didapat x = 1 + y. Substitusi: 3(1+y) + 2y = 12 &rarr; 3 + 5y = 12 &rarr; 5y = 9 &rarr; y = 9/5 = 1.8.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Statistika & Peluang Lanjutan</h2>
+        <ul>
+          <li><strong>Deskripsi Data:</strong> Menghitung mean, median, modus dari data berbentuk tabel atau grafik.</li>
+          <li><strong>Peluang Kejadian Majemuk:</strong> Kejadian saling bebas (P(A&cap;B) = P(A) &times; P(B)) dan saling lepas (P(A&cup;B) = P(A) + P(B)).</li>
+          <li><strong>Expected Value (Nilai Ekspektasi):</strong> E(x) = &Sigma; x &times; P(x).</li>
+        </ul>
+        <h3>Contoh Soal Peluang</h3>
+        <p><strong>Soal:</strong> Dari 7 orang siswa, akan dipilih 3 orang untuk menjadi pengurus OSIS. Berapa banyak cara pemilihan yang mungkin? (Kombinasi)</p>
+        <p><strong>Pembahasan:</strong> C(7,3) = 7! / (3!4!) = (7&times;6&times;5) / 6 = 35.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Geometri Terapan</h2>
+        <ul>
+          <li><strong>Skala & Perbandingan:</strong> Hubungan antara ukuran pada peta dan ukuran sebenarnya.</li>
+          <li><strong>Transformasi Geometri:</strong> Translasi, refleksi, rotasi, dan dilatasi.</li>
+          <li><strong>Trigonometri dalam Konteks:</strong> Menghitung ketinggian, jarak, dan sudut elevasi/depresi.</li>
+        </ul>
+        <h3>Contoh Soal Skala</h3>
+        <p><strong>Soal:</strong> Jarak kota A dan B pada peta 1:1.000.000 adalah 5 cm. Jarak sebenarnya?</p>
+        <p><strong>Pembahasan:</strong> Jarak = 5 cm &times; 1.000.000 = 5.000.000 cm = 50 km.</p>
+      </div>
+      <div class="materi-card">
+        <h2>Soal Cerita Logis & HOTS</h2>
+        <p>Soal Penalaran Matematika sering memerlukan penalaran logis tingkat tinggi (HOTS) dan tidak cukup dengan menghafal rumus.</p>
+        <h3>Strategi Pengerjaan</h3>
+        <ul>
+          <li><strong>Pahami Dulu, Jangan Terburu Hitung:</strong> Baca soal dengan teliti, identifikasi apa yang diketahui dan apa yang ditanyakan.</li>
+          <li><strong>Translasi ke Matematika:</strong> Ubah kalimat cerita menjadi persamaan atau model matematika.</li>
+          <li><strong>Periksa Jawaban:</strong> Pastikan jawaban masuk akal dalam konteks soal.</li>
+          <li><strong>Eliminasi Pilihan:</strong> Jika hitungan terlalu rumit, coba eliminasi pilihan yang tidak masuk akal.</li>
+        </ul>
+      </div>
+      <div class="materi-card">
+        <h2>Bunga Majemuk & Pertumbuhan</h2>
+        <p>Bunga majemuk adalah bunga yang dihitung dari modal awal ditambah bunga sebelumnya (bunga berbunga).</p>
+        <h3>Rumus Bunga Majemuk</h3>
+        <p>M<sub>n</sub> = M<sub>0</sub> &times; (1 + i)<sup>n</sup></p>
+        <ul>
+          <li>M<sub>n</sub> = Modal setelah n periode</li>
+          <li>M<sub>0</sub> = Modal awal</li>
+          <li>i = Suku bunga per periode</li>
+          <li>n = Jumlah periode</li>
+        </ul>
+        <h3>Pertumbuhan Populasi</h3>
+        <p>P<sub>n</sub> = P<sub>0</sub> &times; (1 + r)<sup>n</sup> (sama dengan bunga majemuk, r = laju pertumbuhan).</p>
+      </div>
     `
   }
 };
@@ -139,52 +706,52 @@ const BANK_SIMULASI = {
     { soal: "Arti dari 'Bunga bank' dalam kalimat 'Bunga bank bulan ini naik' adalah...", opsi: ["Bunga melati", "Keuntungan tambahan", "Bunga simpanan/pinjaman", "Kembang indah"], jawaban: 2, pembahasan: "Sinonim kontekstual: bunga = jasa uang." },
     { soal: "Arti kata 'Kausa' dalam teks hukum adalah...", opsi: ["Kaos baju", "Penyebab", "Akibat", "Tuntutan"], jawaban: 1, pembahasan: "Kausa = sebab." },
     { soal: "Padanan kata 'Implementasi' adalah...", opsi: ["Perencanaan", "Pelaksanaan", "Penundaan", "Pembatalan"], jawaban: 1, pembahasan: "Implementasi = pelaksanaan." },
-    { soal: "Padanan kata 'Resiprokitas' adalah...", opsi: ["Saling menguntungkan", "Saling menukar", "Saling merugikan", "Hubungan timbal balik"], jawaban: 3, pembahasan: "Resiprokal = timbal balik." },
+    { soal: "Padanan kata 'Resiprokitas' là...", opsi: ["Saling menguntungkan", "Saling menukar", "Saling merugikan", "Hubungan timbal balik"], jawaban: 3, pembahasan: "Resiprokal = timbal balik." },
     { soal: "Kata 'Mitra' dalam konteks bisnis berarti...", opsi: ["Lawan", "Rekan kerja", "Pesaing", "Pembeli"], jawaban: 1, pembahasan: "Mitra = partner/rekan." },
-    { soal: "Sinonim dari 'Fundamental' adalah...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar/pokok." },
-    { soal: "Sinonim dari 'Ambigu' adalah...", opsi: ["Jelas", "Bermakna ganda", "Tegas", "Pasti"], jawaban: 1, pembahasan: "Ambigu = bermakna ganda." },
-    { soal: "Antonim dari 'Optimis' adalah...", opsi: ["Positif", "Pesimis", "Realistis", "Apatis"], jawaban: 1, pembahasan: "Optimis lawan pesimis." },
-    { soal: "Sinonim dari 'Relevan' adalah...", opsi: ["Berkaitan", "Terpisah", "Asing", "Jauh"], jawaban: 0, pembahasan: "Relevan = berhubungan/berkaitan." },
+    { soal: "Sinonim dari 'Fundamental' là...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar/pokok." },
+    { soal: "Sinonim từ 'Ambigu' là...", opsi: ["Jelas", "Bermakna ganda", "Tegas", "Pasti"], jawaban: 1, pembahasan: "Ambigu = bermakna ganda." },
+    { soal: "Antonim dari 'Optimis' là...", opsi: ["Positif", "Pesimis", "Realistis", "Apatis"], jawaban: 1, pembahasan: "Optimis lawan pesimis." },
+    { soal: "Sinonim từ 'Relevan' là...", opsi: ["Berkaitan", "Terpisah", "Asing", "Jauh"], jawaban: 0, pembahasan: "Relevan = berhubungan/berkaitan." },
     { soal: "Peribahasa 'Bagai aur dengan tebing' bermakna...", opsi: ["Saling membantu", "Saling merusak", "Tidak peduli", "Bermusuhan"], jawaban: 0, pembahasan: "Saling membantu/membutuhkan." },
-    { soal: "Sinonim dari 'Krusial' adalah...", opsi: ["Tambahan", "Sangat penting", "Biasa", "Kecil"], jawaban: 1, pembahasan: "Krusial = sangat penting." },
+    { soal: "Sinonim từ 'Krusial' là...", opsi: ["Tambahan", "Sangat penting", "Biasa", "Kecil"], jawaban: 1, pembahasan: "Krusial = sangat penting." },
     { soal: "Penulisan kata depan yang benar...", opsi: ["Dirumah", "Di rumah", "Di-rumah", "Di Rumah"], jawaban: 1, pembahasan: "Preposisi tempat ditulis terpisah." },
     { soal: "Majas yang menyindir dengan kata-kata berlawanan disebut...", opsi: ["Sarkasme", "Ironi", "Sinisme", "Satire"], jawaban: 1, pembahasan: "Ironi = sindiran halus dengan kata berlawanan." },
-    { soal: "Sinonim dari 'Inovatif' adalah...", opsi: ["Kuno", "Kreatif/Pembaharuan", "Statis", "Tradisional"], jawaban: 1, pembahasan: "Inovatif = pembaharuan/kreatif." },
-    { soal: "Antonim dari 'Generik' adalah...", opsi: ["Umum", "Spesifik", "Biasa", "Biasa"], jawaban: 1, pembahasan: "Generik = umum. Lawan spesifik/khusus." },
+    { soal: "Sinonim từ 'Inovatif' là...", opsi: ["Kuno", "Kreatif/Pembaharuan", "Statis", "Tradisional"], jawaban: 1, pembahasan: "Inovatif = pembaharuan/kreatif." },
+    { soal: "Antonim từ 'Generik' là...", opsi: ["Umum", "Spesifik", "Biasa", "Biasa"], jawaban: 1, pembahasan: "Generik = umum. Lawan spesifik/khusus." },
     { soal: "Peribahasa 'Tak bisa menari dikatakan lantai berbatu' menggambarkan...", opsi: ["Jujur", "Mencari alasan untuk kegagalan", "Kreatif", "Tekun"], jawaban: 1, pembahasan: "Mencari alasan untuk menutupi kelemahan diri." },
-    { soal: "Sinonim dari 'Mudarat' adalah...", opsi: ["Bermanfaat", "Merugikan/Berbahaya", "Menenangkan", "Menyenangkan"], jawaban: 1, pembahasan: "Mudarat = merugikan/berbahaya." },
-    { soal: "Padanan kata 'Eksplisit' adalah...", opsi: ["Tersirat", "Tersurat/Jelas", "Tersembunyi", "Samara"], jawaban: 1, pembahasan: "Eksplisit = tersurat/jelas." },
+    { soal: "Sinonim từ 'Mudarat' là...", opsi: ["Bermanfaat", "Merugikan/Berbahaya", "Menenangkan", "Menyenangkan"], jawaban: 1, pembahasan: "Mudarat = merugikan/berbahaya." },
+    { soal: "Padanan kata 'Eksplisit' là...", opsi: ["Tersirat", "Tersurat/Jelas", "Tersembunyi", "Samara"], jawaban: 1, pembahasan: "Eksplisit = tersurat/jelas." },
     { soal: "Antonim từ 'Marjinal' là...", opsi: ["Tepi", "Sentral/Penting", "Samping", "Pinggir"], jawaban: 1, pembahasan: "Marjinal = di tepi/tidak penting. Lawan sentral." }
   ],
   'subtest-pk': [
-    { soal: "Nilai dari lim(x&rarr;3) (x&sup2; &minus; 9) / (x &minus; 3) adalah...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktorkan: (x&minus;3)(x+3)/(x&minus;3) = x+3. Masukkan x=3: 3+3=6." },
-    { soal: "Nilai dari lim(x&rarr;2) (x&sup2; &minus; 4) / (x&sup2; &minus; 2x) adalah...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktorkan: (x&minus;2)(x+2) / x(x&minus;2) = (x+2)/x. Masukkan x=2: 4/2=2." },
-    { soal: "Hasil dari lim(x&rarr;&infin;) (3x&sup2; &minus; 2x + 1) / (x&sup2; + 5) adalah...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien pangkat tertinggi (x&sup2;): 3/1 = 3." },
-    { soal: "Nilai lim(x&rarr;0) (sin 2x) / x adalah...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim(x&rarr;0) sin(ax)/x = a. Maka 2." },
-    { soal: "Nilai dari lim(x&rarr;5) (&radic;(x+4) &minus; 3) / (x &minus; 5) adalah...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "Kalikan akar sekawan: (x+4&minus;9)/((x&minus;5)(&radic;(x+4)+3)) = 1/(&radic;(x+4)+3). Masukkan x=5: 1/(3+3)=1/6." },
-    { soal: "Jika &sup2;log 3 = a dan &sup2;log 5 = b, maka nilai dari &sup2;log 45 adalah...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45 = 9 &times; 5 = 3&sup2; &times; 5. Maka &sup2;log 45 = 2&middot;&sup2;log 3 + &sup2;log 5 = 2a + b." },
-    { soal: "Hasil dari &sup4;log 8 + &sup4;log 2 adalah...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup4;log(8&times;2) = &sup4;log 16 = 2 (karena 4&sup2;=16)." },
-    { soal: "Jika &sup2;log 3 = a, maka &sup8;log 81 adalah...", opsi: ["a/3", "3a", "4a/3", "a"], jawaban: 2, pembahasan: "&sup8;log 81 = &sup3;&sup2;log 3&sup4; = (4/3) &times; &sup2;log 3 = 4a/3." },
-    { soal: "Nilai dari &sup5;log 125 &minus; &sup5;log 5 adalah...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup5;log(125/5) = &sup5;log 25 = 2." },
-    { soal: "Hasil dari (&sup2;log 3) &times; (&sup3;log 8) adalah...", opsi: ["&sup2;log 8", "&sup3;log 3", "&sup2;log 24", "1"], jawaban: 0, pembahasan: "Sifat rantai logaritma: &sup(a)log b &times; &sup(b)log c = &sup(a)log c. Maka &sup2;log 8 = 3." },
-    { soal: "Satuan dari 2<sup>2026</sup> adalah...", opsi: ["2", "4", "6", "8"], jawaban: 1, pembahasan: "Pola satuan 2: 2,4,8,6 berulang tiap 4. 2026 mod 4 = 2. Maka satuan=4." },
-    { soal: "Satuan dari 7<sup>3035</sup> adalah...", opsi: ["1", "3", "5", "7"], jawaban: 1, pembahasan: "Pola satuan 7: 7,9,3,1 berulang. 3035 mod 4 = 3. Maka satuan=3." },
-    { soal: "Nilai dari 2<sup>3</sup> &times; 2<sup>&minus;2</sup> &times; 2<sup>0</sup> adalah...", opsi: ["1", "2", "4", "8"], jawaban: 1, pembahasan: "2<sup>(3&minus;2+0)</sup> = 2<sup>1</sup> = 2." },
-    { soal: "Bentuk sederhana dari (x<sup>3</sup> &times; x<sup>5</sup>) / x<sup>6</sup> adalah...", opsi: ["x&sup2;", "x&sup4;", "x<sup>8</sup>", "x<sup>14</sup>"], jawaban: 0, pembahasan: "x<sup>(3+5&minus;6)</sup> = x&sup2;." },
-    { soal: "Jika f(x) = 2x + 3 dan g(x) = x&sup2; &minus; 1, maka nilai (g o f)(2) adalah...", opsi: ["14", "15", "47", "48"], jawaban: 2, pembahasan: "f(2) = 2(2)+3 = 7. g(7) = 7&sup2; &minus; 1 = 49&minus;1 = 48." },
-    { soal: "Jika f(x) = (x&minus;2)/(x+3), x&ne;&minus;3, maka f&minus;<sup>1</sup>(x) adalah...", opsi: ["(3x+2)/(1&minus;x)", "(x+2)/(x&minus;3)", "(2x+3)/(1&minus;x)", "(x&minus;3)/(x+2)"], jawaban: 0, pembahasan: "y = (x&minus;2)/(x+3) &rarr; yx + 3y = x &minus; 2 &rarr; x(y&minus;1) = &minus;3y&minus;2 &rarr; x = (3y+2)/(1&minus;y). Maka f&minus;<sup>1</sup>(x) = (3x+2)/(1&minus;x)." },
-    { soal: "Akar-akar persamaan kuadrat x&sup2; &minus; 5x + 6 = 0 adalah...", opsi: ["1 dan 6", "2 dan 3", "&minus;2 dan &minus;3", "2 dan &minus;3"], jawaban: 1, pembahasan: "(x&minus;2)(x&minus;3)=0. Maka x=2 atau x=3." },
-    { soal: "Jumlah dan hasil kali akar persamaan 2x&sup2; &minus; 4x + 1 = 0 adalah...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "&minus;2 dan &minus;1/2"], jawaban: 0, pembahasan: "Jumlah = &minus;b/a = 4/2 = 2. Hasil kali = c/a = 1/2." },
-    { soal: "Sebuah barang dibeli dengan harga Rp200.000. Jika dijual dengan untung 15%, maka harga jualnya adalah...", opsi: ["Rp 215.000", "Rp 220.000", "Rp 225.000", "Rp 230.000"], jawaban: 3, pembahasan: "Untung = 15% &times; 200.000 = 30.000. Harga jual = 230.000." },
+    { soal: "Nilai dari lim(x&rarr;3) (x&sup2; &minus; 9) / (x &minus; 3) là...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktorkan: (x&minus;3)(x+3)/(x&minus;3) = x+3. Masukkan x=3: 3+3=6." },
+    { soal: "Nilai dari lim(x&rarr;2) (x&sup2; &minus; 4) / (x&sup2; &minus; 2x) là...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktorkan: (x&minus;2)(x+2) / x(x&minus;2) = (x+2)/x. Masukkan x=2: 4/2=2." },
+    { soal: "Hasil dari lim(x&rarr;&infin;) (3x&sup2; &minus; 2x + 1) / (x&sup2; + 5) là...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien pangkat tertinggi (x&sup2;): 3/1 = 3." },
+    { soal: "Nilai lim(x&rarr;0) (sin 2x) / x là...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim(x&rarr;0) sin(ax)/x = a. Maka 2." },
+    { soal: "Nilai dari lim(x&rarr;5) (&radic;(x+4) &minus; 3) / (x &minus; 5) là...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "Kalikan akar sekawan: (x+4&minus;9)/((x&minus;5)(&radic;(x+4)+3)) = 1/(&radic;(x+4)+3). Masukkan x=5: 1/(3+3)=1/6." },
+    { soal: "Jika &sup2;log 3 = a dan &sup²;log 5 = b, maka nilai dari &sup²;log 45 là...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45 = 9 &times; 5 = 3&sup2; &times; 5. Maka &sup²;log 45 = 2&middot;&sup²;log 3 + &sup²;log 5 = 2a + b." },
+    { soal: "Hasil dari &sup4;log 8 + &sup4;log 2 là...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup4;log(8&times;2) = &sup4;log 16 = 2 (karena 4&sup2;=16)." },
+    { soal: "Jika &sup²;log 3 = a, maka &sup8;log 81 là...", opsi: ["a/3", "3a", "4a/3", "a"], jawaban: 2, pembahasan: "&sup8;log 81 = &sup3;&sup²;log 3&sup4; = (4/3) &times; &sup²;log 3 = 4a/3." },
+    { soal: "Nilai dari &sup5;log 125 &minus; &sup5;log 5 là...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup5;log(125/5) = &sup5;log 25 = 2." },
+    { soal: "Hasil dari (&sup²;log 3) &times; (&sup³;log 8) là...", opsi: ["&sup²;log 8", "&sup³;log 3", "&sup²;log 24", "1"], jawaban: 0, pembahasan: "Sifat rantai logaritma: &sup(a)log b &times; &sup(b)log c = &sup(a)log c. Maka &sup²;log 8 = 3." },
+    { soal: "Satuan dari 2<sup>2026</sup> là...", opsi: ["2", "4", "6", "8"], jawaban: 1, pembahasan: "Pola satuan 2: 2,4,8,6 berulang tiap 4. 2026 mod 4 = 2. Maka satuan=4." },
+    { soal: "Satuan dari 7<sup>3035</sup> là...", opsi: ["1", "3", "5", "7"], jawaban: 1, pembahasan: "Pola satuan 7: 7,9,3,1 berulang. 3035 mod 4 = 3. Maka satuan=3." },
+    { soal: "Nilai dari 2<sup>3</sup> &times; 2<sup>&minus;2</sup> &times; 2<sup>0</sup> là...", opsi: ["1", "2", "4", "8"], jawaban: 1, pembahasan: "2<sup>(3&minus;2+0)</sup> = 2<sup>1</sup> = 2." },
+    { soal: "Bentuk sederhana dari (x<sup>3</sup> &times; x<sup>5</sup>) / x<sup>6</sup> là...", opsi: ["x&sup2;", "x&sup4;", "x<sup>8</sup>", "x<sup>14</sup>"], jawaban: 0, pembahasan: "x<sup>(3+5&minus;6)</sup> = x&sup2;." },
+    { soal: "Jika f(x) = 2x + 3 dan g(x) = x&sup2; &minus; 1, maka nilai (g o f)(2) là...", opsi: ["14", "15", "47", "48"], jawaban: 2, pembahasan: "f(2) = 2(2)+3 = 7. g(7) = 7&sup2; &minus; 1 = 49&minus;1 = 48." },
+    { soal: "Jika f(x) = (x&minus;2)/(x+3), x&ne;&minus;3, maka f&minus;<sup>1</sup>(x) là...", opsi: ["(3x+2)/(1&minus;x)", "(x+2)/(x&minus;3)", "(2x+3)/(1&minus;x)", "(x&minus;3)/(x+2)"], jawaban: 0, pembahasan: "y = (x&minus;2)/(x+3) &rarr; yx + 3y = x &minus; 2 &rarr; x(y&minus;1) = &minus;3y&minus;2 &rarr; x = (3y+2)/(1&minus;y). Maka f&minus;<sup>1</sup>(x) = (3x+2)/(1&minus;x)." },
+    { soal: "Akar-akar persamaan kuadrat x&sup2; &minus; 5x + 6 = 0 là...", opsi: ["1 dan 6", "2 dan 3", "&minus;2 dan &minus;3", "2 dan &minus;3"], jawaban: 1, pembahasan: "(x&minus;2)(x&minus;3)=0. Maka x=2 hoặc x=3." },
+    { soal: "Jumlah dan hasil kali akar persamaan 2x&sup2; &minus; 4x + 1 = 0 là...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "&minus;2 dan &minus;1/2"], jawaban: 0, pembahasan: "Jumlah = &minus;b/a = 4/2 = 2. Hasil kali = c/a = 1/2." },
+    { soal: "Sebuah barang dibeli dengan harga Rp200.000. Jika dijual dengan untung 15%, maka harga jualnya là...", opsi: ["Rp 215.000", "Rp 220.000", "Rp 225.000", "Rp 230.000"], jawaban: 3, pembahasan: "Untung = 15% &times; 200.000 = 30.000. Harga jual = 230.000." },
     { soal: "Sebuah pekerjaan dapat diselesaikan oleh 8 orang dalam 12 hari. Jika dikerjakan oleh 6 orang, berapa hari pekerjaan itu selesai?", opsi: ["14 hari", "15 hari", "16 hari", "18 hari"], jawaban: 2, pembahasan: "P = 8 &times; 12 = 96. Hari = 96/6 = 16 hari." },
     { soal: "Joko berangkat pukul 06.00 dengan kecepatan 60 km/jam. Budi berangkat pukul 07.00 dengan kecepatan 80 km/jam mengejar Joko. Budi akan menyusul Joko pada pukul...", opsi: ["09.00", "10.00", "11.00", "12.00"], jawaban: 1, pembahasan: "Jarak Joko saat 07.00 = 60 km. Selisih kecepatan = 20 km/jam. Waktu susul = 60/20 = 3 jam. 07.00 + 3 = 10.00." },
-    { soal: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Volume tabung tersebut adalah... (&pi; = 22/7)", opsi: ["1540 cm&sup3;", "1440 cm&sup3;", "1340 cm&sup3;", "1240 cm&sup3;"], jawaban: 0, pembahasan: "V = &pi; r&sup2; t = 22/7 &times; 7 &times; 7 &times; 10 = 22 &times; 70 = 1540." },
-    { soal: "Jika sin x = 3/5 dan x sudut lancip, maka nilai cos x adalah...", opsi: ["3/4", "4/5", "5/4", "4/3"], jawaban: 1, pembahasan: "Cos x = &radic;(1 &minus; sin&sup2;x) = &radic;(1 &minus; 9/25) = &radic;(16/25) = 4/5." },
-    { soal: "Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 adalah...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "6 muncul 3 kali (paling sering)." },
-    { soal: "Median dari data: 3, 5, 7, 8, 10, 12, 15 adalah...", opsi: ["7", "8", "10", "12"], jawaban: 1, pembahasan: "Tengah dari 7 data adalah urutan ke-4: 8." },
-    { soal: "Dari 5 buku matematika dan 4 buku fisika, akan dipilih 2 buku masing-masing satu. Berapa banyak cara memilih?", opsi: ["9", "16", "20", "24"], jawaban: 2, pembahasan: "C(5,1) &times; C(4,1) = 5 &times; 4 = 20." },
+    { soal: "Sebuah tabung memiliki jari-jari 7 cm và tinggi 10 cm. Volume tabung tersebut là... (&pi; = 22/7)", opsi: ["1540 cm&sup3;", "1440 cm&sup3;", "1340 cm&sup3;", "1240 cm&sup3;"], jawaban: 0, pembahasan: "V = &pi; r&sup2; t = 22/7 &times; 7 &times; 7 &times; 10 = 22 &times; 70 = 1540." },
+    { soal: "Jika sin x = 3/5 dan x sudut lancip, maka nilai cos x là...", opsi: ["3/4", "4/5", "5/4", "4/3"], jawaban: 1, pembahasan: "Cos x = &radic;(1 &minus; sin&sup2;x) = &radic;(1 &minus; 9/25) = &radic;(16/25) = 4/5." },
+    { soal: "Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 là...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "6 muncul 3 kali (paling sering)." },
+    { soal: "Median dari data: 3, 5, 7, 8, 10, 12, 15 là...", opsi: ["7", "8", "10", "12"], jawaban: 1, pembahasan: "Tengah dari 7 data là urutan ke-4: 8." },
+    { soal: "Dari 5 buku matematika và 4 buku fisika, sẽ dipilih 2 buku masing-masing satu. Berapa banyak cara memilih?", opsi: ["9", "16", "20", "24"], jawaban: 2, pembahasan: "C(5,1) &times; C(4,1) = 5 &times; 4 = 20." },
     { soal: "Jarak kota A dan B pada peta dengan skala 1:1.000.000 adalah 5 cm. Jarak sebenarnya adalah...", opsi: ["50 km", "500 km", "50 m", "5 km"], jawaban: 0, pembahasan: "5 cm &times; 1.000.000 = 5.000.000 cm = 50 km." },
-    { soal: "Rata-rata nilai ujian 5 siswa adalah 80. Jika ditambah nilai seorang siswa baru menjadi 78, berapa nilai siswa baru tersebut?", opsi: ["68", "70", "72", "75"], jawaban: 0, pembahasan: "Total awal = 400. Total baru = 468. Nilai siswa baru = 68." }
+    { soal: "Rata-rata nilai ujian 5 siswa là 80. Jika ditambah nilai seorang siswa baru menjadi 78, berapa nilai siswa baru tersebut?", opsi: ["68", "70", "72", "75"], jawaban: 0, pembahasan: "Total awal = 400. Total baru = 468. Nilai siswa baru = 68." }
   ],
   'subtest-pbm': [
     { soal: "Bacalah teks berikut!\n\n'Indonesia menghadapi tantangan besar dalam era revolusi industri 4.0. Otomasi dan digitalisasi menggantikan tenaga kerja manual. Menurut data BPS, sektor manufaktur menyerap 5% lebih sedikit tenaga kerja pada tahun 2023 dibandingkan 2020. Namun, sektor ekonomi digital justru tumbuh signifikan. Pemerintah perlu mendesain ulang kurikulum vokasi agar lulusan siap dengan kompetensi abad 21.'\n\nGagasan utama teks tersebut adalah...", opsi: ["Data BPS tentang penyerapan tenaga kerja", "Tantangan Indonesia di era revolusi industri 4.0", "Sektor ekonomi digital tumbuh signifikan", "Kurikulum vokasi perlu didesain ulang"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) ada di awal paragraf." },
@@ -207,18 +774,18 @@ const BANK_SIMULASI = {
     { soal: "Gagasan utama dalam sebuah paragraf disebut juga...", opsi: ["Kalimat penjelas", "Ide pokok", "Kesimpulan", "Opini"], jawaban: 1, pembahasan: "Gagasan utama = ide pokok." },
     { soal: "Teks yang bertujuan menjelaskan langkah-langkah membuat sesuatu disebut teks...", opsi: ["Eksposisi", "Deskripsi", "Prosedur", "Argumentasi"], jawaban: 2, pembahasan: "Teks prosedur memuat langkah-langkah." },
     { soal: "Majas yang membandingkan sesuatu dengan kata 'seperti' atau 'bagai' adalah...", opsi: ["Metafora", "Hiperbola", "Simile", "Personifikasi"], jawaban: 2, pembahasan: "Simile menggunakan kata pembanding eksplisit." },
-    { soal: "Majas yang berarti melebih-lebihkan adalah...", opsi: ["Metafora", "Hiperbola", "Simile", "Litotes"], jawaban: 1, pembahasan: "Hiperbola adalah majas lebay." },
+    { soal: "Majas yang berarti melebih-lebihkan là...", opsi: ["Metafora", "Hiperbola", "Simile", "Litotes"], jawaban: 1, pembahasan: "Hiperbola adalah majas lebay." },
     { soal: "Sinonim dari kata 'Implementasi' adalah...", opsi: ["Perencanaan", "Pelaksanaan", "Penundaan", "Pembatalan"], jawaban: 1, pembahasan: "Implementasi = pelaksanaan." },
-    { soal: "Antonim dari kata 'Implisit' adalah...", opsi: ["Tersirat", "Tersurat", "Samara", "Tersembunyi"], jawaban: 1, pembahasan: "Implisit (tersirat), lawannya eksplisit (tersurat)." }
+    { soal: "Antonim dari kata 'Implisit' là...", opsi: ["Tersirat", "Tersurat", "Samara", "Tersembunyi"], jawaban: 1, pembahasan: "Implisit (tersirat), lawannya eksplisit (tersurat)." }
   ],
   'subtest-indo': [
-    { soal: "Bacalah teks berikut dengan saksama!\n\n'Tumbuhan hijau melakukan fotosintesis untuk menghasilkan makanan. Proses ini memerlukan cahaya matahari, air, dan karbon dioksida. Namun, polusi udara yang berlebihan dapat menghambat proses ini. Partikel smog menutupi permukaan daun sehingga stomata sulit menyerap CO2. Selain itu, hujan asam yang diakibatkan oleh polusi dapat merusak klorofil. Akibatnya, pertumbuhan tanaman terhambat dan produktivitas pertanian menurun.'\n\nGagasan utama teks tersebut adalah...", opsi: ["Proses fotosintesis pada tumbuhan", "Pengaruh polusi udara terhadap fotosintesis", "Fungsi stomata pada daun", "Hujan asam merusak klorofil"], jawaban: 1, pembahasan: "Teks membahas sebab-akibat: polusi menghambat fotosintesis." },
-    { soal: "Berdasarkan teks di atas, pernyataan yang merupakan opini adalah...", opsi: ["Tumbuhan hijau melakukan fotosintesis", "Proses ini memerlukan cahaya matahari", "Polusi udara yang berlebihan dapat menghambat proses ini", "Partikel smog menutupi permukaan daun"], jawaban: 2, pembahasan: "Meskipun masuk akal, 'dapat menghambat' adalah kesimpulan/penilaian penulis (opini), bukan data mentah." },
+    { soal: "Bacalah teks berikut dengan saksama!\n\n'Tumbuhan hijau melakukan fotosintesis untuk menghasilkan makanan. Proses ini memerlukan cahaya matahari, air, dan karbon dioksida. Namun, polusi udara yang berlebihan dapat menghambat proses ini. Partikel smog menutupi permukaan daun sehingga stomata sulit menyerap CO2. Selain itu, hujan asam yang diakibatkan oleh polusi dapat merusak klorofil. Akibatnya, pertumbuhan tanaman terhambat dan produktivitas pertanian menurun.'\n\nGagasan utama teks tersebut là...", opsi: ["Proses fotosintesis pada tumbuhan", "Pengaruh polusi udara terhadap fotosintesis", "Fungsi stomata pada daun", "Hujan asam merusak klorofil"], jawaban: 1, pembahasan: "Teks membahas sebab-akibat: polusi menghambat fotosintesis." },
+    { soal: "Berdasarkan teks di atas, pernyataan yang merupakan opini adalah...", opsi: ["Tumbuhan hijau melakukan fotosintesis", "Proses ini memerlukan cahaya matahari", "Polusi udara yang berlebihan dapat menghambat proses ini", "Partikel smog menutupi permukaan daun"], jawaban: 2, pembahasan: "Meskipun masuk akal, 'dapat menghambat' là kesimpulan/penilaian penulis (opini), bukan data mentah." },
     { soal: "Berdasarkan teks di atas, hubungan kausalitas (sebab-akibat) terdapat pada...", opsi: ["Hujan asam merusak klorofil", "Tumbuhan melakukan fotosintesis", "Stomata menyerap CO2", "Cahaya matahari dibutuhkan"], jawaban: 0, pembahasan: "Hujan asam (sebab) &rarr; merusak klorofil (akibat)." },
-    { soal: "Bacalah teks berikut!\n\n'Globalisasi membawa dampak ganda bagi ekonomi lokal. Di satu sisi, akses pasar yang lebih luas membuka peluang bagi UMKM untuk berkembang. Di sisi lain, masuknya produk asing yang lebih murah mengancam keberlangsungan produksi dalam negeri. Oleh karena itu, pemerintah perlu memberikan perlindungan dan subsidi agar UMKM dapat bersaing.'\n\nSimpulan yang tepat dari teks tersebut adalah...", opsi: ["Globalisasi hanya membawa dampak negatif", "UMKM tidak mampu bersaing dengan produk asing", "Perlindungan pemerintah diperlukan agar UMKM bertahan di era globalisasi", "Produk asing selalu lebih murah dari produk dalam negeri"], jawaban: 2, pembahasan: "Simpulan harus mencakup keseluruhan teks: ada tantangan, perlu solusi (perlindungan)." },
-    { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut adalah...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas bagian dari pendidikan"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) berada di awal paragraf." },
-    { soal: "Teks: 'Polusi udara di Jakarta meningkat. Hal ini ditandai dengan menipisnya lapisan ozon. Dampaknya, penyakit pernapasan meningkat.' Simpulan yang tepat dari teks adalah...", opsi: ["Lapisan ozon menipis karena polusi", "Polusi udara berdampak pada kesehatan pernapasan", "Jakarta kota terpolusi", "Penyakit pernapasan memicu polusi"], jawaban: 1, pembahasan: "Simpulan harus mencakup sebab dan akibat." },
-    { soal: "Teks: 'Penanaman pohon di perkotaan mampu mengurangi efek rumah kaca. Selain itu, pohon juga menyejukkan udara.' Hubungan kedua kalimat tersebut adalah...", opsi: ["Sebab-akibat", "Kesimpulan", "Sejajar (menambahkan)", "Perbandingan"], jawaban: 2, pembahasan: "Kata 'Selain itu' menandakan penambahan argumen." },
+    { soal: "Bacalah teks berikut!\n\n'Globalisasi membawa dampak ganda bagi ekonomi lokal. Di satu sisi, akses pasar yang lebih luas membuka peluang bagi UMKM untuk berkembang. Di sisi lain, masuknya produk asing yang lebih murah mengancam keberlangsungan produksi dalam negeri. Oleh karena itu, pemerintah perlu memberikan perlindungan dan subsidi agar UMKM dapat bersaing.'\n\nSimpulan yang tepat dari teks tersebut là...", opsi: ["Globalisasi hanya membawa dampak negatif", "UMKM tidak mampu bersaing dengan produk asing", "Perlindungan pemerintah diperlukan agar UMKM bertahan di era globalisasi", "Produk asing selalu lebih murah dari produk dalam negeri"], jawaban: 2, pembahasan: "Simpulan harus mencakup keseluruhan teks: ada tantangan, perlu solusi (perlindungan)." },
+    { soal: "Teks: 'Edukasi karakter sangat penting untuk membentuk generasi yang tangguh. Tanpa karakter kuat, ilmu yang didapatkan justru bisa merugikan.' Gagasan utama teks tersebut là...", opsi: ["Generasi tangguh butuh ilmu", "Pentingnya edukasi karakter", "Ilmu tanpa karakter merugikan", "Integritas bagian dari pendidikan"], jawaban: 1, pembahasan: "Kalimat utama (deduktif) berada di awal paragraf." },
+    { soal: "Teks: 'Polusi udara di Jakarta meningkat. Hal ini ditandai dengan menipisnya lapisan ozon. Dampaknya, penyakit pernapasan meningkat.' Simpulan yang tepat dari teks là...", opsi: ["Lapisan ozon menipis karena polusi", "Polusi udara berdampak pada kesehatan pernapasan", "Jakarta kota terpolusi", "Penyakit pernapasan memicu polusi"], jawaban: 1, pembahasan: "Simpulan harus mencakup sebab dan akibat." },
+    { soal: "Teks: 'Penanaman pohon di perkotaan mampu mengurangi efek rumah kaca. Selain itu, pohon juga menyejukkan udara.' Hubungan kedua kalimat tersebut là...", opsi: ["Sebab-akibat", "Kesimpulan", "Sejajar (menambahkan)", "Perbandingan"], jawaban: 2, pembahasan: "Kata 'Selain itu' menandakan penambahan argumen." },
     { soal: "Teks: 'Berdasarkan riset, siswa yang tidur 8 jam memiliki fokus 40% lebih baik.' Pernyataan ini merupakan bagian dari teks...", opsi: ["Opini", "Fakta", "Fiksi", "Argumentasi subjektif"], jawaban: 1, pembahasan: "Berdasarkan riset dan data persentase = fakta." },
     { soal: "Teks: 'Menurut saya, cuaca hari ini terlalu panas untuk berolahraga.' Pernyataan ini merupakan...", opsi: ["Fakta", "Opini", "Data", "Argumentasi logis"], jawaban: 1, pembahasan: "'Menurut saya' = penilaian pribadi (opini)." },
     { soal: "Membaca untuk menemukan informasi spesifik seperti nama atau angka pada teks disebut...", opsi: ["Skimming", "Scanning", "Extensive reading", "Intensive reading"], jawaban: 1, pembahasan: "Scanning = mencari detail spesifik dengan cepat." },
@@ -228,8 +795,8 @@ const BANK_SIMULASI = {
     { soal: "Dalam karya ilmiah, bagian yang berisi latar belakang masalah dan tujuan penelitian terdapat di bab...", opsi: ["Bab I", "Bab II", "Bab III", "Bab IV"], jawaban: 0, pembahasan: "Pendahuluan berisi latar belakang dan tujuan." },
     { soal: "Menyimpulkan isi teks dengan bahasa sendiri tanpa mengubah maksud asli disebut...", opsi: ["Meringkas", "Memparafrasekan", "Mengevaluasi", "Mensintesis"], jawaban: 1, pembahasan: "Memparafrasekan = menulis ulang dengan bahasa sendiri." },
     { soal: "Menggabungkan informasi dari beberapa teks untuk membentuk kesimpulan baru disebut...", opsi: ["Analisis", "Sintesis", "Evaluasi", "Aplikasi"], jawaban: 1, pembahasan: "Sintesis menggabungkan berbagai sumber." },
-    { soal: "Sinonim dari kata 'Fundamental' dalam konteks teks akademis adalah...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar/pokok." },
-    { soal: "Antonim dari kata 'Konvensional' adalah...", opsi: ["Tradisional", "Modern/Inovatif", "Umum", "Lama"], jawaban: 1, pembahasan: "Konvensional = tradisional. Lawannya modern." },
+    { soal: "Sinonim dari kata 'Fundamental' dalam konteks teks akademis là...", opsi: ["Tambahan", "Dasar/Pokok", "Pengganti", "Akhir"], jawaban: 1, pembahasan: "Fundamental = mendasar/pokok." },
+    { soal: "Antonim dari kata 'Konvensional' là...", opsi: ["Tradisional", "Modern/Inovatif", "Umum", "Lama"], jawaban: 1, pembahasan: "Konvensional = tradisional. Lawannya modern." },
     { soal: "Majas yang memberikan sifat manusia pada benda mati disebut...", opsi: ["Metafora", "Personifikasi", "Simile", "Hiperbola"], jawaban: 1, pembahasan: "Personifikasi = benda mati seolah hidup." }
   ],
   'subtest-inggris': [
@@ -258,36 +825,36 @@ const BANK_SIMULASI = {
     { soal: "The past tense of 'Write' is...", opsi: ["Wrote", "Written", "Writed", "Writing"], jawaban: 0, pembahasan: "V2 dari write = wrote." }
   ],
   'subtest-pm': [
-    { soal: "Nilai dari lim(x&rarr;3) (x&sup2; &minus; 9) / (x &minus; 3) adalah...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktorkan: (x&minus;3)(x+3)/(x&minus;3) = x+3. Masukkan x=3: 6." },
-    { soal: "Nilai dari lim(x&rarr;2) (x&sup2; &minus; 4) / (x&sup2; &minus; 2x) adalah...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktorkan: (x+2)/x. Masukkan x=2: 4/2=2." },
-    { soal: "Hasil dari lim(x&rarr;&infin;) (3x&sup2; &minus; 2x + 1) / (x&sup2; + 5) adalah...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien pangkat tertinggi (x&sup2;): 3/1 = 3." },
-    { soal: "Nilai lim(x&rarr;0) (sin 2x) / x adalah...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim(x&rarr;0) sin(ax)/x = a. Maka 2." },
-    { soal: "Nilai dari lim(x&rarr;5) (&radic;(x+4) &minus; 3) / (x &minus; 5) adalah...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "Kalikan akar sekawan: 1/(&radic;(x+4)+3). Masukkan x=5: 1/6." },
-    { soal: "Jika &sup2;log 3 = a dan &sup²;log 5 = b, maka nilai dari &sup2;log 45 adalah...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45 = 9 &times; 5 = 3&sup2; &times; 5. Maka &sup²;log 45 = 2&middot;&sup²;log 3 + &sup²;log 5 = 2a + b." },
-    { soal: "Hasil dari &sup4;log 8 + &sup4;log 2 adalah...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup4;log(8&times;2) = &sup4;log 16 = 2." },
-    { soal: "Jika &sup²;log 3 = a, maka &sup8;log 81 adalah...", opsi: ["a/3", "3a", "4a/3", "a"], jawaban: 2, pembahasan: "&sup8;log 81 = &sup3;&sup²;log 3&sup4; = (4/3) &times; &sup²;log 3 = 4a/3." },
-    { soal: "Nilai dari &sup5;log 125 &minus; &sup5;log 5 adalah...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup5;log(125/5) = &sup5;log 25 = 2." },
-    { soal: "Hasil dari (&sup²;log 3) &times; (&sup3;log 8) adalah...", opsi: ["&sup²;log 8", "&sup³;log 3", "&sup²;log 24", "1"], jawaban: 0, pembahasan: "Sifat rantai: &sup²;log 8 = 3." },
-    { soal: "Satuan dari 2<sup>2026</sup> adalah...", opsi: ["2", "4", "6", "8"], jawaban: 1, pembahasan: "Pola satuan 2: 2,4,8,6 berulang tiap 4. 2026 mod 4 = 2. Maka satuan=4." },
-    { soal: "Satuan dari 7<sup>3035</sup> adalah...", opsi: ["1", "3", "5", "7"], jawaban: 1, pembahasan: "Pola satuan 7: 7,9,3,1 berulang. 3035 mod 4 = 3. Maka satuan=3." },
-    { soal: "Nilai dari 2<sup>3</sup> &times; 2<sup>&minus;2</sup> &times; 2<sup>0</sup> adalah...", opsi: ["1", "2", "4", "8"], jawaban: 1, pembahasan: "2<sup>(3&minus;2+0)</sup> = 2<sup>1</sup> = 2." },
-    { soal: "Bentuk sederhana dari (x<sup>3</sup> &times; x<sup>5</sup>) / x<sup>6</sup> adalah...", opsi: ["x&sup2;", "x&sup4;", "x<sup>8</sup>", "x<sup>14</sup>"], jawaban: 0, pembahasan: "x<sup>(3+5&minus;6)</sup> = x&sup2;." },
-    { soal: "Jika f(x) = 2x + 3 dan g(x) = x&sup2; &minus; 1, maka nilai (g o f)(2) adalah...", opsi: ["14", "15", "47", "48"], jawaban: 2, pembahasan: "f(2) = 7. g(7) = 49&minus;1 = 48." },
-    { soal: "Jika f(x) = (x&minus;2)/(x+3), x&ne;&minus;3, maka f&minus;<sup>1</sup>(x) adalah...", opsi: ["(3x+2)/(1&minus;x)", "(x+2)/(x&minus;3)", "(2x+3)/(1&minus;x)", "(x&minus;3)/(x+2)"], jawaban: 0, pembahasan: "y = (x&minus;2)/(x+3) &rarr; x = (3y+2)/(1&minus;y). Maka f&minus;<sup>1</sup>(x) = (3x+2)/(1&minus;x)." },
-    { soal: "Akar-akar persamaan kuadrat x&sup2; &minus; 5x + 6 = 0 adalah...", opsi: ["1 dan 6", "2 dan 3", "&minus;2 dan &minus;3", "2 dan &minus;3"], jawaban: 1, pembahasan: "(x&minus;2)(x&minus;3)=0. Maka x=2 atau x=3." },
-    { soal: "Jumlah dan hasil kali akar persamaan 2x&sup2; &minus; 4x + 1 = 0 adalah...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "&minus;2 dan &minus;1/2"], jawaban: 0, pembahasan: "Jumlah = &minus;b/a = 2. Hasil kali = c/a = 1/2." },
+    { soal: "Nilai dari lim(x&rarr;3) (x&sup2; &minus; 9) / (x &minus; 3) là...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktorkan: (x&minus;3)(x+3)/(x&minus;3) = x+3. Masukkan x=3: 6." },
+    { soal: "Nilai dari lim(x&rarr;2) (x&sup2; &minus; 4) / (x&sup2; &minus; 2x) là...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktorkan: (x+2)/x. Masukkan x=2: 4/2=2." },
+    { soal: "Hasil dari lim(x&rarr;&infin;) (3x&sup2; &minus; 2x + 1) / (x&sup2; + 5) là...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien pangkat tertinggi (x&sup2;): 3/1 = 3." },
+    { soal: "Nilai lim(x&rarr;0) (sin 2x) / x là...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim(x&rarr;0) sin(ax)/x = a. Maka 2." },
+    { soal: "Nilai dari lim(x&rarr;5) (&radic;(x+4) &minus; 3) / (x &minus; 5) là...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "Kalikan akar sekawan: 1/(&radic;(x+4)+3). Masukkan x=5: 1/6." },
+    { soal: "Jika &sup²;log 3 = a và &sup²;log 5 = b, maka nilai dari &sup²;log 45 là...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45 = 9 &times; 5 = 3&sup2; &times; 5. Maka &sup²;log 45 = 2&middot;&sup²;log 3 + &sup²;log 5 = 2a + b." },
+    { soal: "Hasil dari &sup4;log 8 + &sup4;log 2 là...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup4;log(8&times;2) = &sup4;log 16 = 2." },
+    { soal: "Jika &sup²;log 3 = a, maka &sup8;log 81 là...", opsi: ["a/3", "3a", "4a/3", "a"], jawaban: 2, pembahasan: "&sup8;log 81 = &sup3;&sup²;log 3&sup4; = (4/3) &times; &sup²;log 3 = 4a/3." },
+    { soal: "Nilai dari &sup5;log 125 &minus; &sup5;log 5 là...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup5;log(125/5) = &sup5;log 25 = 2." },
+    { soal: "Hasil dari (&sup²;log 3) &times; (&sup³;log 8) là...", opsi: ["&sup²;log 8", "&sup³;log 3", "&sup²;log 24", "1"], jawaban: 0, pembahasan: "Sifat rantai: &sup²;log 8 = 3." },
+    { soal: "Satuan dari 2<sup>2026</sup> là...", opsi: ["2", "4", "6", "8"], jawaban: 1, pembahasan: "Pola satuan 2: 2,4,8,6 berulang tiap 4. 2026 mod 4 = 2. Maka satuan=4." },
+    { soal: "Satuan dari 7<sup>3035</sup> là...", opsi: ["1", "3", "5", "7"], jawaban: 1, pembahasan: "Pola satuan 7: 7,9,3,1 berulang. 3035 mod 4 = 3. Maka satuan=3." },
+    { soal: "Nilai dari 2<sup>3</sup> &times; 2<sup>&minus;2</sup> &times; 2<sup>0</sup> là...", opsi: ["1", "2", "4", "8"], jawaban: 1, pembahasan: "2<sup>(3&minus;2+0)</sup> = 2<sup>1</sup> = 2." },
+    { soal: "Bentuk sederhana dari (x<sup>3</sup> &times; x<sup>5</sup>) / x<sup>6</sup> là...", opsi: ["x&sup2;", "x&sup4;", "x<sup>8</sup>", "x<sup>14</sup>"], jawaban: 0, pembahasan: "x<sup>(3+5&minus;6)</sup> = x&sup2;." },
+    { soal: "Jika f(x) = 2x + 3 dan g(x) = x&sup2; &minus; 1, maka nilai (g o f)(2) là...", opsi: ["14", "15", "47", "48"], jawaban: 2, pembahasan: "f(2) = 7. g(7) = 49&minus;1 = 48." },
+    { soal: "Jika f(x) = (x&minus;2)/(x+3), x&ne;&minus;3, maka f&minus;<sup>1</sup>(x) là...", opsi: ["(3x+2)/(1&minus;x)", "(x+2)/(x&minus;3)", "(2x+3)/(1&minus;x)", "(x&minus;3)/(x+2)"], jawaban: 0, pembahasan: "y = (x&minus;2)/(x+3) &rarr; x = (3y+2)/(1&minus;y). Maka f&minus;<sup>1</sup>(x) = (3x+2)/(1&minus;x)." },
+    { soal: "Akar-akar persamaan kuadrat x&sup2; &minus; 5x + 6 = 0 là...", opsi: ["1 dan 6", "2 dan 3", "&minus;2 dan &minus;3", "2 dan &minus;3"], jawaban: 1, pembahasan: "(x&minus;2)(x&minus;3)=0. Maka x=2 hoặc x=3." },
+    { soal: "Jumlah dan hasil kali akar persamaan 2x&sup2; &minus; 4x + 1 = 0 là...", opsi: ["2 dan 1/2", "4 dan 1", "2 dan 1", "&minus;2 dan &minus;1/2"], jawaban: 0, pembahasan: "Jumlah = &minus;b/a = 2. Hasil kali = c/a = 1/2." },
     { soal: "Dari 7 orang siswa, akan dipilih 3 orang untuk menjadi pengurus OSIS. Berapa banyak cara pemilihan yang mungkin? (Kombinasi)", opsi: ["21", "35", "42", "210"], jawaban: 1, pembahasan: "C(7,3) = 7! / (3!4!) = 35." },
     { soal: "Dari 5 orang calon ketua, wakil, dan sekretaris akan dipilih. Berapa banyak susunan yang mungkin? (Permutasi)", opsi: ["10", "20", "60", "120"], jawaban: 2, pembahasan: "P(5,3) = 5! / 2! = 60." },
     { soal: "Joko berangkat pukul 06.00 dengan kecepatan 60 km/jam. Budi berangkat pukul 07.00 dengan kecepatan 80 km/jam mengejar Joko. Budi akan menyusul Joko pada pukul...", opsi: ["09.00", "10.00", "11.00", "12.00"], jawaban: 1, pembahasan: "Jarak Joko saat 07.00 = 60 km. Selisih = 20 km/jam. Waktu susul = 3 jam. 07.00 + 3 = 10.00." },
     { soal: "Harga sembako naik 20% dari harga awal Rp50.000. Berapa harga sekarang?", opsi: ["Rp 55.000", "Rp 60.000", "Rp 70.000", "Rp 40.000"], jawaban: 1, pembahasan: "Naik 20% = 10.000. Harga baru = 60.000." },
     { soal: "Sebuah pekerjaan dapat diselesaikan oleh 8 orang dalam 12 hari. Jika dikerjakan oleh 6 orang, berapa hari pekerjaan itu selesai?", opsi: ["14 hari", "15 hari", "16 hari", "18 hari"], jawaban: 2, pembahasan: "P = 8 &times; 12 = 96. Hari = 96/6 = 16 hari." },
-    { soal: "Jarak kota A dan B pada peta dengan skala 1:1.000.000 adalah 5 cm. Jarak sebenarnya adalah...", opsi: ["50 km", "500 km", "50 m", "5 km"], jawaban: 0, pembahasan: "5 cm &times; 1.000.000 = 50 km." },
-    { soal: "Sebuah tabung memiliki jari-jari 7 cm dan tinggi 10 cm. Volume tabung tersebut adalah... (&pi; = 22/7)", opsi: ["1540 cm&sup3;", "1440 cm&sup3;", "1340 cm&sup3;", "1240 cm&sup3;"], jawaban: 0, pembahasan: "V = &pi; r&sup2; t = 1540." },
-    { soal: "Jika sin x = 3/5 dan x sudut lancip, maka nilai cos x adalah...", opsi: ["3/4", "4/5", "5/4", "4/3"], jawaban: 1, pembahasan: "Cos x = &radic;(1 &minus; sin&sup2;x) = 4/5." },
-    { soal: "Sebuah segitiga siku-siku memiliki sisi 3 cm dan 4 cm. Panjang sisi miringnya adalah...", opsi: ["5 cm", "6 cm", "7 cm", "8 cm"], jawaban: 0, pembahasan: "Pythagoras: &radic;(3&sup2; + 4&sup2;) = 5." },
-    { soal: "Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 adalah...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "6 muncul 3 kali." },
+    { soal: "Jarak kota A dan B pada peta dengan skala 1:1.000.000 là 5 cm. Jarak sebenarnya là...", opsi: ["50 km", "500 km", "50 m", "5 km"], jawaban: 0, pembahasan: "5 cm &times; 1.000.000 = 50 km." },
+    { soal: "Sebuah tabung memiliki jari-jari 7 cm và tinggi 10 cm. Volume tabung tersebut là... (&pi; = 22/7)", opsi: ["1540 cm&sup3;", "1440 cm&sup3;", "1340 cm&sup3;", "1240 cm&sup3;"], jawaban: 0, pembahasan: "V = &pi; r&sup2; t = 1540." },
+    { soal: "Jika sin x = 3/5 dan x sudut lancip, maka nilai cos x là...", opsi: ["3/4", "4/5", "5/4", "4/3"], jawaban: 1, pembahasan: "Cos x = &radic;(1 &minus; sin&sup2;x) = 4/5." },
+    { soal: "Sebuah segitiga siku-siku memiliki sisi 3 cm và 4 cm. Panjang sisi miringnya là...", opsi: ["5 cm", "6 cm", "7 cm", "8 cm"], jawaban: 0, pembahasan: "Pythagoras: &radic;(3&sup2; + 4&sup2;) = 5." },
+    { soal: "Modus dari data: 5, 6, 7, 6, 8, 5, 6, 7, 9 là...", opsi: ["5", "6", "7", "8"], jawaban: 1, pembahasan: "6 muncul 3 kali." },
     { soal: "Median dari data: 3, 5, 7, 8, 10, 12, 15 là...", opsi: ["7", "8", "10", "12"], jawaban: 1, pembahasan: "Tengah dari 7 data: urutan ke-4 = 8." },
-    { soal: "Dari 5 buku matematika dan 4 buku fisika, akan dipilih 2 buku masing-masing satu. Berapa banyak cara memilih?", opsi: ["9", "16", "20", "24"], jawaban: 2, pembahasan: "5 &times; 4 = 20." },
+    { soal: "Dari 5 buku matematika và 4 buku fisika, akan dipilih 2 buku masing-masing satu. Berapa banyak cara memilih?", opsi: ["9", "16", "20", "24"], jawaban: 2, pembahasan: "5 &times; 4 = 20." },
     { soal: "Rata-rata nilai ujian 5 siswa là 80. Jika ditambah nilai seorang siswa baru menjadi 78, berapa nilai siswa baru tersebut?", opsi: ["68", "70", "72", "75"], jawaban: 0, pembahasan: "Total awal = 400. Total baru = 468. Siswa baru = 68." },
     { soal: "Jika log 2 = 0.3, maka log 8 là...", opsi: ["0.6", "0.9", "1.2", "0.3"], jawaban: 1, pembahasan: "8 = 2&sup3;. log 8 = 3 &times; log 2 = 0.9." }
   ]
@@ -295,7 +862,7 @@ const BANK_SIMULASI = {
 
 // ====== VARIABEL STATE GLOBAL ======
 let currentGateKey = null;
-let currentSoalSource = 'sim'; // 'sim' atau 'ai'
+let currentSoalSource = 'sim';
 let soalAktif = [];
 let indexSoalSekarang = 0;
 let skorBenar = 0;
