@@ -716,13 +716,13 @@ const BANK_SIMULASI = {
   ],
   'subtest-pk': [
     { soal: "Nilai lim<sub>x&rarr;3</sub> (x&sup2; &minus; 9) per (x &minus; 3) adalah...", opsi: ["0", "3", "6", "9"], jawaban: 2, pembahasan: "Faktor: (x+3). Masukkan x=3: 6." },
-    { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup2; &minus; 4) per (x&sup2; &minus; 2x) adalah...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktor: (x+2)/x. Masukkan x=2: 2." },
-    { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup2; &minus; 2x + 1) per (x&sup2; + 5) adalah...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien tertinggi: 3 per 1 = 3." },
-    { soal: "Nilai lim<sub>x&rarr;0</sub> (sin 2x) per x adalah...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim sin(ax)/x = a. Maka 2." },
-    { soal: "Nilai lim<sub>x&rarr;5</sub> (&radic;(x+4) &minus; 3) per (x &minus; 5) adalah...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "Kali akar sekawan: 1 per (&radic;9 + 3) = 1 per 6." },
-    { soal: "Jika &sup2;log 3 = a dan &sup²;log 5 = b, nilai &sup²;log 45...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45=3&sup2;&times;5. Maka 2a + b." },
+    { soal: "Nilai lim<sub>x&rarr;2</sub> (x&sup2; &minus; 4) per (x&sup2; &minus; 2x) là...", opsi: ["1", "2", "4", "0"], jawaban: 1, pembahasan: "Faktor: (x+2)/x. Masukkan x=2: 2." },
+    { soal: "Hasil lim<sub>x&rarr;&infin;</sub> (3x&sup2; &minus; 2x + 1) per (x&sup2; + 5) là...", opsi: ["0", "1", "3", "&infin;"], jawaban: 2, pembahasan: "Ambil koefisien tertinggi: 3 per 1 = 3." },
+    { soal: "Nilai lim<sub>x&rarr;0</sub> (sin 2x) per x là...", opsi: ["0", "1", "2", "1/2"], jawaban: 2, pembahasan: "lim sin(ax)/x = a. Maka 2." },
+    { soal: "Nilai lim<sub>x&rarr;5</sub> (&radic;(x+4) &minus; 3) per (x &minus; 5) là...", opsi: ["1/6", "6", "0", "1"], jawaban: 0, pembahasan: "Kali akar sekawan: 1 per (&radic;9 + 3) = 1 per 6." },
+    { soal: "Jika &sup²;log 3 = a dan &sup²;log 5 = b, nilai &sup²;log 45...", opsi: ["a + 2b", "2a + b", "a + b", "2ab"], jawaban: 0, pembahasan: "45=3&sup2;&times;5. Maka 2a + b." },
     { soal: "Hasil &sup4;log 8 + &sup4;log 2...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup4;log 16 = 2." },
-    { soal: "Jika &sup²;log 3 = a, maka &sup8;log 81...", opsi: ["a/3", "3a", "4a per 3", "a"], jawaban: 2, pembahasan: "&sup3;&sup²;log 3&sup4; = 4a per 3." },
+    { soal: "Jika &sup²;log 3 = a, maka &sup8;log 81...", opsi: ["a/3", "3a", "4a per 3", "a"], jawaban: 2, pembahasan: "&sup³;&sup²;log 3&sup4; = 4a per 3." },
     { soal: "Nilai &sup5;log 125 &minus; &sup5;log 5...", opsi: ["1", "2", "3", "4"], jawaban: 1, pembahasan: "&sup5;log 25 = 2." },
     { soal: "Hasil (&sup²;log 3) &times; (&sup³;log 8)...", opsi: ["&sup²;log 8", "&sup³;log 3", "&sup²;log 24", "1"], jawaban: 0, pembahasan: "Sifat rantai: &sup²;log 8 = 3." },
     { soal: "Satuan dari 2<sup>2026</sup>...", opsi: ["2", "4", "6", "8"], jawaban: 1, pembahasan: "Pola 2,4,8,6. 2026 mod 4 = 2, maka 4." },
@@ -1161,10 +1161,11 @@ async function generateSoalDariAI(gateKey) {
     const promptSystem = `Kamu adalah tim ahli pakar soal UTBK SNBT. Hanya hasilkan soal HOTS tingkat SANGAT SULIT, penjelasan nya juga jangan ngawur, berikan penjelasan yang bagus dan matang, Rapihkan penjelasan juga jangan berantakan!
 PENTING: Gunakan simbol matematika standar seperti ^ untuk pangkat (contoh: x^2), sqrt() untuk akar, dan * untuk kali. JANGAN gunakan format LaTeX atau simbol $ dan {}.
 Jika soal memerlukan jawaban lebih dari satu (multi-jawaban), set field "multi" ke true dan "jawaban" menjadi array berisi indeks jawaban benar (contoh: "jawaban": [0, 2]). Berikan opsi A sampai E (5 opsi).
-PENTING: PASTIKAN INDEKS JAWABAN BENAR BENAR-BENAR TEPAT SESUAI LOGIKA. JANGAN SALAH MENEMPATKAN INDEKS.
+PENTING: PASTIKAN INDEKS JAWABAN BENAR-BENAR TEPAT SESUAI LOGIKA. CEK 3 KALI KESESUAIAN ANTARA INDEKS JAWABAN DAN TEKS PEMBAHASAN SEBELUM MENGIRIM JSON. JANGAN SALAH MENEMPATKAN INDEKS.
+PENTING: Selalu acak angka, nama, dan skenario soal agar tidak ada soal yang berulang setiap kali diminta.
 WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A", "B", "C", "D", "E"], "multi": false, "jawaban": 0, "pembahasan": "..."}]}.`;
 
-    let promptUser = `Buatkan 10 soal PG UTBK SANGAT SULIT untuk subtes: "${dataMateri.title}". Buat 2-3 soal di antaranya memiliki jawaban lebih dari satu (multi-jawaban) dengan opsi A-E. `;
+    let promptUser = `Buatkan 10 soal PG UTBK SANGAT SULIT untuk subtes: "${dataMateri.title}". Buat 2-3 soal di antaranya memiliki jawaban lebih dari satu (multi-jawaban) dengan opsi A-E. Gunakan angka dan skenario yang benar-benar acak berbeda dari biasanya. `;
 
     if (gateKey === 'subtest-pu') {
         promptUser += `Sertakan SATU teks naratif panjang (250+ kata) berisi aturan rumit di AWAL field "pertanyaan" soal pertama. Buat 4-5 soal merujuk teks tersebut. Sisanya: silogisme berantai 3-4 premis, deret angka pola bertingkat, deret huruf.`;
@@ -1172,7 +1173,7 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
     else if (gateKey === 'subtest-ppu') {
         promptUser += `Buat soal sinonim/antonim kata sulit (ambivalen, esensial, marjinal), peribahasa jarang, ejaan sering salah. Pilihan jawaban sangat mirip.`;
     } 
-  if (gateKey === 'subtest-pk') {
+    if (gateKey === 'subtest-pk') {
         promptUser += `WAJIB sertakan: 1) LIMIT (lim x->3 dari bentuk aljabar/akar), 2) LOGARITMA (^4log 8 + ^4log 2, atau jika ^2log 3 = a maka ^8log 81), 3) Eksponen (satuan dari 2^2026 + 7^3035), 4) Sistem persamaan 3 variabel, 5) Deret tak hingga. 
         
         PENTING UNTUK SOAL PANGKAT TINGGI: Cara mencari satuan pangkat adalah melihat pola 4 angka terakhir yang berulang.
@@ -1199,7 +1200,7 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         Gunakan simbol ^ untuk pangkat dan sqrt() untuk akar. Jangan gunakan $ atau {}.`;
     }
 
-    promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail. Pastikan soal selalu berbeda dan acak setiap kali di-generate.`;
+    promptUser += ` Pastikan jawaban teracak. Setiap soal WAJIB punya pembahasan detail. Pastikan soal selalu berbeda dan acak setiap kali di-generate. Jika ada soal jumlahan pangkat, INGAT bahwa jumlah satuan bisa berupa 2 digit, ambil SATU digit terakhirnya saja sebagai jawaban.`;
 
     try {
         const response = await fetch(GROQ_API_URL, {
@@ -1208,7 +1209,7 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
             body: JSON.stringify({
                 model: AI_MODEL,
                 messages: [ { role: "system", content: promptSystem }, { role: "user", content: promptUser } ],
-                temperature: 1.1, // Ditingkatkan agar soal tidak monoton
+                temperature: 1.3, // Ditingkatkan signifikan agar soal selalu acak dan tidak berulang
                 response_format: { type: "json_object" }
             })
         });
@@ -1216,7 +1217,17 @@ WAJIB balas dalam format JSON murni: {"soal": [{"pertanyaan": "...", "opsi": ["A
         if (response.status === 429) { rotateApiKey(); return generateSoalDariAI(gateKey); }
         if (!response.ok) throw new Error('Gagal memuat soal (Status: ' + response.status + ')');
         const resJson = await response.json();
-        const parsed = JSON.parse(resJson.choices[0].message.content);
+        let rawContent = resJson.choices[0].message.content;
+        
+        // Bersihkan format LaTeX yang berantakan dari AI jika ada
+        rawContent = rawContent.replace(/\$\$(.*?)\$\$/g, '$1').replace(/\$(.*?)\$/g, '$1');
+        rawContent = rawContent.replace(/\\\((.*?)\\\)/g, '$1').replace(/\\\[(.*?)\\\]/g, '$1');
+        rawContent = rawContent.replace(/\\frac\{(.*?)\}\{(.*?)\}/g, '($1 per $2)');
+        rawContent = rawContent.replace(/\^\{(.*?)\}/g, '^$1');
+        rawContent = rawContent.replace(/\\sqrt\{(.*?)\}/g, 'sqrt($1)');
+        rawContent = rawContent.replace(/\\times/g, '*').replace(/\\div/g, '/').replace(/\\pm/g, '+-').replace(/\\cdot/g, '*');
+
+        const parsed = JSON.parse(rawContent);
 
         soalAktif = parsed.soal;
         indexSoalSekarang = 0;
